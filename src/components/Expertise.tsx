@@ -1,74 +1,113 @@
+
 import { Leaf, Droplets, Beaker, Apple } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 
 export const Expertise = () => {
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.2 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
   const industries = [
     {
       icon: Leaf,
       title: "Agro & Aquaculture",
-      description: "Advanced fertilizers and aquaculture solutions for enhanced agricultural productivity"
+      description: "Advanced fertilizers and aquaculture solutions for enhanced agricultural productivity",
+      color: "from-emerald-500 to-green-600",
+      bgColor: "from-emerald-50 to-green-50"
     },
     {
       icon: Droplets,
       title: "Hygiene",
-      description: "Premium hygiene and cleaning solutions for industrial and commercial applications"
+      description: "Premium hygiene and cleaning solutions for industrial and commercial applications",
+      color: "from-blue-500 to-cyan-600",
+      bgColor: "from-blue-50 to-cyan-50"
     },
     {
       icon: Beaker,
       title: "Basic Chemicals",
-      description: "High-quality industrial-grade chemical compounds and raw materials"
+      description: "High-quality industrial-grade chemical compounds and raw materials",
+      color: "from-purple-500 to-violet-600",
+      bgColor: "from-purple-50 to-violet-50"
     },
     {
       icon: Apple,
       title: "Food",
-      description: "Food-grade chemical additives, preservatives, and specialty ingredients"
+      description: "Food-grade chemical additives, preservatives, and specialty ingredients",
+      color: "from-orange-500 to-red-600",
+      bgColor: "from-orange-50 to-red-50"
     }
   ];
 
   return (
-    <section className="py-24 bg-gradient-to-br from-slate-50 via-white to-blue-50 relative overflow-hidden">
-      {/* Premium background elements */}
-      <div className="absolute inset-0 opacity-30">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-gradient-to-r from-blue-400/20 to-purple-400/20 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-20 right-10 w-96 h-96 bg-gradient-to-r from-cyan-400/20 to-blue-400/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }}></div>
+    <section 
+      ref={sectionRef}
+      className="py-32 bg-gradient-to-br from-slate-50 via-white to-blue-50 relative overflow-hidden"
+    >
+      {/* Premium Background Elements */}
+      <div className="absolute inset-0 opacity-40">
+        <div className="absolute top-20 left-10 w-80 h-80 bg-gradient-to-r from-blue-400/20 to-purple-400/20 rounded-full blur-3xl animation-float"></div>
+        <div className="absolute bottom-20 right-10 w-96 h-96 bg-gradient-to-r from-purple-400/20 to-pink-400/20 rounded-full blur-3xl animation-wave" style={{ animationDelay: '3s' }}></div>
+        <div className="absolute top-1/2 left-1/2 w-64 h-64 bg-gradient-to-r from-cyan-400/15 to-blue-400/15 rounded-full blur-2xl animation-pulse-soft" style={{ animationDelay: '6s' }}></div>
       </div>
       
       <div className="container mx-auto px-4 relative z-10">
-        <div className="text-center mb-20">
-          <h2 className="text-5xl md:text-6xl font-bold text-gray-900 mb-8 leading-tight">
-            <span className="bg-gradient-to-r from-gray-900 via-blue-900 to-purple-900 bg-clip-text text-transparent">
-              Featured Sectors
-            </span>
+        <div className={`text-center mb-24 transition-all duration-1000 ${isVisible ? 'animation-fade-in' : 'opacity-0 translate-y-10'}`}>
+          <h2 className="premium-subheading mb-8">
+            Featured Sectors
           </h2>
-          <div className="w-32 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto mb-8 rounded-full"></div>
-          <p className="text-xl md:text-2xl text-gray-600 max-w-4xl mx-auto leading-relaxed font-light">
+          <div className="w-40 h-1.5 premium-gradient mx-auto mb-10 rounded-full"></div>
+          <p className="text-2xl md:text-3xl text-slate-600 max-w-5xl mx-auto leading-relaxed font-light">
             Delivering excellence across key industries with specialized chemical solutions 
-            tailored to meet the unique demands of each sector
+            <span className="block mt-3 font-medium gradient-text">
+              tailored to meet the unique demands of each sector
+            </span>
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
           {industries.map((industry, index) => (
             <div
               key={index}
-              className="group relative bg-white/80 backdrop-blur-xl border border-gray-200/50 rounded-2xl p-8 shadow-2xl hover:shadow-3xl transition-all duration-700 hover:scale-105 hover:bg-white/90 cursor-pointer"
+              className={`interactive-card p-10 hover-shine cursor-pointer transition-all duration-700 ${
+                isVisible ? 'animation-scale-in' : 'opacity-0 scale-95'
+              }`}
               style={{ animationDelay: `${index * 0.2}s` }}
             >
-              {/* Premium gradient border effect */}
-              <div className="absolute inset-0 bg-gradient-to-r from-blue-600 via-purple-600 to-cyan-600 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10 blur-sm"></div>
-              <div className="absolute inset-[1px] bg-white rounded-2xl -z-10"></div>
+              {/* Premium Gradient Border Effect */}
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-600 via-purple-600 to-cyan-600 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 -z-10 blur-sm"></div>
+              <div className="absolute inset-[2px] bg-white rounded-3xl -z-10"></div>
               
               <div className="text-center relative z-10">
-                <div className="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center shadow-xl group-hover:scale-110 transition-transform duration-500">
-                  <industry.icon className="w-10 h-10 text-white" />
+                <div className={`w-24 h-24 mx-auto mb-8 bg-gradient-to-br ${industry.color} rounded-3xl flex items-center justify-center shadow-2xl hover:shadow-3xl group-hover:scale-125 transition-all duration-700 hover-glow`}>
+                  <industry.icon className="w-12 h-12 text-white" />
                 </div>
                 
-                <h3 className="text-2xl font-bold text-gray-900 mb-4 group-hover:bg-gradient-to-r group-hover:from-blue-600 group-hover:to-purple-600 group-hover:bg-clip-text group-hover:text-transparent transition-all duration-500">
+                <h3 className="text-2xl font-bold text-slate-900 mb-6 group-hover:gradient-text transition-all duration-500 leading-tight">
                   {industry.title}
                 </h3>
                 
-                <p className="text-gray-600 leading-relaxed font-medium">
+                <p className="text-slate-600 leading-relaxed font-medium text-lg">
                   {industry.description}
                 </p>
+
+                {/* Premium Interactive Element */}
+                <div className={`mt-8 h-2 bg-gradient-to-r ${industry.color} rounded-full opacity-0 group-hover:opacity-100 transition-all duration-500 transform scale-x-0 group-hover:scale-x-100`}></div>
               </div>
             </div>
           ))}
