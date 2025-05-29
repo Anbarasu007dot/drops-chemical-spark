@@ -140,7 +140,7 @@
            shadow-[0_20px_60px_-12px_rgba(0,0,0,0.12),0_0_0_1px_rgba(255,255,255,0.1)] 
            hover:shadow-[0_35px_80px_-12px_rgba(0,0,0,0.18),0_0_0_1px_rgba(255,255,255,0.15)]
            transition-all duration-700 hover:scale-[1.02] hover:-translate-y-2 
-           relative overflow-hidden group;
+           relative overflow-hidden;
   }
 
   .premium-card::before {

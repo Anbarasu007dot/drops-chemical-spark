@@ -84,7 +84,7 @@ export const Expertise = () => {
           {industries.map((industry, index) => (
             <div
               key={index}
-              className={`interactive-card p-10 hover-shine cursor-pointer transition-all duration-700 ${
+              className={`interactive-card group p-10 hover-shine cursor-pointer transition-all duration-700 ${
                 isVisible ? 'animation-scale-in' : 'opacity-0 scale-95'
               }`}
               style={{ animationDelay: `${index * 0.2}s` }}
