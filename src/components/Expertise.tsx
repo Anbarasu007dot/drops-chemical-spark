@@ -1,27 +1,26 @@
-
-import { Leaf, Droplets, Flask, Apple } from "lucide-react";
+import { Leaf, Droplets, Beaker, Apple } from "lucide-react";
 
 export const Expertise = () => {
   const industries = [
     {
       icon: Leaf,
       title: "Agro & Aquaculture",
-      description: "Advanced fertilizers and aquaculture solutions"
+      description: "Advanced fertilizers and aquaculture solutions for enhanced agricultural productivity"
     },
     {
       icon: Droplets,
       title: "Hygiene",
-      description: "Premium hygiene and cleaning solutions"
+      description: "Premium hygiene and cleaning solutions for industrial and commercial applications"
     },
     {
-      icon: Flask,
+      icon: Beaker,
       title: "Basic Chemicals",
-      description: "Industrial-grade chemical compounds"
+      description: "High-quality industrial-grade chemical compounds and raw materials"
     },
     {
       icon: Apple,
       title: "Food",
-      description: "Food-grade chemical additives and preservatives"
+      description: "Food-grade chemical additives, preservatives, and specialty ingredients"
     }
   ];
 
