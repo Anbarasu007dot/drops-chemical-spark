@@ -1,4 +1,3 @@
-
 import { Star } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { useEffect, useRef, useState } from "react";
@@ -67,7 +66,7 @@ export const Testimonials = () => {
               key={index}
               className={`contact-card transition-all duration-500 ${
                 isVisible ? 'modern-scale-in' : 'opacity-0 scale-95'
-              }`}
+              } bg-slate-800/80 hover:bg-slate-700/90`}
               style={{ animationDelay: `${index * 0.2}s` }}
             >
               <CardContent className="p-8">

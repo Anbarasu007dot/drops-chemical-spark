@@ -34,7 +34,7 @@ export const FeaturedProducts = () => {
       category: "Agro & Aquaculture Chemicals",
       description: "Our comprehensive range of agricultural and aquaculture chemicals includes premium fertilizers, micronutrients, and specialized solutions designed to enhance crop yield and optimize fish farming operations.",
       secondDescription: "From soil conditioning agents to water treatment solutions, we provide scientifically formulated products that ensure sustainable agricultural practices while maximizing productivity.",
-      image: "https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?auto=format&fit=crop&w=800&q=80",
+      image: "https://i0.wp.com/razzanj.com/wp-content/uploads/2016/07/nature-landscape-nature-landscape-hd-image-download-wheat-farm-hd-wallpaper-notebook-background-wheat-farmers-wheat-farming-process-wheat-farming-in-kenya.jpg?ssl=1",
       productCount: "50+",
       color: "text-green-600"
     },
@@ -42,26 +42,27 @@ export const FeaturedProducts = () => {
       category: "Water Treatment Chemicals",
       description: "Advanced water treatment solutions encompassing a full spectrum of purification, conditioning, and treatment chemicals for industrial, municipal, and commercial applications.",
       secondDescription: "Our portfolio includes coagulants, flocculants, disinfectants, and specialty chemicals that ensure water quality compliance while optimizing operational efficiency.",
-      image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80",
+      image: "https://gifdb.com/images/high/water-splash-ocean-waves-v7asu155ykhivrv8.gif",
       productCount: "40+",
       color: "text-blue-600"
-    },
-    {
-      category: "Hygiene Raw Materials",
-      description: "Premium quality raw materials specifically formulated for the hygiene industry, including surfactants, emulsifiers, preservatives, and active ingredients for detergents and personal care products.",
-      secondDescription: "Our carefully selected portfolio enables manufacturers to create high-performance cleaning and personal care solutions that meet stringent quality standards.",
-      image: "https://images.unsplash.com/photo-1500673922987-e212871fec22?auto=format&fit=crop&w=800&q=80",
-      productCount: "80+",
-      color: "text-purple-600"
     },
     {
       category: "Food Grade Chemicals",
       description: "Food-grade chemical solutions including additives, preservatives, and specialty ingredients that meet strict safety and quality standards for food processing applications.",
       secondDescription: "Our comprehensive range includes natural and synthetic ingredients that enhance flavor, texture, shelf-life, and nutritional value while ensuring consumer safety.",
-      image: "https://images.unsplash.com/photo-1518495973542-4542c06a5843?auto=format&fit=crop&w=800&q=80",
+      image: "https://i.makeagif.com/media/8-01-2016/wW8rt2.gif",
       productCount: "30+",
       color: "text-amber-600"
-    }
+    },
+    {
+      category: "Hygiene Raw Materials",
+      description: "Premium quality raw materials specifically formulated for the hygiene industry, including surfactants, emulsifiers, preservatives, and active ingredients for detergents and personal care products.",
+      secondDescription: "Our carefully selected portfolio enables manufacturers to create high-performance cleaning and personal care solutions that meet stringent quality standards.",
+      image: "https://media.licdn.com/dms/image/v2/D4D12AQF2W9YwL1sT7g/article-cover_image-shrink_720_1280/article-cover_image-shrink_720_1280/0/1734252826925?e=2147483647&v=beta&t=RM0Q89mDbn2PuHZfgMc4dkcpXlpZKi1fk4LnragsGAU",
+      productCount: "80+",
+      color: "text-purple-600"
+    },
+    
   ];
 
   const handleQuoteRequest = (category: string) => {

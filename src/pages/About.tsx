@@ -68,7 +68,13 @@ const About = () => {
       
       {/* Enhanced Hero Section */}
       <section className="relative py-20 parallax-bg" style={{
-        backgroundImage: "linear-gradient(rgba(15, 23, 42, 0.7), rgba(30, 41, 59, 0.7)), url('https://www.shutterstock.com/image-photo/scientist-adding-liquid-test-tube-600nw-2493601121.jpgs')"
+         backgroundImage: " url('https://t3.ftcdn.net/jpg/10/67/42/46/360_F_1067424636_V3Nw4SV4VkSgMeG6EOCRL4QE81JY1ajN.jpg')"
+
+        //  "linear-gradient(rgba(247, 248, 250, 0.7), rgba(247, 251, 244, 0.7)), url('https://www.shutterstock.com/image-photo/scientist-adding-liquid-test-tube-600nw-2493601121.jpg')"
+
+
+
+
       }}>
         <div className="relative container mx-auto px-4 text-center">
           <h1 className="text-5xl md:text-6xl font-bold mb-6 modern-fade-in text-white">
@@ -113,7 +119,7 @@ const About = () => {
               <div 
                 className="h-96 rounded-2xl bg-cover bg-center shadow-2xl"
                 style={{
-                  backgroundImage: "url('https://images.unsplash.com/photo-1482938289607-e9573fc25ebb?auto=format&fit=crop&w=800&q=80')"
+                  backgroundImage: "url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZSs25lz7vQ8N5TdxoYvMcvcImGjzwYGRR7A&s')"
                 }}
               />
             </div>
