@@ -1,5 +1,5 @@
 
-import { Mail, Phone, MapPin, Youtube } from "lucide-react";
+import { Mail, MapPin, Youtube } from "lucide-react";
 import { Link } from "react-router-dom";
 
 export const Footer = () => {
@@ -43,13 +43,13 @@ export const Footer = () => {
               serving diverse industries with quality solutions and exceptional service.
             </p>
 
-            {/* Certifications */}
+            {/* Quality Badges */}
             <div className="space-y-2">
               <div className="flex items-center space-x-2">
                 <div className="w-6 h-6 bg-green-600 rounded flex items-center justify-center">
                   <span className="text-xs font-bold">✓</span>
                 </div>
-                <span className="text-sm text-gray-300">ISO Certified</span>
+                <span className="text-sm text-gray-300">Quality Assured</span>
               </div>
               <div className="flex items-center space-x-2">
                 <div className="w-6 h-6 bg-orange-600 rounded flex items-center justify-center">
@@ -62,7 +62,7 @@ export const Footer = () => {
 
           {/* Quick Links */}
           <div>
-            <h3 className="text-xl font-bold mb-6">Quick Links</h3>
+            <h3 className="text-xl font-bold mb-6 text-white">Quick Links</h3>
             <ul className="space-y-3">
               {quickLinks.map((link, index) => (
                 <li key={index}>
@@ -79,7 +79,7 @@ export const Footer = () => {
 
           {/* Product Categories */}
           <div>
-            <h3 className="text-xl font-bold mb-6">Product Categories</h3>
+            <h3 className="text-xl font-bold mb-6 text-white">Product Categories</h3>
             <ul className="space-y-3">
               {productCategories.map((category, index) => (
                 <li key={index}>
@@ -96,7 +96,7 @@ export const Footer = () => {
 
           {/* Contact Info */}
           <div>
-            <h3 className="text-xl font-bold mb-6">Contact Info</h3>
+            <h3 className="text-xl font-bold mb-6 text-white">Contact Info</h3>
             <div className="space-y-4">
               <div className="flex items-start space-x-3">
                 <MapPin className="w-5 h-5 text-blue-400 mt-1 flex-shrink-0" />
@@ -105,14 +105,6 @@ export const Footer = () => {
                   Gandhipuram, Tatabad,<br />
                   Coimbatore - 641012,<br />
                   Tamil Nadu, India
-                </div>
-              </div>
-
-              <div className="flex items-center space-x-3">
-                <Phone className="w-5 h-5 text-blue-400" />
-                <div className="text-sm text-gray-300">
-                  <div>+91 90426 70008</div>
-                  <div>+91 96775 22201</div>
                 </div>
               </div>
 

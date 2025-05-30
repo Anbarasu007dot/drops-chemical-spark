@@ -14,7 +14,7 @@ export const Hero = () => {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 to-gray-100">
-      {/* Chemical Elements */}
+      {/* Enhanced Chemical Elements */}
       <ChemicalElements />
       
       {/* Subtle Background Pattern */}
@@ -26,10 +26,10 @@ export const Hero = () => {
       {/* Professional Content */}
       <div className="relative z-10 container mx-auto px-4 py-20 text-center">
         <div className="max-w-4xl mx-auto">
-          <div className={`transition-all duration-800 ${isVisible ? 'classic-fade-in' : 'opacity-0 translate-y-10'}`}>
+          <div className={`transition-all duration-800 ${isVisible ? 'modern-fade-in' : 'opacity-0 translate-y-10'}`}>
             <h1 className="professional-heading mb-6">
               Expert Manufacturing
-              <span className="block text-gradient mt-2">
+              <span className="block bg-gradient-to-r from-blue-700 to-blue-900 bg-clip-text text-transparent mt-2">
                 & Supply Excellence
               </span>
             </h1>
@@ -42,16 +42,18 @@ export const Hero = () => {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
-              <Button asChild size="lg" className="accent-button text-lg px-8 py-4">
+              <Button asChild size="lg" className="professional-button text-lg px-8 py-4">
                 <Link to="/products" className="flex items-center">
                   Explore Our Products
                   <ArrowRight className="ml-2 w-5 h-5" />
                 </Link>
               </Button>
               
-              <Button variant="outline" size="lg" className="secondary-button text-lg px-8 py-4">
-                <Play className="mr-2 w-5 h-5" />
-                Watch Our Story
+              <Button asChild variant="outline" size="lg" className="secondary-button text-lg px-8 py-4">
+                <Link to="/about" className="flex items-center">
+                  <Play className="mr-2 w-5 h-5" />
+                  Know About Us
+                </Link>
               </Button>
             </div>
 

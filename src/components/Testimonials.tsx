@@ -1,101 +1,93 @@
 
-import { Star, Quote } from "lucide-react";
+import { Star } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
+import { useEffect, useRef, useState } from "react";
 
 export const Testimonials = () => {
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.2 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
   const testimonials = [
     {
-      quote: "Accurate chemical testing and timely suggestions have helped us cut costs and boost efficiency.",
-      author: "R. Krishnamurthy",
-      company: "ELGi Equipments",
-      rating: 5,
-      image: "https://images.unsplash.com/photo-1472396961693-142e6e269027?auto=format&fit=crop&w=400&q=80"
+      name: "Rajesh Kumar",
+      company: "Green Agriculture Ltd.",
+      text: "Drops Chemicals has been our trusted partner for agricultural solutions. Their products have significantly improved our crop yields and the team provides excellent technical support.",
+      rating: 5
     },
     {
-      quote: "Dependable support, excellent delivery — highly recommended for industrial chemical needs.",
-      author: "Priya Sharma",
-      company: "Roots Industries",
-      rating: 5,
-      image: "https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=400&q=80"
+      name: "Priya Sharma",
+      company: "AquaTech Solutions",
+      text: "The water treatment chemicals from Drops Chemicals are of exceptional quality. We've seen remarkable improvements in our water purification processes since partnering with them.",
+      rating: 5
     },
     {
-      quote: "They go beyond supply — their product knowledge and technical expertise is exceptional.",
-      author: "Mohammed Hassan",
-      company: "L&T Construction",
-      rating: 5,
-      image: "https://images.unsplash.com/photo-1482938289607-e9573fc25ebb?auto=format&fit=crop&w=400&q=80"
+      name: "Dr. Arun Patel",
+      company: "Food Processing Industries",
+      text: "Their food-grade chemicals meet all our stringent quality requirements. The consistency and purity of their products make them our preferred supplier.",
+      rating: 5
     }
   ];
 
-  const clients = [
-    "ELGi", "Roots", "SNS Academy", "Craftsman", 
-    "Zahoransky", "O by Tamara", "Larsen & Toubro", "Radisson Blu"
-  ];
-
   return (
-    <section className="py-20 bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 text-white">
+    <section 
+      ref={sectionRef}
+      className="py-20 bg-gradient-to-br from-slate-800 via-blue-900 to-slate-900"
+    >
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">
+        <div className={`text-center mb-16 transition-all duration-800 ${isVisible ? 'modern-fade-in' : 'opacity-0 translate-y-10'}`}>
+          <h2 className="professional-subheading mb-4 text-white">
             What Our Clients Say
           </h2>
-          <p className="text-xl text-blue-100 max-w-3xl mx-auto leading-relaxed">
-            Trusted by industry leaders across Tamil Nadu and beyond. 
-            Here's what our valued clients have to say about our services.
+          <div className="section-divider bg-gradient-to-r from-blue-400 to-white"></div>
+          <p className="text-lg text-blue-100 max-w-3xl mx-auto leading-relaxed">
+            Hear from our satisfied customers about their experience with our chemical solutions
           </p>
         </div>
 
-        {/* Testimonials */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {testimonials.map((testimonial, index) => (
-            <Card 
+            <Card
               key={index}
-              className="bg-white/10 backdrop-blur-md border-white/20 hover:bg-white/20 transition-all duration-500 hover:-translate-y-2 group"
+              className={`contact-card transition-all duration-500 ${
+                isVisible ? 'modern-scale-in' : 'opacity-0 scale-95'
+              }`}
               style={{ animationDelay: `${index * 0.2}s` }}
             >
               <CardContent className="p-8">
-                <div className="mb-6">
-                  <Quote className="w-8 h-8 text-blue-300 mb-4 group-hover:scale-110 transition-transform duration-300" />
-                  <p className="text-gray-100 leading-relaxed text-lg italic">
-                    "{testimonial.quote}"
-                  </p>
-                </div>
-
-                <div className="flex items-center space-x-1 mb-4">
+                <div className="flex mb-4">
                   {[...Array(testimonial.rating)].map((_, i) => (
                     <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
                   ))}
                 </div>
-
-                <div className="flex items-center space-x-4">
-                  <div 
-                    className="w-12 h-12 rounded-full bg-cover bg-center border-2 border-white/30"
-                    style={{ backgroundImage: `url('${testimonial.image}')` }}
-                  />
-                  <div>
-                    <div className="font-semibold text-white">{testimonial.author}</div>
-                    <div className="text-blue-200 text-sm">{testimonial.company}</div>
-                  </div>
+                
+                <p className="text-white/90 mb-6 leading-relaxed italic">
+                  "{testimonial.text}"
+                </p>
+                
+                <div className="border-t border-white/20 pt-4">
+                  <h4 className="font-semibold text-white mb-1">{testimonial.name}</h4>
+                  <p className="text-blue-200 text-sm">{testimonial.company}</p>
                 </div>
               </CardContent>
             </Card>
           ))}
-        </div>
-
-        {/* Client Logos */}
-        <div className="text-center">
-          <h3 className="text-2xl font-bold mb-8 text-blue-100">Trusted by Industry Leaders</h3>
-          <div className="flex flex-wrap justify-center items-center gap-8">
-            {clients.map((client, index) => (
-              <div
-                key={index}
-                className="px-6 py-3 bg-white/10 backdrop-blur-md rounded-lg border border-white/20 hover:bg-white/20 transition-all duration-300 hover:scale-105"
-                style={{ animationDelay: `${index * 0.1}s` }}
-              >
-                <span className="text-white font-semibold">{client}</span>
-              </div>
-            ))}
-          </div>
         </div>
       </div>
     </section>
