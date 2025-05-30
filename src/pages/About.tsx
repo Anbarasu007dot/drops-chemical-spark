@@ -68,7 +68,7 @@ const About = () => {
       
       {/* Enhanced Hero Section */}
       <section className="relative py-20 parallax-bg" style={{
-        backgroundImage: "linear-gradient(rgba(15, 23, 42, 0.7), rgba(30, 41, 59, 0.7)), url('https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=2000&q=80')"
+        backgroundImage: "linear-gradient(rgba(15, 23, 42, 0.7), rgba(30, 41, 59, 0.7)), url('https://t3.ftcdn.net/jpg/05/52/89/00/360_F_552890051_XwEHaQ8NBuQI0H6ll2YaaNkwpKFaGytm.jpg')"
       }}>
         <div className="relative container mx-auto px-4 text-center">
           <h1 className="text-5xl md:text-6xl font-bold mb-6 modern-fade-in text-white">
