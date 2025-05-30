@@ -1,4 +1,3 @@
-
 import { Award, Users, Target, Globe, Factory, Truck, Clock } from "lucide-react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
@@ -116,12 +115,17 @@ const About = () => {
             </div>
             
             <div className="modern-scale-in">
-              <div 
-                className="h-96 rounded-2xl bg-cover bg-center shadow-2xl"
-                style={{
-                  backgroundImage: "url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZSs25lz7vQ8N5TdxoYvMcvcImGjzwYGRR7A&s')"
-                }}
-              />
+              <div className="relative h-96 rounded-2xl overflow-hidden shadow-2xl">
+                <iframe
+                  src="https://player.vimeo.com/video/1089020992?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
+                  title="About Drops Chemicals"
+                  allow="autoplay; encrypted-media"
+                  allowFullScreen
+                  className="absolute inset-0 w-full h-full object-cover"
+                  style={{ border: 0 }}
+                />
+                <div className="absolute inset-0 bg-black/40 pointer-events-none rounded-2xl"></div>
+              </div>
             </div>
           </div>
         </div>
