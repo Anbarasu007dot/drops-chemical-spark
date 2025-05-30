@@ -1,6 +1,7 @@
 
 import { Award, Clock, DollarSign, Headphones, Truck, Users } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+import { ChemicalElements } from "@/components/ChemicalElements";
 
 export const WhyChooseUs = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -71,9 +72,10 @@ export const WhyChooseUs = () => {
   return (
     <section 
       ref={sectionRef}
-      className="py-20 bg-gray-50"
+      className="relative py-20 bg-gray-50"
     >
-      <div className="container mx-auto px-4">
+      <ChemicalElements />
+      <div className="container mx-auto px-4 relative z-10">
         <div className={`text-center mb-16 transition-all duration-800 ${isVisible ? 'classic-fade-in' : 'opacity-0 translate-y-10'}`}>
           <h2 className="professional-subheading mb-4">
             Why Choose Us

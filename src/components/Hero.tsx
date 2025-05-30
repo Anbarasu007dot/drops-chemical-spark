@@ -3,6 +3,7 @@ import { ArrowRight, Play } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { ChemicalElements } from "@/components/ChemicalElements";
 
 export const Hero = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -13,6 +14,9 @@ export const Hero = () => {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 to-gray-100">
+      {/* Chemical Elements */}
+      <ChemicalElements />
+      
       {/* Subtle Background Pattern */}
       <div className="absolute inset-0 subtle-pattern opacity-30"></div>
       

@@ -1,6 +1,7 @@
 
 import { Leaf, Droplets, Beaker, Apple } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+import { ChemicalElements } from "@/components/ChemicalElements";
 
 export const Expertise = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -33,8 +34,8 @@ export const Expertise = () => {
     },
     {
       icon: Droplets,
-      title: "Hygiene",
-      description: "Premium hygiene and cleaning solutions for industrial and commercial applications",
+      title: "Water Treatment",
+      description: "Premium water treatment and purification solutions for industrial and commercial applications",
       color: "text-blue-600",
       bgColor: "bg-blue-50 hover:bg-blue-100"
     },
@@ -47,7 +48,7 @@ export const Expertise = () => {
     },
     {
       icon: Apple,
-      title: "Food",
+      title: "Food Grade",
       description: "Food-grade chemical additives, preservatives, and specialty ingredients",
       color: "text-orange-600",
       bgColor: "bg-orange-50 hover:bg-orange-100"
@@ -57,9 +58,10 @@ export const Expertise = () => {
   return (
     <section 
       ref={sectionRef}
-      className="py-20 bg-white"
+      className="relative py-20 bg-white"
     >
-      <div className="container mx-auto px-4">
+      <ChemicalElements />
+      <div className="container mx-auto px-4 relative z-10">
         <div className={`text-center mb-16 transition-all duration-800 ${isVisible ? 'classic-fade-in' : 'opacity-0 translate-y-10'}`}>
           <h2 className="professional-subheading mb-4">
             Featured Sectors

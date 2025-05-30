@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { useState, useEffect, useRef } from "react";
 import { QuotationModal } from "@/components/QuotationModal";
+import { ChemicalElements } from "@/components/ChemicalElements";
 
 export const FeaturedProducts = () => {
   const [isQuotationOpen, setIsQuotationOpen] = useState(false);
@@ -54,9 +55,9 @@ export const FeaturedProducts = () => {
       color: "text-purple-600"
     },
     {
-      category: "Metal Finishing Chemicals",
-      description: "Specialized chemical solutions for metal processing, surface treatment, and finishing applications across manufacturing industries.",
-      secondDescription: "Our comprehensive range includes electroplating chemicals, surface cleaners, rust inhibitors, and protective coatings that enhance durability and performance.",
+      category: "Food Grade Chemicals",
+      description: "Food-grade chemical solutions including additives, preservatives, and specialty ingredients that meet strict safety and quality standards for food processing applications.",
+      secondDescription: "Our comprehensive range includes natural and synthetic ingredients that enhance flavor, texture, shelf-life, and nutritional value while ensuring consumer safety.",
       image: "https://images.unsplash.com/photo-1518495973542-4542c06a5843?auto=format&fit=crop&w=800&q=80",
       productCount: "30+",
       color: "text-amber-600"
@@ -72,9 +73,10 @@ export const FeaturedProducts = () => {
     <>
       <section 
         ref={sectionRef}
-        className="py-20 bg-white"
+        className="relative py-20 bg-white"
       >
-        <div className="container mx-auto px-4">
+        <ChemicalElements />
+        <div className="container mx-auto px-4 relative z-10">
           <div className={`text-center mb-16 transition-all duration-800 ${isVisible ? 'classic-fade-in' : 'opacity-0 translate-y-10'}`}>
             <h2 className="professional-subheading mb-4">
               Featured Products

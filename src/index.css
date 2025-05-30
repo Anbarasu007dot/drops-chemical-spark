@@ -1,4 +1,6 @@
 
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -78,12 +80,12 @@
 
   body {
     @apply bg-background text-foreground;
-    background: #ffffff;
-    font-family: 'Inter', 'system-ui', 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
-    letter-spacing: -0.015em;
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #cbd5e1 100%);
+    font-family: 'Poppins', 'system-ui', 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
+    letter-spacing: -0.02em;
     line-height: 1.6;
     overflow-x: hidden;
-    color: #1a202c;
+    color: #1e293b;
   }
 
   .line-clamp-2 {
@@ -108,7 +110,7 @@
 @layer components {
   /* Classic Animation Framework */
   .classic-fade-in {
-    animation: classicFadeIn 0.6s ease-out;
+    animation: classicFadeIn 0.8s ease-out;
   }
 
   .classic-slide-up {
@@ -116,40 +118,57 @@
   }
 
   .classic-scale-in {
-    animation: classicScaleIn 0.5s ease-out;
+    animation: classicScaleIn 0.6s ease-out;
+  }
+
+  /* Chemical Animation Elements */
+  .chemical-float {
+    animation: chemicalFloat 4s ease-in-out infinite;
+  }
+
+  .chemical-rotate {
+    animation: chemicalRotate 8s linear infinite;
+  }
+
+  .chemical-bounce {
+    animation: chemicalBounce 3s ease-in-out infinite;
+  }
+
+  .chemical-pulse {
+    animation: chemicalPulse 2s ease-in-out infinite;
   }
 
   /* Professional Card Design */
   .professional-card {
-    @apply bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-md 
+    @apply bg-white border border-slate-200 rounded-lg shadow-sm hover:shadow-lg 
            transition-all duration-300 relative overflow-hidden;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   }
 
   .professional-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    transform: translateY(-4px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
   }
 
   .professional-button {
-    @apply bg-slate-800 hover:bg-slate-700 text-white font-medium
-           transition-all duration-200 rounded-md px-6 py-3
+    @apply bg-blue-600 hover:bg-blue-700 text-white font-semibold
+           transition-all duration-200 rounded-lg px-6 py-3
            shadow-sm hover:shadow-md;
+    font-family: 'Poppins', sans-serif;
   }
 
   .secondary-button {
-    @apply bg-white border border-gray-300 text-slate-700 hover:bg-gray-50 
-           font-medium transition-all duration-200 rounded-md px-6 py-3
+    @apply bg-white border border-slate-300 text-slate-700 hover:bg-slate-50 
+           font-semibold transition-all duration-200 rounded-lg px-6 py-3
            shadow-sm hover:shadow-md;
+    font-family: 'Poppins', sans-serif;
   }
 
   .accent-button {
-    @apply bg-blue-600 hover:bg-blue-700 text-white font-medium
-           transition-all duration-200 rounded-md px-6 py-3
+    @apply bg-blue-600 hover:bg-blue-700 text-white font-semibold
+           transition-all duration-200 rounded-lg px-6 py-3
            shadow-sm hover:shadow-md;
-  }
-
-  .classic-gradient {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    font-family: 'Poppins', sans-serif;
   }
 
   .text-gradient {
@@ -161,7 +180,7 @@
 
   /* Professional Hover Effects */
   .hover-lift {
-    @apply transition-all duration-300 hover:-translate-y-1 hover:shadow-lg;
+    @apply transition-all duration-300 hover:-translate-y-2 hover:shadow-lg;
   }
 
   .hover-scale {
@@ -173,19 +192,23 @@
     font-weight: 600;
     letter-spacing: -0.025em;
     line-height: 1.2;
-    color: #1a202c;
+    color: #1e293b;
+    font-family: 'Poppins', sans-serif;
   }
 
   .professional-heading {
-    @apply text-5xl md:text-6xl font-semibold tracking-tight leading-tight text-slate-900;
+    @apply text-5xl md:text-6xl font-bold tracking-tight leading-tight text-slate-900;
+    font-family: 'Poppins', sans-serif;
   }
 
   .professional-subheading {
     @apply text-3xl md:text-4xl font-semibold tracking-tight text-slate-800;
+    font-family: 'Poppins', sans-serif;
   }
 
   .section-heading {
     @apply text-2xl md:text-3xl font-semibold text-slate-800 mb-4;
+    font-family: 'Poppins', sans-serif;
   }
 
   /* Classic Animations */
@@ -222,11 +245,57 @@
     }
   }
 
+  /* Chemical Animations */
+  @keyframes chemicalFloat {
+    0%, 100% {
+      transform: translateY(0px) rotate(0deg);
+    }
+    50% {
+      transform: translateY(-20px) rotate(10deg);
+    }
+  }
+
+  @keyframes chemicalRotate {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes chemicalBounce {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    25% {
+      transform: translateY(-15px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+    75% {
+      transform: translateY(-5px);
+    }
+  }
+
+  @keyframes chemicalPulse {
+    0%, 100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    50% {
+      transform: scale(1.1);
+      opacity: 0.8;
+    }
+  }
+
   /* Professional Form Elements */
   .professional-input {
-    @apply bg-white border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20
-           rounded-md px-4 py-3 text-gray-900 transition-all duration-200
-           hover:border-gray-400;
+    @apply bg-white border border-slate-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20
+           rounded-lg px-4 py-3 text-slate-900 transition-all duration-200
+           hover:border-slate-400;
+    font-family: 'Poppins', sans-serif;
   }
 
   .professional-textarea {
@@ -241,7 +310,7 @@
 
   .interactive-card:hover {
     border-color: #e2e8f0;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
   }
 
   /* Section Dividers */
@@ -254,20 +323,62 @@
     background-image: radial-gradient(circle at 1px 1px, rgba(148,163,184,0.15) 1px, transparent 0);
     background-size: 20px 20px;
   }
+
+  /* Chemical Element Styles */
+  .chemical-element {
+    position: absolute;
+    opacity: 0.1;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .chemical-molecule {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+    border-radius: 50%;
+    position: relative;
+  }
+
+  .chemical-molecule::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    height: 80%;
+    border: 2px solid white;
+    border-radius: 50%;
+  }
+
+  .chemical-beaker {
+    width: 40px;
+    height: 50px;
+    background: linear-gradient(135deg, #10b981, #059669);
+    clip-path: polygon(20% 0%, 80% 0%, 85% 100%, 15% 100%);
+  }
+
+  .chemical-flask {
+    width: 45px;
+    height: 45px;
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  }
 }
 
 /* Professional Scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 10px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #f8fafc;
+  background: #f1f5f9;
 }
 
 ::-webkit-scrollbar-thumb {
   background: #cbd5e1;
-  border-radius: 4px;
+  border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
