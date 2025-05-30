@@ -1,4 +1,3 @@
-
 import { Mail, MessageSquare, Send, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -52,7 +51,8 @@ export const QuickContact = () => {
       ref={sectionRef}
       className="relative py-20 parallax-bg"
       style={{
-        backgroundImage: "linear-gradient(rgba(15, 23, 42, 0.8), rgba(30, 41, 59, 0.8)), url('https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=2000&q=80')"
+        backgroundImage: " url('https://tsscbse.com/wp-content/uploads/2023/10/Untitled-design-9-1.gif')"
+        // backgroundImage: "linear-gradient(rgba(165, 166, 169, 0.8), rgba(165, 168, 173, 0.8)), url('https://www.shutterstock.com/image-photo/scientist-adding-liquid-test-tube-600nw-2493601121.jpg')"
       }}
     >
       <div className="container mx-auto px-4">
@@ -69,7 +69,7 @@ export const QuickContact = () => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Contact Info */}
           <div className="lg:col-span-1 space-y-6">
-            <Card className={`contact-card transition-all duration-500 ${isVisible ? 'modern-slide-up' : 'opacity-0 translate-y-10'}`}>
+            <Card className={`contact-card transition-all duration-500 ${isVisible ? 'modern-slide-up' : 'opacity-0 translate-y-10'} bg-slate-800/50 hover:bg-slate-700/60`}>
               <CardContent className="p-6">
                 <div className="flex items-center space-x-4">
                   <div className="w-12 h-12 bg-gradient-to-r from-green-500 to-green-600 rounded-lg flex items-center justify-center">
@@ -84,7 +84,7 @@ export const QuickContact = () => {
               </CardContent>
             </Card>
 
-            <Card className={`contact-card transition-all duration-500 ${isVisible ? 'modern-slide-up' : 'opacity-0 translate-y-10'}`} style={{ animationDelay: '0.2s' }}>
+            <Card className={`contact-card transition-all duration-500 ${isVisible ? 'modern-slide-up' : 'opacity-0 translate-y-10'} bg-slate-800/50 hover:bg-slate-700/60`} style={{ animationDelay: '0.2s' }}>
               <CardContent className="p-6">
                 <div className="flex items-center space-x-4">
                   <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-purple-600 rounded-lg flex items-center justify-center">
@@ -99,7 +99,7 @@ export const QuickContact = () => {
               </CardContent>
             </Card>
 
-            <Card className={`contact-card transition-all duration-500 ${isVisible ? 'modern-slide-up' : 'opacity-0 translate-y-10'}`} style={{ animationDelay: '0.4s' }}>
+            <Card className={`contact-card transition-all duration-500 ${isVisible ? 'modern-slide-up' : 'opacity-0 translate-y-10'} bg-slate-800/50 hover:bg-slate-700/60`} style={{ animationDelay: '0.4s' }}>
               <CardContent className="p-6">
                 <div className="flex items-center space-x-4">
                   <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-blue-600 rounded-lg flex items-center justify-center">
