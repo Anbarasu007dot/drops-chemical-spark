@@ -1,7 +1,7 @@
 
 import { Star } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 export const Testimonials = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -14,7 +14,7 @@ export const Testimonials = () => {
           setIsVisible(true);
         }
       },
-      { threshold: 0.2 }
+      { threshold: 0.1 }
     );
 
     if (sectionRef.current) {
@@ -27,63 +27,84 @@ export const Testimonials = () => {
   const testimonials = [
     {
       name: "Rajesh Kumar",
-      company: "Green Agriculture Ltd.",
-      text: "Drops Chemicals has been our trusted partner for agricultural solutions. Their products have significantly improved our crop yields and the team provides excellent technical support.",
-      rating: 5
+      company: "AgriTech Solutions",
+      role: "CEO",
+      content: "Drops Chemicals has been our trusted partner for over 5 years. Their agricultural chemicals have significantly improved our crop yields and quality. Exceptional service and reliable products.",
+      rating: 5,
+      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80"
     },
     {
       name: "Priya Sharma",
-      company: "AquaTech Solutions",
-      text: "The water treatment chemicals from Drops Chemicals are of exceptional quality. We've seen remarkable improvements in our water purification processes since partnering with them.",
-      rating: 5
+      company: "AquaFresh Industries",
+      role: "Operations Manager",
+      content: "The water treatment chemicals from Drops have revolutionized our purification processes. Outstanding quality and excellent technical support team. Highly recommended for industrial applications.",
+      rating: 5,
+      image: "https://images.unsplash.com/photo-1494790108755-2616c2d1b4de?auto=format&fit=crop&w=150&q=80"
     },
     {
       name: "Dr. Arun Patel",
-      company: "Food Processing Industries",
-      text: "Their food-grade chemicals meet all our stringent quality requirements. The consistency and purity of their products make them our preferred supplier.",
-      rating: 5
+      company: "FoodTech Labs",
+      role: "Quality Director",
+      content: "Their food-grade chemicals meet the highest safety standards. Consistent quality, timely delivery, and competitive pricing make them our preferred supplier for all food processing needs.",
+      rating: 5,
+      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=150&q=80"
     }
   ];
 
   return (
     <section 
       ref={sectionRef}
-      className="py-20 bg-gradient-to-br from-slate-800 via-blue-900 to-slate-900"
+      className="py-20 premium-bg-overlay text-white"
+      style={{
+        backgroundImage: "linear-gradient(rgba(26, 54, 93, 0.9), rgba(66, 153, 225, 0.8)), url('https://images.unsplash.com/photo-1559757148-5c350d0d3c56?auto=format&fit=crop&w=2000&q=80')",
+        backgroundAttachment: "fixed",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover"
+      }}
     >
       <div className="container mx-auto px-4">
         <div className={`text-center mb-16 transition-all duration-800 ${isVisible ? 'modern-fade-in' : 'opacity-0 translate-y-10'}`}>
-          <h2 className="professional-subheading mb-4 text-white">
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
             What Our Clients Say
           </h2>
-          <div className="section-divider bg-gradient-to-r from-blue-400 to-white"></div>
-          <p className="text-lg text-blue-100 max-w-3xl mx-auto leading-relaxed">
-            Hear from our satisfied customers about their experience with our chemical solutions
+          <div className="section-divider bg-white"></div>
+          <p className="text-xl text-blue-100 max-w-3xl mx-auto">
+            Trusted by Industry Leaders - Real feedback from our valued partners
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {testimonials.map((testimonial, index) => (
-            <Card
+            <Card 
               key={index}
-              className={`contact-card transition-all duration-500 ${
+              className={`professional-card bg-white/10 backdrop-blur-lg border-white/20 text-white transition-all duration-500 ${
                 isVisible ? 'modern-scale-in' : 'opacity-0 scale-95'
-              } bg-slate-800/80 hover:bg-slate-700/90`}
+              }`}
               style={{ animationDelay: `${index * 0.2}s` }}
             >
               <CardContent className="p-8">
-                <div className="flex mb-4">
+                <div className="flex items-center mb-4">
                   {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
+                    <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
                   ))}
                 </div>
                 
-                <p className="text-white/90 mb-6 leading-relaxed italic">
-                  "{testimonial.text}"
+                <p className="text-blue-100 mb-6 line-height-loose">
+                  "{testimonial.content}"
                 </p>
                 
-                <div className="border-t border-white/20 pt-4">
-                  <h4 className="font-semibold text-white mb-1">{testimonial.name}</h4>
-                  <p className="text-blue-200 text-sm">{testimonial.company}</p>
+                <div className="flex items-center">
+                  <img 
+                    src={testimonial.image} 
+                    alt={testimonial.name}
+                    className="w-12 h-12 rounded-full mr-4 object-cover"
+                  />
+                  <div>
+                    <h4 className="font-semibold text-white">{testimonial.name}</h4>
+                    <p className="text-sm text-blue-200">{testimonial.role}</p>
+                    <p className="text-sm text-blue-300">{testimonial.company}</p>
+                  </div>
                 </div>
               </CardContent>
             </Card>

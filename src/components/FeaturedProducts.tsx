@@ -1,10 +1,11 @@
 
-import { ArrowRight, FileText, MessageSquare } from "lucide-react";
+import { ArrowRight, MessageSquare } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { useState, useEffect, useRef } from "react";
 import { QuotationModal } from "@/components/QuotationModal";
 import { ChemicalElements } from "@/components/ChemicalElements";
+import { Link } from "react-router-dom";
 
 export const FeaturedProducts = () => {
   const [isQuotationOpen, setIsQuotationOpen] = useState(false);
@@ -32,37 +33,40 @@ export const FeaturedProducts = () => {
   const products = [
     {
       category: "Agro & Aquaculture Chemicals",
-      description: "Our comprehensive range of agricultural and aquaculture chemicals includes premium fertilizers, micronutrients, and specialized solutions designed to enhance crop yield and optimize fish farming operations.",
-      secondDescription: "From soil conditioning agents to water treatment solutions, we provide scientifically formulated products that ensure sustainable agricultural practices while maximizing productivity.",
-      image: "https://i0.wp.com/razzanj.com/wp-content/uploads/2016/07/nature-landscape-nature-landscape-hd-image-download-wheat-farm-hd-wallpaper-notebook-background-wheat-farmers-wheat-farming-process-wheat-farming-in-kenya.jpg?ssl=1",
+      categoryId: "agro-aquaculture",
+      description: "Our comprehensive range of agricultural chemicals supports modern farming practices with innovative solutions for crop protection, soil enhancement, and yield optimization.",
+      secondDescription: "We provide environmentally conscious formulations that ensure sustainable agriculture while maximizing productivity and supporting global food security initiatives.",
+      image: "https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?auto=format&fit=crop&w=1200&q=80",
       productCount: "50+",
       color: "text-green-600"
     },
     {
       category: "Water Treatment Chemicals",
-      description: "Advanced water treatment solutions encompassing a full spectrum of purification, conditioning, and treatment chemicals for industrial, municipal, and commercial applications.",
-      secondDescription: "Our portfolio includes coagulants, flocculants, disinfectants, and specialty chemicals that ensure water quality compliance while optimizing operational efficiency.",
-      image: "https://gifdb.com/images/high/water-splash-ocean-waves-v7asu155ykhivrv8.gif",
+      categoryId: "water-treatment",
+      description: "Advanced water treatment solutions designed for industrial, municipal, and residential applications. Our chemical formulations ensure water purity, system efficiency, and environmental compliance.",
+      secondDescription: "From coagulants to disinfectants, our portfolio covers the complete spectrum of water treatment processes, ensuring safe and clean water for diverse applications.",
+      image: "https://images.unsplash.com/photo-1581833971358-2c8b550f87b3?auto=format&fit=crop&w=1200&q=80",
       productCount: "40+",
       color: "text-blue-600"
     },
     {
       category: "Food Grade Chemicals",
-      description: "Food-grade chemical solutions including additives, preservatives, and specialty ingredients that meet strict safety and quality standards for food processing applications.",
-      secondDescription: "Our comprehensive range includes natural and synthetic ingredients that enhance flavor, texture, shelf-life, and nutritional value while ensuring consumer safety.",
-      image: "https://i.makeagif.com/media/8-01-2016/wW8rt2.gif",
+      categoryId: "food-chemicals",
+      description: "Food-grade chemical solutions that meet stringent safety standards for food processing, preservation, and packaging industries. Our products ensure quality, safety, and regulatory compliance.",
+      secondDescription: "Our comprehensive range includes natural and synthetic ingredients that enhance flavor, texture, shelf-life, and nutritional value while ensuring consumer safety throughout the food supply chain.",
+      image: "https://images.unsplash.com/photo-1559181567-c3190ca9959b?auto=format&fit=crop&w=1200&q=80",
       productCount: "30+",
       color: "text-amber-600"
     },
     {
       category: "Hygiene Raw Materials",
+      categoryId: "hygiene-raw-materials",
       description: "Premium quality raw materials specifically formulated for the hygiene industry, including surfactants, emulsifiers, preservatives, and active ingredients for detergents and personal care products.",
-      secondDescription: "Our carefully selected portfolio enables manufacturers to create high-performance cleaning and personal care solutions that meet stringent quality standards.",
-      image: "https://media.licdn.com/dms/image/v2/D4D12AQF2W9YwL1sT7g/article-cover_image-shrink_720_1280/article-cover_image-shrink_720_1280/0/1734252826925?e=2147483647&v=beta&t=RM0Q89mDbn2PuHZfgMc4dkcpXlpZKi1fk4LnragsGAU",
+      secondDescription: "Our carefully selected portfolio enables manufacturers to create high-performance cleaning and personal care solutions that meet stringent quality standards and consumer expectations.",
+      image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=1200&q=80",
       productCount: "80+",
       color: "text-purple-600"
     },
-    
   ];
 
   const handleQuoteRequest = (category: string) => {
@@ -79,7 +83,7 @@ export const FeaturedProducts = () => {
         <ChemicalElements />
         <div className="container mx-auto px-4 relative z-10">
           <div className={`text-center mb-16 transition-all duration-800 ${isVisible ? 'classic-fade-in' : 'opacity-0 translate-y-10'}`}>
-            <h2 className="professional-subheading mb-4">
+            <h2 className="professional-subheading mb-4" style={{ color: 'var(--brand-dark-blue)' }}>
               Featured Products
             </h2>
             <div className="section-divider"></div>
@@ -111,7 +115,7 @@ export const FeaturedProducts = () => {
                     </div>
                     
                     <div className="p-8">
-                      <h3 className="text-2xl font-semibold text-slate-800 mb-4 group-hover:text-slate-900 transition-colors duration-300">
+                      <h3 className="text-2xl font-semibold mb-4 group-hover:text-slate-900 transition-colors duration-300" style={{ color: 'var(--brand-dark-blue)' }}>
                         {product.category}
                       </h3>
                       
@@ -125,11 +129,13 @@ export const FeaturedProducts = () => {
 
                       <div className="flex flex-col sm:flex-row gap-4">
                         <Button
-                          variant="outline"
+                          asChild
                           className="secondary-button flex items-center justify-center"
                         >
-                          <FileText className="w-4 h-4 mr-2" />
-                          MSDS
+                          <Link to={`/products?category=${product.categoryId}`}>
+                            <ArrowRight className="w-4 h-4 mr-2" />
+                            View Products
+                          </Link>
                         </Button>
                         
                         <Button
@@ -148,9 +154,11 @@ export const FeaturedProducts = () => {
           </div>
 
           <div className="text-center mt-16">
-            <Button size="lg" className="accent-button text-lg px-8 py-4">
-              View All Products
-              <ArrowRight className="ml-2 w-5 h-5" />
+            <Button asChild size="lg" className="accent-button text-lg px-8 py-4">
+              <Link to="/products">
+                View All Products
+                <ArrowRight className="ml-2 w-5 h-5" />
+              </Link>
             </Button>
           </div>
         </div>

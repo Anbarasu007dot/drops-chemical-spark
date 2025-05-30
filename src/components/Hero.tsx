@@ -4,6 +4,8 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { ChemicalElements } from "@/components/ChemicalElements";
+import { AnimatedCounter } from "@/components/AnimatedCounter";
+import { FloatingMolecules } from "@/components/FloatingMolecules";
 
 export const Hero = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -13,30 +15,29 @@ export const Hero = () => {
   }, []);
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 to-gray-100">
+    <section className="relative min-h-screen flex items-center justify-center hero-premium-bg">
       {/* Enhanced Chemical Elements */}
       <ChemicalElements />
+      <FloatingMolecules />
       
       {/* Subtle Background Pattern */}
-      <div className="absolute inset-0 subtle-pattern opacity-30"></div>
+      <div className="absolute inset-0 subtle-pattern opacity-20"></div>
+      <div className="absolute inset-0 molecular-bg"></div>
       
-      {/* Clean Background Overlay */}
-      <div className="absolute inset-0 bg-white/60"></div>
-
       {/* Professional Content */}
       <div className="relative z-10 container mx-auto px-4 py-20 text-center">
         <div className="max-w-4xl mx-auto">
           <div className={`transition-all duration-800 ${isVisible ? 'modern-fade-in' : 'opacity-0 translate-y-10'}`}>
-            <h1 className="professional-heading mb-6">
+            <h1 className="professional-heading mb-6 text-white">
               Expert Manufacturing
-              <span className="block bg-gradient-to-r from-blue-700 to-blue-900 bg-clip-text text-transparent mt-2">
+              <span className="block bg-gradient-to-r from-blue-200 to-white bg-clip-text text-transparent mt-2">
                 & Supply Excellence
               </span>
             </h1>
             
-            <p className="text-xl md:text-2xl text-slate-600 mb-10 max-w-3xl mx-auto leading-relaxed font-light">
+            <p className="text-xl md:text-2xl text-blue-100 mb-10 max-w-3xl mx-auto leading-relaxed font-light">
               Leading manufacturer and supplier of high-quality chemical solutions for 
-              <span className="block font-medium text-slate-700 mt-1">
+              <span className="block font-medium text-white mt-1">
                 agriculture, water treatment, food processing, and industrial applications.
               </span>
             </p>
@@ -57,21 +58,36 @@ export const Hero = () => {
               </Button>
             </div>
 
-            {/* Professional Stats */}
+            {/* Professional Stats with Animated Counters */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-3xl mx-auto">
-              {[
-                { number: "20+", label: "Years Experience" },
-                { number: "500+", label: "Products" },
-                { number: "1000+", label: "Happy Clients" },
-                { number: "24/7", label: "Support" }
-              ].map((stat, index) => (
-                <div key={index} className="text-center">
-                  <div className="text-3xl md:text-4xl font-bold text-slate-800 mb-2">
-                    {stat.number}
-                  </div>
-                  <div className="text-slate-600 font-medium">{stat.label}</div>
-                </div>
-              ))}
+              <div className="text-center">
+                <AnimatedCounter 
+                  end={20} 
+                  suffix="+" 
+                  className="text-3xl md:text-4xl font-bold text-white mb-2"
+                />
+                <div className="text-blue-200 font-medium">Years Experience</div>
+              </div>
+              <div className="text-center">
+                <AnimatedCounter 
+                  end={500} 
+                  suffix="+" 
+                  className="text-3xl md:text-4xl font-bold text-white mb-2"
+                />
+                <div className="text-blue-200 font-medium">Products</div>
+              </div>
+              <div className="text-center">
+                <AnimatedCounter 
+                  end={1000} 
+                  suffix="+" 
+                  className="text-3xl md:text-4xl font-bold text-white mb-2"
+                />
+                <div className="text-blue-200 font-medium">Happy Clients</div>
+              </div>
+              <div className="text-center">
+                <div className="text-3xl md:text-4xl font-bold text-white mb-2">24/7</div>
+                <div className="text-blue-200 font-medium">Support</div>
+              </div>
             </div>
           </div>
         </div>

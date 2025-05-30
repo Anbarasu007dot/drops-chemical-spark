@@ -1,21 +1,32 @@
 
-import { useState } from "react";
-import { Search, FileText, MessageSquare, Filter } from "lucide-react";
+import { useState, useEffect } from "react";
+import { Search, MessageSquare } from "lucide-react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
 import { ChemicalElements } from "@/components/ChemicalElements";
+import { FloatingMolecules } from "@/components/FloatingMolecules";
 
 const Products = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
 
+  // Get category from URL params
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const category = urlParams.get('category');
+    if (category) {
+      setSelectedCategory(category);
+    }
+  }, []);
+
   const productCategories = [
     {
       name: "Agro & Aquaculture Chemicals",
       id: "agro-aquaculture",
+      description: "Our comprehensive range of agricultural chemicals supports modern farming practices with innovative solutions for crop protection, soil enhancement, and yield optimization. We provide environmentally conscious formulations that ensure sustainable agriculture while maximizing productivity.",
       products: [
         "Ammonium Polyphosphate", "Ammonium Chloride", "Ammonium Sulphate (White)",
         "Biofertilizer", "Boran", "Boric Acid", "Calcium Carbonate", "Calcium Chloride",
@@ -33,7 +44,8 @@ const Products = () => {
     },
     {
       name: "Water Treatment Chemicals",
-      id: "water-treatment", 
+      id: "water-treatment",
+      description: "Advanced water treatment solutions designed for industrial, municipal, and residential applications. Our chemical formulations ensure water purity, system efficiency, and environmental compliance across diverse treatment processes.",
       products: [
         "Alum (Ferric / Non-Ferric)", "Bioculture", "Bleaching Powder", "Calcium Hypochlorite",
         "Caustic Soda", "Citric Acid", "Decolorant", "EDTA", "Ferric Chloride",
@@ -49,6 +61,7 @@ const Products = () => {
     {
       name: "Hygiene Raw Materials & Detergents",
       id: "hygiene-raw-materials",
+      description: "Premium quality raw materials specifically formulated for the hygiene industry, including surfactants, emulsifiers, preservatives, and active ingredients for detergents and personal care products. Our carefully selected portfolio enables manufacturers to create high-performance cleaning solutions.",
       products: [
         "Acid Slurry (IPCL/TP)", "Acid Thickener", "Alphox 100 & 200 (All Grades)",
         "AOS Liquid/Paste/Powder", "BKC (50%/80%)", "Baking Soda (Sodium Bicarbonate)",
@@ -69,6 +82,7 @@ const Products = () => {
     {
       name: "Food Chemicals",
       id: "food-chemicals",
+      description: "Food-grade chemical solutions that meet stringent safety standards for food processing, preservation, and packaging industries. Our products ensure quality, safety, and regulatory compliance throughout the food supply chain.",
       products: [
         "Acetic Acid", "Ammonium Bicarbonate", "Ascorbic Acid", "Calcium Chloride",
         "Calcium Propionate", "Citric Acid", "Final Gel", "Liquid Glucose",
@@ -83,6 +97,7 @@ const Products = () => {
     {
       name: "Basic Industrial Chemicals",
       id: "basic-chemicals",
+      description: "Essential industrial chemicals for manufacturing and processing applications across various industries, ensuring consistent quality and reliable supply for industrial operations.",
       products: [
         "Sulfuric Acid", "Hydrochloric Acid", "Nitric Acid", "Acetic Acid",
         "Ammonia", "Sodium Hydroxide", "Potassium Hydroxide", "Calcium Oxide",
@@ -95,6 +110,7 @@ const Products = () => {
     {
       name: "Pharmaceutical Raw Materials",
       id: "pharmaceutical",
+      description: "High-purity pharmaceutical raw materials meeting stringent quality standards for pharmaceutical manufacturing, ensuring safety, efficacy, and regulatory compliance.",
       products: [
         "Lactose Monohydrate", "Microcrystalline Cellulose", "Starch", "Mannitol",
         "Sorbitol", "Magnesium Stearate", "Talc", "Titanium Dioxide",
@@ -110,13 +126,16 @@ const Products = () => {
     selectedCategory === "all" || category.id === selectedCategory
   );
 
+  const selectedCategoryData = productCategories.find(cat => cat.id === selectedCategory);
+
   return (
     <div className="min-h-screen">
       <Header />
       
-      {/* Hero Section */}
-      <section className="relative py-20 bg-gradient-to-br from-blue-900 via-blue-800 to-purple-900 text-white">
+      {/* Premium Hero Section */}
+      <section className="relative py-20 premium-page-bg text-white">
         <ChemicalElements />
+        <FloatingMolecules />
         <div className="absolute inset-0 bg-black/20" />
         <div className="relative container mx-auto px-4 text-center z-10">
           <h1 className="text-5xl md:text-6xl font-bold mb-6 animate-fade-in text-white">
@@ -153,14 +172,37 @@ const Products = () => {
         </div>
       </section>
 
+      {/* Category Description Section */}
+      {selectedCategory !== "all" && selectedCategoryData && (
+        <section className="py-12 bg-gradient-to-br from-blue-50 to-white">
+          <div className="container mx-auto px-4">
+            <div className="max-w-4xl mx-auto text-center">
+              <h2 className="text-3xl md:text-4xl font-bold mb-6" style={{ color: 'var(--brand-dark-blue)' }}>
+                {selectedCategoryData.name}
+              </h2>
+              <p className="text-lg text-gray-700 leading-relaxed">
+                {selectedCategoryData.description}
+              </p>
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* Products Section */}
       <section className="py-20 bg-gray-50">
         <div className="container mx-auto px-4">
           {filteredCategories.map((category, categoryIndex) => (
             <div key={category.id} id={category.id} className="mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-8 text-center">
-                {category.name}
-              </h2>
+              {selectedCategory === "all" && (
+                <>
+                  <h2 className="text-3xl md:text-4xl font-bold text-center mb-4" style={{ color: 'var(--brand-dark-blue)' }}>
+                    {category.name}
+                  </h2>
+                  <p className="text-lg text-gray-600 text-center mb-12 max-w-3xl mx-auto">
+                    {category.description}
+                  </p>
+                </>
+              )}
               
               {/* Vertical List Layout */}
               <div className="max-w-4xl mx-auto space-y-4">
@@ -178,7 +220,7 @@ const Products = () => {
                       <CardContent className="p-6">
                         <div className="flex items-center justify-between">
                           <div className="flex-1">
-                            <h3 className="text-lg font-semibold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors">
+                            <h3 className="text-lg font-semibold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors" style={{ color: 'var(--brand-dark-blue)' }}>
                               {product}
                             </h3>
                             <p className="text-sm text-gray-600">
@@ -188,17 +230,8 @@ const Products = () => {
                           
                           <div className="flex gap-2 ml-4">
                             <Button
-                              variant="outline"
                               size="sm"
-                              className="hover:bg-blue-50 hover:border-blue-300 hover:text-blue-600 transition-all duration-300"
-                            >
-                              <FileText className="w-4 h-4 mr-1" />
-                              MSDS
-                            </Button>
-                            
-                            <Button
-                              size="sm"
-                              className="bg-blue-600 hover:bg-blue-700 text-white transition-all duration-300"
+                              className="professional-button"
                             >
                               <MessageSquare className="w-4 h-4 mr-1" />
                               Quote

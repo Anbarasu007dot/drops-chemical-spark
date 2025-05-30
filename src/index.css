@@ -35,6 +35,13 @@
     --sidebar-accent-foreground: 240 5.9% 10%;
     --sidebar-border: 220 13% 91%;
     --sidebar-ring: 217.2 91.2% 59.8%;
+
+    /* Brand Colors */
+    --brand-dark-blue: #1a365d;
+    --brand-light-blue: #4299e1;
+    --brand-white: #ffffff;
+    --brand-light-grey: #f7fafc;
+    --brand-accent-grey: #718096;
   }
 
   .dark {
@@ -108,6 +115,17 @@
 }
 
 @layer components {
+  /* Brand Color Classes */
+  .brand-primary {
+    background-color: var(--brand-dark-blue);
+    color: var(--brand-white);
+  }
+
+  .brand-secondary {
+    background-color: var(--brand-light-blue);
+    color: var(--brand-white);
+  }
+
   /* Modern Animation Framework */
   .modern-fade-in {
     animation: modernFadeIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
@@ -119,6 +137,14 @@
 
   .modern-scale-in {
     animation: modernScaleIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .classic-fade-in {
+    animation: classicFadeIn 1s ease-out;
+  }
+
+  .classic-scale-in {
+    animation: classicScaleIn 0.8s ease-out;
   }
 
   .parallax-bg {
@@ -145,6 +171,17 @@
     animation: chemicalPulse 2s ease-in-out infinite;
   }
 
+  /* Floating molecules for backgrounds */
+  .floating-molecule {
+    position: absolute;
+    opacity: 0.1;
+    animation: floatMolecule 20s linear infinite;
+  }
+
+  .particle-float {
+    animation: particleFloat 15s ease-in-out infinite;
+  }
+
   /* Professional Card Design */
   .professional-card {
     @apply bg-white border border-slate-200 rounded-xl shadow-lg hover:shadow-2xl 
@@ -157,40 +194,47 @@
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
   }
 
+  /* Brand-Consistent Buttons */
   .professional-button {
-    @apply bg-gradient-to-r from-blue-700 to-blue-900 hover:from-blue-800 hover:to-blue-950
-           text-white font-semibold transition-all duration-300 rounded-xl px-8 py-4
-           shadow-lg hover:shadow-xl;
+    background-color: var(--brand-dark-blue);
+    color: var(--brand-white);
+    @apply font-semibold transition-all duration-300 rounded-xl px-8 py-4 shadow-lg hover:shadow-xl;
     font-family: 'Montserrat', sans-serif;
     transform: translateY(0);
   }
 
   .professional-button:hover {
+    background-color: var(--brand-light-blue);
     transform: translateY(-2px);
+    box-shadow: 0 15px 30px -8px rgba(26, 54, 93, 0.3);
   }
 
   .secondary-button {
-    @apply bg-white border-2 border-slate-300 text-slate-700 hover:bg-slate-50 hover:border-slate-400
-           font-semibold transition-all duration-300 rounded-xl px-8 py-4
-           shadow-md hover:shadow-lg;
+    background-color: var(--brand-light-blue);
+    color: var(--brand-white);
+    @apply font-semibold transition-all duration-300 rounded-xl px-8 py-4 shadow-md hover:shadow-lg;
     font-family: 'Montserrat', sans-serif;
     transform: translateY(0);
   }
 
   .secondary-button:hover {
+    background-color: var(--brand-dark-blue);
     transform: translateY(-2px);
+    box-shadow: 0 15px 30px -8px rgba(66, 153, 225, 0.3);
   }
 
   .accent-button {
-    @apply bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700
-           text-white font-semibold transition-all duration-300 rounded-xl px-8 py-4
-           shadow-lg hover:shadow-xl;
+    background-color: var(--brand-light-blue);
+    color: var(--brand-white);
+    @apply font-semibold transition-all duration-300 rounded-xl px-8 py-4 shadow-lg hover:shadow-xl;
     font-family: 'Montserrat', sans-serif;
     transform: translateY(0);
   }
 
   .accent-button:hover {
+    background-color: var(--brand-dark-blue);
     transform: translateY(-2px);
+    box-shadow: 0 15px 30px -8px rgba(66, 153, 225, 0.3);
   }
 
   /* Typography Enhancement */
@@ -227,13 +271,45 @@
     animation-play-state: paused;
   }
 
-  @keyframes scroll {
-    0% {
-      transform: translateX(0);
-    }
-    100% {
-      transform: translateX(-100%);
-    }
+  /* Counter Animation */
+  .counter-animation {
+    @apply text-3xl md:text-4xl font-bold;
+    color: var(--brand-dark-blue);
+  }
+
+  /* Premium Background Effects */
+  .premium-bg-overlay {
+    background: linear-gradient(135deg, rgba(26, 54, 93, 0.8), rgba(66, 153, 225, 0.6));
+  }
+
+  .molecular-bg {
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%234299e1' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='4'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+
+  /* Enhanced Dropdown */
+  .premium-dropdown {
+    @apply bg-white/95 backdrop-blur-lg border border-slate-200/50 shadow-2xl rounded-2xl p-6;
+    transform: translateY(10px);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .premium-dropdown.open {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .premium-dropdown-item {
+    @apply px-4 py-3 rounded-lg transition-all duration-200 cursor-pointer;
+    color: var(--brand-dark-blue);
+  }
+
+  .premium-dropdown-item:hover {
+    background-color: var(--brand-light-grey);
+    color: var(--brand-light-blue);
+    transform: translateX(4px);
   }
 
   /* Modern Animations */
@@ -267,6 +343,64 @@
     100% {
       opacity: 1;
       transform: scale(1);
+    }
+  }
+
+  @keyframes classicFadeIn {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes classicScaleIn {
+    0% {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+
+  @keyframes floatMolecule {
+    0% {
+      transform: translateX(-100px) translateY(0px) rotate(0deg);
+    }
+    50% {
+      transform: translateX(calc(100vw + 100px)) translateY(-50px) rotate(180deg);
+    }
+    100% {
+      transform: translateX(calc(100vw + 200px)) translateY(0px) rotate(360deg);
+    }
+  }
+
+  @keyframes particleFloat {
+    0%, 100% {
+      transform: translateY(0px) translateX(0px);
+    }
+    25% {
+      transform: translateY(-20px) translateX(10px);
+    }
+    50% {
+      transform: translateY(-40px) translateX(-5px);
+    }
+    75% {
+      transform: translateY(-20px) translateX(-10px);
     }
   }
 
@@ -334,18 +468,19 @@
   }
 
   .interactive-card:hover {
-    border-color: #3b82f6;
-    box-shadow: 0 25px 50px -12px rgba(59, 130, 246, 0.25);
+    border-color: var(--brand-light-blue);
+    box-shadow: 0 25px 50px -12px rgba(66, 153, 225, 0.25);
   }
 
   /* Section Dividers */
   .section-divider {
-    @apply w-24 h-0.5 bg-gradient-to-r from-blue-600 to-slate-600 mx-auto mb-8;
+    background: linear-gradient(to right, var(--brand-dark-blue), var(--brand-light-blue));
+    @apply w-24 h-0.5 mx-auto mb-8;
   }
 
   /* Premium Background Patterns */
   .subtle-pattern {
-    background-image: radial-gradient(circle at 1px 1px, rgba(148,163,184,0.15) 1px, transparent 0);
+    background-image: radial-gradient(circle at 1px 1px, rgba(66, 153, 225, 0.15) 1px, transparent 0);
     background-size: 20px 20px;
   }
 
@@ -360,7 +495,7 @@
   .chemical-molecule {
     width: 60px;
     height: 60px;
-    background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+    background: linear-gradient(135deg, var(--brand-light-blue), var(--brand-dark-blue));
     border-radius: 50%;
     position: relative;
   }
@@ -380,14 +515,14 @@
   .chemical-beaker {
     width: 40px;
     height: 50px;
-    background: linear-gradient(135deg, #10b981, #059669);
+    background: linear-gradient(135deg, var(--brand-light-blue), var(--brand-dark-blue));
     clip-path: polygon(20% 0%, 80% 0%, 85% 100%, 15% 100%);
   }
 
   .chemical-flask {
     width: 45px;
     height: 45px;
-    background: linear-gradient(135deg, #f59e0b, #d97706);
+    background: linear-gradient(135deg, var(--brand-light-blue), var(--brand-dark-blue));
     border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
   }
 
@@ -398,7 +533,8 @@
   }
 
   .timeline-dot {
-    @apply w-6 h-6 bg-blue-600 border-4 border-white rounded-full shadow-lg
+    background-color: var(--brand-light-blue);
+    @apply w-6 h-6 border-4 border-white rounded-full shadow-lg
            hover:scale-125 transition-transform duration-300;
   }
 
@@ -406,6 +542,22 @@
   .contact-card {
     @apply bg-white/20 backdrop-blur-md border border-white/30 rounded-xl p-6
            hover:bg-white/30 transition-all duration-300 hover:scale-105;
+  }
+
+  /* Premium Footer */
+  .premium-footer {
+    background: linear-gradient(135deg, var(--brand-dark-blue) 0%, #0f1419 100%);
+  }
+
+  /* Social Media Icons */
+  .social-icon {
+    @apply w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300;
+    background: linear-gradient(135deg, var(--brand-light-blue), var(--brand-dark-blue));
+  }
+
+  .social-icon:hover {
+    transform: translateY(-2px) scale(1.1);
+    box-shadow: 0 10px 25px -5px rgba(66, 153, 225, 0.4);
   }
 }
 
@@ -419,24 +571,24 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #3b82f6, #1d4ed8);
+  background: linear-gradient(180deg, var(--brand-light-blue), var(--brand-dark-blue));
   border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, #2563eb, #1e40af);
+  background: linear-gradient(180deg, var(--brand-dark-blue), var(--brand-light-blue));
 }
 
 /* Professional Selection */
 ::selection {
-  background: #3b82f6;
+  background: var(--brand-light-blue);
   color: white;
 }
 
 /* Enhanced Focus States */
 *:focus {
   outline: none;
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+  box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.3);
   transition: box-shadow 0.2s ease;
 }
 
@@ -450,4 +602,23 @@
 .page-transition.loaded {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* Premium Stock Image Backgrounds */
+.hero-premium-bg {
+  background-image: linear-gradient(rgba(26, 54, 93, 0.7), rgba(66, 153, 225, 0.7)),
+                    url('https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?auto=format&fit=crop&w=2000&q=80');
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.premium-page-bg {
+  background-image: linear-gradient(rgba(26, 54, 93, 0.8), rgba(66, 153, 225, 0.6)),
+                    url('https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?auto=format&fit=crop&w=2000&q=80');
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
