@@ -32,38 +32,34 @@ export const FeaturedProducts = () => {
     {
       category: "Agro & Aquaculture Chemicals",
       description: "Our comprehensive range of agricultural and aquaculture chemicals includes premium fertilizers, micronutrients, and specialized solutions designed to enhance crop yield and optimize fish farming operations.",
-      secondDescription: "From soil conditioning agents to water treatment solutions, we provide scientifically formulated products that ensure sustainable agricultural practices while maximizing productivity and environmental stewardship.",
+      secondDescription: "From soil conditioning agents to water treatment solutions, we provide scientifically formulated products that ensure sustainable agricultural practices while maximizing productivity.",
       image: "https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?auto=format&fit=crop&w=800&q=80",
       productCount: "50+",
-      color: "from-emerald-500 to-green-600",
-      gradient: "from-emerald-50 to-green-50"
+      color: "text-green-600"
     },
     {
       category: "Water Treatment Chemicals",
       description: "Advanced water treatment solutions encompassing a full spectrum of purification, conditioning, and treatment chemicals for industrial, municipal, and commercial applications.",
-      secondDescription: "Our portfolio includes coagulants, flocculants, disinfectants, and specialty chemicals that ensure water quality compliance while optimizing operational efficiency and environmental sustainability.",
+      secondDescription: "Our portfolio includes coagulants, flocculants, disinfectants, and specialty chemicals that ensure water quality compliance while optimizing operational efficiency.",
       image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80",
       productCount: "40+",
-      color: "from-blue-500 to-cyan-600",
-      gradient: "from-blue-50 to-cyan-50"
+      color: "text-blue-600"
     },
     {
       category: "Hygiene Raw Materials",
       description: "Premium quality raw materials specifically formulated for the hygiene industry, including surfactants, emulsifiers, preservatives, and active ingredients for detergents and personal care products.",
-      secondDescription: "Our carefully selected portfolio enables manufacturers to create high-performance cleaning and personal care solutions that meet stringent quality standards while ensuring consumer safety and satisfaction.",
+      secondDescription: "Our carefully selected portfolio enables manufacturers to create high-performance cleaning and personal care solutions that meet stringent quality standards.",
       image: "https://images.unsplash.com/photo-1500673922987-e212871fec22?auto=format&fit=crop&w=800&q=80",
       productCount: "80+",
-      color: "from-purple-500 to-violet-600",
-      gradient: "from-purple-50 to-violet-50"
+      color: "text-purple-600"
     },
     {
       category: "Metal Finishing Chemicals",
       description: "Specialized chemical solutions for metal processing, surface treatment, and finishing applications across manufacturing industries.",
-      secondDescription: "Our comprehensive range includes electroplating chemicals, surface cleaners, rust inhibitors, and protective coatings that enhance durability, appearance, and performance of metal components.",
+      secondDescription: "Our comprehensive range includes electroplating chemicals, surface cleaners, rust inhibitors, and protective coatings that enhance durability and performance.",
       image: "https://images.unsplash.com/photo-1518495973542-4542c06a5843?auto=format&fit=crop&w=800&q=80",
       productCount: "30+",
-      color: "from-amber-500 to-orange-600",
-      gradient: "from-amber-50 to-orange-50"
+      color: "text-amber-600"
     }
   ];
 
@@ -76,87 +72,68 @@ export const FeaturedProducts = () => {
     <>
       <section 
         ref={sectionRef}
-        className="py-32 bg-gradient-to-br from-white via-slate-50 to-gray-100 relative overflow-hidden"
+        className="py-20 bg-white"
       >
-        {/* Premium Background Elements */}
-        <div className="absolute inset-0 opacity-30">
-          <div className="absolute top-32 left-20 w-96 h-96 bg-gradient-to-r from-blue-400/30 to-purple-400/30 rounded-full blur-3xl animation-pulse-soft"></div>
-          <div className="absolute bottom-32 right-20 w-80 h-80 bg-gradient-to-r from-purple-400/30 to-pink-400/30 rounded-full blur-3xl animation-float" style={{ animationDelay: '4s' }}></div>
-          <div className="absolute top-1/2 left-1/3 w-64 h-64 bg-gradient-to-r from-cyan-400/20 to-blue-400/20 rounded-full blur-2xl animation-wave" style={{ animationDelay: '2s' }}></div>
-        </div>
-
-        <div className="container mx-auto px-4 relative z-10">
-          <div className={`text-center mb-24 transition-all duration-1000 ${isVisible ? 'animation-fade-in' : 'opacity-0 translate-y-10'}`}>
-            <h2 className="premium-subheading mb-8">
+        <div className="container mx-auto px-4">
+          <div className={`text-center mb-16 transition-all duration-800 ${isVisible ? 'classic-fade-in' : 'opacity-0 translate-y-10'}`}>
+            <h2 className="professional-subheading mb-4">
               Featured Products
             </h2>
-            <div className="w-40 h-1.5 premium-gradient mx-auto mb-10 rounded-full"></div>
-            <p className="text-2xl md:text-3xl text-slate-600 max-w-5xl mx-auto leading-relaxed font-light">
+            <div className="section-divider"></div>
+            <p className="text-lg text-slate-600 max-w-3xl mx-auto leading-relaxed">
               Discover our comprehensive range of chemical solutions, meticulously formulated 
-              <span className="block mt-3 font-medium gradient-text">
-                to exceed the highest standards of quality, performance, and reliability
-              </span>
+              to exceed the highest standards of quality, performance, and reliability
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             {products.map((product, index) => (
               <Card 
                 key={index}
-                className={`group relative overflow-hidden rounded-3xl shadow-2xl hover:shadow-3xl transition-all duration-1000 hover:-translate-y-4 cursor-pointer bg-white/95 backdrop-blur-xl border-2 border-white/30 hover-shine ${
-                  isVisible ? 'animation-scale-in' : 'opacity-0 scale-95'
+                className={`interactive-card group overflow-hidden transition-all duration-500 ${
+                  isVisible ? 'classic-scale-in' : 'opacity-0 scale-95'
                 }`}
-                style={{ animationDelay: `${index * 0.3}s` }}
+                style={{ animationDelay: `${index * 0.2}s` }}
               >
-                {/* Premium Gradient Border Effect */}
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-600 via-purple-600 to-cyan-600 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 -z-10 blur-sm"></div>
-                
                 <CardContent className="p-0">
                   <div className="relative">
                     <div 
-                      className="h-96 bg-cover bg-center relative overflow-hidden"
+                      className="h-64 bg-cover bg-center relative overflow-hidden"
                       style={{ backgroundImage: `url('${product.image}')` }}
                     >
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
-                      <div className={`absolute top-8 right-8 px-6 py-3 rounded-full bg-gradient-to-r ${product.color} text-white text-lg font-bold shadow-2xl backdrop-blur-sm border border-white/30 hover-glow`}>
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                      <div className={`absolute top-6 right-6 px-4 py-2 rounded-full bg-white/90 ${product.color} text-sm font-semibold shadow-sm`}>
                         {product.productCount} Products
-                      </div>
-                      
-                      {/* Enhanced Floating Elements */}
-                      <div className="absolute inset-0 opacity-30">
-                        <div className={`absolute top-24 left-12 w-24 h-24 bg-gradient-to-r ${product.color} rounded-full blur-xl group-hover:scale-150 transition-transform duration-1000 animation-float`}></div>
-                        <div className={`absolute bottom-24 right-12 w-20 h-20 bg-gradient-to-r ${product.color} rounded-full blur-lg group-hover:scale-125 transition-transform duration-1000 animation-pulse-soft`} style={{ animationDelay: '1s' }}></div>
-                        <div className={`absolute top-1/2 left-1/4 w-16 h-16 bg-gradient-to-r ${product.color} rounded-full blur-md group-hover:scale-110 transition-transform duration-1000 animation-wave`} style={{ animationDelay: '2s' }}></div>
                       </div>
                     </div>
                     
-                    <div className={`p-12 bg-gradient-to-br ${product.gradient} group-hover:bg-white/95 transition-all duration-700`}>
-                      <h3 className="text-3xl font-bold text-slate-900 mb-8 group-hover:gradient-text transition-all duration-500 leading-tight">
+                    <div className="p-8">
+                      <h3 className="text-2xl font-semibold text-slate-800 mb-4 group-hover:text-slate-900 transition-colors duration-300">
                         {product.category}
                       </h3>
                       
-                      <p className="text-slate-700 mb-6 leading-relaxed text-lg font-medium">
+                      <p className="text-slate-600 mb-4 leading-relaxed">
                         {product.description}
                       </p>
 
-                      <p className="text-slate-600 mb-10 leading-relaxed text-lg">
+                      <p className="text-slate-600 mb-8 leading-relaxed">
                         {product.secondDescription}
                       </p>
 
-                      <div className="flex flex-col sm:flex-row gap-6">
+                      <div className="flex flex-col sm:flex-row gap-4">
                         <Button
                           variant="outline"
-                          className="flex-1 flex items-center justify-center hover:bg-blue-50 hover:border-blue-500 hover:text-blue-700 transition-all duration-500 group/btn border-2 rounded-2xl py-6 text-lg font-semibold hover-glow"
+                          className="secondary-button flex items-center justify-center"
                         >
-                          <FileText className="w-6 h-6 mr-3 group-hover/btn:scale-125 transition-transform duration-500" />
+                          <FileText className="w-4 h-4 mr-2" />
                           MSDS
                         </Button>
                         
                         <Button
                           onClick={() => handleQuoteRequest(product.category)}
-                          className="flex-1 premium-button flex items-center justify-center py-6 text-lg font-semibold hover-shine group/btn"
+                          className="accent-button flex items-center justify-center"
                         >
-                          <MessageSquare className="w-6 h-6 mr-3 group-hover/btn:scale-125 transition-transform duration-500" />
+                          <MessageSquare className="w-4 h-4 mr-2" />
                           Get a Quote
                         </Button>
                       </div>
@@ -167,13 +144,10 @@ export const FeaturedProducts = () => {
             ))}
           </div>
 
-          <div className="text-center mt-20">
-            <Button 
-              size="lg"
-              className="premium-button px-16 py-8 text-2xl font-bold hover-shine group"
-            >
+          <div className="text-center mt-16">
+            <Button size="lg" className="accent-button text-lg px-8 py-4">
               View All Products
-              <ArrowRight className="ml-4 w-7 h-7 group-hover:translate-x-3 transition-transform duration-500" />
+              <ArrowRight className="ml-2 w-5 h-5" />
             </Button>
           </div>
         </div>
