@@ -67,6 +67,24 @@ export const FeaturedProducts = () => {
       productCount: "80+",
       color: "text-purple-600"
     },
+    {
+      category: "acids and solvents",
+      categoryId: "hygiene-raw-materials",
+      description: "Premium quality raw materials specifically formulated for the hygiene industry, including surfactants, emulsifiers, preservatives, and active ingredients for detergents and personal care products.",
+      secondDescription: "Our carefully selected portfolio enables manufacturers to create high-performance cleaning and personal care solutions that meet stringent quality standards and consumer expectations.",
+      image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=1200&q=80",
+      productCount: "80+",
+      color: "text-purple-600"
+    },
+    {
+      category: "Basic Industrial Chemicals",
+      categoryId: "hygiene-raw-materials",
+      description: "Premium quality raw materials specifically formulated for the hygiene industry, including surfactants, emulsifiers, preservatives, and active ingredients for detergents and personal care products.",
+      secondDescription: "Our carefully selected portfolio enables manufacturers to create high-performance cleaning and personal care solutions that meet stringent quality standards and consumer expectations.",
+      image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=1200&q=80",
+      productCount: "80+",
+      color: "text-purple-600"
+    },
   ];
 
   const handleQuoteRequest = (category: string) => {
@@ -84,7 +102,7 @@ export const FeaturedProducts = () => {
         <div className="container mx-auto px-4 relative z-10">
           <div className={`text-center mb-16 transition-all duration-800 ${isVisible ? 'classic-fade-in' : 'opacity-0 translate-y-10'}`}>
             <h2 className="professional-subheading mb-4" style={{ color: 'var(--brand-dark-blue)' }}>
-              Featured Products
+              Featured Product
             </h2>
             <div className="section-divider"></div>
             <p className="text-lg text-slate-600 max-w-3xl mx-auto leading-relaxed">

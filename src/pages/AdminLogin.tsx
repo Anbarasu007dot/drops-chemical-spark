@@ -78,7 +78,7 @@ const AdminLogin = () => {
           </form>
           
           <div className="mt-6 text-center text-sm text-gray-500">
-            <p>Password: drops_chemicals_#01</p>
+            <p>Forgot your password? Contact  technical support </p>
           </div>
         </CardContent>
       </Card>
