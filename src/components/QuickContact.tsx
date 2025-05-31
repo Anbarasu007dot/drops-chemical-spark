@@ -56,15 +56,16 @@ export const QuickContact = () => {
           {/* Contact Cards */}
           <div className="space-y-6">
             <div className={`transition-all duration-800 ${isVisible ? 'modern-slide-up' : 'opacity-0 translate-y-10'}`} style={{ animationDelay: '0.2s' }}>
-              <Card className="contact-card enhanced-interactive group">
+              <Card className="contact-card enhanced-interactive group bg-white/10 backdrop-blur-sm border-white/20">
                 <CardContent className="p-6">
                   <div className="flex items-start space-x-4">
                     <div className="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center flex-shrink-0 group-hover:bg-white/30 transition-colors duration-300">
                       <MapPin className="w-6 h-6 text-white" />
                     </div>
                     <div>
-                      <h3 className="trusted-leaders-text font-semibold text-lg mb-2">Visit Us</h3>
+                      <h3 className="trusted-leaders-text font-semibold text-lg mb-2 text-white">Visit Us</h3>
                       <p className="trusted-leaders-text text-blue-100 leading-relaxed">
+                        Drops Chemicals<br />
                         123 Chemical Industry Park<br />
                         Industrial Area, City 560001<br />
                         Karnataka, India
@@ -76,18 +77,18 @@ export const QuickContact = () => {
             </div>
 
             <div className={`transition-all duration-800 ${isVisible ? 'modern-slide-up' : 'opacity-0 translate-y-10'}`} style={{ animationDelay: '0.3s' }}>
-              <Card className="contact-card enhanced-interactive group">
+              <Card className="contact-card enhanced-interactive group bg-white/10 backdrop-blur-sm border-white/20">
                 <CardContent className="p-6">
                   <div className="flex items-start space-x-4">
                     <div className="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center flex-shrink-0 group-hover:bg-white/30 transition-colors duration-300">
                       <Mail className="w-6 h-6 text-white" />
                     </div>
                     <div>
-                      <h3 className="trusted-leaders-text font-semibold text-lg mb-2">Email Us</h3>
+                      <h3 className="trusted-leaders-text font-semibold text-lg mb-2 text-white">Email Us</h3>
                       <p className="trusted-leaders-text text-blue-100 leading-relaxed">
-                        info@chemicalcompany.com<br />
-                        sales@chemicalcompany.com<br />
-                        support@chemicalcompany.com
+                        info@dropschemicals.com<br />
+                        sales@dropschemicals.com<br />
+                        support@dropschemicals.com
                       </p>
                     </div>
                   </div>
@@ -96,14 +97,14 @@ export const QuickContact = () => {
             </div>
 
             <div className={`transition-all duration-800 ${isVisible ? 'modern-slide-up' : 'opacity-0 translate-y-10'}`} style={{ animationDelay: '0.4s' }}>
-              <Card className="contact-card enhanced-interactive group">
+              <Card className="contact-card enhanced-interactive group bg-white/10 backdrop-blur-sm border-white/20">
                 <CardContent className="p-6">
                   <div className="flex items-start space-x-4">
                     <div className="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center flex-shrink-0 group-hover:bg-white/30 transition-colors duration-300">
                       <Clock className="w-6 h-6 text-white" />
                     </div>
                     <div>
-                      <h3 className="trusted-leaders-text font-semibold text-lg mb-2">Business Hours</h3>
+                      <h3 className="trusted-leaders-text font-semibold text-lg mb-2 text-white">Business Hours</h3>
                       <p className="trusted-leaders-text text-blue-100 leading-relaxed">
                         Monday - Friday: 9:00 AM - 6:00 PM<br />
                         Saturday: 9:00 AM - 2:00 PM<br />
@@ -116,14 +117,14 @@ export const QuickContact = () => {
             </div>
 
             <div className={`transition-all duration-800 ${isVisible ? 'modern-slide-up' : 'opacity-0 translate-y-10'}`} style={{ animationDelay: '0.5s' }}>
-              <Card className="contact-card enhanced-interactive group">
+              <Card className="contact-card enhanced-interactive group bg-white/10 backdrop-blur-sm border-white/20">
                 <CardContent className="p-6">
                   <div className="flex items-start space-x-4">
                     <div className="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center flex-shrink-0 group-hover:bg-white/30 transition-colors duration-300">
                       <Phone className="w-6 h-6 text-white" />
                     </div>
                     <div>
-                      <h3 className="trusted-leaders-text font-semibold text-lg mb-2">Call Us</h3>
+                      <h3 className="trusted-leaders-text font-semibold text-lg mb-2 text-white">Call Us</h3>
                       <p className="trusted-leaders-text text-blue-100 leading-relaxed">
                         +91 9876543210<br />
                         +91 9876543211<br />
@@ -138,16 +139,16 @@ export const QuickContact = () => {
 
           {/* Contact Form */}
           <div className={`transition-all duration-800 ${isVisible ? 'modern-fade-in' : 'opacity-0 translate-y-10'}`} style={{ animationDelay: '0.6s' }}>
-            <Card className="contact-card">
+            <Card className="contact-card bg-white/10 backdrop-blur-sm border-white/20">
               <CardContent className="p-8">
-                <h3 className="trusted-leaders-text text-2xl font-semibold mb-6">Send us a Message</h3>
+                <h3 className="trusted-leaders-text text-2xl font-semibold mb-6 text-white">Send us a Message</h3>
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                       <Input
                         placeholder="Your Name"
                         required
-                        className="professional-input bg-white/10 border-white/20 text-white placeholder:text-blue-200 focus:border-white focus:ring-white/20"
+                        className="professional-input bg-white/20 border-white/30 text-white placeholder:text-blue-200 focus:border-white focus:ring-white/20"
                       />
                     </div>
                     <div>
@@ -155,7 +156,7 @@ export const QuickContact = () => {
                         type="email"
                         placeholder="Your Email"
                         required
-                        className="professional-input bg-white/10 border-white/20 text-white placeholder:text-blue-200 focus:border-white focus:ring-white/20"
+                        className="professional-input bg-white/20 border-white/30 text-white placeholder:text-blue-200 focus:border-white focus:ring-white/20"
                       />
                     </div>
                   </div>
@@ -163,7 +164,7 @@ export const QuickContact = () => {
                     <Input
                       placeholder="Subject"
                       required
-                      className="professional-input bg-white/10 border-white/20 text-white placeholder:text-blue-200 focus:border-white focus:ring-white/20"
+                      className="professional-input bg-white/20 border-white/30 text-white placeholder:text-blue-200 focus:border-white focus:ring-white/20"
                     />
                   </div>
                   <div>
@@ -171,7 +172,7 @@ export const QuickContact = () => {
                       placeholder="Your Message"
                       required
                       rows={5}
-                      className="professional-textarea bg-white/10 border-white/20 text-white placeholder:text-blue-200 focus:border-white focus:ring-white/20"
+                      className="professional-textarea bg-white/20 border-white/30 text-white placeholder:text-blue-200 focus:border-white focus:ring-white/20 resize-none"
                     />
                   </div>
                   <Button 

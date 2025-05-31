@@ -3,17 +3,16 @@ import { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
-import { ProductCard } from "@/components/ProductCard";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
-import { ChevronDown, Search, Filter } from "lucide-react";
+import { ChevronDown, Search, Filter, Download, FileText } from "lucide-react";
+import { toast } from "sonner";
 
 const Products = () => {
   const [searchParams] = useSearchParams();
   const [selectedCategory, setSelectedCategory] = useState(searchParams.get('category') || 'all');
   const [searchQuery, setSearchQuery] = useState("");
-  const [selectedSector, setSelectedSector] = useState("");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const sectors = [
@@ -26,8 +25,7 @@ const Products = () => {
         "Potential Farmers & Clusters", 
         "Hydro Farms & Fish Farms",
         "Poultry Farms"
-      ],
-      image: "https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?auto=format&fit=crop&w=1920&q=80"
+      ]
     },
     {
       id: "water-treatment", 
@@ -38,8 +36,7 @@ const Products = () => {
         "Waste Water Treatment Plants",
         "Cooling Towers, Boilers & RO Plants", 
         "Swimming Pools"
-      ],
-      image: "https://images.unsplash.com/photo-1581833971358-2c8b550f87b3?auto=format&fit=crop&w=1920&q=80"
+      ]
     },
     {
       id: "food-chemicals",
@@ -50,8 +47,7 @@ const Products = () => {
         "Dairy Processing Units", 
         "Sugar Industries & Home Made Food Industries",
         "Starch Industries (Sagoserve Industries)"
-      ],
-      image: "https://images.unsplash.com/photo-1559181567-c3190ca9959b?auto=format&fit=crop&w=1920&q=80"
+      ]
     },
     {
       id: "basic-industrial",
@@ -63,8 +59,7 @@ const Products = () => {
         "Radiators & Heat Exchanger Manufacturers",
         "Textile Processing Units, Dyeing & Leather Units",
         "Paper Industries"
-      ],
-      image: "https://images.unsplash.com/photo-1518709268805-4e9042af2176?auto=format&fit=crop&w=1920&q=80"
+      ]
     },
     {
       id: "hygiene-raw-materials",
@@ -74,8 +69,7 @@ const Products = () => {
         "Cosmetic Industries & Laundry Care Industries", 
         "Institutes, Hotels, Resorts & Hospitals",
         "Individual Houses & Offices"
-      ],
-      image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=1920&q=80"
+      ]
     },
     {
       id: "detergent-soap",
@@ -85,8 +79,7 @@ const Products = () => {
         "Detergent Soap & Liquid Manufacturers",
         "Cosmetic Industries & Laundry Care Industries", 
         "Formulations & Hygiene Product Manufacturers"
-      ],
-      image: "https://images.unsplash.com/photo-1563865436274-c2cb04c6c0c8?auto=format&fit=crop&w=1920&q=80"
+      ]
     },
     {
       id: "solvents-petro",
@@ -97,8 +90,7 @@ const Products = () => {
         "Foundries & Heavy Engineering Industries",
         "Lubricant Manufacturers & Oil Drilling Industries",
         "Gold Processing Units"
-      ],
-      image: "https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=1920&q=80"
+      ]
     },
     {
       id: "metal-finishing",
@@ -109,19 +101,17 @@ const Products = () => {
         "Tin, Copper & Nickel Plating Industries",
         "Cooking Utensils Manufacturers", 
         "Powder Coating Units & Zinc Plating"
-      ],
-      image: "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?auto=format&fit=crop&w=1920&q=80"
+      ]
     }
   ];
 
-  // Sample products data
+  // Complete products list
   const products = [
     {
       id: "1",
       name: "Calcium Hypochlorite",
       category: "water-treatment",
       description: "High-grade calcium hypochlorite for water disinfection and treatment applications. Effective against bacteria, viruses, and algae.",
-      image: "https://images.unsplash.com/photo-1581833971358-2c8b550f87b3?auto=format&fit=crop&w=400&q=80",
       purity: "70% Available Chlorine",
       grade: "Technical Grade",
       hasMSDS: true,
@@ -132,7 +122,6 @@ const Products = () => {
       name: "Sodium Hydroxide",
       category: "basic-industrial",
       description: "Premium quality caustic soda flakes for industrial processes including soap manufacturing, paper production, and chemical processing.",
-      image: "https://images.unsplash.com/photo-1518709268805-4e9042af2176?auto=format&fit=crop&w=400&q=80",
       purity: "99% Min",
       grade: "Industrial Grade",
       hasMSDS: false
@@ -142,7 +131,6 @@ const Products = () => {
       name: "Potassium Nitrate",
       category: "agro-aquaculture", 
       description: "Agricultural grade potassium nitrate fertilizer for enhanced crop nutrition and yield improvement in various farming applications.",
-      image: "https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?auto=format&fit=crop&w=400&q=80",
       purity: "13-0-46",
       grade: "Fertilizer Grade",
       hasMSDS: true,
@@ -153,7 +141,6 @@ const Products = () => {
       name: "Citric Acid Monohydrate",
       category: "food-chemicals",
       description: "Food grade citric acid for beverage, confectionery, and food preservation applications meeting international quality standards.",
-      image: "https://images.unsplash.com/photo-1559181567-c3190ca9959b?auto=format&fit=crop&w=400&q=80",
       purity: "99.5% Min",
       grade: "Food Grade",
       hasMSDS: true,
@@ -164,7 +151,6 @@ const Products = () => {
       name: "Linear Alkyl Benzene Sulphonic Acid",
       category: "hygiene-raw-materials",
       description: "High-quality LABSA for detergent and soap manufacturing with excellent cleaning properties and biodegradability.",
-      image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=400&q=80",
       purity: "96% Min",
       grade: "Detergent Grade",
       hasMSDS: false
@@ -174,7 +160,6 @@ const Products = () => {
       name: "Toluene",
       category: "solvents-petro",
       description: "Premium industrial solvent for paint, rubber, and chemical manufacturing with high purity and consistent quality.",
-      image: "https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=400&q=80",
       purity: "99.8% Min",
       grade: "Industrial Grade", 
       hasMSDS: true,
@@ -191,6 +176,15 @@ const Products = () => {
 
   const getCurrentSector = () => {
     return sectors.find(sector => sector.id === selectedCategory);
+  };
+
+  const handleMSDSClick = (product: any) => {
+    if (product.hasMSDS && product.msdsLink) {
+      window.open(product.msdsLink, '_blank');
+      toast.success("MSDS document opened in new tab");
+    } else {
+      toast.info("MSDS requested - our team will contact you soon");
+    }
   };
 
   useEffect(() => {
@@ -226,34 +220,26 @@ const Products = () => {
         <section className="py-16 bg-white">
           <div className="container mx-auto px-4">
             <div className="sector-showcase">
-              <div 
-                className="sector-hero h-64 relative rounded-2xl overflow-hidden mb-8"
-                style={{ backgroundImage: `url('${getCurrentSector()?.image}')` }}
-              >
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-black/30"></div>
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <h2 className="text-4xl md:text-5xl font-bold text-white text-center">
-                    {getCurrentSector()?.name}
-                  </h2>
-                </div>
-              </div>
-              
               <div className="sector-content">
+                <h2 className="text-4xl md:text-5xl font-bold text-center mb-8" style={{ color: '#00008B' }}>
+                  {getCurrentSector()?.name}
+                </h2>
+                
                 <p className="text-lg text-slate-600 leading-relaxed mb-8 max-w-4xl mx-auto text-center">
                   {getCurrentSector()?.description}
                 </p>
                 
-                <div className="services-dropdown mb-12">
+                <div className="services-dropdown mb-12 text-center">
                   <Button
                     onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                    className="dropdown-trigger bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg flex items-center"
+                    className="dropdown-trigger bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg flex items-center mx-auto"
                   >
                     Our Services In This Sector
                     <ChevronDown className={`ml-2 w-4 h-4 transition-transform duration-300 ${isDropdownOpen ? 'rotate-180' : ''}`} />
                   </Button>
                   
                   {isDropdownOpen && (
-                    <div className="dropdown-menu mt-4 bg-white border border-slate-200 rounded-xl shadow-lg p-4">
+                    <div className="dropdown-menu mt-4 bg-white border border-slate-200 rounded-xl shadow-lg p-4 max-w-4xl mx-auto">
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         {getCurrentSector()?.services.map((service, index) => (
                           <div key={index} className="flex items-center space-x-3 p-3 rounded-lg hover:bg-blue-50 transition-colors duration-200">
@@ -325,7 +311,49 @@ const Products = () => {
               
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {filteredProducts.map((product) => (
-                  <ProductCard key={product.id} product={product} />
+                  <div key={product.id} className="bg-white border border-slate-200 rounded-lg p-6 hover:shadow-lg transition-shadow duration-300">
+                    <div className="mb-4">
+                      <h3 className="text-xl font-semibold mb-2" style={{ color: '#00008B' }}>
+                        {product.name}
+                      </h3>
+                      
+                      <div className="flex gap-2 mb-3">
+                        <Badge variant="secondary" className="bg-blue-100 text-blue-800">
+                          {product.grade}
+                        </Badge>
+                        <Badge variant="outline" className="border-blue-200 text-blue-700">
+                          {product.purity}
+                        </Badge>
+                      </div>
+                      
+                      <p className="text-slate-600 text-sm leading-relaxed mb-4">
+                        {product.description}
+                      </p>
+                    </div>
+
+                    <div className="flex justify-center">
+                      <Button
+                        onClick={() => handleMSDSClick(product)}
+                        className={`flex items-center justify-center text-sm px-6 py-2 ${
+                          product.hasMSDS 
+                            ? 'bg-blue-900 hover:bg-blue-800 text-white' 
+                            : 'bg-blue-500 hover:bg-blue-600 text-white'
+                        }`}
+                      >
+                        {product.hasMSDS ? (
+                          <>
+                            <Download className="w-4 h-4 mr-2" />
+                            Get MSDS
+                          </>
+                        ) : (
+                          <>
+                            <FileText className="w-4 h-4 mr-2" />
+                            Request MSDS
+                          </>
+                        )}
+                      </Button>
+                    </div>
+                  </div>
                 ))}
               </div>
             </>
