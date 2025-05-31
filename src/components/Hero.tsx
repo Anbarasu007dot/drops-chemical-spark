@@ -1,4 +1,3 @@
-
 import { ArrowRight, Play } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
@@ -50,12 +49,13 @@ export const Hero = () => {
                 </Link>
               </Button>
               
-              <Button asChild variant="outline" size="lg" className="secondary-button text-lg px-8 py-4">
-                <Link to="/about" className="flex items-center">
+              {/* Make the entire button clickable by wrapping Button with Link */}
+              <Link to="/about" className="inline-block">
+                <Button variant="outline" size="lg" className="secondary-button text-lg px-8 py-4 flex items-center">
                   <Play className="mr-2 w-5 h-5" />
                   Know About Us
-                </Link>
-              </Button>
+                </Button>
+              </Link>
             </div>
 
             {/* Professional Stats with Animated Counters */}
