@@ -1,82 +1,92 @@
 
-import { ArrowRight, Play, CheckCircle } from "lucide-react";
+import { ArrowRight, Play } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { ChemicalElements } from "@/components/ChemicalElements";
 import { AnimatedCounter } from "@/components/AnimatedCounter";
 import { FloatingMolecules } from "@/components/FloatingMolecules";
-import { Link } from "react-router-dom";
 
 export const Hero = () => {
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => setIsVisible(true), 300);
+  }, []);
+
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden premium-page-bg">
+    <section className="relative min-h-screen flex items-center justify-center hero-premium-bg">
+      {/* Enhanced Chemical Elements */}
+      <ChemicalElements />
       <FloatingMolecules />
-      <div className="absolute inset-0 bg-gradient-to-r from-blue-900/90 to-blue-800/90"></div>
       
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <div className="text-center lg:text-left">
-            <div className="inline-flex items-center px-4 py-2 bg-white/10 rounded-full mb-6 backdrop-blur-sm">
-              <CheckCircle className="w-4 h-4 mr-2 text-blue-200" />
-              <span className="text-blue-100 text-sm font-medium">ISO Certified Quality</span>
-            </div>
-            
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
-              <span className="text-white">Premium </span>
-              <span className="hero-gradient-text">Chemical</span>
-              <br />
-              <span className="text-white">Solutions</span>
+      {/* Subtle Background Pattern */}
+      <div className="absolute inset-0 subtle-pattern opacity-20"></div>
+      <div className="absolute inset-0 molecular-bg"></div>
+      
+      {/* Professional Content */}
+      <div className="relative z-10 container mx-auto px-4 py-20 text-center">
+        <div className="max-w-4xl mx-auto">
+          <div className={`transition-all duration-800 ${isVisible ? 'modern-fade-in' : 'opacity-0 translate-y-10'}`}>
+            <h1 className="professional-heading mb-6 text-white">
+              Expert Manufacturing
+              <span className="block bg-gradient-to-r from-blue-200 to-white bg-clip-text text-transparent mt-2">
+                & Supply Excellence
+              </span>
             </h1>
             
-            <p className="text-xl text-blue-100 mb-8 leading-relaxed max-w-xl">
-              Leading supplier of industrial-grade chemicals with over 15 years of expertise. 
-              Delivering quality, reliability, and innovation to industries worldwide.
+            <p className="text-xl md:text-2xl text-blue-100 mb-10 max-w-3xl mx-auto leading-relaxed font-light">
+              Leading manufacturer and supplier of high-quality chemical solutions for 
+              <span className="block font-medium text-white mt-1">
+                agriculture, water treatment, food processing, and industrial applications.
+              </span>
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-4 mb-12">
-              <Button asChild size="lg" className="bg-white text-blue-900 hover:bg-blue-50 font-semibold py-4 px-8 text-lg rounded-lg shadow-lg hover:shadow-xl transition-all duration-300">
-                <Link to="/products">
-                  <ArrowRight className="mr-2 w-5 h-5" />
-                  Explore Products
+            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
+              <Button asChild size="lg" className="professional-button text-lg px-8 py-4">
+                <Link to="/products" className="flex items-center">
+                  Explore Our Products
+                  <ArrowRight className="ml-2 w-5 h-5" />
                 </Link>
               </Button>
               
-              <Button asChild size="lg" variant="outline" className="border-2 border-white text-white hover:bg-white hover:text-blue-900 font-semibold py-4 px-8 text-lg rounded-lg transition-all duration-300">
-                <Link to="/about">
+              <Button asChild variant="outline" size="lg" className="secondary-button text-lg px-8 py-4">
+                <Link to="/about" className="flex items-center">
                   <Play className="mr-2 w-5 h-5" />
                   Know About Us
                 </Link>
               </Button>
             </div>
 
-            <div className="grid grid-cols-3 gap-8 pt-8 border-t border-white/20">
+            {/* Professional Stats with Animated Counters */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-3xl mx-auto">
               <div className="text-center">
-                <div className="text-3xl md:text-4xl font-bold text-white mb-2">
-                  <AnimatedCounter end={15} suffix="+" />
-                </div>
-                <p className="text-blue-200 text-sm md:text-base">Years Experience</p>
+                <AnimatedCounter 
+                  end={20} 
+                  suffix="+" 
+                  className="text-3xl md:text-4xl font-bold text-white mb-2"
+                />
+                <div className="text-blue-200 font-medium">Years Experience</div>
               </div>
               <div className="text-center">
-                <div className="text-3xl md:text-4xl font-bold text-white mb-2">
-                  <AnimatedCounter end={500} suffix="+" />
-                </div>
-                <p className="text-blue-200 text-sm md:text-base">Products</p>
+                <AnimatedCounter 
+                  end={500} 
+                  suffix="+" 
+                  className="text-3xl md:text-4xl font-bold text-white mb-2"
+                />
+                <div className="text-blue-200 font-medium">Products</div>
               </div>
               <div className="text-center">
-                <div className="text-3xl md:text-4xl font-bold text-white mb-2">
-                  <AnimatedCounter end={98} suffix="%" />
-                </div>
-                <p className="text-blue-200 text-sm md:text-base">Client Satisfaction</p>
+                <AnimatedCounter 
+                  end={1000} 
+                  suffix="+" 
+                  className="text-3xl md:text-4xl font-bold text-white mb-2"
+                />
+                <div className="text-blue-200 font-medium">Happy Clients</div>
               </div>
-            </div>
-          </div>
-
-          <div className="hidden lg:block">
-            <div className="relative">
-              <div className="w-96 h-96 bg-white/10 rounded-full backdrop-blur-sm flex items-center justify-center">
-                <div className="w-80 h-80 bg-white/10 rounded-full backdrop-blur-sm flex items-center justify-center">
-                  <div className="w-64 h-64 bg-white/20 rounded-full backdrop-blur-sm flex items-center justify-center">
-                    <div className="text-6xl">⚗️</div>
-                  </div>
-                </div>
+              <div className="text-center">
+                <div className="text-3xl md:text-4xl font-bold text-white mb-2">24/7</div>
+                <div className="text-blue-200 font-medium">Support</div>
               </div>
             </div>
           </div>

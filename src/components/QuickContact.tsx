@@ -1,15 +1,25 @@
 
-import { Mail, MapPin, Clock, Phone } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
+import { Send, MapPin, Mail, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { useState, useRef, useEffect } from "react";
-import { toast } from "sonner";
+import { Card, CardContent } from "@/components/ui/card";
+import { useToast } from "@/hooks/use-toast";
+import { FloatingMolecules } from "@/components/FloatingMolecules";
 
 export const QuickContact = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
+  const { toast } = useToast();
+
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    subject: "",
+    message: ""
+  });
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -28,159 +38,176 @@ export const QuickContact = () => {
     return () => observer.disconnect();
   }, []);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    toast.success("Message sent successfully! We'll get back to you soon.");
+    setIsSubmitting(true);
+
+    // Simulate form submission
+    await new Promise(resolve => setTimeout(resolve, 1000));
+
+    toast({
+      title: "Message Sent!",
+      description: "Thank you for contacting us. We'll get back to you soon.",
+    });
+
+    setFormData({ name: "", email: "", subject: "", message: "" });
+    setIsSubmitting(false);
   };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  const contactInfo = [
+    {
+      icon: MapPin,
+      title: "Visit Us",
+      details: ["3rd floor, No.76, East Power House Road", "Gandhipuram, Coimbatore - 641012"],
+      color: "from-blue-500 to-blue-600"
+    },
+    {
+      icon: Mail,
+      title: "Email Us",
+      details: ["info@dropschemicals.com", "sales@dropschemicals.com"],
+      color: "from-green-500 to-green-600"
+    },
+    {
+      icon: Clock,
+      title: "Business Hours",
+      details: ["Monday - Saturday: 9:00 AM - 6:00 PM", "Sunday: Closed"],
+      color: "from-purple-500 to-purple-600"
+    }
+  ];
 
   return (
     <section 
       ref={sectionRef}
-      className="relative py-20 premium-page-bg"
+      className="relative py-20 premium-page-bg text-white"
     >
-      <div className="absolute inset-0 bg-gradient-to-r from-blue-900/90 to-blue-800/90"></div>
+      <FloatingMolecules />
+      <div className="absolute inset-0 bg-black/30" />
       
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="relative container mx-auto px-4 z-10">
         <div className={`text-center mb-16 transition-all duration-800 ${isVisible ? 'modern-fade-in' : 'opacity-0 translate-y-10'}`}>
-          <h2 className="trusted-leaders-heading mb-4">
-            Get in Touch
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+            Get In Touch
           </h2>
-          <div className="w-24 h-0.5 bg-gradient-to-r from-white to-blue-200 mx-auto mb-8"></div>
-          <p className="text-xl text-blue-100 max-w-3xl mx-auto leading-relaxed">
-            Ready to discuss your chemical requirements? Contact our expert team 
-            for personalized solutions and competitive pricing.
+          <div className="section-divider bg-white"></div>
+          <p className="text-xl text-blue-100 max-w-3xl mx-auto">
+            Ready to discuss your chemical solution needs? Contact our expert team today
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-          {/* Contact Cards */}
-          <div className="space-y-6">
-            <div className={`transition-all duration-800 ${isVisible ? 'modern-slide-up' : 'opacity-0 translate-y-10'}`} style={{ animationDelay: '0.2s' }}>
-              <Card className="contact-card enhanced-interactive group bg-white/10 backdrop-blur-sm border-white/20">
-                <CardContent className="p-6">
-                  <div className="flex items-start space-x-4">
-                    <div className="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center flex-shrink-0 group-hover:bg-white/30 transition-colors duration-300">
-                      <MapPin className="w-6 h-6 text-white" />
-                    </div>
-                    <div>
-                      <h3 className="trusted-leaders-text font-semibold text-lg mb-2 text-white">Visit Us</h3>
-                      <p className="trusted-leaders-text text-blue-100 leading-relaxed">
-                        Drops Chemicals<br />
-                        123 Chemical Industry Park<br />
-                        Industrial Area, City 560001<br />
-                        Karnataka, India
-                      </p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
+          {/* Contact Information */}
+          <div className={`space-y-8 transition-all duration-800 ${isVisible ? 'modern-slide-up' : 'opacity-0 translate-y-10'}`}>
+            <div>
+              <h3 className="text-2xl font-bold text-white mb-6">Contact Information</h3>
+              <p className="text-blue-100 mb-8 leading-relaxed">
+                Connect with our team for personalized chemical solutions and expert consultation.
+              </p>
             </div>
 
-            <div className={`transition-all duration-800 ${isVisible ? 'modern-slide-up' : 'opacity-0 translate-y-10'}`} style={{ animationDelay: '0.3s' }}>
-              <Card className="contact-card enhanced-interactive group bg-white/10 backdrop-blur-sm border-white/20">
+            {contactInfo.map((info, index) => (
+              <Card 
+                key={index}
+                className="contact-card"
+                style={{ animationDelay: `${index * 0.2}s` }}
+              >
                 <CardContent className="p-6">
                   <div className="flex items-start space-x-4">
-                    <div className="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center flex-shrink-0 group-hover:bg-white/30 transition-colors duration-300">
-                      <Mail className="w-6 h-6 text-white" />
+                    <div className={`w-12 h-12 rounded-lg bg-gradient-to-r ${info.color} flex items-center justify-center flex-shrink-0`}>
+                      <info.icon className="w-6 h-6 text-white" />
                     </div>
                     <div>
-                      <h3 className="trusted-leaders-text font-semibold text-lg mb-2 text-white">Email Us</h3>
-                      <p className="trusted-leaders-text text-blue-100 leading-relaxed">
-                        info@dropschemicals.com<br />
-                        sales@dropschemicals.com<br />
-                        support@dropschemicals.com
-                      </p>
+                      <h4 className="text-lg font-semibold text-white mb-2">{info.title}</h4>
+                      {info.details.map((detail, idx) => (
+                        <p key={idx} className="text-blue-100 text-sm">{detail}</p>
+                      ))}
                     </div>
                   </div>
                 </CardContent>
               </Card>
-            </div>
-
-            <div className={`transition-all duration-800 ${isVisible ? 'modern-slide-up' : 'opacity-0 translate-y-10'}`} style={{ animationDelay: '0.4s' }}>
-              <Card className="contact-card enhanced-interactive group bg-white/10 backdrop-blur-sm border-white/20">
-                <CardContent className="p-6">
-                  <div className="flex items-start space-x-4">
-                    <div className="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center flex-shrink-0 group-hover:bg-white/30 transition-colors duration-300">
-                      <Clock className="w-6 h-6 text-white" />
-                    </div>
-                    <div>
-                      <h3 className="trusted-leaders-text font-semibold text-lg mb-2 text-white">Business Hours</h3>
-                      <p className="trusted-leaders-text text-blue-100 leading-relaxed">
-                        Monday - Friday: 9:00 AM - 6:00 PM<br />
-                        Saturday: 9:00 AM - 2:00 PM<br />
-                        Sunday: Closed
-                      </p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
-
-            <div className={`transition-all duration-800 ${isVisible ? 'modern-slide-up' : 'opacity-0 translate-y-10'}`} style={{ animationDelay: '0.5s' }}>
-              <Card className="contact-card enhanced-interactive group bg-white/10 backdrop-blur-sm border-white/20">
-                <CardContent className="p-6">
-                  <div className="flex items-start space-x-4">
-                    <div className="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center flex-shrink-0 group-hover:bg-white/30 transition-colors duration-300">
-                      <Phone className="w-6 h-6 text-white" />
-                    </div>
-                    <div>
-                      <h3 className="trusted-leaders-text font-semibold text-lg mb-2 text-white">Call Us</h3>
-                      <p className="trusted-leaders-text text-blue-100 leading-relaxed">
-                        +91 9876543210<br />
-                        +91 9876543211<br />
-                        Toll Free: 1800-123-4567
-                      </p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
+            ))}
           </div>
 
-          {/* Contact Form */}
-          <div className={`transition-all duration-800 ${isVisible ? 'modern-fade-in' : 'opacity-0 translate-y-10'}`} style={{ animationDelay: '0.6s' }}>
-            <Card className="contact-card bg-white/10 backdrop-blur-sm border-white/20">
+          {/* Enhanced Contact Form */}
+          <div className={`transition-all duration-800 ${isVisible ? 'modern-scale-in' : 'opacity-0 scale-95'}`}>
+            <Card className="bg-white/10 backdrop-blur-lg border-white/20">
               <CardContent className="p-8">
-                <h3 className="trusted-leaders-text text-2xl font-semibold mb-6 text-white">Send us a Message</h3>
+                <h3 className="text-2xl font-bold text-white mb-6">Send us a Message</h3>
+                
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
+                    <div className="space-y-2">
+                      <label className="text-sm font-medium text-blue-100">Full Name</label>
                       <Input
-                        placeholder="Your Name"
+                        name="name"
+                        value={formData.name}
+                        onChange={handleInputChange}
+                        placeholder="Your full name"
                         required
-                        className="professional-input bg-white/20 border-white/30 text-white placeholder:text-blue-200 focus:border-white focus:ring-white/20"
+                        className="bg-white/20 border-white/30 text-white placeholder:text-blue-200 focus:border-blue-400 professional-input"
                       />
                     </div>
-                    <div>
+                    <div className="space-y-2">
+                      <label className="text-sm font-medium text-blue-100">Email Address</label>
                       <Input
                         type="email"
-                        placeholder="Your Email"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleInputChange}
+                        placeholder="your.email@company.com"
                         required
-                        className="professional-input bg-white/20 border-white/30 text-white placeholder:text-blue-200 focus:border-white focus:ring-white/20"
+                        className="bg-white/20 border-white/30 text-white placeholder:text-blue-200 focus:border-blue-400 professional-input"
                       />
                     </div>
                   </div>
-                  <div>
+
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium text-blue-100">Subject</label>
                     <Input
-                      placeholder="Subject"
+                      name="subject"
+                      value={formData.subject}
+                      onChange={handleInputChange}
+                      placeholder="How can we help you?"
                       required
-                      className="professional-input bg-white/20 border-white/30 text-white placeholder:text-blue-200 focus:border-white focus:ring-white/20"
+                      className="bg-white/20 border-white/30 text-white placeholder:text-blue-200 focus:border-blue-400 professional-input"
                     />
                   </div>
-                  <div>
+
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium text-blue-100">Message</label>
                     <Textarea
-                      placeholder="Your Message"
+                      name="message"
+                      value={formData.message}
+                      onChange={handleInputChange}
+                      placeholder="Tell us about your requirements..."
                       required
                       rows={5}
-                      className="professional-textarea bg-white/20 border-white/30 text-white placeholder:text-blue-200 focus:border-white focus:ring-white/20 resize-none"
+                      className="bg-white/20 border-white/30 text-white placeholder:text-blue-200 focus:border-blue-400 professional-textarea resize-none"
                     />
                   </div>
-                  <Button 
-                    type="submit" 
-                    size="lg" 
-                    className="enhanced-interactive w-full bg-white text-blue-900 hover:bg-blue-50 font-semibold py-4 text-lg"
+
+                  <Button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="w-full professional-button text-lg py-4"
                   >
-                    Send Message
+                    {isSubmitting ? (
+                      <div className="flex items-center">
+                        <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin mr-2"></div>
+                        Sending...
+                      </div>
+                    ) : (
+                      <div className="flex items-center justify-center">
+                        <Send className="w-5 h-5 mr-2" />
+                        Send Message
+                      </div>
+                    )}
                   </Button>
                 </form>
               </CardContent>
