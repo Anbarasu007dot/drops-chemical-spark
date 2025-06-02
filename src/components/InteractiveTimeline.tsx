@@ -60,7 +60,7 @@ export const InteractiveTimeline = () => {
           if (pathRef.current) {
             // Animate the timeline path
             gsap.fromTo(pathRef.current, 
-              { strokeDasharray: "1000", strokeDashoffset: "1000" },
+              { strokeDasharray: "2000", strokeDashoffset: "2000" },
               { strokeDashoffset: "0", duration: 3, ease: "power2.out" }
             );
           }
@@ -98,10 +98,12 @@ export const InteractiveTimeline = () => {
           
           <path
             ref={pathRef}
-            d="M 50 150 Q 200 100 250 150 T 450 150 Q 600 200 650 150 T 950 150"
+            d="M 80 150 Q 180 120 250 150 Q 320 180 400 150 Q 480 120 550 150 Q 620 180 700 150 Q 780 120 920 150"
             fill="none"
             stroke="url(#timelineGradient)"
-            strokeWidth="4"
+            strokeWidth="6"
+            strokeLinecap="round"
+            strokeLinejoin="round"
             className="drop-shadow-lg"
           />
         </svg>
@@ -117,7 +119,7 @@ export const InteractiveTimeline = () => {
                   isVisible ? 'animate-fade-in' : 'opacity-0 translate-y-10'
                 }`}
                 style={{ 
-                  marginLeft: index === 0 ? '0' : '225px',
+                  marginLeft: index === 0 ? '0' : '210px',
                   animationDelay: `${index * 0.3 + 1}s`
                 }}
                 onMouseEnter={() => setHoveredIndex(index)}
@@ -128,19 +130,19 @@ export const InteractiveTimeline = () => {
                   className="w-1 mb-4 transition-all duration-300"
                   style={{ 
                     backgroundColor: milestone.color,
-                    height: hoveredIndex === index ? '20px' : '16px',
-                    opacity: hoveredIndex === index ? 1 : 0.7
+                    height: hoveredIndex === index ? '24px' : '20px',
+                    opacity: hoveredIndex === index ? 1 : 0.8
                   }}
                 />
 
                 {/* Milestone Circle */}
                 <div
                   className={`relative w-20 h-20 rounded-full flex items-center justify-center shadow-xl cursor-pointer transition-all duration-300 transform ${
-                    hoveredIndex === index ? 'scale-110 -translate-y-1' : 'scale-100'
+                    hoveredIndex === index ? 'scale-110 -translate-y-2' : 'scale-100'
                   }`}
                   style={{ 
                     backgroundColor: milestone.bgColor,
-                    boxShadow: hoveredIndex === index ? `0 20px 40px ${milestone.color}40` : undefined
+                    boxShadow: hoveredIndex === index ? `0 25px 50px ${milestone.color}40` : undefined
                   }}
                 >
                   <IconComponent 
