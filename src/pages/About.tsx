@@ -3,6 +3,7 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Card, CardContent } from "@/components/ui/card";
 import { useEffect, useRef, useState } from "react";
+import { InteractiveTimeline } from "@/components/InteractiveTimeline";
 
 const About = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -169,58 +170,22 @@ const About = () => {
         </div>
       </section>
 
-      {/* Enhanced Timeline */}
+      {/* Enhanced Interactive Timeline */}
       <section 
         ref={sectionRef}
-        className="py-20 parallax-bg"
-        style={{
-          backgroundImage: "linear-gradient(rgba(15, 23, 42, 0.8), rgba(30, 41, 59, 0.8)), url('https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?auto=format&fit=crop&w=2000&q=80')"
-        }}
+        className="py-20 bg-gradient-to-br from-slate-50 to-blue-50"
       >
         <div className="container mx-auto px-4">
           <div className={`text-center mb-16 transition-all duration-800 ${isVisible ? 'modern-fade-in' : 'opacity-0 translate-y-10'}`}>
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
               Our Journey
             </h2>
-            <p className="text-xl text-blue-100 max-w-3xl mx-auto">
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
               Key milestones in our journey of growth and innovation
             </p>
           </div>
 
-          <div className="relative">
-            {/* Timeline line */}
-            <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-blue-500 to-purple-500 rounded-full"></div>
-
-            <div className="space-y-12">
-              {milestones.map((milestone, index) => (
-                <div 
-                  key={index}
-                  className={`flex items-center ${index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'} transition-all duration-500 ${isVisible ? 'modern-fade-in' : 'opacity-0 translate-y-10'}`}
-                  style={{ animationDelay: `${index * 0.2}s` }}
-                >
-                  <div className="flex-1 px-8">
-                    <Card className={`timeline-card ${index % 2 === 0 ? 'ml-auto' : 'mr-auto'} max-w-md`}>
-                      <CardContent className="p-6">
-                        <div className="flex items-center mb-3">
-                          <div className="w-3 h-3 bg-blue-600 rounded-full mr-3"></div>
-                          <span className="text-2xl font-bold text-blue-600">{milestone.year}</span>
-                        </div>
-                        <h3 className="text-xl font-bold text-gray-900 mb-2">{milestone.title}</h3>
-                        <p className="text-gray-600">{milestone.description}</p>
-                      </CardContent>
-                    </Card>
-                  </div>
-
-                  {/* Timeline dot */}
-                  <div className="relative z-10">
-                    <div className="timeline-dot"></div>
-                  </div>
-
-                  <div className="flex-1"></div>
-                </div>
-              ))}
-            </div>
-          </div>
+          <InteractiveTimeline />
         </div>
       </section>
 
