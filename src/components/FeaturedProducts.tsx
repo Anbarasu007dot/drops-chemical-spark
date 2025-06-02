@@ -67,7 +67,7 @@ export const FeaturedProducts = () => {
       color: "text-purple-600"
     },
     {
-      category: "acids and solvents",
+      category: "Pharmaceutical Raw Materials",
       categoryId: "hygiene-raw-materials",
       description: "Premium quality raw materials specifically formulated for the hygiene industry, including surfactants, emulsifiers, preservatives, and active ingredients for detergents and personal care products.",
       secondDescription: "Our carefully selected portfolio enables manufacturers to create high-performance cleaning and personal care solutions that meet stringent quality standards and consumer expectations.",

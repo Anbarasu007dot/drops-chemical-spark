@@ -1,4 +1,3 @@
-
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { MapPin, Phone, Mail, Clock, MessageSquare } from "lucide-react";
@@ -7,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { toast } from "sonner";
+import React, { useRef, useState } from "react";
 
 const Contact = () => {
   const handleSubmit = (e: React.FormEvent) => {
@@ -51,6 +51,23 @@ const Contact = () => {
     }
   ];
 
+  // Mouse animation state for form card
+  const [mouse, setMouse] = useState({ x: 0, y: 0 });
+  const [isHovering, setIsHovering] = useState(false);
+  const formRef = useRef<HTMLDivElement>(null);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    const rect = formRef.current?.getBoundingClientRect();
+    if (!rect) return;
+    setMouse({
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top,
+    });
+  };
+
+  const handleMouseEnter = () => setIsHovering(true);
+  const handleMouseLeave = () => setIsHovering(false);
+
   return (
     <div className="min-h-screen">
       <Header />
@@ -59,7 +76,7 @@ const Contact = () => {
       <section className="bg-gradient-to-r from-blue-900 via-blue-800 to-purple-900 text-white py-20">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 animate-fade-in">
+            <h1 className="text-4xl md:text-6xl font-extrabold mb-6 animate-fade-in text-white tracking-wide drop-shadow-lg" style={{ fontFamily: 'Montserrat, Arial, sans-serif' }}>
               Get In Touch
             </h1>
             <p className="text-xl md:text-2xl mb-8 text-blue-100 animate-fade-in animation-delay-200">
@@ -74,8 +91,34 @@ const Contact = () => {
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             {/* Contact Form */}
-            <div>
-              <Card>
+            <div
+              ref={formRef}
+              onMouseMove={handleMouseMove}
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
+              className="relative"
+              style={{ perspective: 1000 }}
+            >
+              <div
+                className="pointer-events-none absolute inset-0 z-10 transition-all duration-300"
+                style={{
+                  opacity: isHovering ? 1 : 0,
+                  background: isHovering
+                    ? `radial-gradient(300px circle at ${mouse.x}px ${mouse.y}px, rgba(59,130,246,0.35), rgba(255,255,255,0.10) 60%, transparent 100%)`
+                    : 'none',
+                  filter: isHovering ? 'blur(0px) saturate(1.2)' : 'none',
+                  transition: 'background 0.2s, opacity 0.3s',
+                }}
+              />
+              <Card
+                className={`relative z-20 transition-transform duration-300 ${isHovering ? 'scale-105 shadow-2xl border-blue-400' : ''}`}
+                style={{
+                  boxShadow: isHovering
+                    ? '0 8px 40px 0 rgba(59,130,246,0.25), 0 1.5px 8px 0 rgba(59,130,246,0.10)'
+                    : undefined,
+                  borderColor: isHovering ? '#3b82f6' : undefined,
+                }}
+              >
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
                     <MessageSquare className="w-6 h-6 text-blue-600" />
@@ -184,18 +227,18 @@ const Contact = () => {
 
           <div className="max-w-4xl mx-auto">
             <Card className="overflow-hidden">
-              <div className="h-96 bg-gray-200 flex items-center justify-center">
-                <div className="text-center">
-                  <MapPin className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-                  <h3 className="text-xl font-bold mb-2">Interactive Map</h3>
-                  <p className="text-gray-600 mb-4">
-                    3rd floor, No.76, East Power House Road,<br />
-                    Gandhipuram, Tatabad, Coimbatore - 641012
-                  </p>
-                  <Button variant="outline">
-                    View on Google Maps
-                  </Button>
-                </div>
+              <div className="h-96 bg-gray-200 flex items-center justify-center p-0">
+                <iframe
+                  title="Google Map - Drops Chemicals"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3912.324728934624!2d76.9630130750426!3d11.02196445402837!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba857e2e2e2e2e2%3A0x123456789abcdef!2s3rd%20floor%2C%20No.76%2C%20East%20Power%20House%20Rd%2C%20Tatabad%2C%20Coimbatore%2C%20Tamil%20Nadu%20641012%2C%20India!5e0!3m2!1sen!2sin!4v1685700000000!5m2!1sen!2sin"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  allowFullScreen={true}
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  className="w-full h-96 rounded-none border-0"
+                ></iframe>
               </div>
             </Card>
           </div>

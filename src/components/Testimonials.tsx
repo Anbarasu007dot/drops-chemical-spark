@@ -1,4 +1,3 @@
-
 import { Star } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { useEffect, useState, useRef } from "react";
@@ -39,7 +38,7 @@ export const Testimonials = () => {
       role: "Operations Manager",
       content: "The water treatment chemicals from Drops have revolutionized our purification processes. Outstanding quality and excellent technical support team. Highly recommended for industrial applications.",
       rating: 5,
-      image: "https://images.unsplash.com/photo-1494790108755-2616c2d1b4de?auto=format&fit=crop&w=150&q=80"
+      image: "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.imageconsultinginstitute.com%2Fblog%2Findian-business-women-who-champions-entrepreneurship%2F&psig=AOvVaw2qFdFX5e0SYqB5sy95qi7N&ust=1748935881977000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCPid3ISc0o0DFQAAAAAdAAAAABAE"
     },
     {
       name: "Dr. Arun Patel",
@@ -56,7 +55,7 @@ export const Testimonials = () => {
       ref={sectionRef}
       className="py-20 premium-bg-overlay text-white"
       style={{
-        backgroundImage: "linear-gradient(rgba(26, 54, 93, 0.9), rgba(66, 153, 225, 0.8)), url('https://images.unsplash.com/photo-1559757148-5c350d0d3c56?auto=format&fit=crop&w=2000&q=80')",
+        backgroundImage: "url('https://st.depositphotos.com/1064537/2318/i/450/depositphotos_23185896-stock-photo-handshake-hand-holding-on-black.jpg')",
         backgroundAttachment: "fixed",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
@@ -78,7 +77,7 @@ export const Testimonials = () => {
           {testimonials.map((testimonial, index) => (
             <Card 
               key={index}
-              className={`professional-card bg-white/10 backdrop-blur-lg border-white/20 text-white transition-all duration-500 ${
+              className={`professional-card bg-black/30 backdrop-blur-lg border-white/20 text-white transition-all duration-500 ${
                 isVisible ? 'modern-scale-in' : 'opacity-0 scale-95'
               }`}
               style={{ animationDelay: `${index * 0.2}s` }}

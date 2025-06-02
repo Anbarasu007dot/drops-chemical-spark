@@ -1,4 +1,3 @@
-
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Search, Calendar, User, ArrowRight } from "lucide-react";
@@ -49,10 +48,18 @@ const Blog = () => {
       <Header />
       
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-blue-900 via-blue-800 to-purple-900 text-white py-20">
+      <section
+        className="relative text-white py-20"
+        style={{
+          backgroundImage: `linear-gradient(rgba(16,23,54,0.7), rgba(16,23,54,0.7)), url('https://www.uxdesigninstitute.com/blog/wp-content/uploads/2025/04/447_Accessible-vs-Inclusive-vs-Universal_blog-1.png')`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+        }}
+      >
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 animate-fade-in">
+            <h1 className="text-4xl md:text-6xl font-extrabold mb-6 animate-fade-in text-white tracking-wide drop-shadow-lg" style={{ fontFamily: 'Montserrat, Arial, sans-serif' }}>
               Industry Insights & Knowledge Hub
             </h1>
             <p className="text-xl md:text-2xl mb-8 text-blue-100 animate-fade-in animation-delay-200">
@@ -60,13 +67,15 @@ const Blog = () => {
             </p>
             
             {/* Search Bar */}
-            <div className="max-w-2xl mx-auto relative animate-fade-in animation-delay-400">
-              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-              <Input
-                placeholder="Search articles, topics, or products..."
-                className="pl-12 pr-4 py-4 text-lg bg-white/10 backdrop-blur-md border-white/20 text-white placeholder-gray-300"
-              />
-              <Button className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-blue-600 hover:bg-blue-700">
+            <div className="max-w-2xl mx-auto relative animate-fade-in animation-delay-400 flex items-center gap-2 mt-6">
+              <div className="relative flex-1">
+                <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+                <Input
+                  placeholder="Search articles, topics, or products..."
+                  className="pl-12 pr-4 py-4 text-lg bg-white/10 backdrop-blur-md border-white/20 text-white placeholder-gray-300 w-full"
+                />
+              </div>
+              <Button className="bg-blue-600 hover:bg-blue-700 px-6 py-4 text-lg font-semibold h-auto">
                 Search
               </Button>
             </div>

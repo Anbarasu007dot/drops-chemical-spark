@@ -14,7 +14,15 @@ export const Hero = () => {
   }, []);
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center hero-premium-bg">
+    <section
+      className="relative min-h-screen flex items-center justify-center hero-premium-bg"
+      style={{
+        backgroundImage: "url('https://www.shutterstock.com/image-photo/scientist-adding-liquid-test-tube-600nw-2493601121.jpg')",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat"
+      }}
+    >
       {/* Enhanced Chemical Elements */}
       <ChemicalElements />
       <FloatingMolecules />
@@ -51,7 +59,11 @@ export const Hero = () => {
               
               {/* Make the entire button clickable by wrapping Button with Link */}
               <Link to="/about" className="inline-block">
-                <Button variant="outline" size="lg" className="secondary-button text-lg px-8 py-4 flex items-center">
+                <Button
+                  variant="outline"
+                  size="lg"
+                  className="secondary-button text-lg px-8 py-4 flex items-center bg-white text-blue-900 border-white hover:bg-blue-100 hover:text-blue-900 hover:border-white"
+                >
                   <Play className="mr-2 w-5 h-5" />
                   Know About Us
                 </Button>

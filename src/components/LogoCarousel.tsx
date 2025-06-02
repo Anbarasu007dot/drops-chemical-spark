@@ -1,4 +1,3 @@
-
 import React from 'react';
 
 export const LogoCarousel = () => {
@@ -16,7 +15,7 @@ export const LogoCarousel = () => {
       alt: "L&T Construction"
     },
     {
-      src: "https://images.seeklogo.com/logo-png/48/2/radisson-blu-logo-png_seeklogo-480374.png",
+      src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVsraU05Kxu0PrwIHS15UuQOO8lQ8YDDp6hw&s",
       alt: "Radisson Blu"
     },
     {
@@ -34,9 +33,9 @@ export const LogoCarousel = () => {
   ];
 
   return (
-    <section className="py-20 bg-gradient-to-br from-blue-900 via-purple-900 to-blue-900 text-white overflow-hidden">
+    <section className="py-20 bg-gradient-to-br from-blue-900 via-blue-700 to-blue-900 text-white overflow-hidden">
       <div className="container mx-auto px-4 text-center">
-        <h2 className="text-4xl md:text-5xl font-bold mb-6">
+        <h2 className="text-4xl md:text-5xl font-extrabold mb-6 text-white tracking-wide drop-shadow-lg" style={{ fontFamily: 'Montserrat, Arial, sans-serif' }}>
           Trusted by Industry Leaders
         </h2>
         <p className="text-xl text-blue-100 max-w-3xl mx-auto mb-12">
@@ -54,13 +53,13 @@ export const LogoCarousel = () => {
                   <img
                     src={logo.src}
                     alt={logo.alt}
-                    className="max-w-32 max-h-16 object-contain filter brightness-0 invert opacity-80 hover:opacity-100 transition-opacity duration-300"
+                    className="max-w-32 max-h-16 object-contain opacity-90 transition-opacity duration-300"
                     onError={(e) => {
                       const target = e.target as HTMLImageElement;
                       target.style.display = 'none';
                       const parent = target.parentElement;
                       if (parent) {
-                        parent.innerHTML = `<span class="text-white font-semibold text-sm">${logo.alt}</span>`;
+                        parent.innerHTML = `<span class='text-white font-semibold text-sm'>${logo.alt}</span>`;
                       }
                     }}
                   />
