@@ -98,7 +98,7 @@ export const InteractiveTimeline = () => {
           
           <path
             ref={pathRef}
-            d="M 100 150 Q 200 120 300 150 Q 400 180 500 150 Q 600 120 700 150 Q 800 180 900 150 Q 1000 120 1100 150"
+            d="M 100 100 Q 200 70 300 100 Q 400 130 500 100 Q 600 70 700 100 Q 800 130 900 100 Q 1000 70 1100 100"
             fill="none"
             stroke="url(#timelineGradient)"
             strokeWidth="6"
@@ -108,7 +108,7 @@ export const InteractiveTimeline = () => {
           />
         </svg>
 
-        <div className="relative z-10 grid grid-cols-5 gap-0 h-300 items-center">
+        <div className="relative z-10 grid grid-cols-5 gap-0 h-300 items-center pt-16">
           {timelineData.map((milestone, index) => {
             const IconComponent = milestone.icon;
             
@@ -126,10 +126,10 @@ export const InteractiveTimeline = () => {
               >
                 {/* Vertical Line */}
                 <div 
-                  className="w-1 mb-4 transition-all duration-300"
+                  className="w-1 mb-6 transition-all duration-300"
                   style={{ 
                     backgroundColor: milestone.color,
-                    height: hoveredIndex === index ? '28px' : '24px',
+                    height: hoveredIndex === index ? '32px' : '28px',
                     opacity: hoveredIndex === index ? 1 : 0.8
                   }}
                 />
@@ -161,7 +161,7 @@ export const InteractiveTimeline = () => {
 
                 {/* Year */}
                 <div 
-                  className={`text-2xl font-bold mt-4 mb-2 transition-all duration-300 ${
+                  className={`text-2xl font-bold mt-6 mb-2 transition-all duration-300 ${
                     hoveredIndex === index ? 'scale-110 -translate-y-1' : 'scale-100'
                   }`}
                   style={{ color: milestone.color }}
@@ -171,7 +171,7 @@ export const InteractiveTimeline = () => {
 
                 {/* Tooltip Card */}
                 <div
-                  className={`absolute top-32 bg-white rounded-xl shadow-2xl p-4 w-64 border transition-all duration-300 ${
+                  className={`absolute top-40 bg-white rounded-xl shadow-2xl p-4 w-64 border transition-all duration-300 ${
                     hoveredIndex === index ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-2 scale-95 pointer-events-none'
                   }`}
                   style={{ borderColor: milestone.color }}
