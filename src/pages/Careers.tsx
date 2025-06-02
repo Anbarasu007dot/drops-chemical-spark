@@ -84,9 +84,6 @@ const Careers = () => {
             <p className="text-xl md:text-2xl mb-8 text-blue-100 animate-fade-in animation-delay-200">
               Join a team of passionate professionals dedicated to chemical innovation and excellence
             </p>
-            <Button size="lg" className="bg-white text-blue-900 hover:bg-gray-100 animate-fade-in animation-delay-400">
-              View Open Positions
-            </Button>
           </div>
         </div>
       </section>

@@ -74,7 +74,7 @@ export const Hero = () => {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-3xl mx-auto">
               <div className="text-center">
                 <AnimatedCounter 
-                  end={20} 
+                  end={22} 
                   suffix="+" 
                   className="text-3xl md:text-4xl font-bold text-white mb-2"
                 />
