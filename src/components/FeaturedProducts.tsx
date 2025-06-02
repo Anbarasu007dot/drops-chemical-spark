@@ -57,33 +57,7 @@ export const FeaturedProducts = () => {
       productCount: "30+",
       color: "text-amber-600"
     },
-    {
-      category: "Hygiene Raw Materials",
-      categoryId: "hygiene-raw-materials",
-      description: "Premium quality raw materials specifically formulated for the hygiene industry, including surfactants, emulsifiers, preservatives, and active ingredients for detergents and personal care products.",
-      secondDescription: "Our carefully selected portfolio enables manufacturers to create high-performance cleaning and personal care solutions that meet stringent quality standards and consumer expectations.",
-      image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=1200&q=80",
-      productCount: "80+",
-      color: "text-purple-600"
-    },
-    {
-      category: "Pharmaceutical Raw Materials",
-      categoryId: "hygiene-raw-materials",
-      description: "Premium quality raw materials specifically formulated for the hygiene industry, including surfactants, emulsifiers, preservatives, and active ingredients for detergents and personal care products.",
-      secondDescription: "Our carefully selected portfolio enables manufacturers to create high-performance cleaning and personal care solutions that meet stringent quality standards and consumer expectations.",
-      image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=1200&q=80",
-      productCount: "80+",
-      color: "text-purple-600"
-    },
-    {
-      category: "Basic Industrial Chemicals",
-      categoryId: "hygiene-raw-materials",
-      description: "Premium quality raw materials specifically formulated for the hygiene industry, including surfactants, emulsifiers, preservatives, and active ingredients for detergents and personal care products.",
-      secondDescription: "Our carefully selected portfolio enables manufacturers to create high-performance cleaning and personal care solutions that meet stringent quality standards and consumer expectations.",
-      image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=1200&q=80",
-      productCount: "80+",
-      color: "text-purple-600"
-    },
+    
   ];
 
   const handleQuoteRequest = (category: string) => {
