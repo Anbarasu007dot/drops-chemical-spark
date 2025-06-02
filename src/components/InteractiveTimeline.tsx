@@ -1,6 +1,5 @@
 
 import React, { useEffect, useRef, useState } from 'react';
-import { motion, useInView } from 'framer-motion';
 import { gsap } from 'gsap';
 import { Clock, Cog, Truck, Shield, Flag } from 'lucide-react';
 
@@ -50,40 +49,32 @@ const timelineData = [
 export const InteractiveTimeline = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const pathRef = useRef<SVGPathElement>(null);
-  const isInView = useInView(containerRef, { once: true, margin: "-100px" });
+  const [isVisible, setIsVisible] = useState(false);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   useEffect(() => {
-    if (isInView && pathRef.current) {
-      // Animate the timeline path
-      gsap.fromTo(pathRef.current, 
-        { strokeDasharray: "1000", strokeDashoffset: "1000" },
-        { strokeDashoffset: "0", duration: 3, ease: "power2.out" }
-      );
-    }
-  }, [isInView]);
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          if (pathRef.current) {
+            // Animate the timeline path
+            gsap.fromTo(pathRef.current, 
+              { strokeDasharray: "1000", strokeDashoffset: "1000" },
+              { strokeDashoffset: "0", duration: 3, ease: "power2.out" }
+            );
+          }
+        }
+      },
+      { threshold: 0.1 }
+    );
 
-  const pathVariants = {
-    hidden: { pathLength: 0 },
-    visible: { 
-      pathLength: 1,
-      transition: { duration: 2.5, ease: "easeInOut" }
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
     }
-  };
 
-  const milestoneVariants = {
-    hidden: { scale: 0, opacity: 0 },
-    visible: (i: number) => ({
-      scale: 1,
-      opacity: 1,
-      transition: {
-        delay: i * 0.3 + 1,
-        duration: 0.6,
-        type: "spring",
-        stiffness: 100
-      }
-    })
-  };
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <div ref={containerRef} className="w-full max-w-6xl mx-auto px-4 py-16">
@@ -105,15 +96,12 @@ export const InteractiveTimeline = () => {
             </linearGradient>
           </defs>
           
-          <motion.path
+          <path
             ref={pathRef}
             d="M 50 150 Q 200 100 250 150 T 450 150 Q 600 200 650 150 T 950 150"
             fill="none"
             stroke="url(#timelineGradient)"
             strokeWidth="4"
-            variants={pathVariants}
-            initial="hidden"
-            animate={isInView ? "visible" : "hidden"}
             className="drop-shadow-lg"
           />
         </svg>
@@ -121,43 +109,39 @@ export const InteractiveTimeline = () => {
         <div className="relative z-10 flex justify-between items-center h-300">
           {timelineData.map((milestone, index) => {
             const IconComponent = milestone.icon;
-            const xPosition = 50 + (index * 225);
             
             return (
-              <motion.div
+              <div
                 key={milestone.year}
-                custom={index}
-                variants={milestoneVariants}
-                initial="hidden"
-                animate={isInView ? "visible" : "hidden"}
-                className="flex flex-col items-center relative"
-                style={{ marginLeft: index === 0 ? '0' : '225px' }}
+                className={`flex flex-col items-center relative transition-all duration-500 ${
+                  isVisible ? 'animate-fade-in' : 'opacity-0 translate-y-10'
+                }`}
+                style={{ 
+                  marginLeft: index === 0 ? '0' : '225px',
+                  animationDelay: `${index * 0.3 + 1}s`
+                }}
                 onMouseEnter={() => setHoveredIndex(index)}
                 onMouseLeave={() => setHoveredIndex(null)}
               >
                 {/* Vertical Line */}
-                <motion.div 
-                  className="w-1 h-16 mb-4"
-                  style={{ backgroundColor: milestone.color }}
-                  animate={{ 
-                    height: hoveredIndex === index ? 20 : 16,
+                <div 
+                  className="w-1 mb-4 transition-all duration-300"
+                  style={{ 
+                    backgroundColor: milestone.color,
+                    height: hoveredIndex === index ? '20px' : '16px',
                     opacity: hoveredIndex === index ? 1 : 0.7
                   }}
-                  transition={{ duration: 0.3 }}
                 />
 
                 {/* Milestone Circle */}
-                <motion.div
-                  className="relative w-20 h-20 rounded-full flex items-center justify-center shadow-xl cursor-pointer"
-                  style={{ backgroundColor: milestone.bgColor }}
-                  whileHover={{ 
-                    scale: 1.1,
-                    boxShadow: `0 20px 40px ${milestone.color}40`
+                <div
+                  className={`relative w-20 h-20 rounded-full flex items-center justify-center shadow-xl cursor-pointer transition-all duration-300 transform ${
+                    hoveredIndex === index ? 'scale-110 -translate-y-1' : 'scale-100'
+                  }`}
+                  style={{ 
+                    backgroundColor: milestone.bgColor,
+                    boxShadow: hoveredIndex === index ? `0 20px 40px ${milestone.color}40` : undefined
                   }}
-                  animate={{
-                    y: hoveredIndex === index ? -5 : 0
-                  }}
-                  transition={{ duration: 0.3, type: "spring" }}
                 >
                   <IconComponent 
                     size={32} 
@@ -167,43 +151,29 @@ export const InteractiveTimeline = () => {
                   
                   {/* Pulse effect */}
                   {hoveredIndex === index && (
-                    <motion.div
-                      className="absolute inset-0 rounded-full border-2"
+                    <div
+                      className="absolute inset-0 rounded-full border-2 animate-ping"
                       style={{ borderColor: milestone.color }}
-                      initial={{ scale: 1, opacity: 1 }}
-                      animate={{ scale: 1.5, opacity: 0 }}
-                      transition={{ duration: 1, repeat: Infinity }}
                     />
                   )}
-                </motion.div>
+                </div>
 
                 {/* Year */}
-                <motion.div 
-                  className="text-2xl font-bold mt-4 mb-2"
+                <div 
+                  className={`text-2xl font-bold mt-4 mb-2 transition-all duration-300 ${
+                    hoveredIndex === index ? 'scale-110 -translate-y-1' : 'scale-100'
+                  }`}
                   style={{ color: milestone.color }}
-                  animate={{ 
-                    scale: hoveredIndex === index ? 1.1 : 1,
-                    y: hoveredIndex === index ? -2 : 0
-                  }}
-                  transition={{ duration: 0.3 }}
                 >
                   {milestone.year}
-                </motion.div>
+                </div>
 
                 {/* Tooltip Card */}
-                <motion.div
-                  className="absolute top-32 bg-white rounded-xl shadow-2xl p-4 w-64 border"
+                <div
+                  className={`absolute top-32 bg-white rounded-xl shadow-2xl p-4 w-64 border transition-all duration-300 ${
+                    hoveredIndex === index ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-2 scale-95 pointer-events-none'
+                  }`}
                   style={{ borderColor: milestone.color }}
-                  initial={{ opacity: 0, y: 10, scale: 0.9 }}
-                  animate={{ 
-                    opacity: hoveredIndex === index ? 1 : 0,
-                    y: hoveredIndex === index ? 0 : 10,
-                    scale: hoveredIndex === index ? 1 : 0.9
-                  }}
-                  transition={{ duration: 0.3 }}
-                  style={{
-                    pointerEvents: hoveredIndex === index ? 'auto' : 'none'
-                  }}
                 >
                   <h3 className="font-bold text-lg mb-2" style={{ color: milestone.color }}>
                     {milestone.title}
@@ -211,8 +181,8 @@ export const InteractiveTimeline = () => {
                   <p className="text-gray-600 text-sm">
                     {milestone.description}
                   </p>
-                </motion.div>
-              </motion.div>
+                </div>
+              </div>
             );
           })}
         </div>
@@ -224,23 +194,21 @@ export const InteractiveTimeline = () => {
           const IconComponent = milestone.icon;
           
           return (
-            <motion.div
+            <div
               key={milestone.year}
-              custom={index}
-              variants={milestoneVariants}
-              initial="hidden"
-              animate={isInView ? "visible" : "hidden"}
-              className="flex items-start space-x-4"
+              className={`flex items-start space-x-4 transition-all duration-500 ${
+                isVisible ? 'animate-fade-in' : 'opacity-0 translate-y-10'
+              }`}
+              style={{ animationDelay: `${index * 0.3}s` }}
             >
               {/* Timeline Line */}
               <div className="flex flex-col items-center">
-                <motion.div
-                  className="w-16 h-16 rounded-full flex items-center justify-center shadow-lg"
+                <div
+                  className="w-16 h-16 rounded-full flex items-center justify-center shadow-lg transition-transform duration-200 hover:scale-105"
                   style={{ backgroundColor: milestone.bgColor }}
-                  whileHover={{ scale: 1.05 }}
                 >
                   <IconComponent size={24} style={{ color: milestone.color }} />
-                </motion.div>
+                </div>
                 
                 {index < timelineData.length - 1 && (
                   <div 
@@ -265,7 +233,7 @@ export const InteractiveTimeline = () => {
                   {milestone.description}
                 </p>
               </div>
-            </motion.div>
+            </div>
           );
         })}
       </div>
