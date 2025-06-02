@@ -60,7 +60,7 @@ export const InteractiveTimeline = () => {
           if (pathRef.current) {
             // Animate the timeline path
             gsap.fromTo(pathRef.current, 
-              { strokeDasharray: "2000", strokeDashoffset: "2000" },
+              { strokeDasharray: "2500", strokeDashoffset: "2500" },
               { strokeDashoffset: "0", duration: 3, ease: "power2.out" }
             );
           }
@@ -77,13 +77,13 @@ export const InteractiveTimeline = () => {
   }, []);
 
   return (
-    <div ref={containerRef} className="w-full max-w-6xl mx-auto px-4 py-16">
+    <div ref={containerRef} className="w-full max-w-7xl mx-auto px-4 py-16">
       {/* Desktop Timeline */}
       <div className="hidden lg:block relative">
         <svg 
           width="100%" 
           height="300" 
-          viewBox="0 0 1000 300" 
+          viewBox="0 0 1200 300" 
           className="absolute top-0 left-0"
         >
           <defs>
@@ -98,7 +98,7 @@ export const InteractiveTimeline = () => {
           
           <path
             ref={pathRef}
-            d="M 80 150 Q 180 120 250 150 Q 320 180 400 150 Q 480 120 550 150 Q 620 180 700 150 Q 780 120 920 150"
+            d="M 100 150 Q 200 120 300 150 Q 400 180 500 150 Q 600 120 700 150 Q 800 180 900 150 Q 1000 120 1100 150"
             fill="none"
             stroke="url(#timelineGradient)"
             strokeWidth="6"
@@ -108,7 +108,7 @@ export const InteractiveTimeline = () => {
           />
         </svg>
 
-        <div className="relative z-10 flex justify-between items-center h-300">
+        <div className="relative z-10 grid grid-cols-5 gap-0 h-300 items-center">
           {timelineData.map((milestone, index) => {
             const IconComponent = milestone.icon;
             
@@ -119,7 +119,6 @@ export const InteractiveTimeline = () => {
                   isVisible ? 'animate-fade-in' : 'opacity-0 translate-y-10'
                 }`}
                 style={{ 
-                  marginLeft: index === 0 ? '0' : '210px',
                   animationDelay: `${index * 0.3 + 1}s`
                 }}
                 onMouseEnter={() => setHoveredIndex(index)}
@@ -130,7 +129,7 @@ export const InteractiveTimeline = () => {
                   className="w-1 mb-4 transition-all duration-300"
                   style={{ 
                     backgroundColor: milestone.color,
-                    height: hoveredIndex === index ? '24px' : '20px',
+                    height: hoveredIndex === index ? '28px' : '24px',
                     opacity: hoveredIndex === index ? 1 : 0.8
                   }}
                 />
