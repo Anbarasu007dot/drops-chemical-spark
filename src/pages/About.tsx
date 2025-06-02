@@ -68,13 +68,9 @@ const About = () => {
       
       {/* Enhanced Hero Section */}
       <section className="relative py-20 parallax-bg" style={{
-         backgroundImage: " url('https://t3.ftcdn.net/jpg/10/67/42/46/360_F_1067424636_V3Nw4SV4VkSgMeG6EOCRL4QE81JY1ajN.jpg')"
-
-        //  "linear-gradient(rgba(247, 248, 250, 0.7), rgba(247, 251, 244, 0.7)), url('https://www.shutterstock.com/image-photo/scientist-adding-liquid-test-tube-600nw-2493601121.jpg')"
-
-
-
-
+         backgroundImage: "url('https://www.snexplores.org/wp-content/uploads/2020/09/1030_SS_Chemical-1028x579.jpg')",
+         backgroundSize: "cover",
+         backgroundPosition: "center"
       }}>
         <div className="relative container mx-auto px-4 text-center">
           <h1 className="text-5xl md:text-6xl font-bold mb-6 modern-fade-in text-white">

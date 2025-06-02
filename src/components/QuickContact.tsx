@@ -1,4 +1,3 @@
-
 import { useState, useEffect, useRef } from "react";
 import { Send, MapPin, Mail, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -86,9 +85,14 @@ export const QuickContact = () => {
     <section 
       ref={sectionRef}
       className="relative py-20 premium-page-bg text-white"
+      style={{
+        backgroundImage: "url('https://thumbs.dreamstime.com/b/technical-support-center-customer-service-internet-business-technology-concept-technical-support-center-customer-service-internet-119668737.jpg')",
+        backgroundSize: "cover",
+        backgroundPosition: "center"
+      }}
     >
       <FloatingMolecules />
-      <div className="absolute inset-0 bg-black/30" />
+      <div className="absolute inset-0 bg-black/50" />
       
       <div className="relative container mx-auto px-4 z-10">
         <div className={`text-center mb-16 transition-all duration-800 ${isVisible ? 'modern-fade-in' : 'opacity-0 translate-y-10'}`}>
@@ -111,32 +115,32 @@ export const QuickContact = () => {
               </p>
             </div>
 
-            {contactInfo.map((info, index) => (
-              <Card 
-                key={index}
-                className="contact-card"
-                style={{ animationDelay: `${index * 0.2}s` }}
-              >
-                <CardContent className="p-6">
-                  <div className="flex items-start space-x-4">
-                    <div className={`w-12 h-12 rounded-lg bg-gradient-to-r ${info.color} flex items-center justify-center flex-shrink-0`}>
+            <div className="flex flex-col gap-4">
+              {contactInfo.map((info, index) => (
+                <Card 
+                  key={index}
+                  className="contact-card bg-black/60 backdrop-blur-md border-white/20 shadow-lg w-full min-h-[90px]"
+                  style={{ animationDelay: `${index * 0.2}s` }}
+                >
+                  <CardContent className="py-4 px-8 flex flex-row items-center h-full">
+                    <div className={`w-12 h-12 rounded-lg bg-gradient-to-r ${info.color} flex items-center justify-center flex-shrink-0 mr-6`}>
                       <info.icon className="w-6 h-6 text-white" />
                     </div>
-                    <div>
-                      <h4 className="text-lg font-semibold text-white mb-2">{info.title}</h4>
+                    <div className="flex-1 text-left">
+                      <h4 className="text-lg font-semibold text-white mb-1">{info.title}</h4>
                       {info.details.map((detail, idx) => (
                         <p key={idx} className="text-blue-100 text-sm">{detail}</p>
                       ))}
                     </div>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
           </div>
 
           {/* Enhanced Contact Form */}
           <div className={`transition-all duration-800 ${isVisible ? 'modern-scale-in' : 'opacity-0 scale-95'}`}>
-            <Card className="bg-white/10 backdrop-blur-lg border-white/20">
+            <Card className="bg-black/60 backdrop-blur-md border-white/20 shadow-lg">
               <CardContent className="p-8">
                 <h3 className="text-2xl font-bold text-white mb-6">Send us a Message</h3>
                 

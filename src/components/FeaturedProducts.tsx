@@ -1,4 +1,3 @@
-
 import { ArrowRight, MessageSquare } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -36,7 +35,7 @@ export const FeaturedProducts = () => {
       categoryId: "agro-aquaculture",
       description: "Our comprehensive range of agricultural chemicals supports modern farming practices with innovative solutions for crop protection, soil enhancement, and yield optimization.",
       secondDescription: "We provide environmentally conscious formulations that ensure sustainable agriculture while maximizing productivity and supporting global food security initiatives.",
-      image: "https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?auto=format&fit=crop&w=1200&q=80",
+      image: "https://ik.imagekit.io/dvuz4klnl/IMG-20250602-WA0005(1).jpg?updatedAt=1748847949000",
       productCount: "50+",
       color: "text-green-600"
     },
@@ -111,7 +110,7 @@ export const FeaturedProducts = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
             {products.map((product, index) => (
               <Card 
                 key={index}
