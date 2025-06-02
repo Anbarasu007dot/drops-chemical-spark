@@ -1,3 +1,4 @@
+
 import { ArrowRight, MessageSquare } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -57,7 +58,33 @@ export const FeaturedProducts = () => {
       productCount: "30+",
       color: "text-amber-600"
     },
-    
+    {
+      category: "Hygiene Raw Materials & Detergents",
+      categoryId: "hygiene-detergents",
+      description: "Premium hygiene and cleaning solutions designed for commercial and industrial applications. Our formulations deliver superior cleaning performance while meeting environmental standards.",
+      secondDescription: "From surface cleaners to specialized sanitizers, our product range ensures effective hygiene maintenance across healthcare, hospitality, and industrial sectors.",
+      image: "https://images.unsplash.com/photo-1584464491033-06628f3a6b7b?auto=format&fit=crop&w=1200&q=80",
+      productCount: "35+",
+      color: "text-purple-600"
+    },
+    {
+      category: "Basic Industry Chemicals",
+      categoryId: "basic-industry",
+      description: "Essential chemical building blocks for manufacturing and industrial processes. Our high-purity chemicals serve as reliable raw materials for diverse industrial applications.",
+      secondDescription: "We supply critical industrial chemicals including acids, bases, solvents, and specialty compounds that form the foundation of modern manufacturing processes.",
+      image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80",
+      productCount: "60+",
+      color: "text-slate-600"
+    },
+    {
+      category: "Pharmaceutical Raw Materials",
+      categoryId: "pharmaceutical",
+      description: "High-quality pharmaceutical intermediates and active ingredients manufactured under strict GMP standards. Our products support the development of safe and effective medications.",
+      secondDescription: "From APIs to excipients, our pharmaceutical chemicals meet international quality standards and regulatory requirements for drug manufacturing and research applications.",
+      image: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?auto=format&fit=crop&w=1200&q=80",
+      productCount: "25+",
+      color: "text-red-600"
+    }
   ];
 
   const handleQuoteRequest = (category: string) => {
@@ -84,7 +111,7 @@ export const FeaturedProducts = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
             {products.map((product, index) => (
               <Card 
                 key={index}
