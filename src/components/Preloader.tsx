@@ -25,14 +25,18 @@ export const Preloader = ({ onComplete }: PreloaderProps) => {
     document.body.style.overflow = 'hidden';
     document.body.style.pointerEvents = 'none';
 
-    // Animation sequence - slower timing
+    // Animation sequence inspired by reference website
     const fadeInTimer = setTimeout(() => {
       setAnimationPhase('line-visible');
-    }, 200);
+    }, 300);
 
-    const pauseTimer = setTimeout(() => {
+    const expandTimer = setTimeout(() => {
+      setAnimationPhase('expanding');
+    }, 1000); // Line visible for 700ms
+
+    const splitTimer = setTimeout(() => {
       setAnimationPhase('splitting');
-    }, 1200); // Longer pause: 200ms fade + 800ms pause + 200ms buffer
+    }, 1500); // Expand for 500ms
 
     const completeTimer = setTimeout(() => {
       setAnimationPhase('complete');
@@ -40,11 +44,12 @@ export const Preloader = ({ onComplete }: PreloaderProps) => {
       document.body.style.overflow = 'unset';
       document.body.style.pointerEvents = 'auto';
       onComplete();
-    }, 3500); // Total animation duration - much slower
+    }, 3000); // Total duration
 
     return () => {
       clearTimeout(fadeInTimer);
-      clearTimeout(pauseTimer);
+      clearTimeout(expandTimer);
+      clearTimeout(splitTimer);
       clearTimeout(completeTimer);
       // Cleanup styles
       document.body.style.overflow = 'unset';
@@ -58,13 +63,14 @@ export const Preloader = ({ onComplete }: PreloaderProps) => {
 
   return (
     <div className="preloader-container">
-      {/* Central vertical line */}
+      {/* Central element that grows and splits */}
       <div 
-        className={`preloader-line ${
-          animationPhase === 'line-visible' || animationPhase === 'splitting' 
-            ? 'line-fade-in' : ''
+        className={`preloader-core ${
+          animationPhase === 'line-visible' ? 'core-fade-in' : ''
         } ${
-          animationPhase === 'splitting' ? 'line-split' : ''
+          animationPhase === 'expanding' ? 'core-expand' : ''
+        } ${
+          animationPhase === 'splitting' ? 'core-split' : ''
         }`}
       />
       
@@ -79,6 +85,13 @@ export const Preloader = ({ onComplete }: PreloaderProps) => {
       <div 
         className={`preloader-panel preloader-panel-right ${
           animationPhase === 'splitting' ? 'slide-right' : ''
+        }`}
+      />
+
+      {/* Overlay for smooth transition */}
+      <div 
+        className={`preloader-overlay ${
+          animationPhase === 'splitting' ? 'overlay-fade' : ''
         }`}
       />
     </div>
