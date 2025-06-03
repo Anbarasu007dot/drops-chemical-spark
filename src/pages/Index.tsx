@@ -18,23 +18,31 @@ const Index = () => {
 
   const handlePreloaderComplete = () => {
     setIsLoading(false);
+    // Slight delay before showing content for smooth transition
     setTimeout(() => {
       setShowContent(true);
-    }, 100);
+    }, 50);
   };
 
   useEffect(() => {
-    // Prevent scrolling during preloader
-    if (isLoading) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'unset';
+    // Check if we should skip preloader (already shown this session)
+    const hasSeenPreloader = sessionStorage.getItem('preloader-shown');
+    
+    if (hasSeenPreloader) {
+      // Skip preloader entirely
+      setIsLoading(false);
+      setShowContent(true);
+      return;
     }
 
+    // Prevent scrolling during preloader if it will run
+    document.body.style.overflow = 'hidden';
+
     return () => {
+      // Cleanup on unmount
       document.body.style.overflow = 'unset';
     };
-  }, [isLoading]);
+  }, []);
 
   if (isLoading) {
     return <Preloader onComplete={handlePreloaderComplete} />;

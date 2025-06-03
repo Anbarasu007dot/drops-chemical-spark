@@ -595,7 +595,7 @@
     left: 0;
     width: 100vw;
     height: 100vh;
-    background-color: white;
+    background-color: #ffffff;
     z-index: 9999;
     overflow: hidden;
     display: flex;
@@ -603,6 +603,7 @@
     justify-content: center;
   }
 
+  /* Central vertical line */
   .preloader-line {
     position: absolute;
     width: 2px;
@@ -611,20 +612,28 @@
     left: 50%;
     top: 0;
     transform: translateX(-50%);
-    transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  }
-
-  .preloader-line.split {
     opacity: 0;
+    transition: opacity 0.3s ease-in-out;
   }
 
+  .preloader-line.line-fade-in {
+    opacity: 1;
+  }
+
+  .preloader-line.line-split {
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+  }
+
+  /* Sliding panels */
   .preloader-panel {
     position: absolute;
     top: 0;
     width: 50vw;
     height: 100vh;
-    background-color: white;
-    transition: transform 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    background-color: #ffffff;
+    transition: transform 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    z-index: 2;
   }
 
   .preloader-panel-left {
@@ -637,6 +646,7 @@
     border-left: 1px solid #ADD8E6;
   }
 
+  /* Sliding animations with cinematic easing */
   .preloader-panel-left.slide-left {
     transform: translateX(-100%);
   }
@@ -645,16 +655,36 @@
     transform: translateX(100%);
   }
 
+  /* Main content fade and scale in */
   .main-content-fade-in {
-    animation: fadeInContent 0.8s ease-out;
+    animation: contentReveal 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
   }
 
-  @keyframes fadeInContent {
+  @keyframes contentReveal {
     0% {
       opacity: 0;
+      transform: scale(0.95);
     }
     100% {
       opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .preloader-line {
+      width: 1.5px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .preloader-line {
+      width: 1px;
+    }
+    
+    .preloader-panel {
+      transition: transform 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     }
   }
 }
