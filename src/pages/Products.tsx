@@ -21,6 +21,21 @@ const Products = () => {
     }
   }, []);
 
+  // Category background images
+  const categoryBackgrounds = {
+    "agro-aquaculture": "url('https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?auto=format&fit=crop&w=2000&q=80')",
+    "water-treatment": "url('https://images.unsplash.com/photo-1581594693702-fbdc51b2763b?auto=format&fit=crop&w=2000&q=80')",
+    "food-chemicals": "url('https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=2000&q=80')",
+    "hygiene-raw-materials": "url('https://images.unsplash.com/photo-1584464491033-06628f3a6b7b?auto=format&fit=crop&w=2000&q=80')",
+    "basic-chemicals": "url('https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?auto=format&fit=crop&w=2000&q=80')",
+    "pharmaceutical": "url('https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?auto=format&fit=crop&w=2000&q=80')",
+    "all": "url('https://img.freepik.com/free-vector/futuristic-science-lab-background-space_23-2148475304.jpg?semt=ais_hybrid&w=740')"
+  };
+
+  const getCurrentBackground = () => {
+    return categoryBackgrounds[selectedCategory as keyof typeof categoryBackgrounds] || categoryBackgrounds.all;
+  };
+
   const productCategories = [
     {
       name: "Agro & Aquaculture Chemicals",
@@ -127,6 +142,20 @@ const Products = () => {
 
   const selectedCategoryData = productCategories.find(cat => cat.id === selectedCategory);
 
+  // Get all products for A-Z view
+  const getAllProductsAlphabetically = () => {
+    const allProducts: string[] = [];
+    productCategories.forEach(category => {
+      allProducts.push(...category.products);
+    });
+    return allProducts
+      .filter(product => 
+        searchTerm === "" || 
+        product.toLowerCase().includes(searchTerm.toLowerCase())
+      )
+      .sort((a, b) => a.localeCompare(b));
+  };
+
   return (
     <div className="min-h-screen">
       <Header />
@@ -134,7 +163,7 @@ const Products = () => {
       {/* Premium Hero Section */}
       <section className="relative py-20 bg-blue-800 text-white"
         style={{
-          backgroundImage: ` url('https://img.freepik.com/free-vector/futuristic-science-lab-background-space_23-2148475304.jpg?semt=ais_hybrid&w=740')`,
+          backgroundImage: getCurrentBackground(),
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
@@ -197,67 +226,106 @@ const Products = () => {
       {/* Products Section */}
       <section className="py-20 bg-gray-50">
         <div className="container mx-auto px-4">
-          {filteredCategories.map((category, categoryIndex) => (
-            <div key={category.id} id={category.id} className="mb-16">
-              {selectedCategory === "all" && (
-                <>
-                  <h2 className="text-3xl md:text-4xl font-bold text-center mb-4" style={{ color: 'var(--brand-dark-blue)' }}>
-                    {category.name}
-                  </h2>
-                  <p className="text-lg text-gray-600 text-center mb-12 max-w-3xl mx-auto">
-                    {category.description}
-                  </p>
-                </>
-              )}
+          {selectedCategory === "all" ? (
+            // A-Z Products View
+            <div className="mb-16">
+              <h2 className="text-3xl md:text-4xl font-bold text-center mb-12" style={{ color: 'var(--brand-dark-blue)' }}>
+                A–Z Products
+              </h2>
               
-              {/* Vertical List Layout */}
               <div className="max-w-4xl mx-auto space-y-4">
-                {category.products
-                  .filter(product => 
-                    searchTerm === "" || 
-                    product.toLowerCase().includes(searchTerm.toLowerCase())
-                  )
-                  .map((product, index) => (
-                    <Card 
-                      key={index}
-                      className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-1 bg-white border border-gray-200"
-                      style={{ animationDelay: `${index * 0.02}s` }}
-                    >
-                      <CardContent className="p-6">
-                        <div className="flex items-center justify-between">
-                          <div className="flex-1">
-                            <h3 className="text-lg font-semibold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors" style={{ color: 'var(--brand-dark-blue)' }}>
-                              {product}
-                            </h3>
-                            <p className="text-sm text-gray-600">
-                              High-quality chemical solution for industrial applications
-                            </p>
-                          </div>
-                          
-                          <div className="flex gap-2 ml-4">
-                            <Button
-                              size="sm"
-                              className="professional-button"
-                            >
-                              <MessageSquare className="w-4 h-4 mr-1" />
-                              Quote
-                            </Button>
-                            <Button
-                              size="sm"
-                              className="bg-blue-200 hover:bg-blue-300 text-blue-900 font-bold shadow-md border-0 px-4 py-2 rounded-lg flex items-center gap-1"
-                              style={{ fontFamily: 'Montserrat, Arial, sans-serif', letterSpacing: '0.05em' }}
-                            >
-                              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" className="w-4 h-4 mr-1" stroke="currentColor"><path d="M4 17V7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v10" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/><rect x="9" y="9" width="6" height="6" rx="1" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
-                              MSME
-                            </Button>
-                          </div>
+                {getAllProductsAlphabetically().map((product, index) => (
+                  <Card 
+                    key={index}
+                    className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-1 bg-white border border-gray-200"
+                    style={{ animationDelay: `${index * 0.02}s` }}
+                  >
+                    <CardContent className="p-6">
+                      <div className="flex items-center justify-between">
+                        <div className="flex-1">
+                          <h3 className="text-lg font-semibold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors" style={{ color: 'var(--brand-dark-blue)' }}>
+                            {product}
+                          </h3>
+                          <p className="text-sm text-gray-600">
+                            High-quality chemical solution for industrial applications
+                          </p>
                         </div>
-                      </CardContent>
-                    </Card>
-                  ))}
+                        
+                        <div className="flex gap-2 ml-4">
+                          <Button
+                            size="sm"
+                            className="professional-button"
+                          >
+                            <MessageSquare className="w-4 h-4 mr-1" />
+                            Quote
+                          </Button>
+                          <Button
+                            size="sm"
+                            className="bg-blue-200 hover:bg-blue-300 text-blue-900 font-bold shadow-md border-0 px-4 py-2 rounded-lg flex items-center gap-1"
+                            style={{ fontFamily: 'Montserrat, Arial, sans-serif', letterSpacing: '0.05em' }}
+                          >
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" className="w-4 h-4 mr-1" stroke="currentColor"><path d="M4 17V7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v10" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/><rect x="9" y="9" width="6" height="6" rx="1" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                            MSME
+                          </Button>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
               </div>
             </div>
-          ))}
+          ) : (
+            // Category-specific view
+            filteredCategories.map((category, categoryIndex) => (
+              <div key={category.id} id={category.id} className="mb-16">
+                <div className="max-w-4xl mx-auto space-y-4">
+                  {category.products
+                    .filter(product => 
+                      searchTerm === "" || 
+                      product.toLowerCase().includes(searchTerm.toLowerCase())
+                    )
+                    .map((product, index) => (
+                      <Card 
+                        key={index}
+                        className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-1 bg-white border border-gray-200"
+                        style={{ animationDelay: `${index * 0.02}s` }}
+                      >
+                        <CardContent className="p-6">
+                          <div className="flex items-center justify-between">
+                            <div className="flex-1">
+                              <h3 className="text-lg font-semibold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors" style={{ color: 'var(--brand-dark-blue)' }}>
+                                {product}
+                              </h3>
+                              <p className="text-sm text-gray-600">
+                                High-quality chemical solution for industrial applications
+                              </p>
+                            </div>
+                            
+                            <div className="flex gap-2 ml-4">
+                              <Button
+                                size="sm"
+                                className="professional-button"
+                              >
+                                <MessageSquare className="w-4 h-4 mr-1" />
+                                Quote
+                              </Button>
+                              <Button
+                                size="sm"
+                                className="bg-blue-200 hover:bg-blue-300 text-blue-900 font-bold shadow-md border-0 px-4 py-2 rounded-lg flex items-center gap-1"
+                                style={{ fontFamily: 'Montserrat, Arial, sans-serif', letterSpacing: '0.05em' }}
+                              >
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" className="w-4 h-4 mr-1" stroke="currentColor"><path d="M4 17V7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v10" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/><rect x="9" y="9" width="6" height="6" rx="1" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                                MSME
+                              </Button>
+                            </div>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    ))}
+                </div>
+              </div>
+            ))
+          )}
         </div>
       </section>
 

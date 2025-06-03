@@ -1,3 +1,4 @@
+
 import { ArrowRight, MessageSquare } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -59,7 +60,7 @@ export const FeaturedProducts = () => {
     },
     {
       category: "Hygiene Raw Materials & Detergents",
-      categoryId: "hygiene-detergents",
+      categoryId: "hygiene-raw-materials",
       description: "Premium hygiene and cleaning solutions designed for commercial and industrial applications. Our formulations deliver superior cleaning performance while meeting environmental standards.",
       secondDescription: "From surface cleaners to specialized sanitizers, our product range ensures effective hygiene maintenance across healthcare, hospitality, and industrial sectors.",
       image: "https://media.istockphoto.com/id/1212821218/photo/medical-personnel-hand-washing-dressed-in-medical-scrubs-stock-photo.jpg?s=612x612&w=0&k=20&c=z8QcxCrqDcxA1Yd5yeLpWP2LUKfmS2guFekBLh2WB10=",
@@ -68,7 +69,7 @@ export const FeaturedProducts = () => {
     },
     {
       category: "Basic Industry Chemicals",
-      categoryId: "basic-industry",
+      categoryId: "basic-chemicals",
       description: "Essential chemical building blocks for manufacturing and industrial processes. Our high-purity chemicals serve as reliable raw materials for diverse industrial applications.",
       secondDescription: "We supply critical industrial chemicals including acids, bases, solvents, and specialty compounds that form the foundation of modern manufacturing processes.",
       image: "https://www.theindustryoutlook.com/uploaded_images/newstransfer/6avcaorganic_chemicals_123.jpg",
