@@ -25,18 +25,18 @@ export const Preloader = ({ onComplete }: PreloaderProps) => {
     document.body.style.overflow = 'hidden';
     document.body.style.pointerEvents = 'none';
 
-    // Animation sequence inspired by reference website
+    // Animation sequence matching reference website
     const fadeInTimer = setTimeout(() => {
       setAnimationPhase('line-visible');
-    }, 300);
+    }, 500);
 
     const expandTimer = setTimeout(() => {
       setAnimationPhase('expanding');
-    }, 1000); // Line visible for 700ms
+    }, 1500); // Line visible for 1000ms
 
     const splitTimer = setTimeout(() => {
       setAnimationPhase('splitting');
-    }, 1500); // Expand for 500ms
+    }, 2500); // Expand for 1000ms
 
     const completeTimer = setTimeout(() => {
       setAnimationPhase('complete');
@@ -44,7 +44,7 @@ export const Preloader = ({ onComplete }: PreloaderProps) => {
       document.body.style.overflow = 'unset';
       document.body.style.pointerEvents = 'auto';
       onComplete();
-    }, 3000); // Total duration
+    }, 4500); // Total duration
 
     return () => {
       clearTimeout(fadeInTimer);
