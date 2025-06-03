@@ -55,7 +55,7 @@ export const Testimonials = () => {
       ref={sectionRef}
       className="py-20 premium-bg-overlay text-white"
       style={{
-        backgroundImage: "url('https://st.depositphotos.com/1064537/2318/i/450/depositphotos_23185896-stock-photo-handshake-hand-holding-on-black.jpg')",
+        backgroundImage: "linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)), url('https://images.pexels.com/photos/4963433/pexels-photo-4963433.jpeg?cs=srgb&dl=pexels-ketut-subiyanto-4963433.jpg&fm=jpg')",
         backgroundAttachment: "fixed",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",

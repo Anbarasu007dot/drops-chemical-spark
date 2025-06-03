@@ -38,7 +38,7 @@ const About = () => {
     { icon: Users, number: "1000+", label: "Happy Clients", color: "from-blue-500 to-blue-600" },
     { icon: Factory, number: "500+", label: "Products", color: "from-green-500 to-green-600" },
     { icon: Truck, number: "24-48", label: "Hours Delivery", color: "from-purple-500 to-purple-600" },
-    { icon: Clock, number: "20+", label: "Years Experience", color: "from-orange-500 to-orange-600" }
+    { icon: Clock, number: "22+", label: "Years Experience", color: "from-orange-500 to-orange-600" }
   ];
 
   const values = [

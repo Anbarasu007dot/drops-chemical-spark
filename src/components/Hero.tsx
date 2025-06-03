@@ -17,7 +17,7 @@ export const Hero = () => {
     <section
       className="relative min-h-screen flex items-center justify-center hero-premium-bg"
       style={{
-        backgroundImage: "url('https://www.shutterstock.com/image-photo/scientist-adding-liquid-test-tube-600nw-2493601121.jpg')",
+        backgroundImage: "linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)), url('https://housing.com/news/wp-content/uploads/2023/10/chemical-industries.jpg')",
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat"
@@ -45,7 +45,7 @@ export const Hero = () => {
             <p className="text-xl md:text-2xl text-blue-100 mb-10 max-w-3xl mx-auto leading-relaxed font-light">
               Leading manufacturer and supplier of high-quality chemical solutions for 
               <span className="block font-medium text-white mt-1">
-                agriculture, water treatment, food processing, and industrial applications.
+                Agriculture, Water Treatment, Food Processing, and Industrial Applications.
               </span>
             </p>
 

@@ -25,6 +25,7 @@ export const Header = () => {
       href: "/products",
       hasDropdown: true,
       dropdownItems: [
+        { name: "All Products", id: "all" },
         { name: "Agro & Aquaculture", id: "agro-aquaculture" },
         { name: "Water Treatment", id: "water-treatment" },
         { name: "Food Chemicals", id: "food-chemicals" },
@@ -50,9 +51,8 @@ export const Header = () => {
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-3 hover:opacity-80 transition-all duration-300 hover:scale-105">
             <img
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZSs25lz7vQ8N5TdxoYvMcvcImGjzwYGRR7A&s"
-              className="w-20 h-20 rounded-xl object-cover object-top shadow-lg hover:shadow-xl transition-all duration-300 bg-white"
-              style={{ objectPosition: 'top', clipPath: 'inset(0 0 30% 0)' }}
+              src="https://ik.imagekit.io/dvuz4klnl/Screenshot_2025-06-03-15-28-07-28_c37d74246d9c81aa0bb824b57eaf7062.jpg?updatedAt=1748944738882"
+              className="w-10 h-10 rounded-full object-cover object-center shadow-lg hover:shadow-xl transition-all duration-300 bg-white"
               alt="Drops Chemicals Logo"
             />
             <div className="flex flex-col">

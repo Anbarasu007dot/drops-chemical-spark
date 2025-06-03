@@ -70,7 +70,7 @@ const Careers = () => {
       <section
         className="relative text-white py-20"
         style={{
-          backgroundImage: `linear-gradient(rgba(16,23,54,0.7), rgba(16,23,54,0.7)), url('https://aaftonline.com/blog/wp-content/uploads/2024/08/Career-Growth-vs-Career-Development-The-Key-Differences.jpg')`,
+          backgroundImage: `url('https://png.pngtree.com/thumb_back/fh260/background/20220702/pngtree-a-professionals-productivity-handson-with-the-latest-modern-computer-and-business-solutions-photo-image_32277816.jpg')`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',

@@ -23,13 +23,13 @@ const Products = () => {
 
   // Category background images
   const categoryBackgrounds = {
-    "agro-aquaculture": "url('https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?auto=format&fit=crop&w=2000&q=80')",
-    "water-treatment": "url('https://images.unsplash.com/photo-1581594693702-fbdc51b2763b?auto=format&fit=crop&w=2000&q=80')",
-    "food-chemicals": "url('https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=2000&q=80')",
-    "hygiene-raw-materials": "url('https://images.unsplash.com/photo-1584464491033-06628f3a6b7b?auto=format&fit=crop&w=2000&q=80')",
-    "basic-chemicals": "url('https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?auto=format&fit=crop&w=2000&q=80')",
-    "pharmaceutical": "url('https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?auto=format&fit=crop&w=2000&q=80')",
-    "all": "url('https://img.freepik.com/free-vector/futuristic-science-lab-background-space_23-2148475304.jpg?semt=ais_hybrid&w=740')"
+    "agro-aquaculture": "url('https://i0.wp.com/razzanj.com/wp-content/uploads/2016/07/nature-landscape-nature-landscape-hd-image-download-wheat-farm-hd-wallpaper-notebook-background-wheat-farmers-wheat-farming-process-wheat-farming-in-kenya.jpg?ssl=1')",
+    "water-treatment": "url('https://hydromarque.com/images/_mainFeature/The-Role-of-Water-Treatment-in-Sustainability-and-Environmental-Stewardship.jpg')",
+    "food-chemicals": "url('https://ik.imagekit.io/dvuz4klnl/IMG-20250603-WA0002.jpg?updatedAt=1748941753292')",
+    "hygiene-raw-materials": "url('https://images.theconversation.com/files/327549/original/file-20200413-177903-6l8e8z.jpg?ixlib=rb-4.1.0&rect=531%2C1038%2C7687%2C3843&q=45&auto=format&w=1356&h=668&fit=crop')",
+    "basic-chemicals": "url('https://kbsiplaw.com/wp-content/uploads/Science-laboratory-glassware73532203MED.jpg')",
+    "pharmaceutical": "url('https://t4.ftcdn.net/jpg/09/21/52/41/360_F_921524123_XJ149EOFKyhjm4Q1oSJYbyZrMYKvdZYE.jpg')",
+    "all": "url('https://fineotex.com/wp-content/uploads/2024/09/Body-Image-1-min-6-scaled.jpg')"
   };
 
   const getCurrentBackground = () => {
@@ -171,38 +171,39 @@ const Products = () => {
       >
         <ChemicalElements />
         <FloatingMolecules />
-        <div className="absolute inset-0 bg-black/20" />
-        <div className="relative container mx-auto px-4 text-center z-10">
-          <h1 className="text-5xl md:text-6xl font-bold mb-6 animate-fade-in text-white">
-            Our Products
-          </h1>
-          <p className="text-xl md:text-2xl text-blue-100 max-w-3xl mx-auto mb-8 animate-slide-up">
-            Comprehensive range of high-quality chemical solutions for diverse industrial applications
-          </p>
-          
-          {/* Search and Filter */}
-          <div className="max-w-2xl mx-auto flex flex-col md:flex-row gap-4 mt-12">
-            <div className="flex-1 relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
-              <Input
-                placeholder="Search products..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-10 bg-white/20 border-white/30 text-white placeholder:text-blue-200 focus:border-blue-400"
-              />
+        <div className="absolute inset-0 bg-black/30" />
+        <div className="relative container mx-auto px-4 text-center z-10 flex justify-center">
+          <div className="bg-white/20 backdrop-blur-md rounded-2xl shadow-lg p-8 md:p-12 flex flex-col items-center w-full max-w-2xl mx-auto">
+            <h1 className="text-5xl md:text-6xl font-bold mb-6 animate-fade-in text-white drop-shadow">
+              Our Products
+            </h1>
+            <p className="text-xl md:text-2xl text-blue-100 max-w-3xl mx-auto mb-8 animate-slide-up">
+              Comprehensive range of high-quality chemical solutions for diverse industrial applications
+            </p>
+            {/* Search and Filter */}
+            <div className="w-full flex flex-col md:flex-row gap-4 mt-2">
+              <div className="flex-1 relative">
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                <Input
+                  placeholder="Search products..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="pl-10 bg-white/20 border-white/30 text-white placeholder:text-blue-200 focus:border-blue-400"
+                />
+              </div>
+              <select
+                value={selectedCategory}
+                onChange={(e) => setSelectedCategory(e.target.value)}
+                className="px-4 py-2 bg-white/20 border border-white/30 rounded-lg text-white focus:border-blue-400 focus:outline-none"
+              >
+                <option value="all" className="text-gray-900">All Products</option>
+                {productCategories.map((category) => (
+                  <option key={category.id} value={category.id} className="text-gray-900">
+                    {category.name}
+                  </option>
+                ))}
+              </select>
             </div>
-            <select
-              value={selectedCategory}
-              onChange={(e) => setSelectedCategory(e.target.value)}
-              className="px-4 py-2 bg-white/20 border border-white/30 rounded-lg text-white focus:border-blue-400 focus:outline-none"
-            >
-              <option value="all" className="text-gray-900">All Categories</option>
-              {productCategories.map((category) => (
-                <option key={category.id} value={category.id} className="text-gray-900">
-                  {category.name}
-                </option>
-              ))}
-            </select>
           </div>
         </div>
       </section>
@@ -265,7 +266,7 @@ const Products = () => {
                             style={{ fontFamily: 'Montserrat, Arial, sans-serif', letterSpacing: '0.05em' }}
                           >
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" className="w-4 h-4 mr-1" stroke="currentColor"><path d="M4 17V7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v10" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/><rect x="9" y="9" width="6" height="6" rx="1" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
-                            MSME
+                            MSDS
                           </Button>
                         </div>
                       </div>
@@ -315,7 +316,7 @@ const Products = () => {
                                 style={{ fontFamily: 'Montserrat, Arial, sans-serif', letterSpacing: '0.05em' }}
                               >
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" className="w-4 h-4 mr-1" stroke="currentColor"><path d="M4 17V7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v10" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/><rect x="9" y="9" width="6" height="6" rx="1" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
-                                MSME
+                                MSDS
                               </Button>
                             </div>
                           </div>

@@ -1,4 +1,4 @@
-import { Mail, MapPin } from "lucide-react";
+import { Mail, MapPin, Phone } from "lucide-react";
 import { Link } from "react-router-dom";
 
 export const Footer = () => {
@@ -29,9 +29,8 @@ export const Footer = () => {
           <div className="lg:col-span-1">
             <div className="flex items-center space-x-3 mb-6">
               <img
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZSs25lz7vQ8N5TdxoYvMcvcImGjzwYGRR7A&s"
-                className="w-20 h-20 rounded-xl object-cover object-top shadow-lg hover:shadow-xl transition-all duration-300 bg-white scale-110"
-                style={{ objectPosition: 'top' }}
+                src="https://ik.imagekit.io/dvuz4klnl/Screenshot_2025-06-03-15-28-07-28_c37d74246d9c81aa0bb824b57eaf7062.jpg?updatedAt=1748944738882"
+                className="w-12 h-12 rounded-full object-cover object-center shadow-lg hover:shadow-xl transition-all duration-300 bg-white"
                 alt="Drops Chemicals Logo"
               />
               <div className="flex flex-col">
@@ -131,6 +130,10 @@ export const Footer = () => {
                   <div>info@dropschemicals.com</div>
                   <div>sales@dropschemicals.com</div>
                 </div>
+              </div>
+              <div className="flex items-center space-x-3 mt-2">
+                <Phone className="w-5 h-5 text-blue-300" />
+                <div className="text-sm text-blue-100">+91 96775 22201</div>
               </div>
             </div>
           </div>
