@@ -17,12 +17,20 @@ const Contact = () => {
   const contactInfo = [
     {
       icon: <MapPin className="w-6 h-6 text-blue-600" />,
-      title: "Address",
+      title: "Corporate Office",
       content: [
         "3rd floor, No.76, East Power House Road,",
         "Gandhipuram, Tatabad,",
         "Coimbatore - 641012,",
         "Tamil Nadu, India"
+      ]
+    },
+    {
+      icon: <MapPin className="w-6 h-6 text-blue-600" />,
+      title: "Manufacturing Unit",
+      content: [
+        "7/8-5, Main Rd, Athikadavu,",
+        "Keeranatham, Tamil Nadu 641035"
       ]
     },
     {

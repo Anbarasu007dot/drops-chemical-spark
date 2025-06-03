@@ -38,7 +38,7 @@ export const Testimonials = () => {
       role: "Operations Manager",
       content: "The water treatment chemicals from Drops have revolutionized our purification processes. Outstanding quality and excellent technical support team. Highly recommended for industrial applications.",
       rating: 5,
-      image: "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.imageconsultinginstitute.com%2Fblog%2Findian-business-women-who-champions-entrepreneurship%2F&psig=AOvVaw2qFdFX5e0SYqB5sy95qi7N&ust=1748935881977000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCPid3ISc0o0DFQAAAAAdAAAAABAE"
+      image: "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=format&fit=crop&w=150&q=80"
     },
     {
       name: "Dr. Arun Patel",

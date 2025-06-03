@@ -15,7 +15,7 @@ export const LogoCarousel = () => {
       alt: "L&T Construction"
     },
     {
-      src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVsraU05Kxu0PrwIHS15UuQOO8lQ8YDDp6hw&s",
+      src: "https://icon2.cleanpng.com/20180624/spo/aazkk20gu.webp",
       alt: "Radisson Blu"
     },
     {
@@ -44,16 +44,13 @@ export const LogoCarousel = () => {
 
         <div className="relative">
           <div className="flex overflow-hidden">
-            <div className="logo-carousel">
+            <div className="logo-carousel flex">
               {[...logos, ...logos].map((logo, index) => (
-                <div
-                  key={index}
-                  className="flex-shrink-0 w-48 h-24 bg-white/10 backdrop-blur-md rounded-lg border border-white/20 hover:bg-white/20 transition-all duration-300 flex items-center justify-center mx-4"
-                >
+                <div key={index} className="flex items-center justify-center mx-4">
                   <img
                     src={logo.src}
                     alt={logo.alt}
-                    className="max-w-32 max-h-16 object-contain opacity-90 transition-opacity duration-300"
+                    className="max-w-40 max-h-20 object-contain opacity-90 transition-opacity duration-300 bg-transparent"
                     onError={(e) => {
                       const target = e.target as HTMLImageElement;
                       target.style.display = 'none';

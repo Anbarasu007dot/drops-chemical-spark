@@ -134,7 +134,7 @@ const Products = () => {
       {/* Premium Hero Section */}
       <section className="relative py-20 bg-blue-800 text-white"
         style={{
-          backgroundImage: ` url('https://img.freepik.com/premium-photo/elegant-gradient-blue-background-with-soft-light-effects_763013-3869.jpg?semt=ais_hybrid&w=740')`,
+          backgroundImage: ` url('https://img.freepik.com/free-vector/futuristic-science-lab-background-space_23-2148475304.jpg?semt=ais_hybrid&w=740')`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',

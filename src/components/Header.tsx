@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Menu, X, Search, ChevronDown } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -48,11 +47,14 @@ export const Header = () => {
     }`}>
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
-          {/* Logo with enhanced styling */}
+          {/* Logo */}
           <Link to="/" className="flex items-center space-x-3 hover:opacity-80 transition-all duration-300 hover:scale-105">
-            <div className="w-10 h-10 rounded-xl flex items-center justify-center text-white font-bold text-lg shadow-lg hover:shadow-xl transition-all duration-300 brand-primary">
-              D
-            </div>
+            <img
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZSs25lz7vQ8N5TdxoYvMcvcImGjzwYGRR7A&s"
+              className="w-20 h-20 rounded-xl object-cover object-top shadow-lg hover:shadow-xl transition-all duration-300 bg-white"
+              style={{ objectPosition: 'top', clipPath: 'inset(0 0 30% 0)' }}
+              alt="Drops Chemicals Logo"
+            />
             <div className="flex flex-col">
               <span className="font-bold text-lg gradient-text" style={{ color: 'var(--brand-dark-blue)' }}>Drops Chemicals</span>
               <span className="text-xs text-gray-600 -mt-1">Reliable Partner Serving Excellence</span>
