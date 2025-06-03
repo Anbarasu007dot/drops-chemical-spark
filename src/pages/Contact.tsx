@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { toast } from "sonner";
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 
 const Contact = () => {
   const handleSubmit = (e: React.FormEvent) => {
@@ -59,23 +59,6 @@ const Contact = () => {
     }
   ];
 
-  // Mouse animation state for form card
-  const [mouse, setMouse] = useState({ x: 0, y: 0 });
-  const [isHovering, setIsHovering] = useState(false);
-  const formRef = useRef<HTMLDivElement>(null);
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    const rect = formRef.current?.getBoundingClientRect();
-    if (!rect) return;
-    setMouse({
-      x: e.clientX - rect.left,
-      y: e.clientY - rect.top,
-    });
-  };
-
-  const handleMouseEnter = () => setIsHovering(true);
-  const handleMouseLeave = () => setIsHovering(false);
-
   return (
     <div className="min-h-screen">
       <Header />
@@ -107,34 +90,8 @@ const Contact = () => {
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             {/* Contact Form */}
-            <div
-              ref={formRef}
-              onMouseMove={handleMouseMove}
-              onMouseEnter={handleMouseEnter}
-              onMouseLeave={handleMouseLeave}
-              className="relative"
-              style={{ perspective: 1000 }}
-            >
-              <div
-                className="pointer-events-none absolute inset-0 z-10 transition-all duration-300"
-                style={{
-                  opacity: isHovering ? 1 : 0,
-                  background: isHovering
-                    ? `radial-gradient(300px circle at ${mouse.x}px ${mouse.y}px, rgba(59,130,246,0.35), rgba(255,255,255,0.10) 60%, transparent 100%)`
-                    : 'none',
-                  filter: isHovering ? 'blur(0px) saturate(1.2)' : 'none',
-                  transition: 'background 0.2s, opacity 0.3s',
-                }}
-              />
-              <Card
-                className={`relative z-20 transition-transform duration-300 ${isHovering ? 'scale-105 shadow-2xl border-blue-400' : ''}`}
-                style={{
-                  boxShadow: isHovering
-                    ? '0 8px 40px 0 rgba(59,130,246,0.25), 0 1.5px 8px 0 rgba(59,130,246,0.10)'
-                    : undefined,
-                  borderColor: isHovering ? '#3b82f6' : undefined,
-                }}
-              >
+            <div className="relative">
+              <Card className="transition-all duration-300 hover:shadow-2xl hover:scale-[1.03] border border-transparent hover:border-blue-400">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
                     <MessageSquare className="w-6 h-6 text-blue-600" />
@@ -185,12 +142,40 @@ const Contact = () => {
                   </form>
                 </CardContent>
               </Card>
+
+              {/* WhatsApp Contact - styled as other cards with more visible effects */}
+              <div className="mt-8">
+                <Card className="transition-all duration-300 hover:shadow-2xl hover:scale-[1.03] border border-transparent hover:border-green-500">
+                  <CardContent className="p-6">
+                    <div className="flex items-center space-x-4">
+                      <div className="w-12 h-12 bg-green-600 rounded-full flex items-center justify-center">
+                        <MessageSquare className="w-6 h-6 text-white" />
+                      </div>
+                      <div>
+                        <h3 className="text-lg font-bold mb-1">WhatsApp</h3>
+                        <p className="text-gray-600 mb-3">Get instant support on WhatsApp</p>
+                        <Button className="bg-green-600 hover:bg-green-700">
+                          Chat with us
+                        </Button>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
             </div>
 
             {/* Contact Information */}
             <div className="space-y-8">
               {contactInfo.map((info, index) => (
-                <Card key={index} className="hover:shadow-lg transition-shadow duration-300">
+                <Card key={index} className={
+                  `transition-all duration-300 hover:shadow-2xl hover:scale-[1.03] border border-transparent ` +
+                  (info.title === 'Corporate Office' ? 'hover:border-blue-400 ' :
+                   info.title === 'Manufacturing Unit' ? 'hover:border-blue-400 ' :
+                   info.title === 'Phone' ? 'hover:border-green-500 ' :
+                   info.title === 'Email' ? 'hover:border-red-500 ' :
+                   info.title === 'Business Hours' ? 'hover:border-purple-500 ' :
+                   '')
+                }>
                   <CardContent className="p-6">
                     <div className="flex items-start space-x-4">
                       <div className="flex-shrink-0">
@@ -208,32 +193,12 @@ const Contact = () => {
                   </CardContent>
                 </Card>
               ))}
-
-              {/* WhatsApp Contact */}
-              <Card className="bg-green-50 border-green-200">
-                <CardContent className="p-6">
-                  <div className="flex items-center space-x-4">
-                    <div className="w-12 h-12 bg-green-600 rounded-full flex items-center justify-center">
-                      <MessageSquare className="w-6 h-6 text-white" />
-                    </div>
-                    <div>
-                      <h3 className="text-lg font-bold mb-1">WhatsApp</h3>
-                      <p className="text-gray-600 mb-3">Get instant support on WhatsApp</p>
-                      <Button className="bg-green-600 hover:bg-green-700">
-                        Chat with us
-                      </Button>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
             </div>
           </div>
         </div>
-      </section>
 
-      {/* Map Section */}
-      <section className="py-16 bg-gray-50">
-        <div className="container mx-auto px-4">
+        {/* Map Section moved here for better layout */}
+        <div className="container mx-auto px-4 mt-12">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Visit Our Office</h2>
             <p className="text-xl text-gray-600">
