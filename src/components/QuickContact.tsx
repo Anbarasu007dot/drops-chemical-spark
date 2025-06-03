@@ -86,7 +86,7 @@ export const QuickContact = () => {
       ref={sectionRef}
       className="relative py-20 premium-page-bg text-white"
       style={{
-        backgroundImage: "url('https://thumbs.dreamstime.com/b/technical-support-center-customer-service-internet-business-technology-concept-technical-support-center-customer-service-internet-119668737.jpg')",
+        backgroundImage: "url('https://www.ionos.com/startupguide/fileadmin/_processed_/c/0/csm_data-analysis-laptop-t_4483ab6cad.webp')",
         backgroundSize: "cover",
         backgroundPosition: "center"
       }}
@@ -95,7 +95,7 @@ export const QuickContact = () => {
       <div className="absolute inset-0 bg-black/50" />
       
       <div className="relative container mx-auto px-4 z-10">
-        <div className={`text-center mb-16 transition-all duration-800 ${isVisible ? 'modern-fade-in' : 'opacity-0 translate-y-10'}`}>
+        <div className={`text-center mb-16 transition-all duration-800`}>
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
             Get In Touch
           </h2>
@@ -107,7 +107,7 @@ export const QuickContact = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
           {/* Contact Information */}
-          <div className={`space-y-8 transition-all duration-800 ${isVisible ? 'modern-slide-up' : 'opacity-0 translate-y-10'}`}>
+          <div className="space-y-8">
             <div>
               <h3 className="text-2xl font-bold text-white mb-6">Contact Information</h3>
               <p className="text-blue-100 mb-8 leading-relaxed">
@@ -119,7 +119,9 @@ export const QuickContact = () => {
               {contactInfo.map((info, index) => (
                 <Card 
                   key={index}
-                  className="contact-card bg-black/60 backdrop-blur-md border-white/20 shadow-lg w-full min-h-[90px]"
+                  className={`professional-card bg-black/60 backdrop-blur-md border-white/20 text-white transition-all duration-500 ${
+                    isVisible ? 'modern-scale-in' : 'opacity-0 scale-95'
+                  }`}
                   style={{ animationDelay: `${index * 0.2}s` }}
                 >
                   <CardContent className="py-4 px-8 flex flex-row items-center h-full">
@@ -139,7 +141,7 @@ export const QuickContact = () => {
           </div>
 
           {/* Enhanced Contact Form */}
-          <div className={`transition-all duration-800 ${isVisible ? 'modern-scale-in' : 'opacity-0 scale-95'}`}>
+          <div>
             <Card className="bg-black/60 backdrop-blur-md border-white/20 shadow-lg">
               <CardContent className="p-8">
                 <h3 className="text-2xl font-bold text-white mb-6">Send us a Message</h3>

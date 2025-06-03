@@ -26,7 +26,7 @@ const Products = () => {
     "agro-aquaculture": "url('https://i0.wp.com/razzanj.com/wp-content/uploads/2016/07/nature-landscape-nature-landscape-hd-image-download-wheat-farm-hd-wallpaper-notebook-background-wheat-farmers-wheat-farming-process-wheat-farming-in-kenya.jpg?ssl=1')",
     "water-treatment": "url('https://hydromarque.com/images/_mainFeature/The-Role-of-Water-Treatment-in-Sustainability-and-Environmental-Stewardship.jpg')",
     "food-chemicals": "url('https://ik.imagekit.io/dvuz4klnl/IMG-20250603-WA0002.jpg?updatedAt=1748941753292')",
-    "hygiene-raw-materials": "url('https://images.theconversation.com/files/327549/original/file-20200413-177903-6l8e8z.jpg?ixlib=rb-4.1.0&rect=531%2C1038%2C7687%2C3843&q=45&auto=format&w=1356&h=668&fit=crop')",
+    "hygiene-raw-materials": "url('https://plus.unsplash.com/premium_photo-1661597057916-f1d021a8465c?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8d2FzaGluZyUyMGRpc2hlc3xlbnwwfHwwfHx8MA%3D%3D')",
     "basic-chemicals": "url('https://kbsiplaw.com/wp-content/uploads/Science-laboratory-glassware73532203MED.jpg')",
     "pharmaceutical": "url('https://t4.ftcdn.net/jpg/09/21/52/41/360_F_921524123_XJ149EOFKyhjm4Q1oSJYbyZrMYKvdZYE.jpg')",
     "all": "url('https://fineotex.com/wp-content/uploads/2024/09/Body-Image-1-min-6-scaled.jpg')"
@@ -183,12 +183,12 @@ const Products = () => {
             {/* Search and Filter */}
             <div className="w-full flex flex-col md:flex-row gap-4 mt-2">
               <div className="flex-1 relative">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-white" />
                 <Input
                   placeholder="Search products..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="pl-10 bg-white/20 border-white/30 text-white placeholder:text-blue-200 focus:border-blue-400"
+                  className="pl-10 bg-white/20 border-white/30 text-white placeholder:text-white focus:border-blue-400"
                 />
               </div>
               <select
