@@ -25,14 +25,14 @@ export const Preloader = ({ onComplete }: PreloaderProps) => {
     document.body.style.overflow = 'hidden';
     document.body.style.pointerEvents = 'none';
 
-    // Animation sequence
+    // Animation sequence - slower timing
     const fadeInTimer = setTimeout(() => {
       setAnimationPhase('line-visible');
-    }, 100);
+    }, 200);
 
     const pauseTimer = setTimeout(() => {
       setAnimationPhase('splitting');
-    }, 800); // 100ms fade + 500ms pause + 200ms buffer
+    }, 1200); // Longer pause: 200ms fade + 800ms pause + 200ms buffer
 
     const completeTimer = setTimeout(() => {
       setAnimationPhase('complete');
@@ -40,7 +40,7 @@ export const Preloader = ({ onComplete }: PreloaderProps) => {
       document.body.style.overflow = 'unset';
       document.body.style.pointerEvents = 'auto';
       onComplete();
-    }, 2300); // Total animation duration
+    }, 3500); // Total animation duration - much slower
 
     return () => {
       clearTimeout(fadeInTimer);
