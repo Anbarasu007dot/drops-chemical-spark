@@ -39,9 +39,9 @@ export const Hero = () => {
   // Dynamic background slideshow logic
   const bgImages = [
     "https://housing.com/news/wp-content/uploads/2023/10/chemical-industries.jpg",
-    "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1500&q=80",
-    "https://images.pexels.com/photos/373576/pexels-photo-373576.jpeg?auto=compress&w=1500&q=80",
-    "https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=1500&q=80"
+    "https://new.abb.com/images/librariesprovider87/drives-global/drives-frontpage-segment-chemical.jpg?sfvrsn=4a3a910a_0",
+    "https://d12oja0ew7x0i8.cloudfront.net/images/Article_Images/ImageForArticle_21307_164499491645378.png",
+    "https://www.caia.co.za/wp-content/uploads/2025/05/CAIA-OG.jpg"
   ];
   const [bgIndex, setBgIndex] = useState(0);
   const [bgLoaded, setBgLoaded] = useState(Array(bgImages.length).fill(false));
@@ -105,8 +105,8 @@ export const Hero = () => {
       <FloatingMolecules />
 
       {/* Subtle Background Pattern */}
-      <div className="absolute inset-0 subtle-pattern opacity-20"></div>
-      <div className="absolute inset-0 molecular-bg"></div>
+      {/* <div className="absolute inset-0 subtle-pattern opacity-20"></div> */}
+      {/* <div className="absolute inset-0 molecular-bg"></div> */}
 
       {/* Professional Content */}
       <div className="relative z-10 container mx-auto px-4 py-20 text-center">
