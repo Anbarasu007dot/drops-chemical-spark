@@ -145,7 +145,7 @@ export const FeaturedProducts = () => {
                       </p>
                       {/* Expandable extended description - contained within the card, no overflow */}
                       <div
-                        className={`w-full transition-all duration-700 ease-[cubic-bezier(0.4,0,0.2,1)] overflow-hidden ${hoveredCard === index ? 'max-h-40 opacity-100 mt-0' : 'max-h-0 opacity-0 mt-0'}`}
+                        className={`w-full transition-all duration-700 ease-[cubic-bezier\(0.4,0,0.2,1\)] overflow-hidden ${hoveredCard === index ? 'max-h-40 opacity-100 mt-0' : 'max-h-0 opacity-0 mt-0'}`.replace('ease-[cubic-bezier\(0.4,0,0.2,1\)]', 'ease-[cubic-bezier(0.4,0,0.2,1)]')}
                         style={{ zIndex: 10 }}
                       >
                         <div className="bg-white/95 rounded-b-lg px-2 py-2 shadow-md">
