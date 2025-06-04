@@ -137,7 +137,7 @@ export const FeaturedProducts = () => {
                         asChild
                         className="secondary-button flex items-center justify-center"
                       >
-                        <Link to={`/products?category=${product.categoryId || encodeURIComponent(product.category)}`} replace={false} reloadDocument={false}>
+                        <Link to={`/products?category=${product.categoryId || encodeURIComponent(product.category)}`}>
                           <ArrowRight className="w-4 h-4 mr-2" />
                           View Products
                         </Link>
