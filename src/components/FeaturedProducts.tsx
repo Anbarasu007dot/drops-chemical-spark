@@ -3,13 +3,10 @@ import { ArrowRight, MessageSquare } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { useState, useEffect, useRef } from "react";
-import { QuotationModal } from "@/components/QuotationModal";
 import { ChemicalElements } from "@/components/ChemicalElements";
 import { Link } from "react-router-dom";
 
 export const FeaturedProducts = () => {
-  const [isQuotationOpen, setIsQuotationOpen] = useState(false);
-  const [selectedProduct, setSelectedProduct] = useState("");
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
 
@@ -87,101 +84,90 @@ export const FeaturedProducts = () => {
     }
   ];
 
-  const handleQuoteRequest = (category: string) => {
-    setSelectedProduct(category);
-    setIsQuotationOpen(true);
-  };
-
   return (
-    <>
-      <section 
-        ref={sectionRef}
-        className="relative py-20 bg-white"
-      >
-        <ChemicalElements />
-        <div className="container mx-auto px-4 relative z-10">
-          <div className={`text-center mb-16 transition-all duration-800 ${isVisible ? 'classic-fade-in' : 'opacity-0 translate-y-10'}`}>
-            <h2 className="professional-subheading mb-4" style={{ color: 'var(--brand-dark-blue)' }}>
-              Featured Sectors
-            </h2>
-            <div className="section-divider"></div>
-            <p className="text-lg text-slate-600 max-w-3xl mx-auto leading-relaxed">
-              Discover our comprehensive range of chemical solutions, meticulously formulated 
-              to exceed the highest standards of quality, performance, and reliability
-            </p>
-          </div>
+    <section 
+      ref={sectionRef}
+      className="relative py-20 bg-white"
+    >
+      <ChemicalElements />
+      <div className="container mx-auto px-4 relative z-10">
+        <div className={`text-center mb-16 transition-all duration-800 ${isVisible ? 'classic-fade-in' : 'opacity-0 translate-y-10'}`}>
+          <h2 className="professional-subheading mb-4" style={{ color: 'var(--brand-dark-blue)' }}>
+            Featured Sectors
+          </h2>
+          <div className="section-divider"></div>
+          <p className="text-lg text-slate-600 max-w-3xl mx-auto leading-relaxed">
+            Discover our comprehensive range of chemical solutions, meticulously formulated 
+            to exceed the highest standards of quality, performance, and reliability
+          </p>
+        </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
-            {products.map((product, index) => (
-              <Card 
-                key={index}
-                className={`interactive-card group overflow-hidden transition-all duration-500 ${
-                  isVisible ? 'classic-scale-in' : 'opacity-0 scale-95'
-                }`}
-                style={{ animationDelay: `${index * 0.2}s` }}
-              >
-                <CardContent className="p-0 h-full flex flex-col">
-                  <div className="relative flex flex-col h-full">
-                    <div 
-                      className="h-64 bg-cover bg-center relative overflow-hidden"
-                      style={{ backgroundImage: `url('${product.image}')` }}
-                    >
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                      <div className={`absolute top-6 right-6 px-4 py-2 rounded-full bg-white/90 ${product.color} text-sm font-semibold shadow-sm`}>
-                        {product.productCount} Products
-                      </div>
-                    </div>
-                    <div className="p-8 flex flex-col h-full">
-                      <h3 className="text-2xl font-semibold mb-4 group-hover:text-slate-900 transition-colors duration-300" style={{ color: 'var(--brand-dark-blue)' }}>
-                        {product.category}
-                      </h3>
-                      <p className="text-slate-600 mb-4 leading-relaxed">
-                        {product.description}
-                      </p>
-                      <p className="text-slate-600 mb-8 leading-relaxed">
-                        {product.secondDescription}
-                      </p>
-                      <div className="flex flex-col sm:flex-row gap-4 mt-auto">
-                        <Button
-                          asChild
-                          className="secondary-button flex items-center justify-center"
-                        >
-                          <Link to={`/products?category=${product.categoryId || encodeURIComponent(product.category)}`} replace={false} reloadDocument={false}>
-                            <ArrowRight className="w-4 h-4 mr-2" />
-                            View Products
-                          </Link>
-                        </Button>
-                        <Button
-                          onClick={() => handleQuoteRequest(product.category)}
-                          className="accent-button flex items-center justify-center"
-                        >
-                          <MessageSquare className="w-4 h-4 mr-2" />
-                          Get a Quote
-                        </Button>
-                      </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+          {products.map((product, index) => (
+            <Card 
+              key={index}
+              className={`interactive-card group overflow-hidden transition-all duration-500 ${
+                isVisible ? 'classic-scale-in' : 'opacity-0 scale-95'
+              }`}
+              style={{ animationDelay: `${index * 0.2}s` }}
+            >
+              <CardContent className="p-0 h-full flex flex-col">
+                <div className="relative flex flex-col h-full">
+                  <div 
+                    className="h-64 bg-cover bg-center relative overflow-hidden"
+                    style={{ backgroundImage: `url('${product.image}')` }}
+                  >
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                    <div className={`absolute top-6 right-6 px-4 py-2 rounded-full bg-white/90 ${product.color} text-sm font-semibold shadow-sm`}>
+                      {product.productCount} Products
                     </div>
                   </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-
-          <div className="text-center mt-16">
-            <Button asChild size="lg" className="accent-button text-lg px-8 py-4">
-              <Link to="/products">
-                View All Products
-                <ArrowRight className="ml-2 w-5 h-5" />
-              </Link>
-            </Button>
-          </div>
+                  <div className="p-8 flex flex-col h-full">
+                    <h3 className="text-2xl font-semibold mb-4 group-hover:text-slate-900 transition-colors duration-300" style={{ color: 'var(--brand-dark-blue)' }}>
+                      {product.category}
+                    </h3>
+                    <p className="text-slate-600 mb-4 leading-relaxed">
+                      {product.description}
+                    </p>
+                    <p className="text-slate-600 mb-8 leading-relaxed">
+                      {product.secondDescription}
+                    </p>
+                    <div className="flex flex-col sm:flex-row gap-4 mt-auto">
+                      <Button
+                        asChild
+                        className="secondary-button flex items-center justify-center"
+                      >
+                        <Link to={`/products?category=${product.categoryId || encodeURIComponent(product.category)}`} replace={false} reloadDocument={false}>
+                          <ArrowRight className="w-4 h-4 mr-2" />
+                          View Products
+                        </Link>
+                      </Button>
+                      <Button
+                        asChild
+                        className="accent-button flex items-center justify-center"
+                      >
+                        <Link to="/contact">
+                          <MessageSquare className="w-4 h-4 mr-2" />
+                          Get a Quote
+                        </Link>
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
         </div>
-      </section>
 
-      <QuotationModal 
-        isOpen={isQuotationOpen}
-        onClose={() => setIsQuotationOpen(false)}
-        productCategory={selectedProduct}
-      />
-    </>
+        <div className="text-center mt-16">
+          <Button asChild size="lg" className="accent-button text-lg px-8 py-4">
+            <Link to="/products">
+              View All Products
+              <ArrowRight className="ml-2 w-5 h-5" />
+            </Link>
+          </Button>
+        </div>
+      </div>
+    </section>
   );
 };
