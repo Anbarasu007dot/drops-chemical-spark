@@ -37,7 +37,7 @@ const Contact = () => {
       icon: <Phone className="w-6 h-6 text-green-600" />,
       title: "Phone",
       content: [
-        "+91 90426 70008",
+        
         "+91 96775 22201"
       ]
     },

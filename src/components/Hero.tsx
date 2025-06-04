@@ -13,10 +13,19 @@ function useTypingEffect(text: string, speed = 60) {
   useEffect(() => {
     let i = 0;
     setDisplayed("");
+    if (!text) return;
     const interval = setInterval(() => {
-      setDisplayed((prev) => prev + text[i]);
-      i++;
-      if (i >= text.length) clearInterval(interval);
+      setDisplayed((prev) => {
+        // Only add next character if it exists
+        if (i < text.length) {
+          const next = prev + text[i];
+          i++;
+          return next;
+        } else {
+          clearInterval(interval);
+          return prev;
+        }
+      });
     }, speed);
     return () => clearInterval(interval);
   }, [text, speed]);
@@ -27,21 +36,70 @@ export const Hero = () => {
   const [isVisible, setIsVisible] = useState(false);
   const supplyText = useTypingEffect("Supply Excellence", 60);
 
+  // Dynamic background slideshow logic
+  const bgImages = [
+    "https://housing.com/news/wp-content/uploads/2023/10/chemical-industries.jpg",
+    "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1500&q=80",
+    "https://images.pexels.com/photos/373576/pexels-photo-373576.jpeg?auto=compress&w=1500&q=80",
+    "https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=1500&q=80"
+  ];
+  const [bgIndex, setBgIndex] = useState(0);
+  const [bgLoaded, setBgLoaded] = useState(Array(bgImages.length).fill(false));
+
+  // Preload images
+  useEffect(() => {
+    bgImages.forEach((src, idx) => {
+      const img = new window.Image();
+      img.src = src;
+      img.onload = () => setBgLoaded((prev) => {
+        const updated = [...prev];
+        updated[idx] = true;
+        return updated;
+      });
+    });
+  }, [bgImages]);
+
+  // Cycle background images
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setBgIndex((prev) => (prev + 1) % bgImages.length);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, [bgImages.length]);
+
   useEffect(() => {
     setTimeout(() => setIsVisible(true), 300);
   }, []);
 
   return (
     <section
-      className="relative min-h-screen flex items-center justify-center hero-premium-bg"
-      style={{
-        backgroundImage:
-          "linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)), url('https://housing.com/news/wp-content/uploads/2023/10/chemical-industries.jpg')",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-      }}
+      className="relative min-h-screen flex items-center justify-center hero-premium-bg overflow-hidden"
     >
+      {/* Dynamic Background Slideshow */}
+      <div className="absolute inset-0 w-full h-full z-0 pointer-events-none">
+        {bgImages.map((src, idx) => (
+          <div
+            key={src}
+            className="hero-bg-slide"
+            style={{
+              backgroundImage: `linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)), url('${src}')`,
+              opacity: bgIndex === idx ? 1 : 0,
+              transition: 'opacity 1s cubic-bezier(0.4,0,0.2,1)',
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              backgroundRepeat: 'no-repeat',
+              position: 'absolute',
+              inset: 0,
+              width: '100%',
+              height: '100%',
+              zIndex: 0,
+              pointerEvents: 'none',
+            }}
+            aria-hidden="true"
+          />
+        ))}
+      </div>
+
       {/* Enhanced Chemical Elements */}
       <ChemicalElements />
       <FloatingMolecules />
@@ -56,15 +114,17 @@ export const Hero = () => {
           <div className={`transition-all duration-800 ${isVisible ? 'modern-fade-in' : 'opacity-0 translate-y-10'}`}>
             <h1 className="professional-heading mb-6 text-white">
               Expert Manufacturing
-              <span className="block bg-gradient-to-r from-blue-200 to-white bg-clip-text text-transparent mt-2">
-                <span className="inline-block">
-                  &nbsp;&amp;&nbsp;
-                  <span aria-label="Supply Excellence" className="inline-block">
-                    {supplyText}
-                    <span className="type-cursor">|</span>
-                  </span>
-                </span>
-              </span>
+              <span className="block mt-2">
+  <span className="inline-block">
+    &nbsp;&amp;&nbsp;
+    <span aria-label="Supply Excellence" className="inline-block relative z-20 text-white">
+      <span className="supply-typing-text">
+        {supplyText}
+      </span>
+      <span className="type-cursor">|</span>
+    </span>
+  </span>
+</span>
             </h1>
 
             <p className="text-xl md:text-2xl text-blue-100 mb-10 max-w-3xl mx-auto leading-relaxed font-light">
@@ -147,3 +207,14 @@ export const Hero = () => {
 //   0%, 100% { opacity: 1; }
 //   50% { opacity: 0; }
 // }
+
+/* Add to the bottom of the file or in your CSS:
+.supply-typing-text {
+  display: inline-block;
+  animation: supply-fade-in 1.2s cubic-bezier(0.4,0,0.2,1) both;
+}
+@keyframes supply-fade-in {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+*/

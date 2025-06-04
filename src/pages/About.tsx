@@ -3,6 +3,7 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Card, CardContent } from "@/components/ui/card";
 import { useEffect, useRef, useState } from "react";
+import { AnimatedCounter } from "@/components/AnimatedCounter";
 import { InteractiveTimeline } from "@/components/InteractiveTimeline";
 
 const About = () => {
@@ -24,6 +25,26 @@ const About = () => {
     }
 
     return () => observer.disconnect();
+  }, []);
+
+  // Track stat card visibility for scroll-triggered animation
+  const [statsVisible, setStatsVisible] = useState(false);
+  const statsSectionRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!statsSectionRef.current) return;
+      const rect = statsSectionRef.current.getBoundingClientRect();
+      const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+      if (rect.top < windowHeight * 0.85 && rect.bottom > windowHeight * 0.15) {
+        setStatsVisible(true);
+      } else {
+        setStatsVisible(false);
+      }
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const milestones = [
@@ -74,7 +95,7 @@ const About = () => {
       }}>
         <div className="relative container mx-auto px-4 text-center">
           <h1 className="text-5xl md:text-6xl font-bold mb-6 modern-fade-in text-white">
-            About Drops Chemicals
+            About Us
           </h1>
           <p className="text-xl md:text-2xl text-blue-100 max-w-3xl mx-auto modern-slide-up">
             Two decades of excellence in chemical manufacturing and supply, 
@@ -98,16 +119,28 @@ const About = () => {
                 that meet the highest standards of quality and reliability.
               </p>
               
-              <div className="grid grid-cols-2 gap-4">
-                {stats.map((stat, index) => (
-                  <div key={index} className="text-center p-4 bg-gray-50 rounded-lg professional-card">
-                    <div className={`w-12 h-12 mx-auto mb-2 rounded-lg bg-gradient-to-r ${stat.color} flex items-center justify-center`}>
-                      <stat.icon className="w-6 h-6 text-white" />
+              <div ref={statsSectionRef} className="grid grid-cols-2 gap-9">
+                {stats.map((stat, index) => {
+                  // Extract number and suffix for AnimatedCounter
+                  const match = stat.number.match(/(\d+)(.*)/);
+                  const end = match ? parseInt(match[1]) : 0;
+                  const suffix = match ? match[2] : '';
+                  return (
+                    <div
+                      key={index}
+                      className={`text-center p-4 bg-[#e2e8f0] rounded-lg professional-card stat-bounce-in ${statsVisible ? 'stat-card-in' : 'opacity-0 translate-y-10'}`}
+                      style={{ transition: 'all 0.7s cubic-bezier(0.22,1,0.36,1)', transitionDelay: statsVisible ? `${index * 0.15}s` : '0ms' }}
+                    >
+                      <div className={`w-12 h-12 mx-auto mb-2 rounded-lg bg-gradient-to-r ${stat.color} flex items-center justify-center`}>
+                        <stat.icon className="w-6 h-6 text-white" />
+                      </div>
+                      <div className="text-2xl font-bold text-gray-900">
+                        <AnimatedCounter end={end} duration={1200} suffix={suffix} />
+                      </div>
+                      <div className="text-sm text-gray-600">{stat.label}</div>
                     </div>
-                    <div className="text-2xl font-bold text-gray-900">{stat.number}</div>
-                    <div className="text-sm text-gray-600">{stat.label}</div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             </div>
             

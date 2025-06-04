@@ -70,7 +70,7 @@ const Careers = () => {
       <section
         className="relative text-white py-20"
         style={{
-          backgroundImage: `url('https://png.pngtree.com/thumb_back/fh260/background/20220702/pngtree-a-professionals-productivity-handson-with-the-latest-modern-computer-and-business-solutions-photo-image_32277816.jpg')`,
+          backgroundImage: `linear-gradient(rgba(24, 34, 60, 0.55), rgba(24, 34, 60, 0.55)), url('https://wallpapers.com/images/featured/work-background-kxmiw0h0ugqy2eoa.jpg')`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
@@ -114,88 +114,41 @@ const Careers = () => {
         </div>
       </section>
 
-      {/* Current Openings */}
-      <section className="py-16">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Current Openings</h2>
-            <p className="text-xl text-gray-600">
-              Discover exciting opportunities to grow your career with us
-            </p>
-          </div>
-
-          <div className="max-w-4xl mx-auto space-y-6">
-            {jobOpenings.map((job) => (
-              <Card key={job.id} className="hover:shadow-lg transition-shadow duration-300">
-                <CardContent className="p-6">
-                  <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-                    <div className="flex-1">
-                      <div className="flex flex-wrap items-center gap-3 mb-3">
-                        <h3 className="text-xl font-bold">{job.title}</h3>
-                        <Badge variant="secondary">{job.department}</Badge>
-                        <Badge variant="outline">{job.type}</Badge>
-                      </div>
-                      
-                      <div className="flex flex-wrap items-center gap-4 text-sm text-gray-600 mb-3">
-                        <div className="flex items-center gap-1">
-                          <MapPin className="w-4 h-4" />
-                          {job.location}
-                        </div>
-                        <div className="flex items-center gap-1">
-                          <Clock className="w-4 h-4" />
-                          {job.experience}
-                        </div>
-                      </div>
-                      
-                      <p className="text-gray-700 mb-3">{job.description}</p>
-                      
-                      <div className="flex flex-wrap gap-2">
-                        {job.requirements.map((req, index) => (
-                          <Badge key={index} variant="outline" className="text-xs">
-                            {req}
-                          </Badge>
-                        ))}
-                      </div>
-                    </div>
-                    
-                    <div className="md:ml-6">
-                      <Button className="w-full md:w-auto bg-blue-600 hover:bg-blue-700">
-                        Apply Now
-                      </Button>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
+      {/* Hiring Plans Notice */}
+      <section className="py-24 bg-gradient-to-br from-gray-50 via-blue-50 to-blue-100 flex items-center justify-center min-h-[40vh] relative overflow-hidden">
+        {/* Animated background pattern */}
+        <div className="absolute inset-0 pointer-events-none opacity-30 z-0" aria-hidden="true">
+          <svg width="100%" height="100%" className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <pattern id="dots" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+                <circle cx="2" cy="2" r="2" fill="#a5b4fc" />
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#dots)" />
+          </svg>
         </div>
-      </section>
-
-      {/* Application Process */}
-      <section className="py-16 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Our Hiring Process</h2>
-            <p className="text-xl text-gray-600">
-              A transparent and efficient process designed to find the right fit
-            </p>
-          </div>
-
-          <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
-            {[
-              { step: "1", title: "Application", desc: "Submit your resume and cover letter" },
-              { step: "2", title: "Screening", desc: "Initial review and phone interview" },
-              { step: "3", title: "Interview", desc: "Technical and cultural fit assessment" },
-              { step: "4", title: "Offer", desc: "Welcome to the Drops Chemicals family!" }
-            ].map((item, index) => (
-              <div key={index} className="text-center">
-                <div className="w-16 h-16 bg-blue-600 text-white rounded-full flex items-center justify-center text-xl font-bold mx-auto mb-4">
-                  {item.step}
-                </div>
-                <h3 className="text-xl font-bold mb-2">{item.title}</h3>
-                <p className="text-gray-600">{item.desc}</p>
-              </div>
-            ))}
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-4">
+          <div className="bg-white/90 rounded-2xl shadow-lg flex flex-col md:flex-row items-center justify-center gap-10 p-8 md:p-12 animate-fade-in">
+            {/* Illustration (left) */}
+            <div className="flex-shrink-0 w-full md:w-1/2 flex justify-center mb-8 md:mb-0 h-full">
+              <img
+                src="https://imgs.search.brave.com/o86eUJzEKOk-sodCYHSNPxFiElss8xD_s21f4RjwsYU/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvODgx/NTQyMTIyL3Bob3Rv/L2J1c2luZXNzLXBl/b3BsZS11c2luZy1w/ZW4tdGFibGV0LW5v/dGVib29rLWFyZS1w/bGFubmluZy1hLW1h/cmtldGluZy1wbGFu/LXRvLWltcHJvdmUt/dGhlLXF1YWxpdHku/anBnP3M9NjEyeDYx/MiZ3PTAmaz0yMCZj/PXpTbzZ6WDR6Z3NP/WUJRcHdfN1hjejNu/WF9zWHF3SHIwbVN6/RUdrVVJFVWc9"
+                alt="Planning illustration"
+                className="w-full h-full max-h-72 md:max-h-96 object-contain rounded-xl m-2"
+                loading="lazy"
+              />
+            </div>
+            {/* Message and CTA (right) */}
+            <div className="flex-1 flex flex-col items-center md:items-start text-center md:text-left justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" className="w-12 h-12 text-blue-400 mb-4 mx-auto md:mx-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6l4 2m6-4a10 10 0 11-20 0 10 10 0 0120 0z" />
+              </svg>
+              <h2 className="text-2xl md:text-3xl font-semibold text-gray-800 mb-2">Our hiring plans are still under consideration.</h2>
+              <p className="text-gray-600 text-lg font-normal mb-6">Please check back soon for updates on career opportunities at Drops Chemicals.</p>
+              <Button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg text-lg font-semibold shadow-md transition-all duration-300" onClick={() => alert('Job alerts coming soon!')}>
+                Stay Updated
+              </Button>
+            </div>
           </div>
         </div>
       </section>

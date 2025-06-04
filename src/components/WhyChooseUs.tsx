@@ -1,4 +1,3 @@
-
 import { Award, Clock, DollarSign, Headphones, Truck, Users } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { ChemicalElements } from "@/components/ChemicalElements";
@@ -72,7 +71,7 @@ export const WhyChooseUs = () => {
   return (
     <section 
       ref={sectionRef}
-      className="relative py-20 bg-gray-50"
+      className="relative py-20 bg-[57b8d9]"
     >
       <ChemicalElements />
       <div className="container mx-auto px-4 relative z-10">

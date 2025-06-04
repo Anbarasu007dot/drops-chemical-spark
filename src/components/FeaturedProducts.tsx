@@ -96,7 +96,7 @@ export const FeaturedProducts = () => {
     <>
       <section 
         ref={sectionRef}
-        className="relative py-20 bg-white"
+        className="relative py-20 bg-[53bde1]"
       >
         <ChemicalElements />
         <div className="container mx-auto px-4 relative z-10">
@@ -115,7 +115,7 @@ export const FeaturedProducts = () => {
             {products.map((product, index) => (
               <Card 
                 key={index}
-                className={`interactive-card overflow-visible transition-all duration-500 ${
+                className={`interactive-card overflow-visible transition-all duration-500 rounded-2xl ${
                   isVisible ? 'classic-scale-in' : 'opacity-0 scale-95'
                 } ${hoveredCard === index ? '' : ''} ${selectedProduct === product.category ? 'ring-4 ring-blue-400 scale-105 shadow-[0_0_32px_8px_rgba(37,99,235,0.35)] z-20' : ''}`}
                 style={{ animationDelay: `${index * 0.2}s` }}
@@ -124,37 +124,34 @@ export const FeaturedProducts = () => {
                 onMouseDown={() => setSelectedProduct(product.category)}
                 onMouseUp={() => setTimeout(() => setSelectedProduct(''), 200)}
               >
-                <CardContent className="p-0 h-full flex flex-col">
+                <CardContent className="p-0 flex flex-col h-full">
                   <div className="relative flex flex-col h-full">
-                    <div 
-                      className="h-64 bg-cover bg-center relative overflow-hidden"
+                    <div className="h-48 bg-cover bg-center relative overflow-hidden rounded-t-2xl"
                       style={{ backgroundImage: `url('${product.image}')` }}
                     >
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent rounded-t-2xl" />
                       <div className={`absolute top-6 right-6 px-4 py-2 rounded-full bg-white/90 ${product.color} text-sm font-semibold shadow-sm`}>
                         {product.productCount} Products
                       </div>
                     </div>
-                    <div className="p-8 flex flex-col h-full relative">
+                    <div className="p-6 flex flex-col flex-1 relative">
                       <h3 className="text-2xl font-semibold mb-2 transition-colors duration-300" style={{ color: 'var(--brand-dark-blue)' }}>
                         {product.category}
                       </h3>
-                      {/* Short description always visible */}
                       <p className="text-slate-600 leading-relaxed text-sm mb-0.5">
                         {product.description}
                       </p>
-                      {/* Expandable extended description - contained within the card, no overflow */}
                       <div
-                        className={`w-full transition-all duration-700 ease-[cubic-bezier\(0.4,0,0.2,1\)] overflow-hidden ${hoveredCard === index ? 'max-h-40 opacity-100 mt-0' : 'max-h-0 opacity-0 mt-0'}`.replace('ease-[cubic-bezier\(0.4,0,0.2,1\)]', 'ease-[cubic-bezier(0.4,0,0.2,1)]')}
+                        className={`w-full transition-all duration-700 ease-[cubic-bezier(0.4,0,0.2,1)] overflow-hidden ${hoveredCard === index ? 'max-h-40 opacity-100 mt-0' : 'max-h-0 opacity-0 mt-0'}`.replace('ease-[cubic-bezier\(0.4,0,0.2,1\)]', 'ease-[cubic-bezier(0.4,0,0.2,1)]')}
                         style={{ zIndex: 10 }}
                       >
-                        <div className="bg-white/95 rounded-b-lg px-2 py-2 shadow-md">
-                          <p className="text-slate-600 leading-relaxed text-sm">
+                        <div className="bg-white/95 rounded-b-lg px-0 py-0 shadow-md">
+                          <p className="text-slate-600 leading-relaxed text-sm mb-0.5 font-normal p-0 m-0">
                             {product.secondDescription}
                           </p>
                         </div>
                       </div>
-                      <div className="flex flex-col sm:flex-row gap-4 mt-auto pt-4">
+                      <div className="flex flex-col sm:flex-row gap-4 pt-3 mt-auto">
                         <Button
                           asChild
                           className="secondary-button flex items-center justify-center px-8 py-3 rounded-xl font-semibold text-lg bg-blue-600 text-white border-2 border-blue-600 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-300 group hover:bg-blue-700 hover:border-blue-700 hover:scale-105 hover:shadow-[0_0_16px_4px_rgba(37,99,235,0.45)] shadow-[0_2px_8px_0_rgba(37,99,235,0.15)]"

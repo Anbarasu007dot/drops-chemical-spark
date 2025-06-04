@@ -7,7 +7,7 @@ export const LogoCarousel = () => {
       alt: "ELGi Equipments"
     },
     {
-      src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0ubXmTzOPd0ikx_d2mtRaN9h8Qch4ls3f1J4WgKDcyGIELuC78gcA3y2KXRsPiKBV2Dw&usqp=CAU",
+      src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSX4Y4LYJSpthySotwwuLqtI5-YWyAk-bGyjw&s",
       alt: "Roots Industries"
     },
     {
@@ -15,11 +15,11 @@ export const LogoCarousel = () => {
       alt: "L&T Construction"
     },
     {
-      src: "https://icon2.cleanpng.com/20180624/spo/aazkk20gu.webp",
+      src: "https://imgs.search.brave.com/MrYGbrDWPqWPcKbXPgaaYHAV6JQQZW3RMRZAyqkHJVA/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMuc2Vla2xvZ28u/Y29tL2xvZ28tcG5n/LzI0LzEvcmFkaXNz/b24tYmx1LWxvZ28t/cG5nX3NlZWtsb2dv/LTI0NzQ1OC5wbmc",
       alt: "Radisson Blu"
     },
     {
-      src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6gfcyPuEO0i6__nvSA4xvdGx6LW3pr9twZw&s",
+      src: "https://img.etimg.com/thumb/width-1200,height-900,imgsize-18236,resizemode-75,msid-119848724/industry/indl-goods/svs/engineering/larsen-toubro-wins-large-orders-in-india-overseas.jpg",
       alt: "Craftsman Automation"
     },
     {
@@ -33,30 +33,33 @@ export const LogoCarousel = () => {
   ];
 
   return (
-    <section className="py-20 bg-gradient-to-br from-blue-900 via-blue-700 to-blue-900 text-white overflow-hidden">
-      <div className="container mx-auto px-4 text-center">
-        <h2 className="text-4xl md:text-5xl font-extrabold mb-6 text-white tracking-wide drop-shadow-lg" style={{ fontFamily: 'Montserrat, Arial, sans-serif' }}>
-          Trusted by Industry Leaders
+    <section className="py-20 bg-white relative overflow-hidden">
+      <div className="container mx-auto px-4 text-center relative z-10">
+        <h2 className="text-4xl md:text-5xl font-extrabold mb-4 text-[#18345c] tracking-wide" style={{ fontFamily: 'Montserrat, Arial, sans-serif' }}>
+          Trusted by Top Companies
         </h2>
-        <p className="text-xl text-blue-100 max-w-3xl mx-auto mb-12">
+        <p className="text-base italic text-slate-500 mb-2 font-light">We’re proud to have earned the trust of these organizations.</p>
+        <p className="text-lg text-slate-600 max-w-3xl mx-auto mb-10">
           Partnering with renowned companies across Tamil Nadu and beyond
         </p>
 
+        {/* Auto-scrolling logo carousel */}
         <div className="relative">
-          <div className="flex overflow-hidden">
-            <div className="logo-carousel flex">
+          <div className="overflow-hidden w-full">
+            <div className="logo-carousel flex animate-logo-scroll gap-8">
               {[...logos, ...logos].map((logo, index) => (
-                <div key={index} className="flex items-center justify-center mx-4">
+                <div key={index} className="flex items-center justify-center mx-6">
                   <img
                     src={logo.src}
                     alt={logo.alt}
-                    className="max-w-40 max-h-20 object-contain opacity-90 transition-opacity duration-300 bg-transparent"
+                    className="max-w-56 max-h-28 object-contain opacity-90 transition-opacity duration-300 bg-transparent"
+                    loading="lazy"
                     onError={(e) => {
                       const target = e.target as HTMLImageElement;
                       target.style.display = 'none';
                       const parent = target.parentElement;
                       if (parent) {
-                        parent.innerHTML = `<span class='text-white font-semibold text-sm'>${logo.alt}</span>`;
+                        parent.innerHTML = `<span class='text-slate-500 font-semibold text-sm'>${logo.alt}</span>`;
                       }
                     }}
                   />
@@ -66,6 +69,15 @@ export const LogoCarousel = () => {
           </div>
         </div>
       </div>
+      {/* Carousel animation CSS (add to index.css):
+      .animate-logo-scroll {
+        animation: logo-scroll 32s linear infinite;
+      }
+      @keyframes logo-scroll {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(-50%); }
+      }
+      */}
     </section>
   );
 };

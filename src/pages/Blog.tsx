@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { useEffect, useRef, useState } from "react";
 
 const Blog = () => {
   const blogPosts = [
@@ -42,6 +43,33 @@ const Blog = () => {
 
   const categories = ["All", "Water Treatment", "Agriculture", "Safety", "Industry News"];
   const recentPosts = blogPosts.slice(0, 3);
+
+  // Animation state for each card
+  const [visibleCards, setVisibleCards] = useState<boolean[]>(Array(blogPosts.length).fill(false));
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      cardRefs.current.forEach((ref, idx) => {
+        if (!ref) return;
+        const rect = ref.getBoundingClientRect();
+        const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+        if (rect.top < windowHeight * 0.92 && rect.bottom > windowHeight * 0.08) {
+          setVisibleCards((prev) => {
+            if (!prev[idx]) {
+              const updated = [...prev];
+              updated[idx] = true;
+              return updated;
+            }
+            return prev;
+          });
+        }
+      });
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
     <div className="min-h-screen">
@@ -102,47 +130,51 @@ const Blog = () => {
 
             {/* Blog Posts Grid */}
             <div className="space-y-8">
-              {blogPosts.map((post) => (
-                <Card key={post.id} className="overflow-hidden hover:shadow-lg transition-shadow duration-300 group">
-                  <div className="md:flex">
-                    <div className="md:w-1/3">
-                      <img
-                        src={post.image}
-                        alt={post.title}
-                        className="w-full h-48 md:h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                      />
-                    </div>
-                    <div className="md:w-2/3 p-6">
-                      <div className="flex items-center gap-4 mb-3">
-                        <Badge variant="secondary">{post.category}</Badge>
-                        <div className="flex items-center text-sm text-gray-500 gap-4">
-                          <div className="flex items-center gap-1">
-                            <Calendar className="w-4 h-4" />
-                            {post.date}
-                          </div>
-                          <div className="flex items-center gap-1">
-                            <User className="w-4 h-4" />
-                            {post.author}
-                          </div>
-                          <span>{post.readTime}</span>
-                        </div>
+              {blogPosts.map((post, idx) => (
+                <div
+                  key={post.id}
+                  ref={el => cardRefs.current[idx] = el}
+                  className={`transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] will-change-transform ${visibleCards[idx] ? 'blog-fade-in' : 'blog-fade-init'}`}
+                  style={{ transitionDelay: visibleCards[idx] ? `${idx * 0.15 + 0.1}s` : '0ms' }}
+                >
+                  <Card className="overflow-hidden hover:shadow-lg transition-shadow duration-300 group">
+                    <div className="md:flex">
+                      <div className="md:w-1/3">
+                        <img
+                          src={post.image}
+                          alt={post.title}
+                          className="w-full h-48 md:h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                        />
                       </div>
-                      
-                      <h3 className="text-xl font-bold mb-3 group-hover:text-blue-600 transition-colors">
-                        {post.title}
-                      </h3>
-                      
-                      <p className="text-gray-600 mb-4 line-clamp-2">
-                        {post.excerpt}
-                      </p>
-                      
-                      <Button variant="outline" className="group-hover:bg-blue-600 group-hover:text-white transition-colors">
-                        Read More
-                        <ArrowRight className="w-4 h-4 ml-2" />
-                      </Button>
+                      <div className="md:w-2/3 p-6">
+                        <div className="flex items-center gap-4 mb-3">
+                          <Badge variant="secondary">{post.category}</Badge>
+                          <div className="flex items-center text-sm text-gray-500 gap-4">
+                            <div className="flex items-center gap-1">
+                              <Calendar className="w-4 h-4" />
+                              {post.date}
+                            </div>
+                            <div className="flex items-center gap-1">
+                              <User className="w-4 h-4" />
+                              {post.author}
+                            </div>
+                            <span>{post.readTime}</span>
+                          </div>
+                        </div>
+                        <h3 className="text-xl font-bold mb-3 group-hover:text-blue-600 transition-colors">
+                          {post.title}
+                        </h3>
+                        <p className="text-gray-600 mb-4 line-clamp-2">
+                          {post.excerpt}
+                        </p>
+                        <Button variant="outline" className="group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                          Read More
+                          <ArrowRight className="w-4 h-4 ml-2" />
+                        </Button>
+                      </div>
                     </div>
-                  </div>
-                </Card>
+                  </Card>
+                </div>
               ))}
             </div>
           </div>

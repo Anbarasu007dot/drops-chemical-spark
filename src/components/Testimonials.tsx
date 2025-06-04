@@ -1,28 +1,8 @@
 import { Star } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
-import { useEffect, useState, useRef } from "react";
+import { useRef, useState } from "react";
 
 export const Testimonials = () => {
-  const [isVisible, setIsVisible] = useState(false);
-  const sectionRef = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, []);
-
   const testimonials = [
     {
       name: "Rajesh Kumar",
@@ -47,12 +27,53 @@ export const Testimonials = () => {
       content: "Their food-grade chemicals meet the highest safety standards. Consistent quality, timely delivery, and competitive pricing make them our preferred supplier for all food processing needs.",
       rating: 5,
       image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=150&q=80"
+    },
+    {
+      name: "Suresh Menon",
+      company: "ChemTech Manufacturing",
+      role: "Production Head",
+      content: "We rely on Drops Chemicals for our manufacturing processes. Their industrial chemicals are top-notch, and their customer service is always responsive. A true partner in our growth.",
+      rating: 5,
+      image: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=150&q=80"
+    },
+    {
+      name: "Anita Reddy",
+      company: "EcoClean Solutions",
+      role: "Founder",
+      content: "Drops Chemicals provides eco-friendly solutions that align with our sustainability goals. Their commitment to quality and innovation is evident in every product. A pleasure to work with.",
+      rating: 5,
+      image: "https://imgs.search.brave.com/HcmxOTyAOtVsl6aUPH7Hd6gSST5yoMxPlrDT04CFGNw/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWcu/ZnJlZXBpay5jb20v/ZnJlZS1waG90by90/d28tYnVzaW5lc3N3/b21lbi13b3JraW5n/LWNhZmVfMTE1Ny0y/NjM4Ni5qcGc_c2Vt/dD1haXNfaXRlbXNf/Ym9vc3RlZCZ3PTc0/MA"
+    },
+    {
+      name: "Vikram Singh",
+      company: "Industrial Supplies Co.",
+      role: "Sales Director",
+      content: "We have been sourcing chemicals from Drops for years. Their extensive range and consistent quality have made them our go-to supplier. Excellent products and customer service.",
+      rating: 5,
+      image: "https://imgs.search.brave.com/Z_wvk4K5Np2qCps-IVPPKJoaD_y2YsX8XY1S3GTT9To/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5nZXR0eWltYWdl/cy5jb20vaWQvMTM0/NDUyNjkxNi9waG90/by95b3VuZy1zaWto/LWJ1c2luZXNzbWFu/LXdvcmtpbmctb24t/Y29tcHV0ZXItYXQt/b2ZmaWNlLmpwZz9z/PTYxMng2MTImdz0w/Jms9MjAmYz1vVmFL/ZFBiVzEybHQzbHVy/YWg1bFBoUkhhREgw/dlBnOEFyOUxJVHcz/Y3JrPQ"
     }
   ];
 
+  // Carousel logic
+  const carouselRef = useRef<HTMLDivElement>(null);
+  const [isPaused, setIsPaused] = useState(false);
+
+  // Duplicate testimonials for seamless looping
+  const carouselTestimonials = [...testimonials, ...testimonials];
+
+  // Animation CSS variables
+  const CARD_WIDTH = 340; // px, adjust to match card width + margin
+  const GAP = 32; // px, adjust to match gap-8
+  const totalCards = carouselTestimonials.length;
+  const totalWidth = totalCards * (CARD_WIDTH + GAP);
+  const duration = totalCards * 2.5; // seconds, adjust for speed
+
+  // Pause animation on hover
+  const handleMouseEnter = () => setIsPaused(true);
+  const handleMouseLeave = () => setIsPaused(false);
+
   return (
-    <section 
-      ref={sectionRef}
+    <section
       className="py-20 premium-bg-overlay text-white"
       style={{
         backgroundImage: "linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)), url('https://images.pexels.com/photos/4963433/pexels-photo-4963433.jpeg?cs=srgb&dl=pexels-ketut-subiyanto-4963433.jpg&fm=jpg')",
@@ -63,24 +84,70 @@ export const Testimonials = () => {
       }}
     >
       <div className="container mx-auto px-4">
-        <div className={`text-center mb-16 transition-all duration-800 ${isVisible ? 'modern-fade-in' : 'opacity-0 translate-y-10'}`}>
+        <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
             What Our Clients Say
           </h2>
           <div className="section-divider bg-white"></div>
           <p className="text-xl text-blue-100 max-w-3xl mx-auto">
-            Trusted by Industry Leaders - Real feedback from our valued partners
+            Trusted by Industry Experts - Real feedback from our valued partners
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        {/* Desktop/Tablet: Infinite Carousel */}
+        <div
+          className="hidden md:block overflow-x-hidden w-full"
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+        >
+          <div
+            ref={carouselRef}
+            className="flex gap-8 testimonial-carousel-track"
+            style={{
+              width: totalWidth,
+              animationPlayState: isPaused ? "paused" : "running",
+              animationDuration: `${duration}s`,
+            }}
+          >
+            {carouselTestimonials.map((testimonial, index) => (
+              <Card
+                key={index}
+                className="professional-card bg-black/30 backdrop-blur-lg border-white/20 text-white testimonial-hover min-w-[320px] max-w-xs w-[320px] cursor-pointer"
+                style={{ flex: "0 0 320px" }}
+              >
+                <CardContent className="p-8">
+                  <div className="flex items-center mb-4">
+                    {[...Array(testimonial.rating)].map((_, i) => (
+                      <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                    ))}
+                  </div>
+                  <p className="text-blue-100 mb-6 line-height-loose">
+                    "{testimonial.content}"
+                  </p>
+                  <div className="flex items-center">
+                    <img
+                      src={testimonial.image}
+                      alt={testimonial.name}
+                      className="w-12 h-12 rounded-full mr-4 object-cover"
+                    />
+                    <div>
+                      <h4 className="font-semibold text-white">{testimonial.name}</h4>
+                      <p className="text-sm text-blue-200">{testimonial.role}</p>
+                      <p className="text-sm text-blue-300">{testimonial.company}</p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+
+        {/* Mobile: Horizontal swipeable carousel */}
+        <div className="md:hidden flex gap-6 overflow-x-auto snap-x snap-mandatory pb-4 -mx-4 px-4">
           {testimonials.map((testimonial, index) => (
-            <Card 
+            <Card
               key={index}
-              className={`professional-card bg-black/30 backdrop-blur-lg border-white/20 text-white transition-all duration-500 ${
-                isVisible ? 'modern-scale-in' : 'opacity-0 scale-95'
-              }`}
-              style={{ animationDelay: `${index * 0.2}s` }}
+              className="professional-card bg-black/30 backdrop-blur-lg border-white/20 text-white testimonial-hover min-w-[85vw] max-w-[90vw] snap-center cursor-pointer"
             >
               <CardContent className="p-8">
                 <div className="flex items-center mb-4">
@@ -88,14 +155,12 @@ export const Testimonials = () => {
                     <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
                   ))}
                 </div>
-                
                 <p className="text-blue-100 mb-6 line-height-loose">
                   "{testimonial.content}"
                 </p>
-                
                 <div className="flex items-center">
-                  <img 
-                    src={testimonial.image} 
+                  <img
+                    src={testimonial.image}
                     alt={testimonial.name}
                     className="w-12 h-12 rounded-full mr-4 object-cover"
                   />
