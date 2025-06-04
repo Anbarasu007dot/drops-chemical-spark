@@ -325,6 +325,22 @@
     transform: translateX(4px);
   }
 
+  /* Blinking Typewriter Cursor */
+  .type-cursor {
+    display: inline-block;
+    width: 1ch;
+    color: #fff;
+    animation: blink 1s steps(1) infinite;
+    font-weight: 400;
+    font-size: inherit;
+    vertical-align: baseline;
+  }
+
+  @keyframes blink {
+    0%, 49% { opacity: 1; }
+    50%, 100% { opacity: 0; }
+  }
+
   /* Modern Animations */
   @keyframes modernFadeIn {
     0% {

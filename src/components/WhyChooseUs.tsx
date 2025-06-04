@@ -1,7 +1,7 @@
-
 import { Award, Clock, DollarSign, Headphones, Truck, Users } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { ChemicalElements } from "@/components/ChemicalElements";
+import { motion } from "framer-motion";
 
 export const WhyChooseUs = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -88,27 +88,37 @@ export const WhyChooseUs = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {features.map((feature, index) => (
-            <div
-              key={index}
-              className={`interactive-card group p-8 transition-all duration-500 ${
-                isVisible ? 'classic-scale-in' : 'opacity-0 scale-95'
-              }`}
-              style={{ animationDelay: `${index * 0.1}s` }}
-            >
-              <div className={`w-14 h-14 ${feature.bgColor} rounded-lg flex items-center justify-center mb-6 transition-all duration-300 group-hover:scale-110`}>
-                <feature.icon className={`w-7 h-7 ${feature.color}`} />
-              </div>
-              
-              <h3 className="text-xl font-semibold text-slate-800 mb-4 group-hover:text-slate-900 transition-colors duration-300">
-                {feature.title}
-              </h3>
-              
-              <p className="text-slate-600 leading-relaxed">
-                {feature.description}
-              </p>
-            </div>
-          ))}
+          {features.map((feature, index) => {
+            // Alternate directions for visual interest
+            const directions = [
+              { x: -60, y: 0 }, // left
+              { x: 60, y: 0 },  // right
+              { x: 0, y: 60 },  // bottom
+            ];
+            const dir = directions[index % directions.length];
+            return (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, x: dir.x, y: dir.y }}
+                animate={isVisible ? { opacity: 1, x: 0, y: 0 } : {}}
+                transition={{ duration: 0.7, delay: 0.1 + index * 0.13, ease: [0.4, 0, 0.2, 1] }}
+                className={`interactive-card group p-8 transition-all duration-500 ${
+                  isVisible ? 'classic-scale-in' : 'opacity-0 scale-95'
+                }`}
+                style={{ animationDelay: `${index * 0.1}s` }}
+              >
+                <div className={`w-14 h-14 ${feature.bgColor} rounded-lg flex items-center justify-center mb-6 transition-all duration-300 group-hover:scale-110`}>
+                  <feature.icon className={`w-7 h-7 ${feature.color}`} />
+                </div>
+                <h3 className="text-xl font-semibold text-slate-800 mb-4 group-hover:text-slate-900 transition-colors duration-300">
+                  {feature.title}
+                </h3>
+                <p className="text-slate-600 leading-relaxed">
+                  {feature.description}
+                </p>
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </section>

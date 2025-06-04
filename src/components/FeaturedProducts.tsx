@@ -1,5 +1,4 @@
-
-import { ArrowRight, MessageSquare } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { useState, useEffect, useRef } from "react";
@@ -11,6 +10,7 @@ export const FeaturedProducts = () => {
   const [isQuotationOpen, setIsQuotationOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState("");
   const [isVisible, setIsVisible] = useState(false);
+  const [hoveredCard, setHoveredCard] = useState<number | null>(null);
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -115,10 +115,14 @@ export const FeaturedProducts = () => {
             {products.map((product, index) => (
               <Card 
                 key={index}
-                className={`interactive-card group overflow-hidden transition-all duration-500 ${
+                className={`interactive-card overflow-visible transition-all duration-500 ${
                   isVisible ? 'classic-scale-in' : 'opacity-0 scale-95'
-                }`}
+                } ${hoveredCard === index ? '' : ''} ${selectedProduct === product.category ? 'ring-4 ring-blue-400 scale-105 shadow-[0_0_32px_8px_rgba(37,99,235,0.35)] z-20' : ''}`}
                 style={{ animationDelay: `${index * 0.2}s` }}
+                onMouseEnter={() => setHoveredCard(index)}
+                onMouseLeave={() => setHoveredCard(null)}
+                onMouseDown={() => setSelectedProduct(product.category)}
+                onMouseUp={() => setTimeout(() => setSelectedProduct(''), 200)}
               >
                 <CardContent className="p-0 h-full flex flex-col">
                   <div className="relative flex flex-col h-full">
@@ -131,32 +135,34 @@ export const FeaturedProducts = () => {
                         {product.productCount} Products
                       </div>
                     </div>
-                    <div className="p-8 flex flex-col h-full">
-                      <h3 className="text-2xl font-semibold mb-4 group-hover:text-slate-900 transition-colors duration-300" style={{ color: 'var(--brand-dark-blue)' }}>
+                    <div className="p-8 flex flex-col h-full relative">
+                      <h3 className="text-2xl font-semibold mb-2 transition-colors duration-300" style={{ color: 'var(--brand-dark-blue)' }}>
                         {product.category}
                       </h3>
-                      <p className="text-slate-600 mb-4 leading-relaxed">
+                      {/* Short description always visible */}
+                      <p className="text-slate-600 leading-relaxed text-sm mb-0.5">
                         {product.description}
                       </p>
-                      <p className="text-slate-600 mb-8 leading-relaxed">
-                        {product.secondDescription}
-                      </p>
-                      <div className="flex flex-col sm:flex-row gap-4 mt-auto">
+                      {/* Expandable extended description - contained within the card, no overflow */}
+                      <div
+                        className={`w-full transition-all duration-700 ease-[cubic-bezier(0.4,0,0.2,1)] overflow-hidden ${hoveredCard === index ? 'max-h-40 opacity-100 mt-0' : 'max-h-0 opacity-0 mt-0'}`}
+                        style={{ zIndex: 10 }}
+                      >
+                        <div className="bg-white/95 rounded-b-lg px-2 py-2 shadow-md">
+                          <p className="text-slate-600 leading-relaxed text-sm">
+                            {product.secondDescription}
+                          </p>
+                        </div>
+                      </div>
+                      <div className="flex flex-col sm:flex-row gap-4 mt-auto pt-4">
                         <Button
                           asChild
-                          className="secondary-button flex items-center justify-center"
+                          className="secondary-button flex items-center justify-center px-8 py-3 rounded-xl font-semibold text-lg bg-blue-600 text-white border-2 border-blue-600 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-300 group hover:bg-blue-700 hover:border-blue-700 hover:scale-105 hover:shadow-[0_0_16px_4px_rgba(37,99,235,0.45)] shadow-[0_2px_8px_0_rgba(37,99,235,0.15)]"
                         >
-                          <Link to={`/products?category=${product.categoryId || encodeURIComponent(product.category)}`} replace={false} reloadDocument={false}>
-                            <ArrowRight className="w-4 h-4 mr-2" />
-                            View Products
+                          <Link to={`/products?category=${product.categoryId || encodeURIComponent(product.category)}`} replace={false} reloadDocument={false} className="flex items-center">
+                            <span className="mr-2 transition-transform duration-300 group-hover:translate-x-1">View Products</span>
+                            <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1 group-hover:scale-110" />
                           </Link>
-                        </Button>
-                        <Button
-                          onClick={() => handleQuoteRequest(product.category)}
-                          className="accent-button flex items-center justify-center"
-                        >
-                          <MessageSquare className="w-4 h-4 mr-2" />
-                          Get a Quote
                         </Button>
                       </div>
                     </div>
