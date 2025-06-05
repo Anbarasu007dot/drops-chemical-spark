@@ -246,11 +246,8 @@ const Products = () => {
                 {getAllProductsAlphabetically().map((product, index) => (
                   <Card
                     key={index}
-                    className="product-card hover:shadow-lg transition-all duration-300 hover:-translate-y-1 bg-white border border-gray-200"
-                    data-aos="fade-up"
-                    data-aos-delay={0}
-                    data-aos-duration="400"
-                    style={{ animationDelay: '0s' }}
+                    className="product-card hover:shadow-lg transition-all duration-300 hover:-translate-y-1 bg-white border border-gray-200 animate-fade-in"
+                    style={{ animationDelay: `${index * 0.05}s` }}
                   >
                     <CardContent className="p-6 relative">
                       <div className="flex items-center justify-between">
@@ -310,11 +307,8 @@ const Products = () => {
                     .map((product, index) => (
                       <Card
                         key={index}
-                        className="product-card hover:shadow-lg transition-all duration-300 hover:-translate-y-1 bg-white border border-gray-200"
-                        data-aos="fade-up"
-                        data-aos-delay={0}
-                        data-aos-duration="400"
-                        style={{ animationDelay: '0s' }}
+                        className="product-card hover:shadow-lg transition-all duration-300 hover:-translate-y-1 bg-white border border-gray-200 animate-fade-in"
+                        style={{ animationDelay: `${index * 0.05}s` }}
                       >
                         <CardContent className="p-6 relative">
                           <div className="flex items-center justify-between">
