@@ -1,3 +1,4 @@
+
 #root {
   max-width: 1280px;
   margin: 0 auto;
@@ -185,6 +186,62 @@
   80%  { width: 100%; }
   100% { width: 0%; }
 }
+
+/* New Animated Loading Bar for Career Page */
+.animated-loading-bar {
+  width: 130px;
+  height: 6px;
+  background: #e0e0e0;
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+  margin-top: 12px;
+}
+
+@media (min-width: 640px) {
+  .animated-loading-bar {
+    margin-top: 0;
+    margin-left: 12px;
+  }
+}
+
+.loading-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #6eb9ff, #3f87ff);
+  box-shadow: 0 0 10px rgba(110, 185, 255, 0.5);
+  border-radius: inherit;
+  animation: loadPulse 2.8s ease-in-out infinite;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Shimmer effect */
+.shimmer {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.4) 50%,
+    transparent 100%
+  );
+  animation: shimmerMove 1.5s ease-in-out infinite;
+}
+
+@keyframes loadPulse {
+  0%   { width: 0%; }
+  80%  { width: 100%; }
+  100% { width: 0%; }
+}
+
+@keyframes shimmerMove {
+  0%   { transform: translateX(-100%); }
+  100% { transform: translateX(200%); }
+}
+
 .progress-wrapper {
   display: flex;
   flex-direction: row;
