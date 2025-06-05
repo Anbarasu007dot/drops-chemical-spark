@@ -145,9 +145,14 @@ const Careers = () => {
               </svg>
               <h2 className="text-2xl md:text-3xl font-semibold text-gray-800 mb-2">Our hiring plans are still under consideration.</h2>
               <p className="text-gray-600 text-lg font-normal mb-6">Please check back soon for updates on career opportunities at Drops Chemicals.</p>
-              <Button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg text-lg font-semibold shadow-md transition-all duration-300" onClick={() => alert('Job alerts coming soon!')}>
-                Stay Updated
-              </Button>
+              <div className="flex progress-wrapper sm:flex-row flex-col sm:items-center gap-3 w-full">
+                <Button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg text-lg font-semibold shadow-md transition-all duration-300" onClick={() => alert('Job alerts coming soon!')}>
+                  Stay Updated
+                </Button>
+                <span className="mt-3 sm:mt-0 flex items-center w-full sm:w-[140px] max-w-[150px] h-[6px] rounded-full bg-[#e0e0e0] overflow-hidden relative progress-bar-track">
+                  <span className="progress-bar-fill" style={{display: 'block', height: '80%', borderRadius: '10px', boxShadow: '0 0 8px rgba(110, 185, 255, 0.6)', background: 'linear-gradient(90deg, #6eb9ff, #3f87ff)', position: 'absolute', left: 0, top: 0, animation: 'infiniteProgress 2.5s ease-in-out infinite'}}></span>
+                </span>
+              </div>
             </div>
           </div>
         </div>

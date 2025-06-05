@@ -143,20 +143,20 @@ const Contact = () => {
                 </CardContent>
               </Card>
 
-              {/* WhatsApp Contact - styled as other cards with more visible effects */}
+              {/* Business Hours Card placed below the form */}
               <div className="mt-8">
-                <Card className="transition-all duration-300 hover:shadow-2xl hover:scale-[1.03] border border-transparent hover:border-green-500">
+                <Card className="transition-all duration-300 hover:shadow-2xl hover:scale-[1.03] border border-transparent hover:border-purple-500">
                   <CardContent className="p-6">
-                    <div className="flex items-center space-x-4">
-                      <div className="w-12 h-12 bg-green-600 rounded-full flex items-center justify-center">
-                        <MessageSquare className="w-6 h-6 text-white" />
+                    <div className="flex items-start space-x-4">
+                      <div className="flex-shrink-0">
+                        <Clock className="w-6 h-6 text-purple-600" />
                       </div>
                       <div>
-                        <h3 className="text-lg font-bold mb-1">WhatsApp</h3>
-                        <p className="text-gray-600 mb-3">Get instant support on WhatsApp</p>
-                        <Button className="bg-green-600 hover:bg-green-700">
-                          Chat with us
-                        </Button>
+                        <h3 className="text-lg font-bold mb-2">Business Hours</h3>
+                        <div className="space-y-1">
+                          <p className="text-gray-600">Monday to Saturday:</p>
+                          <p className="text-gray-600">9:00 AM to 8:00 PM</p>
+                        </div>
                       </div>
                     </div>
                   </CardContent>
@@ -166,14 +166,13 @@ const Contact = () => {
 
             {/* Contact Information */}
             <div className="space-y-8">
-              {contactInfo.map((info, index) => (
+              {contactInfo.filter(info => info.title !== 'Business Hours').map((info, index) => (
                 <Card key={index} className={
                   `transition-all duration-300 hover:shadow-2xl hover:scale-[1.03] border border-transparent ` +
                   (info.title === 'Corporate Office' ? 'hover:border-blue-400 ' :
                    info.title === 'Manufacturing Unit' ? 'hover:border-blue-400 ' :
                    info.title === 'Phone' ? 'hover:border-green-500 ' :
                    info.title === 'Email' ? 'hover:border-red-500 ' :
-                   info.title === 'Business Hours' ? 'hover:border-purple-500 ' :
                    '')
                 }>
                   <CardContent className="p-6">

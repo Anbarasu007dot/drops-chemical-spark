@@ -7,6 +7,9 @@ import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
 import { ChemicalElements } from "@/components/ChemicalElements";
 import { FloatingMolecules } from "@/components/FloatingMolecules";
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+import { Link } from "react-router-dom";
 
 const Products = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -19,6 +22,11 @@ const Products = () => {
     if (category) {
       setSelectedCategory(category);
     }
+  }, []);
+
+  // Initialize AOS animation
+  useEffect(() => {
+    AOS.init({ duration: 400, once: true });
   }, []);
 
   // Category background images
@@ -236,15 +244,18 @@ const Products = () => {
               
               <div className="max-w-4xl mx-auto space-y-4">
                 {getAllProductsAlphabetically().map((product, index) => (
-                  <Card 
+                  <Card
                     key={index}
-                    className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-1 bg-white border border-gray-200"
-                    style={{ animationDelay: `${index * 0.02}s` }}
+                    className="product-card hover:shadow-lg transition-all duration-300 hover:-translate-y-1 bg-white border border-gray-200"
+                    data-aos="fade-up"
+                    data-aos-delay={0}
+                    data-aos-duration="400"
+                    style={{ animationDelay: '0s' }}
                   >
-                    <CardContent className="p-6">
+                    <CardContent className="p-6 relative">
                       <div className="flex items-center justify-between">
                         <div className="flex-1">
-                          <h3 className="text-lg font-semibold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors" style={{ color: 'var(--brand-dark-blue)' }}>
+                          <h3 className="text-lg font-semibold text-gray-900 mb-2 hover:text-blue-600 transition-colors" style={{ color: 'var(--brand-dark-blue)' }}>
                             {product}
                           </h3>
                           <p className="text-sm text-gray-600">
@@ -253,21 +264,32 @@ const Products = () => {
                         </div>
                         
                         <div className="flex gap-2 ml-4">
+                          <Link to="/contact" style={{ textDecoration: 'none' }}>
+                            <Button
+                              size="sm"
+                              className="professional-button animated-btn"
+                            >
+                              <MessageSquare className="w-4 h-4 mr-1" />
+                              Quote
+                            </Button>
+                          </Link>
                           <Button
                             size="sm"
-                            className="professional-button"
-                          >
-                            <MessageSquare className="w-4 h-4 mr-1" />
-                            Quote
-                          </Button>
-                          <Button
-                            size="sm"
-                            className="bg-blue-200 hover:bg-blue-300 text-blue-900 font-bold shadow-md border-0 px-4 py-2 rounded-lg flex items-center gap-1"
+                            className="bg-blue-200 hover:bg-blue-300 text-blue-900 font-bold shadow-md border-0 px-4 py-2 rounded-lg flex items-center gap-1 animated-btn"
                             style={{ fontFamily: 'Montserrat, Arial, sans-serif', letterSpacing: '0.05em' }}
                           >
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" className="w-4 h-4 mr-1" stroke="currentColor"><path d="M4 17V7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v10" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/><rect x="9" y="9" width="6" height="6" rx="1" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
-                            MSDS
+                            Request MSDS
                           </Button>
+                        </div>
+                      </div>
+                      <div className="overlay absolute left-0 right-0 bottom-0 h-full w-full bg-blue-900/90 rounded-2xl flex flex-col items-center justify-center opacity-0 pointer-events-none transition-all duration-500 ease-out" style={{transform: 'translateY(100%)'}}>
+                        <div className="text-white text-center px-4">
+                          <p className="mb-2 font-semibold">More Info</p>
+                          <div className="flex justify-center gap-3">
+                            <span className="inline-block"><MessageSquare className="w-5 h-5" /></span>
+                            <span className="inline-block"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" className="w-5 h-5" stroke="currentColor"><path d="M4 17V7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v10" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/><rect x="9" y="9" width="6" height="6" rx="1" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg></span>
+                          </div>
                         </div>
                       </div>
                     </CardContent>
@@ -286,38 +308,51 @@ const Products = () => {
                       product.toLowerCase().includes(searchTerm.toLowerCase())
                     )
                     .map((product, index) => (
-                      <Card 
+                      <Card
                         key={index}
-                        className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-1 bg-white border border-gray-200"
-                        style={{ animationDelay: `${index * 0.02}s` }}
+                        className="product-card hover:shadow-lg transition-all duration-300 hover:-translate-y-1 bg-white border border-gray-200"
+                        data-aos="fade-up"
+                        data-aos-delay={0}
+                        data-aos-duration="400"
+                        style={{ animationDelay: '0s' }}
                       >
-                        <CardContent className="p-6">
+                        <CardContent className="p-6 relative">
                           <div className="flex items-center justify-between">
                             <div className="flex-1">
-                              <h3 className="text-lg font-semibold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors" style={{ color: 'var(--brand-dark-blue)' }}>
+                              <h3 className="text-lg font-semibold text-gray-900 mb-2 hover:text-blue-600 transition-colors" style={{ color: 'var(--brand-dark-blue)' }}>
                                 {product}
                               </h3>
                               <p className="text-sm text-gray-600">
                                 High-quality chemical solution for industrial applications
                               </p>
                             </div>
-                            
                             <div className="flex gap-2 ml-4">
+                              <Link to="/contact" style={{ textDecoration: 'none' }}>
+                                <Button
+                                  size="sm"
+                                  className="professional-button animated-btn"
+                                >
+                                  <MessageSquare className="w-4 h-4 mr-1" />
+                                  Quote
+                                </Button>
+                              </Link>
                               <Button
                                 size="sm"
-                                className="professional-button"
-                              >
-                                <MessageSquare className="w-4 h-4 mr-1" />
-                                Quote
-                              </Button>
-                              <Button
-                                size="sm"
-                                className="bg-blue-200 hover:bg-blue-300 text-blue-900 font-bold shadow-md border-0 px-4 py-2 rounded-lg flex items-center gap-1"
+                                className="bg-blue-200 hover:bg-blue-300 text-blue-900 font-bold shadow-md border-0 px-4 py-2 rounded-lg flex items-center gap-1 animated-btn"
                                 style={{ fontFamily: 'Montserrat, Arial, sans-serif', letterSpacing: '0.05em' }}
                               >
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" className="w-4 h-4 mr-1" stroke="currentColor"><path d="M4 17V7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v10" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/><rect x="9" y="9" width="6" height="6" rx="1" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
-                                MSDS
+                                Request MSDS
                               </Button>
+                            </div>
+                          </div>
+                          <div className="overlay absolute left-0 right-0 bottom-0 h-full w-full bg-blue-900/90 rounded-2xl flex flex-col items-center justify-center opacity-0 pointer-events-none transition-all duration-500 ease-out" style={{transform: 'translateY(100%)'}}>
+                            <div className="text-white text-center px-4">
+                              <p className="mb-2 font-semibold">More Info</p>
+                              <div className="flex justify-center gap-3">
+                                <span className="inline-block"><MessageSquare className="w-5 h-5" /></span>
+                                <span className="inline-block"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" className="w-5 h-5" stroke="currentColor"><path d="M4 17V7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v10" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/><rect x="9" y="9" width="6" height="6" rx="1" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg></span>
+                              </div>
                             </div>
                           </div>
                         </CardContent>
@@ -329,7 +364,6 @@ const Products = () => {
           )}
         </div>
       </section>
-
       <Footer />
     </div>
   );

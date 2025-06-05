@@ -76,7 +76,7 @@ export const QuickContact = () => {
     {
       icon: Clock,
       title: "Business Hours",
-      details: ["Monday - Saturday: 9:00 AM - 6:00 PM", "Sunday: Closed"],
+      details: ["Monday - Saturday: 9:00 AM - 8:00 PM", "Sunday: Closed"],
       color: "from-purple-500 to-purple-600"
     }
   ];
