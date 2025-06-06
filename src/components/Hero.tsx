@@ -16,7 +16,6 @@ function useTypingEffect(text: string, speed = 60) {
     if (!text) return;
     const interval = setInterval(() => {
       setDisplayed((prev) => {
-        // Only add next character if it exists
         if (i < text.length) {
           const next = prev + text[i];
           i++;
@@ -44,20 +43,6 @@ export const Hero = () => {
     "https://www.caia.co.za/wp-content/uploads/2025/05/CAIA-OG.jpg"
   ];
   const [bgIndex, setBgIndex] = useState(0);
-  const [bgLoaded, setBgLoaded] = useState(Array(bgImages.length).fill(false));
-
-  // Preload images
-  useEffect(() => {
-    bgImages.forEach((src, idx) => {
-      const img = new window.Image();
-      img.src = src;
-      img.onload = () => setBgLoaded((prev) => {
-        const updated = [...prev];
-        updated[idx] = true;
-        return updated;
-      });
-    });
-  }, [bgImages]);
 
   // Cycle background images
   useEffect(() => {
@@ -104,10 +89,6 @@ export const Hero = () => {
       <ChemicalElements />
       <FloatingMolecules />
 
-      {/* Subtle Background Pattern */}
-      {/* <div className="absolute inset-0 subtle-pattern opacity-20"></div> */}
-      {/* <div className="absolute inset-0 molecular-bg"></div> */}
-
       {/* Professional Content */}
       <div className="relative z-10 container mx-auto px-4 py-20 text-center">
         <div className="max-w-4xl mx-auto">
@@ -115,16 +96,16 @@ export const Hero = () => {
             <h1 className="professional-heading mb-6 text-white">
               Expert Manufacturing
               <span className="block mt-2">
-  <span className="inline-block">
-    &nbsp;&amp;&nbsp;
-    <span aria-label="Supply Excellence" className="inline-block relative z-20 text-white">
-      <span className="supply-typing-text">
-        {supplyText}
-      </span>
-      <span className="type-cursor">|</span>
-    </span>
-  </span>
-</span>
+                <span className="inline-block">
+                  &nbsp;&&nbsp;
+                  <span aria-label="Supply Excellence" className="inline-block relative z-20 text-white">
+                    <span className="supply-typing-text">
+                      {supplyText}
+                    </span>
+                    <span className="type-cursor">|</span>
+                  </span>
+                </span>
+              </span>
             </h1>
 
             <p className="text-xl md:text-2xl text-blue-100 mb-10 max-w-3xl mx-auto leading-relaxed font-light">
@@ -142,7 +123,6 @@ export const Hero = () => {
                 </Link>
               </Button>
 
-              {/* Make the entire button clickable by wrapping Button with Link */}
               <Link to="/about" className="inline-block">
                 <Button
                   variant="outline"
@@ -192,29 +172,3 @@ export const Hero = () => {
     </section>
   );
 };
-
-// Add CSS for blinking cursor
-// .type-cursor {
-//   display: inline-block;
-//   width: 8px;
-//   height: 24px;
-//   background-color: white;
-//   margin-left: 2px;
-//   animation: blink 1s step-end infinite;
-// }
-
-// @keyframes blink {
-//   0%, 100% { opacity: 1; }
-//   50% { opacity: 0; }
-// }
-
-/* Add to the bottom of the file or in your CSS:
-.supply-typing-text {
-  display: inline-block;
-  animation: supply-fade-in 1.2s cubic-bezier(0.4,0,0.2,1) both;
-}
-@keyframes supply-fade-in {
-  from { opacity: 0; transform: translateY(16px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-*/

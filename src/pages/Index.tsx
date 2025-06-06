@@ -1,7 +1,4 @@
-
-import { useState, useEffect } from "react";
 import { Hero } from "@/components/Hero";
-import { Expertise } from "@/components/Expertise";
 import { FeaturedProducts } from "@/components/FeaturedProducts";
 import { WhyChooseUs } from "@/components/WhyChooseUs";
 import { Testimonials } from "@/components/Testimonials";
@@ -17,7 +14,6 @@ const Index = () => {
       <Header />
       <main>
         <Hero />
-        <Expertise />
         <FeaturedProducts />
         <WhyChooseUs />
         <Testimonials />
