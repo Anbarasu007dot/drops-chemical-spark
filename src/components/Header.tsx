@@ -89,8 +89,9 @@ export const Header = () => {
                         {item.dropdownItems?.map((dropdownItem, idx) => (
                           <Link
                             key={idx}
-                            to={`/products?category=${dropdownItem.id}`}
+                            to={dropdownItem.id === 'all' ? '/products' : `/products?category=${dropdownItem.id}`}
                             className="premium-dropdown-item"
+                            onClick={() => setOpenDropdownIndex(null)}
                           >
                             {dropdownItem.name}
                           </Link>
@@ -176,9 +177,12 @@ export const Header = () => {
                         {item.dropdownItems?.map((dropdownItem, idx) => (
                           <Link
                             key={idx}
-                            to={`/products?category=${dropdownItem.id}`}
+                            to={dropdownItem.id === 'all' ? '/products' : `/products?category=${dropdownItem.id}`}
                             className="block text-gray-700 px-4 py-2 rounded hover:bg-blue-50"
-                            onClick={() => { setIsMenuOpen(false); setOpenDropdownIndex(null); }}
+                            onClick={() => { 
+                              setIsMenuOpen(false); 
+                              setOpenDropdownIndex(null); 
+                            }}
                             style={{ color: 'var(--brand-dark-blue)' }}
                           >
                             {dropdownItem.name}
@@ -192,7 +196,10 @@ export const Header = () => {
                     key={index}
                     to={item.href}
                     className="text-gray-700 hover:text-transparent hover:bg-gradient-to-r hover:from-blue-600 hover:to-purple-600 hover:bg-clip-text transition-all duration-300 font-medium px-4 py-2 rounded-lg hover:bg-gray-50"
-                    onClick={() => { setIsMenuOpen(false); setOpenDropdownIndex(null); }}
+                    onClick={() => { 
+                      setIsMenuOpen(false); 
+                      setOpenDropdownIndex(null); 
+                    }}
                     style={{ color: 'var(--brand-dark-blue)' }}
                   >
                     {item.name}

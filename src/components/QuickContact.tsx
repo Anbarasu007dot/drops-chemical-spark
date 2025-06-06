@@ -4,14 +4,13 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent } from "@/components/ui/card";
-import { useToast } from "@/hooks/use-toast";
+import { toast } from "sonner";
 import { FloatingMolecules } from "@/components/FloatingMolecules";
 
 export const QuickContact = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
-  const { toast } = useToast();
 
   const [formData, setFormData] = useState({
     name: "",
@@ -57,13 +56,18 @@ export const QuickContact = () => {
         },
         body: JSON.stringify(payload),
       });
-      const result = await res.text();
-      alert(result);
+      
+      if (res.ok) {
+        toast.success("Message sent successfully! We'll get back to you soon.");
+        setFormData({ name: '', email: '', subject: '', message: '' });
+      } else {
+        toast.error("Failed to send message. Please try again.");
+      }
     } catch (error) {
-      alert('Failed to send email. Please try again.');
+      console.error('Error sending email:', error);
+      toast.error("Failed to send message. Please try again.");
     } finally {
       setIsSubmitting(false);
-      setFormData({ name: '', email: '', subject: '', message: '' });
     }
   };
 

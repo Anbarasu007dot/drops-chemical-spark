@@ -13,7 +13,6 @@ import Feedback from "./pages/Feedback";
 import AdminLogin from "./pages/AdminLogin";
 import AdminDashboard from "./pages/AdminDashboard";
 import NotFound from "./pages/NotFound";
-import ServiceRequestForm from "./components/ServiceRequestForm";
 
 const queryClient = new QueryClient();
 
@@ -36,10 +35,6 @@ const App = () => (
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
-        <div>
-          <h1>Request a Service</h1>
-          <ServiceRequestForm />
-        </div>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>

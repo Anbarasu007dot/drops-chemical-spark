@@ -15,9 +15,12 @@ const Contact = () => {
   const [company, setCompany] = useState('');
   const [subject, setSubject] = useState('');
   const [message, setMessage] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleServiceSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsSubmitting(true);
+    
     const formData = {
       formType: 'service-request',
       name,
@@ -27,6 +30,7 @@ const Contact = () => {
       subject,
       message,
     };
+    
     try {
       const res = await fetch('http://localhost:5000/send-email', {
         method: 'POST',
@@ -35,10 +39,24 @@ const Contact = () => {
         },
         body: JSON.stringify(formData),
       });
-      const result = await res.text();
-      alert(result);
+      
+      if (res.ok) {
+        toast.success("Message sent successfully! We'll get back to you soon.");
+        // Clear form
+        setName('');
+        setEmail('');
+        setPhone('');
+        setCompany('');
+        setSubject('');
+        setMessage('');
+      } else {
+        toast.error("Failed to send message. Please try again.");
+      }
     } catch (error) {
-      alert('Failed to send service request.');
+      console.error('Error sending email:', error);
+      toast.error("Failed to send message. Please try again.");
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -65,7 +83,6 @@ const Contact = () => {
       icon: <Phone className="w-6 h-6 text-green-600" />,
       title: "Phone",
       content: [
-        
         "+91 96775 22201"
       ]
     },
@@ -132,26 +149,52 @@ const Contact = () => {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div>
                         <label className="block text-sm font-medium mb-2">Name *</label>
-                        <Input placeholder="Your full name" required value={name} onChange={e => setName(e.target.value)} />
+                        <Input 
+                          placeholder="Your full name" 
+                          required 
+                          value={name} 
+                          onChange={e => setName(e.target.value)} 
+                        />
                       </div>
                       <div>
                         <label className="block text-sm font-medium mb-2">Email *</label>
-                        <Input type="email" placeholder="your.email@example.com" required value={email} onChange={e => setEmail(e.target.value)} />
+                        <Input 
+                          type="email" 
+                          placeholder="your.email@example.com" 
+                          required 
+                          value={email} 
+                          onChange={e => setEmail(e.target.value)} 
+                        />
                       </div>
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div>
                         <label className="block text-sm font-medium mb-2">Phone *</label>
-                        <Input placeholder="+91 XXXXX XXXXX" required value={phone} onChange={e => setPhone(e.target.value)} />
+                        <Input 
+                          placeholder="+91 XXXXX XXXXX" 
+                          required 
+                          value={phone} 
+                          onChange={e => setPhone(e.target.value)} 
+                        />
                       </div>
                       <div>
                         <label className="block text-sm font-medium mb-2">Company Name *</label>
-                        <Input placeholder="Your company name" required value={company} onChange={e => setCompany(e.target.value)} />
+                        <Input 
+                          placeholder="Your company name" 
+                          required 
+                          value={company} 
+                          onChange={e => setCompany(e.target.value)} 
+                        />
                       </div>
                     </div>
                     <div>
                       <label className="block text-sm font-medium mb-2">Subject *</label>
-                      <Input placeholder="How can we help you?" required value={subject} onChange={e => setSubject(e.target.value)} />
+                      <Input 
+                        placeholder="How can we help you?" 
+                        required 
+                        value={subject} 
+                        onChange={e => setSubject(e.target.value)} 
+                      />
                     </div>
                     <div>
                       <label className="block text-sm font-medium mb-2">Message *</label>
@@ -163,8 +206,13 @@ const Contact = () => {
                         onChange={e => setMessage(e.target.value)}
                       />
                     </div>
-                    <Button type="submit" className="w-full bg-blue-600 hover:bg-blue-700">
-                      Send Message
+                    
+                    <Button 
+                      type="submit" 
+                      className="w-full bg-blue-600 hover:bg-blue-700"
+                      disabled={isSubmitting}
+                    >
+                      {isSubmitting ? "Sending..." : "Send Message"}
                     </Button>
                   </form>
                 </CardContent>
