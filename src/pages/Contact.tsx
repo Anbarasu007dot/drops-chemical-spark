@@ -9,9 +9,37 @@ import { toast } from "sonner";
 import React, { useState } from "react";
 
 const Contact = () => {
-  const handleSubmit = (e: React.FormEvent) => {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
+  const [company, setCompany] = useState('');
+  const [subject, setSubject] = useState('');
+  const [message, setMessage] = useState('');
+
+  const handleServiceSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    toast.success("Message sent successfully! We'll get back to you soon.");
+    const formData = {
+      formType: 'service-request',
+      name,
+      email,
+      phone,
+      company,
+      subject,
+      message,
+    };
+    try {
+      const res = await fetch('http://localhost:5000/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+      const result = await res.text();
+      alert(result);
+    } catch (error) {
+      alert('Failed to send service request.');
+    }
   };
 
   const contactInfo = [
@@ -67,13 +95,14 @@ const Contact = () => {
       <section
         className="relative text-white py-20"
         style={{
-          backgroundImage: ` url('https://t4.ftcdn.net/jpg/03/37/96/33/360_F_337963325_EJuPjWslX3vAFxJ59L3y1cm6IsSfo07s.jpg')`,
+          backgroundImage: ` url('https://b2bblogassets.airtel.in/wp-content/uploads/2022/11/sip-calling.jpg')`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
         }}
       >
-        <div className="container mx-auto px-4">
+        <div className="absolute inset-0 bg-black/50 z-0" />
+        <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-4xl md:text-6xl font-extrabold mb-6 animate-fade-in text-white tracking-wide drop-shadow-lg" style={{ fontFamily: 'Montserrat, Arial, sans-serif' }}>
               Get In Touch
@@ -99,43 +128,41 @@ const Contact = () => {
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <form onSubmit={handleSubmit} className="space-y-6">
+                  <form onSubmit={handleServiceSubmit} className="space-y-6">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div>
                         <label className="block text-sm font-medium mb-2">Name *</label>
-                        <Input placeholder="Your full name" required />
+                        <Input placeholder="Your full name" required value={name} onChange={e => setName(e.target.value)} />
                       </div>
                       <div>
                         <label className="block text-sm font-medium mb-2">Email *</label>
-                        <Input type="email" placeholder="your.email@example.com" required />
+                        <Input type="email" placeholder="your.email@example.com" required value={email} onChange={e => setEmail(e.target.value)} />
                       </div>
                     </div>
-                    
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div>
-                        <label className="block text-sm font-medium mb-2">Phone</label>
-                        <Input placeholder="+91 XXXXX XXXXX" />
+                        <label className="block text-sm font-medium mb-2">Phone *</label>
+                        <Input placeholder="+91 XXXXX XXXXX" required value={phone} onChange={e => setPhone(e.target.value)} />
                       </div>
                       <div>
-                        <label className="block text-sm font-medium mb-2">Company Name</label>
-                        <Input placeholder="Your company name" />
+                        <label className="block text-sm font-medium mb-2">Company Name *</label>
+                        <Input placeholder="Your company name" required value={company} onChange={e => setCompany(e.target.value)} />
                       </div>
                     </div>
-                    
                     <div>
                       <label className="block text-sm font-medium mb-2">Subject *</label>
-                      <Input placeholder="How can we help you?" required />
+                      <Input placeholder="How can we help you?" required value={subject} onChange={e => setSubject(e.target.value)} />
                     </div>
-                    
                     <div>
                       <label className="block text-sm font-medium mb-2">Message *</label>
                       <Textarea
                         placeholder="Tell us about your requirements, questions, or how we can assist you..."
                         rows={6}
                         required
+                        value={message}
+                        onChange={e => setMessage(e.target.value)}
                       />
                     </div>
-                    
                     <Button type="submit" className="w-full bg-blue-600 hover:bg-blue-700">
                       Send Message
                     </Button>
