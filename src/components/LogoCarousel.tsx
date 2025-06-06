@@ -29,6 +29,18 @@ export const LogoCarousel = () => {
     {
       src: "https://www.brushexpert.com/getimage/directory%20-%20logos/zahoransky%20logo.jpg/",
       alt: "Zahoransky India"
+    },
+    {
+      src: "https://logos-world.net/wp-content/uploads/2023/08/Propel-Water-Logo.png",
+      alt: "Propel Water"
+    },
+    {
+      src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSa_e8SzShMrMSw8E60BXddEYAqo1_Lhmnlnw&s",
+      alt: "Client Logo"
+    },
+    {
+      src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZ13x52ghbLcWO7_b2EaW3Yy-NJ6Anqlzerg&s",
+      alt: "Client Logo"
     }
   ];
 
@@ -38,7 +50,7 @@ export const LogoCarousel = () => {
         <h2 className="text-4xl md:text-5xl font-extrabold mb-4 text-[#18345c] tracking-wide" style={{ fontFamily: 'Montserrat, Arial, sans-serif' }}>
           Trusted by Top Companies
         </h2>
-        <p className="text-base italic text-slate-500 mb-2 font-light">We’re proud to have earned the trust of these organizations.</p>
+        <p className="text-base italic text-slate-500 mb-2 font-light">We're proud to have earned the trust of these organizations.</p>
         <p className="text-lg text-slate-600 max-w-3xl mx-auto mb-10">
           Partnering with renowned companies across Tamil Nadu and beyond
         </p>
@@ -69,15 +81,6 @@ export const LogoCarousel = () => {
           </div>
         </div>
       </div>
-      {/* Carousel animation CSS (add to index.css):
-      .animate-logo-scroll {
-        animation: logo-scroll 32s linear infinite;
-      }
-      @keyframes logo-scroll {
-        0% { transform: translateX(0); }
-        100% { transform: translateX(-50%); }
-      }
-      */}
     </section>
   );
 };
