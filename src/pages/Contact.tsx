@@ -26,54 +26,55 @@ const Contact = () => {
     });
   };
 
-  const handleServiceSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
-    // Validate required fields
-    if (!formData.name || !formData.email || !formData.phone || !formData.company || !formData.subject || !formData.message) {
-      toast.error("Please fill in all required fields.");
-      return;
+
+    // If you want to use this as a contact form, change formType to 'contact' and map name to fullName
+    const isContact = false; // set to true if this is a contact form
+    let payload;
+    if (isContact) {
+      if (!formData.name || !formData.email || !formData.subject || !formData.message) {
+        toast.error("Please fill in all required fields.");
+        return;
+      }
+      payload = {
+        formType: 'contact',
+        fullName: formData.name,
+        email: formData.email,
+        subject: formData.subject,
+        message: formData.message,
+      };
+    } else {
+      if (!formData.name || !formData.email || !formData.phone || !formData.company || !formData.subject || !formData.message) {
+        toast.error("Please fill in all required fields.");
+        return;
+      }
+      payload = {
+        formType: 'service-request',
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        company: formData.company,
+        subject: formData.subject,
+        message: formData.message,
+      };
     }
 
     setIsSubmitting(true);
-    
-    const payload = {
-      formType: 'service-request',
-      name: formData.name,
-      email: formData.email,
-      phone: formData.phone,
-      company: formData.company,
-      subject: formData.subject,
-      message: formData.message,
-    };
-    
     try {
       const res = await fetch('http://localhost:5000/send-email', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(payload),
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ formType: payload.formType, formData: payload }),
       });
-      
       if (res.ok) {
-        toast.success("Message sent successfully! We'll get back to you soon.");
-        // Clear form
-        setFormData({
-          name: '',
-          email: '',
-          phone: '',
-          company: '',
-          subject: '',
-          message: ''
-        });
+        toast.success("Email sent successfully!");
+        setFormData({ name: '', email: '', phone: '', company: '', subject: '', message: '' });
       } else {
         const errorText = await res.text();
-        console.error('Server error:', errorText);
-        toast.error("Failed to send message. Please try again.");
+        toast.error("Failed to send message. " + errorText);
       }
     } catch (error) {
-      console.error('Error sending email:', error);
       toast.error("Failed to send message. Please check your connection and try again.");
     } finally {
       setIsSubmitting(false);
@@ -165,7 +166,7 @@ const Contact = () => {
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <form onSubmit={handleServiceSubmit} className="space-y-6">
+                  <form onSubmit={handleSubmit} className="space-y-6">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div>
                         <label className="block text-sm font-medium mb-2">Name *</label>
