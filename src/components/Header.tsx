@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input";
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
-  const [isProductsOpen, setIsProductsOpen] = useState(false);
+  const [openDropdownIndex, setOpenDropdownIndex] = useState<number | null>(null);
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -68,8 +68,8 @@ export const Header = () => {
                 {item.hasDropdown ? (
                   <div
                     className="relative"
-                    onMouseEnter={() => setIsProductsOpen(true)}
-                    onMouseLeave={() => setIsProductsOpen(false)}
+                    onMouseEnter={() => setOpenDropdownIndex(index)}
+                    onMouseLeave={() => setOpenDropdownIndex(null)}
                   >
                     <Link
                       to={item.href}
@@ -82,7 +82,7 @@ export const Header = () => {
                     </Link>
                     
                     {/* Enhanced Dropdown */}
-                    <div className={`absolute top-full left-0 mt-2 w-80 premium-dropdown ${isProductsOpen ? 'open' : ''}`}>
+                    <div className={`absolute top-full left-0 mt-2 w-80 premium-dropdown ${openDropdownIndex === index ? 'open' : ''}`}>
                       <h3 className="text-lg font-semibold mb-4" style={{ color: 'var(--brand-dark-blue)' }}>Product Categories</h3>
                       <div className="grid grid-cols-1 gap-2">
                         {item.dropdownItems?.map((dropdownItem, idx) => (
@@ -160,15 +160,43 @@ export const Header = () => {
           <div className="lg:hidden py-4 border-t border-gray-200 animate-fade-in professional-card rounded-b-xl mt-2">
             <nav className="flex flex-col space-y-4">
               {navItems.map((item, index) => (
-                <Link
-                  key={index}
-                  to={item.href}
-                  className="text-gray-700 hover:text-transparent hover:bg-gradient-to-r hover:from-blue-600 hover:to-purple-600 hover:bg-clip-text transition-all duration-300 font-medium px-4 py-2 rounded-lg hover:bg-gray-50"
-                  onClick={() => setIsMenuOpen(false)}
-                  style={{ color: 'var(--brand-dark-blue)' }}
-                >
-                  {item.name}
-                </Link>
+                item.hasDropdown ? (
+                  <div key={index} className="relative">
+                    <button
+                      className="w-full text-left text-gray-700 font-medium px-4 py-2 rounded-lg hover:bg-gray-50 flex items-center justify-between"
+                      onClick={() => setOpenDropdownIndex(openDropdownIndex === index ? null : index)}
+                      style={{ color: 'var(--brand-dark-blue)' }}
+                    >
+                      <span>{item.name}</span>
+                      <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${openDropdownIndex === index ? 'rotate-180' : ''}`} />
+                    </button>
+                    {openDropdownIndex === index && (
+                      <div className="pl-4 mt-2 flex flex-col gap-1">
+                        {item.dropdownItems?.map((dropdownItem, idx) => (
+                          <Link
+                            key={idx}
+                            to={`/products?category=${dropdownItem.id}`}
+                            className="block text-gray-700 px-4 py-2 rounded hover:bg-blue-50"
+                            onClick={() => { setIsMenuOpen(false); setOpenDropdownIndex(null); }}
+                            style={{ color: 'var(--brand-dark-blue)' }}
+                          >
+                            {dropdownItem.name}
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                ) : (
+                  <Link
+                    key={index}
+                    to={item.href}
+                    className="text-gray-700 hover:text-transparent hover:bg-gradient-to-r hover:from-blue-600 hover:to-purple-600 hover:bg-clip-text transition-all duration-300 font-medium px-4 py-2 rounded-lg hover:bg-gray-50"
+                    onClick={() => { setIsMenuOpen(false); setOpenDropdownIndex(null); }}
+                    style={{ color: 'var(--brand-dark-blue)' }}
+                  >
+                    {item.name}
+                  </Link>
+                )
               ))}
             </nav>
           </div>

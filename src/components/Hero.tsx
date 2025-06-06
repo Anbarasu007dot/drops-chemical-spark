@@ -38,9 +38,9 @@ export const Hero = () => {
 
   // Dynamic background slideshow logic
   const bgImages = [
-    "https://housing.com/news/wp-content/uploads/2023/10/chemical-industries.jpg",
-    "https://new.abb.com/images/librariesprovider87/drives-global/drives-frontpage-segment-chemical.jpg?sfvrsn=4a3a910a_0",
     "https://d12oja0ew7x0i8.cloudfront.net/images/Article_Images/ImageForArticle_21307_164499491645378.png",
+    "https://new.abb.com/images/librariesprovider87/drives-global/drives-frontpage-segment-chemical.jpg?sfvrsn=4a3a910a_0",
+    "https://indiaforensic.com/certifications/wp-content/uploads/2017/01/agriculture.jpg",
     "https://www.caia.co.za/wp-content/uploads/2025/05/CAIA-OG.jpg"
   ];
   const [bgIndex, setBgIndex] = useState(0);

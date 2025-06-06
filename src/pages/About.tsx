@@ -89,7 +89,7 @@ const About = () => {
       
       {/* Enhanced Hero Section */}
       <section className="relative py-20 parallax-bg" style={{
-         backgroundImage: "linear-gradient(rgba(16,23,54,0.65), rgba(16,23,54,0.65)), url('https://www.tus.ac.jp/en/assets/img/fac/ko1/bg_ind.jpg')",
+         backgroundImage: "linear-gradient(rgba(16,23,54,0.65), rgba(16,23,54,0.65)), url('https://snu.edu.in/site/assets/files/6903/teamwork-dim-modern-lab.1600x0.webp')",
          backgroundSize: "cover",
          backgroundPosition: "center"
       }}>

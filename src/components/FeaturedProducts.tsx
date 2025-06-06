@@ -112,61 +112,78 @@ export const FeaturedProducts = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
-            {products.map((product, index) => (
-              <Card 
-                key={index}
-                className={`interactive-card overflow-visible transition-all duration-500 rounded-2xl ${
-                  isVisible ? 'classic-scale-in' : 'opacity-0 scale-95'
-                } ${hoveredCard === index ? '' : ''} ${selectedProduct === product.category ? 'ring-4 ring-blue-400 scale-105 shadow-[0_0_32px_8px_rgba(37,99,235,0.35)] z-20' : ''}`}
-                style={{ animationDelay: `${index * 0.2}s` }}
-                onMouseEnter={() => setHoveredCard(index)}
-                onMouseLeave={() => setHoveredCard(null)}
-                onMouseDown={() => setSelectedProduct(product.category)}
-                onMouseUp={() => setTimeout(() => setSelectedProduct(''), 200)}
-              >
-                <CardContent className="p-0 flex flex-col h-full">
-                  <div className="relative flex flex-col h-full">
-                    <div className="h-48 bg-cover bg-center relative overflow-hidden rounded-t-2xl"
-                      style={{ backgroundImage: `url('${product.image}')` }}
-                    >
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent rounded-t-2xl" />
-                      <div className={`absolute top-6 right-6 px-4 py-2 rounded-full bg-white/90 ${product.color} text-sm font-semibold shadow-sm`}>
-                        {product.productCount} Products
-                      </div>
-                    </div>
-                    <div className="p-6 flex flex-col flex-1 relative">
-                      <h3 className="text-2xl font-semibold mb-2 transition-colors duration-300" style={{ color: 'var(--brand-dark-blue)' }}>
-                        {product.category}
-                      </h3>
-                      <p className="text-slate-600 leading-relaxed text-sm mb-0.5">
-                        {product.description}
-                      </p>
-                      <div
-                        className={`w-full transition-all duration-700 ease-[cubic-bezier(0.4,0,0.2,1)] overflow-hidden ${hoveredCard === index ? 'max-h-40 opacity-100 mt-0' : 'max-h-0 opacity-0 mt-0'}`.replace('ease-[cubic-bezier\(0.4,0,0.2,1\)]', 'ease-[cubic-bezier(0.4,0,0.2,1)]')}
-                        style={{ zIndex: 10 }}
+            {products.map((product, index) => {
+              const productUrl = `/products?category=${product.categoryId || encodeURIComponent(product.category)}`;
+              return (
+                <Card 
+                  key={index}
+                  className={`interactive-card overflow-visible transition-all duration-500 rounded-2xl ${
+                    isVisible ? 'classic-scale-in' : 'opacity-0 scale-95'
+                  } ${hoveredCard === index ? '' : ''} ${selectedProduct === product.category ? 'ring-4 ring-blue-400 scale-105 shadow-[0_0_32px_8px_rgba(37,99,235,0.35)] z-20' : ''}`}
+                  style={{ animationDelay: `${index * 0.2}s`, cursor: 'pointer' }}
+                  onMouseEnter={() => setHoveredCard(index)}
+                  onMouseLeave={() => setHoveredCard(null)}
+                  onMouseDown={() => setSelectedProduct(product.category)}
+                  onMouseUp={() => setTimeout(() => setSelectedProduct(''), 200)}
+                  onClick={e => {
+                    // Prevent click if a button or link inside is clicked
+                    if ((e.target as HTMLElement).closest('button, a')) return;
+                    window.location.href = productUrl;
+                  }}
+                  role="link"
+                  tabIndex={0}
+                  onKeyDown={e => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      window.location.href = productUrl;
+                    }
+                  }}
+                  aria-label={`View products for ${product.category}`}
+                >
+                  <CardContent className="p-0 flex flex-col h-full">
+                    <div className="relative flex flex-col h-full">
+                      <div className="h-48 bg-cover bg-center relative overflow-hidden rounded-t-2xl"
+                        style={{ backgroundImage: `url('${product.image}')` }}
                       >
-                        <div className="bg-white/95 rounded-b-lg px-0 py-0 shadow-md">
-                          <p className="text-slate-600 leading-relaxed text-sm mb-0.5 font-normal p-0 m-0">
-                            {product.secondDescription}
-                          </p>
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent rounded-t-2xl" />
+                        <div className={`absolute top-6 right-6 px-4 py-2 rounded-full bg-white/90 ${product.color} text-sm font-semibold shadow-sm`}>
+                          {product.productCount} Products
                         </div>
                       </div>
-                      <div className="flex flex-col sm:flex-row gap-4 pt-3 mt-auto">
-                        <Button
-                          asChild
-                          className="secondary-button flex items-center justify-center px-8 py-3 rounded-xl font-semibold text-lg bg-blue-600 text-white border-2 border-blue-600 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-300 group hover:bg-blue-700 hover:border-blue-700 hover:scale-105 hover:shadow-[0_0_16px_4px_rgba(37,99,235,0.45)] shadow-[0_2px_8px_0_rgba(37,99,235,0.15)]"
+                      <div className="p-6 flex flex-col flex-1 relative">
+                        <h3 className="text-2xl font-semibold mb-2 transition-colors duration-300" style={{ color: 'var(--brand-dark-blue)' }}>
+                          {product.category}
+                        </h3>
+                        <p className="text-slate-600 leading-relaxed text-sm mb-0.5">
+                          {product.description}
+                        </p>
+                        <div
+                          className={`w-full transition-all duration-700 ease-[cubic-bezier(0.4,0,0.2,1)] overflow-hidden ${hoveredCard === index ? 'max-h-40 opacity-100 mt-0' : 'max-h-0 opacity-0 mt-0'}`.replace('ease-[cubic-bezier\(0.4,0,0.2,1\)]', 'ease-[cubic-bezier(0.4,0,0.2,1)]')}
+                          style={{ zIndex: 10 }}
                         >
-                          <Link to={`/products?category=${product.categoryId || encodeURIComponent(product.category)}`} replace={false} reloadDocument={false} className="flex items-center">
-                            <span className="mr-2 transition-transform duration-300 group-hover:translate-x-1">View Products</span>
-                            <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1 group-hover:scale-110" />
-                          </Link>
-                        </Button>
+                          <div className="bg-white/95 rounded-b-lg px-0 py-0 shadow-md">
+                            <p className="text-slate-600 leading-relaxed text-sm mb-0.5 font-normal p-0 m-0">
+                              {product.secondDescription}
+                            </p>
+                          </div>
+                        </div>
+                        <div className="flex flex-col sm:flex-row gap-4 pt-3 mt-auto">
+                          <Button
+                            asChild
+                            className="secondary-button flex items-center justify-center px-8 py-3 rounded-xl font-semibold text-lg bg-blue-600 text-white border-2 border-blue-600 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-300 group hover:bg-blue-700 hover:border-blue-700 hover:scale-105 hover:shadow-[0_0_16px_4px_rgba(37,99,235,0.45)] shadow-[0_2px_8px_0_rgba(37,99,235,0.15)]"
+                            onClick={e => e.stopPropagation()}
+                          >
+                            <Link to={productUrl} replace={false} reloadDocument={false} className="flex items-center">
+                              <span className="mr-2 transition-transform duration-300 group-hover:translate-x-1">View Products</span>
+                              <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1 group-hover:scale-110" />
+                            </Link>
+                          </Button>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
+                  </CardContent>
+                </Card>
+              );
+            })}
           </div>
 
           <div className="text-center mt-16">

@@ -9,20 +9,23 @@ import { ChemicalElements } from "@/components/ChemicalElements";
 import { FloatingMolecules } from "@/components/FloatingMolecules";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const Products = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
+  const location = useLocation();
 
   // Get category from URL params
   useEffect(() => {
-    const urlParams = new URLSearchParams(window.location.search);
+    const urlParams = new URLSearchParams(location.search);
     const category = urlParams.get('category');
     if (category) {
       setSelectedCategory(category);
+    } else {
+      setSelectedCategory('all');
     }
-  }, []);
+  }, [location.search]);
 
   // Initialize AOS animation
   useEffect(() => {
