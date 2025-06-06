@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Menu, X, Search, ChevronDown } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
@@ -9,6 +9,7 @@ export const Header = () => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [openDropdownIndex, setOpenDropdownIndex] = useState<number | null>(null);
   const [scrolled, setScrolled] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -17,6 +18,24 @@ export const Header = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // Close mobile menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as HTMLElement;
+      if (!target.closest('.mobile-menu-container')) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    if (isMenuOpen) {
+      document.addEventListener('click', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, [isMenuOpen]);
 
   const navItems = [
     { name: "Home", href: "/" },
@@ -40,6 +59,17 @@ export const Header = () => {
     { name: "Contact", href: "/contact" },
     { name: "Feedback", href: "/feedback" },
   ];
+
+  const handleDropdownItemClick = (itemId: string) => {
+    setOpenDropdownIndex(null);
+    setIsMenuOpen(false);
+    
+    if (itemId === 'all') {
+      navigate('/products');
+    } else {
+      navigate(`/products?category=${itemId}`);
+    }
+  };
 
   return (
     <header className={`sticky top-0 z-50 transition-all duration-500 ${
@@ -87,14 +117,13 @@ export const Header = () => {
                       <h3 className="text-lg font-semibold mb-4" style={{ color: 'var(--brand-dark-blue)' }}>Product Categories</h3>
                       <div className="grid grid-cols-1 gap-2">
                         {item.dropdownItems?.map((dropdownItem, idx) => (
-                          <Link
+                          <button
                             key={idx}
-                            to={dropdownItem.id === 'all' ? '/products' : `/products?category=${dropdownItem.id}`}
-                            className="premium-dropdown-item"
-                            onClick={() => setOpenDropdownIndex(null)}
+                            onClick={() => handleDropdownItemClick(dropdownItem.id)}
+                            className="premium-dropdown-item text-left w-full"
                           >
                             {dropdownItem.name}
-                          </Link>
+                          </button>
                         ))}
                       </div>
                     </div>
@@ -102,7 +131,7 @@ export const Header = () => {
                 ) : (
                   <Link
                     to={item.href}
-                    className="flex items-center space-x-1 text-gray-700 hover:text-transparent hover:bg-gradient-to-r hover:from-blue-600 hover:to-purple-600 hover:bg-clip-text transition-all duration-300 font-medium relative"
+                    className="flex items-center space-x-1 text-gray-700 hover:text-transparent hover:bg-gradient-to-r hover:from-blue-600 hover:to-purple-600 hover:bg-clip-text transition-all duration-300 font-medium relative group"
                     style={{ color: 'var(--brand-dark-blue)' }}
                   >
                     <span>{item.name}</span>
@@ -146,20 +175,22 @@ export const Header = () => {
             </div>
 
             {/* Mobile Menu Button */}
-            <Button
-              variant="ghost"
-              size="sm"
-              className="lg:hidden hover:bg-gray-100 rounded-xl"
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-            >
-              {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-            </Button>
+            <div className="mobile-menu-container lg:hidden">
+              <Button
+                variant="ghost"
+                size="sm"
+                className="hover:bg-gray-100 rounded-xl"
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+              >
+                {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              </Button>
+            </div>
           </div>
         </div>
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="lg:hidden py-4 border-t border-gray-200 animate-fade-in professional-card rounded-b-xl mt-2">
+          <div className="mobile-menu-container lg:hidden py-4 border-t border-gray-200 animate-fade-in professional-card rounded-b-xl mt-2">
             <nav className="flex flex-col space-y-4">
               {navItems.map((item, index) => (
                 item.hasDropdown ? (
@@ -175,18 +206,14 @@ export const Header = () => {
                     {openDropdownIndex === index && (
                       <div className="pl-4 mt-2 flex flex-col gap-1">
                         {item.dropdownItems?.map((dropdownItem, idx) => (
-                          <Link
+                          <button
                             key={idx}
-                            to={dropdownItem.id === 'all' ? '/products' : `/products?category=${dropdownItem.id}`}
-                            className="block text-gray-700 px-4 py-2 rounded hover:bg-blue-50"
-                            onClick={() => { 
-                              setIsMenuOpen(false); 
-                              setOpenDropdownIndex(null); 
-                            }}
+                            onClick={() => handleDropdownItemClick(dropdownItem.id)}
+                            className="block text-gray-700 px-4 py-2 rounded hover:bg-blue-50 text-left w-full"
                             style={{ color: 'var(--brand-dark-blue)' }}
                           >
                             {dropdownItem.name}
-                          </Link>
+                          </button>
                         ))}
                       </div>
                     )}

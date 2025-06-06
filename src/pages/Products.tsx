@@ -7,8 +7,6 @@ import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
 import { ChemicalElements } from "@/components/ChemicalElements";
 import { FloatingMolecules } from "@/components/FloatingMolecules";
-import AOS from 'aos';
-import 'aos/dist/aos.css';
 import { Link, useLocation } from "react-router-dom";
 
 const Products = () => {
@@ -26,11 +24,6 @@ const Products = () => {
       setSelectedCategory('all');
     }
   }, [location.search]);
-
-  // Initialize AOS animation
-  useEffect(() => {
-    AOS.init({ duration: 400, once: true });
-  }, []);
 
   // Category background images
   const categoryBackgrounds = {

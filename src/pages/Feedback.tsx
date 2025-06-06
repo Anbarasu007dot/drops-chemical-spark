@@ -50,25 +50,41 @@ const Feedback = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!form.company || !form.date || !form.completedBy || !form.contact || !form.email || !form.products || !form.experience || !form.price || !form.quality || !form.expectations || !form.suggestions || !form.overall) {
+    
+    // Validate all required fields
+    const requiredFields = [
+      'company', 'date', 'completedBy', 'contact', 'email', 
+      'products', 'experience', 'price', 'quality', 
+      'expectations', 'suggestions', 'overall'
+    ];
+    
+    const missingFields = requiredFields.filter(field => !form[field as keyof typeof form]);
+    
+    if (missingFields.length > 0) {
       toast.error("Please fill in all required fields.");
       return;
     }
+
     setSubmitting(true);
+    
     try {
       const res = await fetch('http://localhost:5000/send-email', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ formType: 'feedback', ...form }),
       });
+      
       if (res.ok) {
-        toast.success("Thank you for your feedback!");
+        toast.success("Thank you for your feedback! We appreciate your input.");
         handleClear();
       } else {
+        const errorText = await res.text();
+        console.error('Server error:', errorText);
         toast.error("Failed to send feedback. Please try again.");
       }
     } catch (err) {
-      toast.error("Failed to send feedback. Please try again.");
+      console.error('Network error:', err);
+      toast.error("Failed to send feedback. Please check your connection and try again.");
     } finally {
       setSubmitting(false);
     }
@@ -89,48 +105,104 @@ const Feedback = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-sm font-medium mb-1">Your Company Name *</label>
-                    <Input name="company" value={form.company} onChange={handleChange} required className="bg-white/80 border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 rounded-lg shadow-sm text-gray-900 placeholder:text-gray-400" />
+                    <Input 
+                      name="company" 
+                      value={form.company} 
+                      onChange={handleChange} 
+                      required 
+                      className="bg-white/80 border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 rounded-lg shadow-sm text-gray-900 placeholder:text-gray-400" 
+                    />
                   </div>
                   <div>
                     <label className="block text-sm font-medium mb-1">Date *</label>
-                    <Input name="date" type="date" value={form.date} onChange={handleChange} required className="bg-white/80 border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 rounded-lg shadow-sm text-gray-900 placeholder:text-gray-400" />
+                    <Input 
+                      name="date" 
+                      type="date" 
+                      value={form.date} 
+                      onChange={handleChange} 
+                      required 
+                      className="bg-white/80 border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 rounded-lg shadow-sm text-gray-900 placeholder:text-gray-400" 
+                    />
                   </div>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-sm font-medium mb-1">Survey Completed By *</label>
-                    <Input name="completedBy" value={form.completedBy} onChange={handleChange} required className="bg-white/80 border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 rounded-lg shadow-sm text-gray-900 placeholder:text-gray-400" />
+                    <Input 
+                      name="completedBy" 
+                      value={form.completedBy} 
+                      onChange={handleChange} 
+                      required 
+                      className="bg-white/80 border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 rounded-lg shadow-sm text-gray-900 placeholder:text-gray-400" 
+                    />
                   </div>
                   <div>
                     <label className="block text-sm font-medium mb-1">Contact No *</label>
-                    <Input name="contact" value={form.contact} onChange={handleChange} required className="bg-white/80 border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 rounded-lg shadow-sm text-gray-900 placeholder:text-gray-400" />
+                    <Input 
+                      name="contact" 
+                      value={form.contact} 
+                      onChange={handleChange} 
+                      required 
+                      className="bg-white/80 border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 rounded-lg shadow-sm text-gray-900 placeholder:text-gray-400" 
+                    />
                   </div>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-sm font-medium mb-1">Email *</label>
-                    <Input name="email" type="email" value={form.email} onChange={handleChange} required className="bg-white/80 border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 rounded-lg shadow-sm text-gray-900 placeholder:text-gray-400" />
+                    <Input 
+                      name="email" 
+                      type="email" 
+                      value={form.email} 
+                      onChange={handleChange} 
+                      required 
+                      className="bg-white/80 border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 rounded-lg shadow-sm text-gray-900 placeholder:text-gray-400" 
+                    />
                   </div>
                   <div>
                     <label className="block text-sm font-medium mb-1">What products/services did you purchase from Drops Chemicals? *</label>
-                    <Input name="products" value={form.products} onChange={handleChange} required className="bg-white/80 border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 rounded-lg shadow-sm text-gray-900 placeholder:text-gray-400" />
+                    <Input 
+                      name="products" 
+                      value={form.products} 
+                      onChange={handleChange} 
+                      required 
+                      className="bg-white/80 border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 rounded-lg shadow-sm text-gray-900 placeholder:text-gray-400" 
+                    />
                   </div>
                 </div>
                 <div>
                   <label className="block text-sm font-medium mb-1">Was your purchasing experience positive? *</label>
-                  <Input name="experience" value={form.experience} onChange={handleChange} required className="bg-white/80 border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 rounded-lg shadow-sm text-gray-900 placeholder:text-gray-400" />
+                  <Input 
+                    name="experience" 
+                    value={form.experience} 
+                    onChange={handleChange} 
+                    required 
+                    className="bg-white/80 border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 rounded-lg shadow-sm text-gray-900 placeholder:text-gray-400" 
+                  />
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-sm font-medium mb-1">Price *</label>
-                    <select name="price" value={form.price} onChange={handleChange} required className="w-full rounded-lg border border-gray-300 py-2 px-3 bg-white/80 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 shadow-sm text-gray-900">
+                    <select 
+                      name="price" 
+                      value={form.price} 
+                      onChange={handleChange} 
+                      required 
+                      className="w-full rounded-lg border border-gray-300 py-2 px-3 bg-white/80 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 shadow-sm text-gray-900"
+                    >
                       <option value="">Select</option>
                       {performanceOptions.map(opt => <option key={opt} value={opt}>{opt}</option>)}
                     </select>
                   </div>
                   <div>
                     <label className="block text-sm font-medium mb-1">Quality *</label>
-                    <select name="quality" value={form.quality} onChange={handleChange} required className="w-full rounded-lg border border-gray-300 py-2 px-3 bg-white/80 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 shadow-sm text-gray-900">
+                    <select 
+                      name="quality" 
+                      value={form.quality} 
+                      onChange={handleChange} 
+                      required 
+                      className="w-full rounded-lg border border-gray-300 py-2 px-3 bg-white/80 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 shadow-sm text-gray-900"
+                    >
                       <option value="">Select</option>
                       {performanceOptions.map(opt => <option key={opt} value={opt}>{opt}</option>)}
                     </select>
@@ -138,11 +210,25 @@ const Feedback = () => {
                 </div>
                 <div>
                   <label className="block text-sm font-medium mb-1">Did the products purchased meet your expectations? *</label>
-                  <Textarea name="expectations" value={form.expectations} onChange={handleChange} required rows={2} className="bg-white/80 border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 rounded-lg shadow-sm text-gray-900 placeholder:text-gray-400" />
+                  <Textarea 
+                    name="expectations" 
+                    value={form.expectations} 
+                    onChange={handleChange} 
+                    required 
+                    rows={2} 
+                    className="bg-white/80 border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 rounded-lg shadow-sm text-gray-900 placeholder:text-gray-400" 
+                  />
                 </div>
                 <div>
                   <label className="block text-sm font-medium mb-1">Suggestions on how we can serve better *</label>
-                  <Textarea name="suggestions" value={form.suggestions} onChange={handleChange} required rows={2} className="bg-white/80 border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 rounded-lg shadow-sm text-gray-900 placeholder:text-gray-400" />
+                  <Textarea 
+                    name="suggestions" 
+                    value={form.suggestions} 
+                    onChange={handleChange} 
+                    required 
+                    rows={2} 
+                    className="bg-white/80 border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 rounded-lg shadow-sm text-gray-900 placeholder:text-gray-400" 
+                  />
                 </div>
                 <div>
                   <label className="block text-sm font-medium mb-1 mb-2">Rate your experience with us *</label>
@@ -164,10 +250,27 @@ const Feedback = () => {
                   </div>
                 </div>
                 <div className="flex gap-4 pt-4">
-                  <Button type="submit" className="bg-blue-600 hover:bg-blue-700 w-full" disabled={submitting}>
-                    {submitting ? "Submitting..." : "Submit"}
+                  <Button 
+                    type="submit" 
+                    className="bg-blue-600 hover:bg-blue-700 w-full" 
+                    disabled={submitting}
+                  >
+                    {submitting ? (
+                      <div className="flex items-center">
+                        <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin mr-2"></div>
+                        Submitting...
+                      </div>
+                    ) : (
+                      "Submit"
+                    )}
                   </Button>
-                  <Button type="button" variant="outline" className="w-full" onClick={handleClear}>
+                  <Button 
+                    type="button" 
+                    variant="outline" 
+                    className="w-full" 
+                    onClick={handleClear}
+                    disabled={submitting}
+                  >
                     Clear
                   </Button>
                 </div>

@@ -8,7 +8,13 @@ export const sendEmail = async (formType: string, data: any) => {
   console.log('formType:', formType);
   console.log('data:', data);
 
-  const transporter = nodemailer.createTransport({
+  // Validate environment variables
+  if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
+    console.error('Missing email configuration');
+    throw new Error('Email configuration is missing');
+  }
+
+  const transporter = nodemailer.createTransporter({
     host: 'smtp.gmail.com',
     port: 587,
     secure: false, // Use TLS
@@ -40,8 +46,8 @@ ${data.message}
 
 👤 Name: ${data.name}
 📧 Email: ${data.email}
-📞 Phone: ${data.phone || ''}
-🏢 Company: ${data.company || ''}
+📞 Phone: ${data.phone || 'Not provided'}
+🏢 Company: ${data.company || 'Not provided'}
 📌 Subject: ${data.subject}
 
 📝 Message:
@@ -65,10 +71,19 @@ ${data.message}
 💡 Suggestions: ${data.suggestions}
 ⭐ Overall Experience: ${data.overall}
     `;
+    
     // Validate required fields for feedback
-    if (!data.company || !data.date || !data.completedBy || !data.contact || !data.email || !data.products || !data.experience || !data.price || !data.quality || !data.expectations || !data.suggestions || !data.overall) {
-      console.error('Missing required feedback fields:', data);
-      throw new Error('Missing required feedback fields');
+    const requiredFields = [
+      'company', 'date', 'completedBy', 'contact', 'email', 
+      'products', 'experience', 'price', 'quality', 
+      'expectations', 'suggestions', 'overall'
+    ];
+    
+    const missingFields = requiredFields.filter(field => !data[field]);
+    
+    if (missingFields.length > 0) {
+      console.error('Missing required feedback fields:', missingFields);
+      throw new Error(`Missing required feedback fields: ${missingFields.join(', ')}`);
     }
   } else {
     console.error('Unknown form type received in sendEmail:', formType);
@@ -82,6 +97,13 @@ ${data.message}
     text,
   };
 
-  await transporter.sendMail(mailOptions);
-  return true;
+  try {
+    console.log('Attempting to send email...');
+    const result = await transporter.sendMail(mailOptions);
+    console.log('Email sent successfully:', result.messageId);
+    return true;
+  } catch (error) {
+    console.error('Failed to send email:', error);
+    throw error;
+  }
 };

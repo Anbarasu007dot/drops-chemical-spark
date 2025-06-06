@@ -9,26 +9,42 @@ import { toast } from "sonner";
 import React, { useState } from "react";
 
 const Contact = () => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [phone, setPhone] = useState('');
-  const [company, setCompany] = useState('');
-  const [subject, setSubject] = useState('');
-  const [message, setMessage] = useState('');
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    company: '',
+    subject: '',
+    message: ''
+  });
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
 
   const handleServiceSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Validate required fields
+    if (!formData.name || !formData.email || !formData.phone || !formData.company || !formData.subject || !formData.message) {
+      toast.error("Please fill in all required fields.");
+      return;
+    }
+
     setIsSubmitting(true);
     
-    const formData = {
+    const payload = {
       formType: 'service-request',
-      name,
-      email,
-      phone,
-      company,
-      subject,
-      message,
+      name: formData.name,
+      email: formData.email,
+      phone: formData.phone,
+      company: formData.company,
+      subject: formData.subject,
+      message: formData.message,
     };
     
     try {
@@ -37,24 +53,28 @@ const Contact = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(payload),
       });
       
       if (res.ok) {
         toast.success("Message sent successfully! We'll get back to you soon.");
         // Clear form
-        setName('');
-        setEmail('');
-        setPhone('');
-        setCompany('');
-        setSubject('');
-        setMessage('');
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          company: '',
+          subject: '',
+          message: ''
+        });
       } else {
+        const errorText = await res.text();
+        console.error('Server error:', errorText);
         toast.error("Failed to send message. Please try again.");
       }
     } catch (error) {
       console.error('Error sending email:', error);
-      toast.error("Failed to send message. Please try again.");
+      toast.error("Failed to send message. Please check your connection and try again.");
     } finally {
       setIsSubmitting(false);
     }
@@ -150,20 +170,22 @@ const Contact = () => {
                       <div>
                         <label className="block text-sm font-medium mb-2">Name *</label>
                         <Input 
+                          name="name"
                           placeholder="Your full name" 
                           required 
-                          value={name} 
-                          onChange={e => setName(e.target.value)} 
+                          value={formData.name} 
+                          onChange={handleInputChange} 
                         />
                       </div>
                       <div>
                         <label className="block text-sm font-medium mb-2">Email *</label>
                         <Input 
+                          name="email"
                           type="email" 
                           placeholder="your.email@example.com" 
                           required 
-                          value={email} 
-                          onChange={e => setEmail(e.target.value)} 
+                          value={formData.email} 
+                          onChange={handleInputChange} 
                         />
                       </div>
                     </div>
@@ -171,39 +193,43 @@ const Contact = () => {
                       <div>
                         <label className="block text-sm font-medium mb-2">Phone *</label>
                         <Input 
+                          name="phone"
                           placeholder="+91 XXXXX XXXXX" 
                           required 
-                          value={phone} 
-                          onChange={e => setPhone(e.target.value)} 
+                          value={formData.phone} 
+                          onChange={handleInputChange} 
                         />
                       </div>
                       <div>
                         <label className="block text-sm font-medium mb-2">Company Name *</label>
                         <Input 
+                          name="company"
                           placeholder="Your company name" 
                           required 
-                          value={company} 
-                          onChange={e => setCompany(e.target.value)} 
+                          value={formData.company} 
+                          onChange={handleInputChange} 
                         />
                       </div>
                     </div>
                     <div>
                       <label className="block text-sm font-medium mb-2">Subject *</label>
                       <Input 
+                        name="subject"
                         placeholder="How can we help you?" 
                         required 
-                        value={subject} 
-                        onChange={e => setSubject(e.target.value)} 
+                        value={formData.subject} 
+                        onChange={handleInputChange} 
                       />
                     </div>
                     <div>
                       <label className="block text-sm font-medium mb-2">Message *</label>
                       <Textarea
+                        name="message"
                         placeholder="Tell us about your requirements, questions, or how we can assist you..."
                         rows={6}
                         required
-                        value={message}
-                        onChange={e => setMessage(e.target.value)}
+                        value={formData.message}
+                        onChange={handleInputChange}
                       />
                     </div>
                     
@@ -212,7 +238,14 @@ const Contact = () => {
                       className="w-full bg-blue-600 hover:bg-blue-700"
                       disabled={isSubmitting}
                     >
-                      {isSubmitting ? "Sending..." : "Send Message"}
+                      {isSubmitting ? (
+                        <div className="flex items-center">
+                          <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin mr-2"></div>
+                          Sending...
+                        </div>
+                      ) : (
+                        "Send Message"
+                      )}
                     </Button>
                   </form>
                 </CardContent>
