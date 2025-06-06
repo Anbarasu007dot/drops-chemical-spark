@@ -266,14 +266,16 @@ const Products = () => {
                               Quote
                             </Button>
                           </Link>
-                          <Button
-                            size="sm"
-                            className="bg-blue-200 hover:bg-blue-300 text-blue-900 font-bold shadow-md border-0 px-4 py-2 rounded-lg flex items-center gap-1 animated-btn"
-                            style={{ fontFamily: 'Montserrat, Arial, sans-serif', letterSpacing: '0.05em' }}
-                          >
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" className="w-4 h-4 mr-1" stroke="currentColor"><path d="M4 17V7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v10" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/><rect x="9" y="9" width="6" height="6" rx="1" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
-                            Request MSDS
-                          </Button>
+                          <Link to="/contact" style={{ textDecoration: 'none' }}>
+                            <Button
+                              size="sm"
+                              className="bg-blue-200 hover:bg-blue-300 text-blue-900 font-bold shadow-md border-0 px-4 py-2 rounded-lg flex items-center gap-1 animated-btn"
+                              style={{ fontFamily: 'Montserrat, Arial, sans-serif', letterSpacing: '0.05em' }}
+                            >
+                              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" className="w-4 h-4 mr-1" stroke="currentColor"><path d="M4 17V7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v10" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/><rect x="9" y="9" width="6" height="6" rx="1" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                              Request MSDS
+                            </Button>
+                          </Link>
                         </div>
                       </div>
                       <div className="overlay absolute left-0 right-0 bottom-0 h-full w-full bg-blue-900/90 rounded-2xl flex flex-col items-center justify-center opacity-0 pointer-events-none transition-all duration-500 ease-out" style={{transform: 'translateY(100%)'}}>
@@ -326,14 +328,16 @@ const Products = () => {
                                   Quote
                                 </Button>
                               </Link>
-                              <Button
-                                size="sm"
-                                className="bg-blue-200 hover:bg-blue-300 text-blue-900 font-bold shadow-md border-0 px-4 py-2 rounded-lg flex items-center gap-1 animated-btn"
-                                style={{ fontFamily: 'Montserrat, Arial, sans-serif', letterSpacing: '0.05em' }}
-                              >
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" className="w-4 h-4 mr-1" stroke="currentColor"><path d="M4 17V7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v10" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/><rect x="9" y="9" width="6" height="6" rx="1" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
-                                Request MSDS
-                              </Button>
+                              <Link to="/contact" style={{ textDecoration: 'none' }}>
+                                <Button
+                                  size="sm"
+                                  className="bg-blue-200 hover:bg-blue-300 text-blue-900 font-bold shadow-md border-0 px-4 py-2 rounded-lg flex items-center gap-1 animated-btn"
+                                  style={{ fontFamily: 'Montserrat, Arial, sans-serif', letterSpacing: '0.05em' }}
+                                >
+                                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" className="w-4 h-4 mr-1" stroke="currentColor"><path d="M4 17V7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v10" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/><rect x="9" y="9" width="6" height="6" rx="1" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                                  Request MSDS
+                                </Button>
+                              </Link>
                             </div>
                           </div>
                           <div className="overlay absolute left-0 right-0 bottom-0 h-full w-full bg-blue-900/90 rounded-2xl flex flex-col items-center justify-center opacity-0 pointer-events-none transition-all duration-500 ease-out" style={{transform: 'translateY(100%)'}}>
