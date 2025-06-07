@@ -71,7 +71,7 @@ const Feedback = () => {
       const res = await fetch('http://localhost:5000/send-email', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ formType: 'feedback', ...form }),
+        body: JSON.stringify({ formType: 'feedback', formData: form }),
       });
       
       if (res.ok) {

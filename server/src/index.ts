@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { Request, Response } from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import { sendEmail } from './mailer';
@@ -11,7 +11,7 @@ const PORT = 5000;
 app.use(cors());
 app.use(express.json());
 
-app.post('/send-email', async (req, res) => {
+app.post('/send-email', async (req: Request, res: Response) => {
   let formType = req.body.formType;
   let formData = req.body.formData;
 
@@ -47,7 +47,11 @@ app.post('/send-email', async (req, res) => {
   }
 
   for (const field of requiredFields) {
-    if (!processedData[field]) {
+    if (
+      processedData[field] === undefined ||
+      processedData[field] === null ||
+      (typeof processedData[field] === 'string' && processedData[field].trim() === '')
+    ) {
       res.status(400).send(`Missing required field in ${formType} form: ${field}`);
       return;
     }
