@@ -96,9 +96,85 @@ export const FeaturedProducts = () => {
     <>
       <section 
         ref={sectionRef}
-        className="relative py-20 bg-[53bde1]"
+        className="relative py-20 bg-[53bde1] overflow-hidden"
       >
         <ChemicalElements />
+        
+        {/* Chemical Icons at Bottom */}
+        <div className="absolute bottom-0 left-0 right-0 pointer-events-none z-0">
+          {/* Atom Icon - Bottom Left */}
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/2784/2784403.png"
+            alt=""
+            className="absolute w-12 h-12 opacity-20"
+            style={{
+              bottom: '10%',
+              left: '8%',
+              animation: 'chemicalFloat1 12s ease-in-out infinite'
+            }}
+          />
+          
+          {/* Molecule Structure - Bottom Center Left */}
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/2784/2784428.png"
+            alt=""
+            className="absolute w-14 h-14 opacity-25"
+            style={{
+              bottom: '15%',
+              left: '25%',
+              animation: 'chemicalFloat2 14s ease-in-out infinite'
+            }}
+          />
+          
+          {/* Test Tube - Bottom Center */}
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/2784/2784384.png"
+            alt=""
+            className="absolute w-10 h-10 opacity-20"
+            style={{
+              bottom: '8%',
+              left: '45%',
+              animation: 'chemicalFloat3 16s ease-in-out infinite'
+            }}
+          />
+          
+          {/* Beaker - Bottom Center Right */}
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/2784/2784390.png"
+            alt=""
+            className="absolute w-13 h-13 opacity-25"
+            style={{
+              bottom: '12%',
+              right: '30%',
+              animation: 'chemicalFloat4 13s ease-in-out infinite'
+            }}
+          />
+          
+          {/* DNA/Chemical Bond - Bottom Right */}
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/2784/2784425.png"
+            alt=""
+            className="absolute w-11 h-11 opacity-20"
+            style={{
+              bottom: '18%',
+              right: '12%',
+              animation: 'chemicalFloat5 15s ease-in-out infinite'
+            }}
+          />
+          
+          {/* Small Atom - Bottom Far Right */}
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/2784/2784403.png"
+            alt=""
+            className="absolute w-8 h-8 opacity-15"
+            style={{
+              bottom: '6%',
+              right: '5%',
+              animation: 'chemicalFloat6 11s ease-in-out infinite'
+            }}
+          />
+        </div>
+        
         <div className="container mx-auto px-4 relative z-10">
           <div className={`text-center mb-16 transition-all duration-800 ${isVisible ? 'classic-fade-in' : 'opacity-0 translate-y-10'}`}>
             <h2 className="professional-subheading mb-4" style={{ color: 'var(--brand-dark-blue)' }}>
