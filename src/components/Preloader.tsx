@@ -9,7 +9,10 @@ export const Preloader = ({ onComplete }: PreloaderProps) => {
   const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
-    // Disable scrolling during preloader
+    // Prevent scrolling and interaction during preloader
+    const originalOverflow = document.body.style.overflow;
+    const originalPointerEvents = document.body.style.pointerEvents;
+    
     document.body.style.overflow = 'hidden';
     document.body.style.pointerEvents = 'none';
 
@@ -19,18 +22,18 @@ export const Preloader = ({ onComplete }: PreloaderProps) => {
       
       // Wait for fade out animation to complete
       setTimeout(() => {
-        // Re-enable interaction
-        document.body.style.overflow = 'unset';
-        document.body.style.pointerEvents = 'auto';
+        // Restore body styles
+        document.body.style.overflow = originalOverflow;
+        document.body.style.pointerEvents = originalPointerEvents;
         onComplete();
       }, 500); // Match the CSS transition duration
     }, 2200); // Show preloader for 2.2 seconds
 
     return () => {
       clearTimeout(timer);
-      // Cleanup styles
-      document.body.style.overflow = 'unset';
-      document.body.style.pointerEvents = 'auto';
+      // Cleanup styles in case component unmounts early
+      document.body.style.overflow = originalOverflow;
+      document.body.style.pointerEvents = originalPointerEvents;
     };
   }, [onComplete]);
 

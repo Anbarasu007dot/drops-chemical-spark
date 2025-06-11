@@ -4,17 +4,22 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(255,255,255,0.95);
+  background-color: #ffffff;
   z-index: 9999;
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: opacity 0.5s ease-out;
+  /* Prevent any layout shifts */
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 .preloader-container.fade-out {
   opacity: 0;
   pointer-events: none;
+  transition: opacity 0.5s ease-out;
 }
 
 .atom-spinner {
@@ -24,6 +29,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  /* Ensure it stays centered */
+  flex-shrink: 0;
+  margin: 0;
+  padding: 0;
 }
 
 .nucleus {
