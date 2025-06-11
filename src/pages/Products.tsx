@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { Search, MessageSquare } from "lucide-react";
 import { Header } from "@/components/Header";
@@ -234,7 +235,7 @@ const Products = () => {
           {selectedCategory === "all" ? (
             // A-Z Products View
             <div className="mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold text-center mb-12\" style={{ color: 'var(--brand-dark-blue)' }}>
+              <h2 className="text-3xl md:text-4xl font-bold text-center mb-12" style={{ color: 'var(--brand-dark-blue)' }}>
                 A–Z Products
               </h2>
               
