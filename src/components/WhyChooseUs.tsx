@@ -71,9 +71,85 @@ export const WhyChooseUs = () => {
   return (
     <section 
       ref={sectionRef}
-      className="relative py-20 bg-[57b8d9]"
+      className="relative py-20 bg-[57b8d9] overflow-hidden"
     >
       <ChemicalElements />
+      
+      {/* Floating Background Images */}
+      <div className="absolute inset-0 pointer-events-none z-0">
+        {/* Flask Lab - Top Left */}
+        <img
+          src="https://img.freepik.com/premium-vector/flask-lab-logo-chemistry-laboratory-vector-icon_658271-10795.jpg"
+          alt=""
+          className="absolute w-20 h-20 opacity-25"
+          style={{
+            top: '15%',
+            left: '8%',
+            animation: 'floatGentle1 14s ease-in-out infinite'
+          }}
+        />
+        
+        {/* Molecule Structure - Top Right */}
+        <img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfJTCFkEaK8Hrufdx8IJcNTsJbKA4w32uAug&s"
+          alt=""
+          className="absolute w-24 h-24 opacity-20"
+          style={{
+            top: '20%',
+            right: '12%',
+            animation: 'floatGentle2 16s ease-in-out infinite'
+          }}
+        />
+        
+        {/* Handshake - Bottom Left */}
+        <img
+          src="https://content.presentermedia.com/files/clipart/00033000/33230/handshake_800_wht.jpg"
+          alt=""
+          className="absolute w-28 h-28 opacity-15"
+          style={{
+            bottom: '15%',
+            left: '10%',
+            animation: 'floatGentle3 18s ease-in-out infinite'
+          }}
+        />
+        
+        {/* Stopwatch - Bottom Right */}
+        <img
+          src="https://media.istockphoto.com/id/1409428311/vector/stopwatch-3d-icon-vector-illustration-blue-timer-with-red-button-isolated-object-on-a.jpg?s=612x612&w=0&k=20&c=PZ8zvaCyCpxwvOnlKX-yg04Jjxfv6POspOzAOb6hih8="
+          alt=""
+          className="absolute w-22 h-22 opacity-25"
+          style={{
+            bottom: '20%',
+            right: '8%',
+            animation: 'floatGentle4 12s ease-in-out infinite'
+          }}
+        />
+        
+        {/* Additional Flask - Middle Left */}
+        <img
+          src="https://img.freepik.com/premium-vector/flask-lab-logo-chemistry-laboratory-vector-icon_658271-10795.jpg"
+          alt=""
+          className="absolute w-16 h-16 opacity-20"
+          style={{
+            top: '50%',
+            left: '5%',
+            animation: 'floatGentle5 15s ease-in-out infinite'
+          }}
+        />
+        
+        {/* Additional Molecule - Middle Right */}
+        <img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfJTCFkEaK8Hrufdx8IJcNTsJbKA4w32uAug&s"
+          alt=""
+          className="absolute w-18 h-18 opacity-15"
+          style={{
+            top: '60%',
+            right: '6%',
+            animation: 'floatGentle6 13s ease-in-out infinite'
+          }}
+        />
+      </div>
+      
       <div className="container mx-auto px-4 relative z-10">
         <div className={`text-center mb-16 transition-all duration-800 ${isVisible ? 'classic-fade-in' : 'opacity-0 translate-y-10'}`}>
           <h2 className="professional-subheading mb-4">
