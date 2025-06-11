@@ -1,75 +1,82 @@
-
 .preloader-container {
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(255,255,255,0.92);
+  background: rgba(255,255,255,0.95);
   z-index: 9999;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: opacity 0.5s;
+  transition: opacity 0.5s ease-out;
+}
+
+.preloader-container.fade-out {
+  opacity: 0;
+  pointer-events: none;
 }
 
 .atom-spinner {
   position: relative;
-  width: 80px;
-  height: 80px;
-  will-change: transform;
+  width: 120px;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .nucleus {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 8px;
-  height: 8px;
-  background: #3b82f6;
+  width: 12px;
+  height: 12px;
+  background: linear-gradient(45deg, #3b82f6, #1d4ed8);
   border-radius: 50%;
   transform: translate(-50%, -50%);
-  box-shadow: 0 0 10px rgba(59, 130, 246, 0.4);
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.6);
+  z-index: 3;
 }
 
 .orbit {
   position: absolute;
   top: 50%;
   left: 50%;
-  border: 1px solid rgba(59, 130, 246, 0.3);
+  border: 2px solid rgba(59, 130, 246, 0.3);
   border-radius: 50%;
   transform: translate(-50%, -50%);
   will-change: transform;
 }
 
 .orbit-1 {
-  width: 60px;
-  height: 60px;
+  width: 80px;
+  height: 80px;
   animation: spin-orbit-1 2s linear infinite;
 }
 
 .orbit-2 {
-  width: 40px;
-  height: 40px;
+  width: 60px;
+  height: 60px;
   animation: spin-orbit-2 1.5s linear infinite reverse;
 }
 
 .orbit-3 {
-  width: 80px;
-  height: 80px;
+  width: 100px;
+  height: 100px;
   animation: spin-orbit-3 2.5s linear infinite;
 }
 
 .electron {
   position: absolute;
-  width: 4px;
-  height: 4px;
-  background: #3b82f6;
+  width: 6px;
+  height: 6px;
+  background: linear-gradient(45deg, #3b82f6, #60a5fa);
   border-radius: 50%;
-  top: -2px;
+  top: -3px;
   left: 50%;
   transform: translateX(-50%);
-  box-shadow: 0 0 6px rgba(59, 130, 246, 0.6);
+  box-shadow: 0 0 10px rgba(59, 130, 246, 0.8);
   will-change: transform;
 }
 
@@ -88,9 +95,69 @@
   100% { transform: translate(-50%, -50%) rotate(360deg); }
 }
 
-@media (max-width: 600px) {
-  .preloader-container {
-    min-width: 100vw;
-    min-height: 100vh;
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .atom-spinner {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .orbit-1 {
+    width: 70px;
+    height: 70px;
+  }
+  
+  .orbit-2 {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .orbit-3 {
+    width: 85px;
+    height: 85px;
+  }
+  
+  .nucleus {
+    width: 10px;
+    height: 10px;
+  }
+  
+  .electron {
+    width: 5px;
+    height: 5px;
+    top: -2.5px;
+  }
+}
+
+@media (max-width: 480px) {
+  .atom-spinner {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .orbit-1 {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .orbit-2 {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .orbit-3 {
+    width: 75px;
+    height: 75px;
+  }
+  
+  .nucleus {
+    width: 8px;
+    height: 8px;
+  }
+  
+  .electron {
+    width: 4px;
+    height: 4px;
+    top: -2px;
   }
 }

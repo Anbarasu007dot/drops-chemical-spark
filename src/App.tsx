@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -22,37 +21,39 @@ const queryClient = new QueryClient();
 const AppContent = () => {
   const location = useLocation();
   const [loading, setLoading] = useState(true);
+  const [showPreloader, setShowPreloader] = useState(true);
 
+  // Show preloader on route changes
   useEffect(() => {
     setLoading(true);
-    document.body.style.overflow = "hidden";
-    // Show preloader for 2.7s on every route change
+    setShowPreloader(true);
+    
     const timer = setTimeout(() => {
       setLoading(false);
-      document.body.style.overflow = "";
     }, 2700);
-    return () => {
-      clearTimeout(timer);
-      document.body.style.overflow = "";
-    };
-  }, [location]);
 
-  // Show preloader on initial load as well
+    return () => clearTimeout(timer);
+  }, [location.pathname]);
+
+  // Show preloader on initial load
   useEffect(() => {
     setLoading(true);
-    document.body.style.overflow = "hidden";
+    setShowPreloader(true);
+    
     const timer = setTimeout(() => {
       setLoading(false);
-      document.body.style.overflow = "";
     }, 2700);
-    return () => {
-      clearTimeout(timer);
-      document.body.style.overflow = "";
-    };
+
+    return () => clearTimeout(timer);
   }, []);
 
-  if (loading) {
-    return <Preloader onComplete={() => setLoading(false)} />;
+  const handlePreloaderComplete = () => {
+    setShowPreloader(false);
+    setLoading(false);
+  };
+
+  if (loading && showPreloader) {
+    return <Preloader onComplete={handlePreloaderComplete} />;
   }
 
   return (
