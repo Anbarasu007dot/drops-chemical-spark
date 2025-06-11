@@ -9,36 +9,31 @@ export const Preloader = ({ onComplete }: PreloaderProps) => {
   const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
-    // Prevent scrolling and interaction during preloader
+    // Prevent scrolling during preloader
     const originalOverflow = document.body.style.overflow;
-    const originalPointerEvents = document.body.style.pointerEvents;
-    
     document.body.style.overflow = 'hidden';
-    document.body.style.pointerEvents = 'none';
 
-    // Set preloader duration - reduced for faster transition
+    // Set preloader duration
     const timer = setTimeout(() => {
       setIsVisible(false);
       
-      // Start fade out immediately
+      // Restore body styles and call onComplete
       setTimeout(() => {
-        // Restore body styles
         document.body.style.overflow = originalOverflow;
-        document.body.style.pointerEvents = originalPointerEvents;
         onComplete();
-      }, 300); // Reduced from 500 to 300ms for faster transition
-    }, 1800); // Reduced from 2200 to 1800ms
+      }, 300);
+    }, 1500);
 
     return () => {
       clearTimeout(timer);
-      // Cleanup styles in case component unmounts early
       document.body.style.overflow = originalOverflow;
-      document.body.style.pointerEvents = originalPointerEvents;
     };
   }, [onComplete]);
 
+  if (!isVisible) return null;
+
   return (
-    <div className={`preloader-container ${!isVisible ? 'fade-out' : ''}`}>
+    <div className="preloader-container">
       <div className="atom-spinner">
         <div className="nucleus"></div>
         <div className="orbit orbit-1">

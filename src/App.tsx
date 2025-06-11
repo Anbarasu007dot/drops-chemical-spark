@@ -22,18 +22,16 @@ const AppContent = () => {
   const location = useLocation();
   const [loading, setLoading] = useState(true);
   const [showPreloader, setShowPreloader] = useState(true);
-  const [contentReady, setContentReady] = useState(false);
 
   // Show preloader on route changes
   useEffect(() => {
     setLoading(true);
     setShowPreloader(true);
-    setContentReady(false);
     
     const timer = setTimeout(() => {
       setLoading(false);
-      setContentReady(true);
-    }, 2200); // Reduced from 2700 to 2200
+      setShowPreloader(false);
+    }, 1800);
 
     return () => clearTimeout(timer);
   }, [location.pathname]);
@@ -42,28 +40,23 @@ const AppContent = () => {
   useEffect(() => {
     setLoading(true);
     setShowPreloader(true);
-    setContentReady(false);
     
     const timer = setTimeout(() => {
       setLoading(false);
-      setContentReady(true);
-    }, 2200); // Reduced from 2700 to 2200
+      setShowPreloader(false);
+    }, 1800);
 
     return () => clearTimeout(timer);
   }, []);
 
-  const handlePreloaderComplete = () => {
-    setShowPreloader(false);
-  };
-
   // Show preloader while loading
   if (loading && showPreloader) {
-    return <Preloader onComplete={handlePreloaderComplete} />;
+    return <Preloader onComplete={() => {}} />;
   }
 
-  // Show content immediately after preloader without white flash
+  // Show content immediately after preloader
   return (
-    <div className={`min-h-screen transition-opacity duration-300 ${contentReady ? 'opacity-100' : 'opacity-0'}`}>
+    <div className="min-h-screen">
       <Routes>
         <Route path="/" element={<Index />} />
         <Route path="/products" element={<Products />} />
