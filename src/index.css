@@ -183,7 +183,7 @@
     animation: particleFloat 15s ease-in-out infinite;
   }
 
-  /* Enhanced Wave Divider System with Smooth Flowing Motion */
+  /* Enhanced Wave Divider System with Smooth Flowing Motion and Increased Amplitude */
   .enhanced-wave-divider {
     position: relative;
     height: 120px;
@@ -202,17 +202,17 @@
 
   .wave-layer-1 {
     z-index: 3;
-    animation: smoothWaveFlow1 20s linear infinite, waveOscillate1 8s ease-in-out infinite;
+    animation: smoothWaveFlow1 12s linear infinite, waveOscillate1 6s ease-in-out infinite;
   }
 
   .wave-layer-2 {
     z-index: 2;
-    animation: smoothWaveFlow2 25s linear infinite reverse, waveOscillate2 12s ease-in-out infinite reverse;
+    animation: smoothWaveFlow2 15s linear infinite reverse, waveOscillate2 8s ease-in-out infinite reverse;
   }
 
   .wave-layer-3 {
     z-index: 1;
-    animation: smoothWaveFlow3 30s linear infinite, waveOscillate3 15s ease-in-out infinite;
+    animation: smoothWaveFlow3 18s linear infinite, waveOscillate3 10s ease-in-out infinite;
   }
 
   .wave-glow {
@@ -648,7 +648,7 @@
     50%, 100% { opacity: 0; }
   }
 
-  /* Enhanced Wave Animations with Smooth Flowing Motion */
+  /* Enhanced Wave Animations with Smooth Flowing Motion and Increased Amplitude */
   @keyframes smoothWaveFlow1 {
     0% {
       transform: translateX(0);
@@ -681,13 +681,13 @@
       transform: translateX(0px) scaleY(1);
     }
     25% {
-      transform: translateX(-15px) scaleY(1.05);
+      transform: translateX(-25px) scaleY(1.15);
     }
     50% {
-      transform: translateX(-30px) scaleY(0.95);
+      transform: translateX(-50px) scaleY(0.85);
     }
     75% {
-      transform: translateX(-15px) scaleY(1.02);
+      transform: translateX(-25px) scaleY(1.08);
     }
   }
 
@@ -696,10 +696,10 @@
       transform: translateX(0px) scaleY(1);
     }
     33% {
-      transform: translateX(20px) scaleY(1.08);
+      transform: translateX(35px) scaleY(1.2);
     }
     66% {
-      transform: translateX(40px) scaleY(0.92);
+      transform: translateX(70px) scaleY(0.8);
     }
   }
 
@@ -708,10 +708,10 @@
       transform: translateX(0px) scaleY(1);
     }
     40% {
-      transform: translateX(-25px) scaleY(1.1);
+      transform: translateX(-40px) scaleY(1.25);
     }
     80% {
-      transform: translateX(-50px) scaleY(0.9);
+      transform: translateX(-80px) scaleY(0.75);
     }
   }
 
