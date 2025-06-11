@@ -98,11 +98,6 @@
 }
 
 @media (max-width: 600px) {
-  .preloader-container {
-    min-width: 100vw;
-    min-height: 100vh;
-  }
-  
   .atom-spinner {
     width: 60px;
     height: 60px;
