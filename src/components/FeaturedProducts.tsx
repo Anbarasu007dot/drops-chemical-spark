@@ -196,22 +196,46 @@ export const FeaturedProducts = () => {
           </div>
         </div>
 
-        {/* Enhanced Bottom Area with Advanced Visual Effects */}
-        <div className="absolute bottom-0 left-0 right-0 h-32 overflow-hidden">
-          {/* Animated Gradient Wave */}
-          <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-blue-600/20 via-purple-500/10 to-transparent animate-pulse"></div>
-          
-          {/* SVG Wave Pattern */}
-          <svg className="absolute bottom-0 left-0 right-0 w-full h-16" viewBox="0 0 1200 120" preserveAspectRatio="none">
+        {/* Enhanced Multi-layered Wave Divider */}
+        <div className="enhanced-wave-divider">
+          {/* Wave Layer 1 - Primary Blue */}
+          <svg className="wave-layer wave-layer-1" viewBox="0 0 1200 120" preserveAspectRatio="none">
             <defs>
-              <linearGradient id="waveGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stopColor="#3b82f6" stopOpacity="0.3" />
-                <stop offset="50%" stopColor="#8b5cf6" stopOpacity="0.2" />
-                <stop offset="100%" stopColor="#06b6d4" stopOpacity="0.3" />
+              <linearGradient id="waveGradient1" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="#3b82f6" stopOpacity="0.8" />
+                <stop offset="50%" stopColor="#1d4ed8" stopOpacity="0.9" />
+                <stop offset="100%" stopColor="#2563eb" stopOpacity="0.8" />
               </linearGradient>
             </defs>
-            <path d="M0,60 C300,120 900,0 1200,60 L1200,120 L0,120 Z" fill="url(#waveGradient)" className="animate-wave-flow" />
+            <path d="M0,60 C300,120 900,0 1200,60 L1200,120 L0,120 Z" fill="url(#waveGradient1)" />
           </svg>
+
+          {/* Wave Layer 2 - Purple Accent */}
+          <svg className="wave-layer wave-layer-2" viewBox="0 0 1200 120" preserveAspectRatio="none">
+            <defs>
+              <linearGradient id="waveGradient2" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="#8b5cf6" stopOpacity="0.6" />
+                <stop offset="50%" stopColor="#a855f7" stopOpacity="0.7" />
+                <stop offset="100%" stopColor="#9333ea" stopOpacity="0.6" />
+              </linearGradient>
+            </defs>
+            <path d="M0,80 C400,20 800,100 1200,40 L1200,120 L0,120 Z" fill="url(#waveGradient2)" />
+          </svg>
+
+          {/* Wave Layer 3 - Cyan Base */}
+          <svg className="wave-layer wave-layer-3" viewBox="0 0 1200 120" preserveAspectRatio="none">
+            <defs>
+              <linearGradient id="waveGradient3" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="#06b6d4" stopOpacity="0.5" />
+                <stop offset="50%" stopColor="#0891b2" stopOpacity="0.6" />
+                <stop offset="100%" stopColor="#0e7490" stopOpacity="0.5" />
+              </linearGradient>
+            </defs>
+            <path d="M0,100 C200,40 1000,80 1200,20 L1200,120 L0,120 Z" fill="url(#waveGradient3)" />
+          </svg>
+
+          {/* Soft Glow Effect */}
+          <div className="wave-glow"></div>
 
           {/* Floating Chemical Icons */}
           <div className="absolute bottom-4 left-8 w-12 h-12 opacity-20 animate-chemicalFloat1">
