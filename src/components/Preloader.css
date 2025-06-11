@@ -1,19 +1,131 @@
+
 .preloader-container {
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(255,255,255,0.92); /* semi-transparent white for overlay effect */
+  background: rgba(255, 255, 255, 0.95);
   z-index: 9999;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: opacity 0.5s;
+  transition: opacity 0.5s ease-out;
 }
+
+.atom-spinner {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  animation: atom-spin 2s linear infinite;
+}
+
+.atom-nucleus {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 12px;
+  height: 12px;
+  background: #3b82f6;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 10px rgba(59, 130, 246, 0.6);
+}
+
+.atom-orbit {
+  position: absolute;
+  border: 2px solid rgba(59, 130, 246, 0.3);
+  border-radius: 50%;
+  animation: orbit-spin 1.5s linear infinite;
+}
+
+.atom-orbit::before {
+  content: '';
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: #3b82f6;
+  border-radius: 50%;
+  top: -3px;
+  left: 50%;
+  transform: translateX(-50%);
+  box-shadow: 0 0 5px rgba(59, 130, 246, 0.8);
+}
+
+.atom-orbit-1 {
+  width: 60px;
+  height: 60px;
+  top: 10px;
+  left: 10px;
+  animation-duration: 1.2s;
+}
+
+.atom-orbit-2 {
+  width: 70px;
+  height: 70px;
+  top: 5px;
+  left: 5px;
+  transform: rotate(60deg);
+  animation-duration: 1.5s;
+  animation-direction: reverse;
+}
+
+.atom-orbit-3 {
+  width: 80px;
+  height: 80px;
+  top: 0;
+  left: 0;
+  transform: rotate(120deg);
+  animation-duration: 1.8s;
+}
+
+@keyframes atom-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes orbit-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 @media (max-width: 600px) {
   .preloader-container {
     min-width: 100vw;
     min-height: 100vh;
+  }
+  
+  .atom-spinner {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .atom-orbit-1 {
+    width: 45px;
+    height: 45px;
+    top: 7.5px;
+    left: 7.5px;
+  }
+  
+  .atom-orbit-2 {
+    width: 52px;
+    height: 52px;
+    top: 4px;
+    left: 4px;
+  }
+  
+  .atom-orbit-3 {
+    width: 60px;
+    height: 60px;
+    top: 0;
+    left: 0;
   }
 }
