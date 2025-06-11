@@ -35,15 +35,11 @@ export const Preloader = ({ onComplete }: PreloaderProps) => {
   return (
     <div className="preloader-container">
       <div className="atom-spinner">
-        <div className="nucleus"></div>
-        <div className="orbit orbit-1">
-          <div className="electron"></div>
-        </div>
-        <div className="orbit orbit-2">
-          <div className="electron"></div>
-        </div>
-        <div className="orbit orbit-3">
-          <div className="electron"></div>
+        <div className="spinner-inner">
+          <div className="spinner-line"></div>
+          <div className="spinner-line"></div>
+          <div className="spinner-line"></div>
+          <div className="spinner-circle">&#9679;</div>
         </div>
       </div>
     </div>
