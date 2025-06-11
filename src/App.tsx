@@ -37,29 +37,37 @@ const AppContent = () => {
     };
   }, [location]);
 
+  // Show preloader on initial load as well
+  useEffect(() => {
+    setLoading(true);
+    document.body.style.overflow = "hidden";
+    const timer = setTimeout(() => {
+      setLoading(false);
+      document.body.style.overflow = "";
+    }, 2700);
+    return () => {
+      clearTimeout(timer);
+      document.body.style.overflow = "";
+    };
+  }, []);
+
+  if (loading) {
+    return <Preloader onComplete={() => setLoading(false)} />;
+  }
+
   return (
-    <>
-      {loading && <Preloader onComplete={() => setLoading(false)} />}
-      <div
-        style={{
-          opacity: loading ? 0 : 1,
-          transition: "opacity 0.5s",
-        }}
-      >
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/products" element={<Products />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/blog" element={<Blog />} />
-          <Route path="/careers" element={<Careers />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/feedback" element={<Feedback />} />
-          <Route path="/admin" element={<AdminLogin />} />
-          <Route path="/admin/dashboard" element={<AdminDashboard />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </div>
-    </>
+    <Routes>
+      <Route path="/" element={<Index />} />
+      <Route path="/products" element={<Products />} />
+      <Route path="/about" element={<About />} />
+      <Route path="/blog" element={<Blog />} />
+      <Route path="/careers" element={<Careers />} />
+      <Route path="/contact" element={<Contact />} />
+      <Route path="/feedback" element={<Feedback />} />
+      <Route path="/admin" element={<AdminLogin />} />
+      <Route path="/admin/dashboard" element={<AdminDashboard />} />
+      <Route path="*" element={<NotFound />} />
+    </Routes>
   );
 };
 

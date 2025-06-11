@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import "./Preloader.css";
 
@@ -9,18 +10,6 @@ export const Preloader = ({ onComplete }: PreloaderProps) => {
   const [animationPhase, setAnimationPhase] = useState('initial');
 
   useEffect(() => {
-    // Check if preloader should run (only once per session)
-    const hasSeenPreloader = sessionStorage.getItem('preloader-shown');
-    
-    if (hasSeenPreloader) {
-      // Skip animation if already shown this session
-      onComplete();
-      return;
-    }
-
-    // Mark preloader as shown for this session
-    sessionStorage.setItem('preloader-shown', 'true');
-
     // Disable scrolling and interaction during preloader
     document.body.style.overflow = 'hidden';
     document.body.style.pointerEvents = 'none';
@@ -44,7 +33,7 @@ export const Preloader = ({ onComplete }: PreloaderProps) => {
       document.body.style.overflow = 'unset';
       document.body.style.pointerEvents = 'auto';
       onComplete();
-    }, 4500); // Total duration
+    }, 2700); // Total duration
 
     return () => {
       clearTimeout(fadeInTimer);
@@ -85,13 +74,6 @@ export const Preloader = ({ onComplete }: PreloaderProps) => {
       <div 
         className={`preloader-panel preloader-panel-right ${
           animationPhase === 'splitting' ? 'slide-right' : ''
-        }`}
-      />
-
-      {/* Overlay for smooth transition */}
-      <div 
-        className={`preloader-overlay ${
-          animationPhase === 'splitting' ? 'overlay-fade' : ''
         }`}
       />
     </div>
