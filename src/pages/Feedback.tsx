@@ -98,7 +98,7 @@ const Feedback = () => {
           <Card className="shadow-xl rounded-2xl bg-white/90">
             <CardHeader>
               <CardTitle className="text-3xl font-bold text-blue-900 text-center">Feedback</CardTitle>
-              <p className="text-blue-700 text-center mt-2">We value your feedback! Please fill out the form below.</p>
+              <p className="text-blue-700 text-center mt-2">We value your feedback on our water treatment services and eco-friendly solutions! Please fill out the form below.</p>
             </CardHeader>
             <CardContent>
               <form className="space-y-6" onSubmit={handleSubmit}>

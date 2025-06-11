@@ -64,11 +64,11 @@ export const LatestBlogs = () => {
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-            Latest Insights
+            Latest Insights on Water Treatment and Chemical Safety
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
             Stay updated with industry trends, safety protocols, and innovative chemical solutions 
-            through our expert insights and knowledge sharing.
+            through our expert insights and knowledge sharing. Explore our latest articles on water treatment, eco-friendly solutions, and industrial chemical safety.
           </p>
         </div>
 
@@ -137,7 +137,7 @@ export const LatestBlogs = () => {
             className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg text-lg font-semibold transition-all duration-300 hover:scale-105 group"
           >
             <Link to="/blog" className="flex items-center">
-              View All Articles
+              View All Articles on Water Treatment and Chemical Safety
               <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </Link>
           </Button>

@@ -1,4 +1,3 @@
-
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { MapPin, Clock, Users, TrendingUp, Heart, Award } from "lucide-react";

@@ -121,7 +121,7 @@ const About = () => {
               
               <div ref={statsSectionRef} className="grid grid-cols-2 gap-9">
                 {stats.map((stat, index) => {
-                  // Extract number and suffix for AnimatedCounter
+               
                   const match = stat.number.match(/(\d+)(.*)/);
                   const end = match ? parseInt(match[1]) : 0;
                   const suffix = match ? match[2] : '';

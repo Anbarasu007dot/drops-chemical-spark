@@ -3,22 +3,123 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>dropschemicals</title>
-    <meta name="description" content="dropsChemicals website" />
-    <meta name="author" content="made with passion  by Anbarasu from PSGCAS" />
+    <title>Drops Chemicals | Water Treatment, Industrial Chemicals, Eco-Friendly Solutions</title>
+    <meta name="description" content="Drops Chemicals specializes in water treatment chemicals, eco-friendly fertilizers, industrial chemical solutions, and safety protocols for agriculture and manufacturing." />
+    <meta name="author" content="Anbarasu, Drops Chemicals, Water Treatment, Industrial Chemicals, Eco-Friendly Solutions" />
     <link rel="icon" href="https://ik.imagekit.io/dvuz4klnl/Round%20Photo_Jun042025_214605.png?updatedAt=1749053835711" type="image/jpeg">
 
-    <meta property="og:title" content="drops-chemicals" />
-    <meta property="og:description" content="made with passion by Anbarasu from PSGCAS" />
+    <meta property="og:title" content="Drops Chemicals | Water Treatment & Industrial Solutions" />
+    <meta property="og:description" content="Leading provider of water treatment chemicals, eco-friendly fertilizers, and industrial safety solutions." />
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="" />
+    <meta property="og:image" content="https://ik.imagekit.io/dvuz4klnl/Round%20Photo_Jun042025_214605.png?updatedAt=1749053835711" />
 
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="made with passion  by Anbarasu from PSGCAS" />
-    <meta name="twitter:image" content="made with passion by Anbarasu from PSGCAS" />
+    <meta name="twitter:site" content="@dropschemicals Water Treatment, Industrial Chemicals, Eco-Friendly Solutions" />
+    <meta name="twitter:image" content="https://ik.imagekit.io/dvuz4klnl/Round%20Photo_Jun042025_214605.png?updatedAt=1749053835711" />
+    <style>
+    .atom-spinner, .atom-spinner * {
+      box-sizing: border-box;
+    }
+    .atom-spinner {
+      height: 200px; /* Increased size for prominence */
+      width: 200px;
+      overflow: hidden;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: transparent;
+      z-index: 9999;
+      transition: opacity 0.6s ease;
+      /* Responsive scaling for mobile */
+    }
+    @media (max-width: 600px) {
+      .atom-spinner {
+        height: 120px;
+        width: 120px;
+      }
+    }
+    .atom-spinner.fade-out {
+      opacity: 0;
+      pointer-events: none;
+    }
+    .atom-spinner .spinner-inner {
+      position: relative;
+      display: block;
+      height: 100%;
+      width: 100%;
+    }
+    .atom-spinner .spinner-line {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      border-left-width: calc(200px / 25);
+      border-top-width: calc(200px / 25);
+      border-left-color: #004080;
+      border-left-style: solid;
+      border-top-style: solid;
+      border-top-color: transparent;
+      box-shadow: 0 0 16px 2px #85c1e9;
+    }
+    .atom-spinner .spinner-line:nth-child(1) {
+      animation: atom-spinner-animation-1 1.5s ease-in-out infinite;
+      transform: rotateZ(120deg) rotateX(66deg) rotateZ(0deg);
+    }
+    .atom-spinner .spinner-line:nth-child(2) {
+      animation: atom-spinner-animation-2 1.5s ease-in-out infinite;
+      transform: rotateZ(240deg) rotateX(66deg) rotateZ(0deg);
+    }
+    .atom-spinner .spinner-line:nth-child(3) {
+      animation: atom-spinner-animation-3 1.5s ease-in-out infinite;
+      transform: rotateZ(360deg) rotateX(66deg) rotateZ(0deg);
+    }
+    .atom-spinner .spinner-circle {
+      display: block;
+      position: absolute;
+      color: #5dade2;
+      font-size: calc(200px * 0.24);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-shadow: 0 0 12px #85c1e9;
+    }
+    @media (max-width: 600px) {
+      .atom-spinner .spinner-circle {
+        font-size: calc(120px * 0.24);
+      }
+      .atom-spinner .spinner-line {
+        border-left-width: calc(120px / 25);
+        border-top-width: calc(120px / 25);
+      }
+    }
+    @keyframes atom-spinner-animation-1 {
+      100% {
+        transform: rotateZ(120deg) rotateX(66deg) rotateZ(360deg);
+      }
+    }
+    @keyframes atom-spinner-animation-2 {
+      100% {
+        transform: rotateZ(240deg) rotateX(66deg) rotateZ(360deg);
+      }
+    }
+    @keyframes atom-spinner-animation-3 {
+      100% {
+        transform: rotateZ(360deg) rotateX(66deg) rotateZ(360deg);
+      }
+    }
+    </style>
   </head>
 
   <body>
+    <div id="preloader" class="atom-spinner">
+      <div class="spinner-inner">
+        <div class="spinner-line"></div>
+        <div class="spinner-line"></div>
+        <div class="spinner-line"></div>
+        <div class="spinner-circle">&#9679;</div>
+      </div>
+    </div>
     <div id="root"></div>
     <!-- IMPORTANT: DO NOT REMOVE THIS SCRIPT TAG OR THIS VERY COMMENT! -->
     <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
@@ -28,5 +129,15 @@
     (function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="wzZ3NQS14Y2BzzkIVMeoV";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
     </script>
     <!-- Chatbase embed end -->
+    <script>
+    // Fade out preloader once window fully loads
+    window.addEventListener('load', () => {
+      const preloader = document.getElementById('preloader');
+      preloader.classList.add('fade-out');
+      setTimeout(() => {
+        preloader.style.display = 'none';
+      }, 600);
+    });
+  </script>
   </body>
 </html>

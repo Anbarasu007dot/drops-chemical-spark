@@ -1,0 +1,19 @@
+.preloader-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(255,255,255,0.92); /* semi-transparent white for overlay effect */
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.5s;
+}
+@media (max-width: 600px) {
+  .preloader-container {
+    min-width: 100vw;
+    min-height: 100vh;
+  }
+}
