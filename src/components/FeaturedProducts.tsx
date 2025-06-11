@@ -195,6 +195,79 @@ export const FeaturedProducts = () => {
             </Button>
           </div>
         </div>
+
+        {/* Enhanced Bottom Area with Advanced Visual Effects */}
+        <div className="absolute bottom-0 left-0 right-0 h-32 overflow-hidden">
+          {/* Animated Gradient Wave */}
+          <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-blue-600/20 via-purple-500/10 to-transparent animate-pulse"></div>
+          
+          {/* SVG Wave Pattern */}
+          <svg className="absolute bottom-0 left-0 right-0 w-full h-16" viewBox="0 0 1200 120" preserveAspectRatio="none">
+            <defs>
+              <linearGradient id="waveGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="#3b82f6" stopOpacity="0.3" />
+                <stop offset="50%" stopColor="#8b5cf6" stopOpacity="0.2" />
+                <stop offset="100%" stopColor="#06b6d4" stopOpacity="0.3" />
+              </linearGradient>
+            </defs>
+            <path d="M0,60 C300,120 900,0 1200,60 L1200,120 L0,120 Z" fill="url(#waveGradient)" className="animate-wave-flow" />
+          </svg>
+
+          {/* Floating Chemical Icons */}
+          <div className="absolute bottom-4 left-8 w-12 h-12 opacity-20 animate-chemicalFloat1">
+            <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full text-blue-500">
+              <circle cx="12" cy="12" r="3" />
+              <circle cx="12" cy="3" r="1" />
+              <circle cx="12" cy="21" r="1" />
+              <circle cx="3" cy="12" r="1" />
+              <circle cx="21" cy="12" r="1" />
+              <line x1="12" y1="9" x2="12" y2="15" stroke="currentColor" strokeWidth="1" />
+              <line x1="9" y1="12" x2="15" y2="12" stroke="currentColor" strokeWidth="1" />
+            </svg>
+          </div>
+
+          <div className="absolute bottom-8 right-16 w-8 h-8 opacity-15 animate-chemicalFloat2">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" className="w-full h-full text-purple-500">
+              <path d="M12 2L2 7v10c0 5.55 3.84 9.74 9 11 5.16-1.26 9-5.45 9-11V7l-10-5z" strokeWidth="2" />
+              <circle cx="12" cy="12" r="3" fill="currentColor" />
+            </svg>
+          </div>
+
+          <div className="absolute bottom-12 left-1/3 w-14 h-14 opacity-25 animate-chemicalFloat3">
+            <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full text-cyan-500">
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+            </svg>
+          </div>
+
+          <div className="absolute bottom-6 right-1/4 w-10 h-10 opacity-20 animate-chemicalFloat4">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" className="w-full h-full text-green-500">
+              <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" strokeWidth="2" />
+              <polyline points="3.27,6.96 12,12.01 20.73,6.96" strokeWidth="2" />
+              <line x1="12" y1="22.08" x2="12" y2="12" strokeWidth="2" />
+            </svg>
+          </div>
+
+          <div className="absolute bottom-10 left-2/3 w-13 h-13 opacity-18 animate-chemicalFloat5">
+            <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full text-indigo-500">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg>
+          </div>
+
+          <div className="absolute bottom-14 right-8 w-11 h-11 opacity-22 animate-chemicalFloat6">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" className="w-full h-full text-pink-500">
+              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" strokeWidth="2" />
+            </svg>
+          </div>
+
+          {/* Particle System */}
+          <div className="absolute bottom-0 left-0 right-0 h-full">
+            <div className="particle particle-1"></div>
+            <div className="particle particle-2"></div>
+            <div className="particle particle-3"></div>
+            <div className="particle particle-4"></div>
+            <div className="particle particle-5"></div>
+          </div>
+        </div>
       </section>
 
       <QuotationModal 
