@@ -1,4 +1,4 @@
-import { Award, Clock, DollarSign, Headphones, Truck, Users } from "lucide-react";
+import { Award, Users, Target, Globe, Factory, Truck, Clock } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { ChemicalElements } from "@/components/ChemicalElements";
 
@@ -39,14 +39,14 @@ export const WhyChooseUs = () => {
       bgColor: "bg-green-50 hover:bg-green-100"
     },
     {
-      icon: DollarSign,
+      icon: Target,
       title: "Competitive Pricing",
       description: "Cost-effective solutions without compromising on quality",
       color: "text-purple-600",
       bgColor: "bg-purple-50 hover:bg-purple-100"
     },
     {
-      icon: Headphones,
+      icon: Globe,
       title: "Prompt Customer Service",
       description: "24/7 support with dedicated customer service team",
       color: "text-orange-600",
@@ -75,77 +75,96 @@ export const WhyChooseUs = () => {
     >
       <ChemicalElements />
       
-      {/* Floating Background Images */}
+      {/* Floating Background Images - Concentrated around header area */}
       <div className="absolute inset-0 pointer-events-none z-0">
-        {/* Flask Lab - Top Left */}
-        <img
-          src="https://img.freepik.com/premium-vector/flask-lab-logo-chemistry-laboratory-vector-icon_658271-10795.jpg"
-          alt=""
-          className="absolute w-20 h-20 opacity-25"
-          style={{
-            top: '15%',
-            left: '8%',
-            animation: 'floatGentle1 14s ease-in-out infinite'
-          }}
-        />
-        
-        {/* Molecule Structure - Top Right */}
-        <img
-          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfJTCFkEaK8Hrufdx8IJcNTsJbKA4w32uAug&s"
-          alt=""
-          className="absolute w-24 h-24 opacity-20"
-          style={{
-            top: '20%',
-            right: '12%',
-            animation: 'floatGentle2 16s ease-in-out infinite'
-          }}
-        />
-        
-        {/* Handshake - Bottom Left */}
-        <img
-          src="https://content.presentermedia.com/files/clipart/00033000/33230/handshake_800_wht.jpg"
-          alt=""
-          className="absolute w-28 h-28 opacity-15"
-          style={{
-            bottom: '15%',
-            left: '10%',
-            animation: 'floatGentle3 18s ease-in-out infinite'
-          }}
-        />
-        
-        {/* Stopwatch - Bottom Right */}
-        <img
-          src="https://media.istockphoto.com/id/1409428311/vector/stopwatch-3d-icon-vector-illustration-blue-timer-with-red-button-isolated-object-on-a.jpg?s=612x612&w=0&k=20&c=PZ8zvaCyCpxwvOnlKX-yg04Jjxfv6POspOzAOb6hih8="
-          alt=""
-          className="absolute w-22 h-22 opacity-25"
-          style={{
-            bottom: '20%',
-            right: '8%',
-            animation: 'floatGentle4 12s ease-in-out infinite'
-          }}
-        />
-        
-        {/* Additional Flask - Middle Left */}
+        {/* Top area around title */}
         <img
           src="https://img.freepik.com/premium-vector/flask-lab-logo-chemistry-laboratory-vector-icon_658271-10795.jpg"
           alt=""
           className="absolute w-16 h-16 opacity-20"
           style={{
-            top: '50%',
-            left: '5%',
+            top: '8%',
+            left: '15%',
+            animation: 'floatGentle1 14s ease-in-out infinite'
+          }}
+        />
+        
+        <img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfJTCFkEaK8Hrufdx8IJcNTsJbKA4w32uAug&s"
+          alt=""
+          className="absolute w-20 h-20 opacity-15"
+          style={{
+            top: '12%',
+            right: '18%',
+            animation: 'floatGentle2 16s ease-in-out infinite'
+          }}
+        />
+        
+        {/* Around description area */}
+        <img
+          src="https://content.presentermedia.com/files/clipart/00033000/33230/handshake_800_wht.jpg"
+          alt=""
+          className="absolute w-18 h-18 opacity-25"
+          style={{
+            top: '25%',
+            left: '8%',
+            animation: 'floatGentle3 18s ease-in-out infinite'
+          }}
+        />
+        
+        <img
+          src="https://media.istockphoto.com/id/1409428311/vector/stopwatch-3d-icon-vector-illustration-blue-timer-with-red-button-isolated-object-on-a.jpg?s=612x612&w=0&k=20&c=PZ8zvaCyCpxwvOnlKX-yg04Jjxfv6POspOzAOb6hih8="
+          alt=""
+          className="absolute w-16 h-16 opacity-20"
+          style={{
+            top: '28%',
+            right: '12%',
+            animation: 'floatGentle4 12s ease-in-out infinite'
+          }}
+        />
+        
+        {/* Additional images to fill the header area */}
+        <img
+          src="https://img.freepik.com/premium-vector/flask-lab-logo-chemistry-laboratory-vector-icon_658271-10795.jpg"
+          alt=""
+          className="absolute w-14 h-14 opacity-18"
+          style={{
+            top: '18%',
+            left: '25%',
             animation: 'floatGentle5 15s ease-in-out infinite'
           }}
         />
         
-        {/* Additional Molecule - Middle Right */}
         <img
           src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfJTCFkEaK8Hrufdx8IJcNTsJbKA4w32uAug&s"
           alt=""
-          className="absolute w-18 h-18 opacity-15"
+          className="absolute w-16 h-16 opacity-22"
           style={{
-            top: '60%',
-            right: '6%',
+            top: '15%',
+            right: '28%',
             animation: 'floatGentle6 13s ease-in-out infinite'
+          }}
+        />
+        
+        <img
+          src="https://content.presentermedia.com/files/clipart/00033000/33230/handshake_800_wht.jpg"
+          alt=""
+          className="absolute w-15 h-15 opacity-17"
+          style={{
+            top: '32%',
+            left: '35%',
+            animation: 'floatGentle1 17s ease-in-out infinite'
+          }}
+        />
+        
+        <img
+          src="https://media.istockphoto.com/id/1409428311/vector/stopwatch-3d-icon-vector-illustration-blue-timer-with-red-button-isolated-object-on-a.jpg?s=612x612&w=0&k=20&c=PZ8zvaCyCpxwvOnlKX-yg04Jjxfv6POspOzAOb6hih8="
+          alt=""
+          className="absolute w-17 h-17 opacity-19"
+          style={{
+            top: '22%',
+            right: '35%',
+            animation: 'floatGentle2 14s ease-in-out infinite'
           }}
         />
       </div>
