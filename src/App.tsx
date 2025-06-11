@@ -22,15 +22,18 @@ const AppContent = () => {
   const location = useLocation();
   const [loading, setLoading] = useState(true);
   const [showPreloader, setShowPreloader] = useState(true);
+  const [contentReady, setContentReady] = useState(false);
 
   // Show preloader on route changes
   useEffect(() => {
     setLoading(true);
     setShowPreloader(true);
+    setContentReady(false);
     
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 2700);
+      setContentReady(true);
+    }, 2200); // Reduced from 2700 to 2200
 
     return () => clearTimeout(timer);
   }, [location.pathname]);
@@ -39,36 +42,41 @@ const AppContent = () => {
   useEffect(() => {
     setLoading(true);
     setShowPreloader(true);
+    setContentReady(false);
     
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 2700);
+      setContentReady(true);
+    }, 2200); // Reduced from 2700 to 2200
 
     return () => clearTimeout(timer);
   }, []);
 
   const handlePreloaderComplete = () => {
     setShowPreloader(false);
-    setLoading(false);
   };
 
+  // Show preloader while loading
   if (loading && showPreloader) {
     return <Preloader onComplete={handlePreloaderComplete} />;
   }
 
+  // Show content immediately after preloader without white flash
   return (
-    <Routes>
-      <Route path="/" element={<Index />} />
-      <Route path="/products" element={<Products />} />
-      <Route path="/about" element={<About />} />
-      <Route path="/blog" element={<Blog />} />
-      <Route path="/careers" element={<Careers />} />
-      <Route path="/contact" element={<Contact />} />
-      <Route path="/feedback" element={<Feedback />} />
-      <Route path="/admin" element={<AdminLogin />} />
-      <Route path="/admin/dashboard" element={<AdminDashboard />} />
-      <Route path="*" element={<NotFound />} />
-    </Routes>
+    <div className={`min-h-screen transition-opacity duration-300 ${contentReady ? 'opacity-100' : 'opacity-0'}`}>
+      <Routes>
+        <Route path="/" element={<Index />} />
+        <Route path="/products" element={<Products />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/blog" element={<Blog />} />
+        <Route path="/careers" element={<Careers />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/feedback" element={<Feedback />} />
+        <Route path="/admin" element={<AdminLogin />} />
+        <Route path="/admin/dashboard" element={<AdminDashboard />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </div>
   );
 };
 

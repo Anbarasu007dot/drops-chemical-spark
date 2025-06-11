@@ -16,18 +16,18 @@ export const Preloader = ({ onComplete }: PreloaderProps) => {
     document.body.style.overflow = 'hidden';
     document.body.style.pointerEvents = 'none';
 
-    // Set preloader duration
+    // Set preloader duration - reduced for faster transition
     const timer = setTimeout(() => {
       setIsVisible(false);
       
-      // Wait for fade out animation to complete
+      // Start fade out immediately
       setTimeout(() => {
         // Restore body styles
         document.body.style.overflow = originalOverflow;
         document.body.style.pointerEvents = originalPointerEvents;
         onComplete();
-      }, 500); // Match the CSS transition duration
-    }, 2200); // Show preloader for 2.2 seconds
+      }, 300); // Reduced from 500 to 300ms for faster transition
+    }, 1800); // Reduced from 2200 to 1800ms
 
     return () => {
       clearTimeout(timer);
@@ -36,10 +36,6 @@ export const Preloader = ({ onComplete }: PreloaderProps) => {
       document.body.style.pointerEvents = originalPointerEvents;
     };
   }, [onComplete]);
-
-  if (!isVisible) {
-    return null;
-  }
 
   return (
     <div className={`preloader-container ${!isVisible ? 'fade-out' : ''}`}>
