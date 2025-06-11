@@ -183,7 +183,7 @@
     animation: particleFloat 15s ease-in-out infinite;
   }
 
-  /* Enhanced Wave Divider System */
+  /* Enhanced Wave Divider System with Smooth Flowing Motion */
   .enhanced-wave-divider {
     position: relative;
     height: 120px;
@@ -195,24 +195,24 @@
     position: absolute;
     bottom: 0;
     left: 0;
-    width: 100%;
+    width: 200%; /* Double width for smooth infinite scrolling */
     height: 100%;
     opacity: 0.8;
   }
 
   .wave-layer-1 {
     z-index: 3;
-    animation: waveOscillate1 8s ease-in-out infinite, parallaxWave1 0.1s linear infinite;
+    animation: smoothWaveFlow1 20s linear infinite, waveOscillate1 8s ease-in-out infinite;
   }
 
   .wave-layer-2 {
     z-index: 2;
-    animation: waveOscillate2 12s ease-in-out infinite reverse, parallaxWave2 0.1s linear infinite;
+    animation: smoothWaveFlow2 25s linear infinite reverse, waveOscillate2 12s ease-in-out infinite reverse;
   }
 
   .wave-layer-3 {
     z-index: 1;
-    animation: waveOscillate3 15s ease-in-out infinite, parallaxWave3 0.1s linear infinite;
+    animation: smoothWaveFlow3 30s linear infinite, waveOscillate3 15s ease-in-out infinite;
   }
 
   .wave-glow {
@@ -648,7 +648,34 @@
     50%, 100% { opacity: 0; }
   }
 
-  /* Enhanced Wave Animations */
+  /* Enhanced Wave Animations with Smooth Flowing Motion */
+  @keyframes smoothWaveFlow1 {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  @keyframes smoothWaveFlow2 {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  @keyframes smoothWaveFlow3 {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
   @keyframes waveOscillate1 {
     0%, 100% {
       transform: translateX(0px) scaleY(1);
@@ -686,21 +713,6 @@
     80% {
       transform: translateX(-50px) scaleY(0.9);
     }
-  }
-
-  @keyframes parallaxWave1 {
-    0% { transform: translateX(0px); }
-    100% { transform: translateX(-2px); }
-  }
-
-  @keyframes parallaxWave2 {
-    0% { transform: translateX(0px); }
-    100% { transform: translateX(-1px); }
-  }
-
-  @keyframes parallaxWave3 {
-    0% { transform: translateX(0px); }
-    100% { transform: translateX(-0.5px); }
   }
 
   @keyframes glowPulse {
