@@ -71,17 +71,17 @@ export const WhyChooseUs = () => {
   return (
     <section 
       ref={sectionRef}
-      className="relative py-20 bg-[57b8d9] overflow-hidden"
+      className="relative py-20 bg-[53bde1] overflow-hidden"
     >
       <ChemicalElements />
       
-      {/* Floating Background Images - Concentrated around header area */}
+      {/* Floating Background Images - Only around header area, reduced visibility */}
       <div className="absolute inset-0 pointer-events-none z-0">
-        {/* Top area around title */}
+        {/* Reduced visibility flask images */}
         <img
           src="https://img.freepik.com/premium-vector/flask-lab-logo-chemistry-laboratory-vector-icon_658271-10795.jpg"
           alt=""
-          className="absolute w-16 h-16 opacity-20"
+          className="absolute w-14 h-14 opacity-10"
           style={{
             top: '8%',
             left: '15%',
@@ -89,10 +89,11 @@ export const WhyChooseUs = () => {
           }}
         />
         
+        {/* Molecule structure - more visible */}
         <img
           src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfJTCFkEaK8Hrufdx8IJcNTsJbKA4w32uAug&s"
           alt=""
-          className="absolute w-20 h-20 opacity-15"
+          className="absolute w-18 h-18 opacity-20"
           style={{
             top: '12%',
             right: '18%',
@@ -100,11 +101,11 @@ export const WhyChooseUs = () => {
           }}
         />
         
-        {/* Around description area */}
+        {/* Handshake - around description area */}
         <img
           src="https://content.presentermedia.com/files/clipart/00033000/33230/handshake_800_wht.jpg"
           alt=""
-          className="absolute w-18 h-18 opacity-25"
+          className="absolute w-16 h-16 opacity-25"
           style={{
             top: '25%',
             left: '8%',
@@ -112,10 +113,11 @@ export const WhyChooseUs = () => {
           }}
         />
         
+        {/* Stopwatch */}
         <img
           src="https://media.istockphoto.com/id/1409428311/vector/stopwatch-3d-icon-vector-illustration-blue-timer-with-red-button-isolated-object-on-a.jpg?s=612x612&w=0&k=20&c=PZ8zvaCyCpxwvOnlKX-yg04Jjxfv6POspOzAOb6hih8="
           alt=""
-          className="absolute w-16 h-16 opacity-20"
+          className="absolute w-15 h-15 opacity-22"
           style={{
             top: '28%',
             right: '12%',
@@ -123,9 +125,9 @@ export const WhyChooseUs = () => {
           }}
         />
         
-        {/* Additional images to fill the header area */}
+        {/* Additional handshake for balance */}
         <img
-          src="https://img.freepik.com/premium-vector/flask-lab-logo-chemistry-laboratory-vector-icon_658271-10795.jpg"
+          src="https://content.presentermedia.com/files/clipart/00033000/33230/handshake_800_wht.jpg"
           alt=""
           className="absolute w-14 h-14 opacity-18"
           style={{
@@ -135,36 +137,15 @@ export const WhyChooseUs = () => {
           }}
         />
         
+        {/* Additional molecule for right side balance */}
         <img
           src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfJTCFkEaK8Hrufdx8IJcNTsJbKA4w32uAug&s"
           alt=""
-          className="absolute w-16 h-16 opacity-22"
+          className="absolute w-16 h-16 opacity-15"
           style={{
             top: '15%',
             right: '28%',
             animation: 'floatGentle6 13s ease-in-out infinite'
-          }}
-        />
-        
-        <img
-          src="https://content.presentermedia.com/files/clipart/00033000/33230/handshake_800_wht.jpg"
-          alt=""
-          className="absolute w-15 h-15 opacity-17"
-          style={{
-            top: '32%',
-            left: '35%',
-            animation: 'floatGentle1 17s ease-in-out infinite'
-          }}
-        />
-        
-        <img
-          src="https://media.istockphoto.com/id/1409428311/vector/stopwatch-3d-icon-vector-illustration-blue-timer-with-red-button-isolated-object-on-a.jpg?s=612x612&w=0&k=20&c=PZ8zvaCyCpxwvOnlKX-yg04Jjxfv6POspOzAOb6hih8="
-          alt=""
-          className="absolute w-17 h-17 opacity-19"
-          style={{
-            top: '22%',
-            right: '35%',
-            animation: 'floatGentle2 14s ease-in-out infinite'
           }}
         />
       </div>
