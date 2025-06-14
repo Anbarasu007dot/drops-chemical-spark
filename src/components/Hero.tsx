@@ -116,18 +116,18 @@ export const Hero = () => {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
-              <Button asChild size="lg" className="professional-button text-lg px-8 py-4">
-                <Link to="/products" className="flex items-center">
+              <Button asChild size="lg" className="professional-button text-lg px-8 py-4 w-full sm:w-auto">
+                <Link to="/products" className="flex items-center justify-center">
                   Explore Our Products
                   <ArrowRight className="ml-2 w-5 h-5" />
                 </Link>
               </Button>
 
-              <Link to="/about" className="inline-block">
+              <Link to="/about" className="inline-block w-full sm:w-auto">
                 <Button
                   variant="outline"
                   size="lg"
-                  className="secondary-button text-lg px-8 py-4 flex items-center bg-white text-blue-900 border-white hover:bg-blue-100 hover:text-blue-900 hover:border-white"
+                  className="secondary-button text-lg px-8 py-4 flex items-center justify-center bg-white text-blue-900 border-white hover:bg-blue-100 hover:text-blue-900 hover:border-white w-full"
                 >
                   <Play className="mr-2 w-5 h-5" />
                   Know About Us
