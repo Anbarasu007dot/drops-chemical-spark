@@ -7,7 +7,12 @@ if (!supabaseUrl || !supabaseAnonKey) {
   throw new Error('Missing Supabase environment variables')
 }
 
-export const supabase = createClient(supabaseUrl, supabaseAnonKey)
+export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
+  auth: {
+    persistSession: false,
+    autoRefreshToken: false
+  }
+})
 
 // Types for our blog posts
 export interface BlogPost {
@@ -31,7 +36,7 @@ export interface BlogPost {
 
 export interface CreateBlogPost {
   title: string
-  slug: string
+  slug?: string
   excerpt?: string
   content?: string
   featured_image?: string
@@ -53,4 +58,5 @@ export interface UpdateBlogPost {
   tags?: string[]
   category?: string
   status?: 'draft' | 'published' | 'archived'
+  published_at?: string
 }

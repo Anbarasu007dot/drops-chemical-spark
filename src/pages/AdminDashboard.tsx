@@ -98,28 +98,26 @@ const AdminDashboard = () => {
     e.preventDefault();
     
     if (!formData.title || !formData.excerpt) {
-      toast.error("Please fill in all required fields");
+      toast.error("Please fill in all required fields (Title and Excerpt)");
       return;
-    }
-
-    // Generate slug from title if not provided
-    if (!formData.slug) {
-      formData.slug = formData.title
-        .toLowerCase()
-        .replace(/[^a-z0-9]+/g, '-')
-        .replace(/(^-|-$)/g, '');
     }
 
     try {
       if (editingPost) {
         const { id, ...updateData } = formData;
-        await updatePost(editingPost, updateData as UpdateBlogPost);
+        const result = await updatePost(editingPost, updateData as UpdateBlogPost);
+        if (result) {
+          resetForm();
+        }
       } else {
-        await createPost(formData as CreateBlogPost);
+        const result = await createPost(formData as CreateBlogPost);
+        if (result) {
+          resetForm();
+        }
       }
-      resetForm();
     } catch (error) {
       console.error('Error saving post:', error);
+      toast.error('Failed to save post. Please try again.');
     }
   };
 

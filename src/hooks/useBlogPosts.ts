@@ -37,21 +37,38 @@ export const useBlogPosts = () => {
           .replace(/(^-|-$)/g, '')
       }
 
+      // Prepare the data for insertion
+      const insertData = {
+        title: postData.title,
+        slug: postData.slug,
+        excerpt: postData.excerpt || null,
+        content: postData.content || null,
+        featured_image: postData.featured_image || null,
+        meta_title: postData.meta_title || null,
+        meta_description: postData.meta_description || null,
+        tags: postData.tags || [],
+        category: postData.category || 'general',
+        status: postData.status || 'draft',
+        published_at: postData.status === 'published' ? new Date().toISOString() : null,
+        author_id: null // Let the database handle this with uid()
+      }
+
       const { data, error } = await supabase
         .from('blog_posts')
-        .insert([{
-          ...postData,
-          published_at: postData.status === 'published' ? new Date().toISOString() : null
-        }])
+        .insert([insertData])
         .select()
         .single()
 
-      if (error) throw error
+      if (error) {
+        console.error('Supabase error:', error)
+        throw error
+      }
       
       setPosts(prev => [data, ...prev])
       toast.success('Blog post created successfully!')
       return data
     } catch (err) {
+      console.error('Create post error:', err)
       const errorMessage = err instanceof Error ? err.message : 'Failed to create post'
       setError(errorMessage)
       toast.error(errorMessage)
@@ -63,26 +80,31 @@ export const useBlogPosts = () => {
   const updatePost = async (id: string, updates: UpdateBlogPost): Promise<BlogPost | null> => {
     try {
       // Set published_at when changing status to published
+      const updateData = { ...updates }
       if (updates.status === 'published') {
         const currentPost = posts.find(p => p.id === id)
         if (currentPost && !currentPost.published_at) {
-          updates.published_at = new Date().toISOString()
+          updateData.published_at = new Date().toISOString()
         }
       }
 
       const { data, error } = await supabase
         .from('blog_posts')
-        .update(updates)
+        .update(updateData)
         .eq('id', id)
         .select()
         .single()
 
-      if (error) throw error
+      if (error) {
+        console.error('Supabase update error:', error)
+        throw error
+      }
 
       setPosts(prev => prev.map(post => post.id === id ? data : post))
       toast.success('Blog post updated successfully!')
       return data
     } catch (err) {
+      console.error('Update post error:', err)
       const errorMessage = err instanceof Error ? err.message : 'Failed to update post'
       setError(errorMessage)
       toast.error(errorMessage)
@@ -98,12 +120,16 @@ export const useBlogPosts = () => {
         .delete()
         .eq('id', id)
 
-      if (error) throw error
+      if (error) {
+        console.error('Supabase delete error:', error)
+        throw error
+      }
 
       setPosts(prev => prev.filter(post => post.id !== id))
       toast.success('Blog post deleted successfully!')
       return true
     } catch (err) {
+      console.error('Delete post error:', err)
       const errorMessage = err instanceof Error ? err.message : 'Failed to delete post'
       setError(errorMessage)
       toast.error(errorMessage)
@@ -120,7 +146,10 @@ export const useBlogPosts = () => {
         .eq('status', 'published')
         .order('published_at', { ascending: false })
 
-      if (error) throw error
+      if (error) {
+        console.error('Get published posts error:', error)
+        throw error
+      }
       return data || []
     } catch (err) {
       console.error('Failed to fetch published posts:', err)
@@ -138,7 +167,10 @@ export const useBlogPosts = () => {
         .eq('status', 'published')
         .single()
 
-      if (error) throw error
+      if (error) {
+        console.error('Get post by slug error:', error)
+        throw error
+      }
 
       // Increment view count
       await supabase
