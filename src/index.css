@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&family=Proxima+Nova:wght@300;400;500;600;700;800&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -590,7 +590,7 @@
   /* Logo Carousel - Increased Speed */
   .logo-carousel {
     @apply flex items-center space-x-8;
-    animation: scroll 8s linear infinite; /* Increased speed from 10s to 8s */
+    animation: scroll 6s linear infinite; /* Increased speed from 8s to 6s */
   }
 
   .logo-carousel:hover {
@@ -598,7 +598,7 @@
   }
 
   .animate-logo-scroll {
-    animation: logo-scroll 10s linear infinite; /* Increased speed from 12s to 10s */
+    animation: logo-scroll 8s linear infinite; /* Increased speed from 10s to 8s */
   }
 
   @keyframes logo-scroll {
@@ -1493,6 +1493,7 @@
     font-size: 14px;
     line-height: 1.4;
     word-wrap: break-word;
+    white-space: pre-line;
   }
 
   .user-message .message-content {
@@ -1507,6 +1508,31 @@
     border: 1px solid #e5e7eb;
     border-bottom-left-radius: 6px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+
+  .quick-reply-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 12px 0;
+  }
+
+  .quick-reply-btn {
+    background: linear-gradient(135deg, var(--brand-light-blue), var(--brand-dark-blue));
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 8px rgba(66, 153, 225, 0.2);
+  }
+
+  .quick-reply-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(66, 153, 225, 0.3);
   }
 
   .chat-form {
@@ -1567,6 +1593,19 @@
       right: 15px;
       width: 55px;
       height: 55px;
+    }
+  }
+
+  /* Company Name Styling with Proxima Nova */
+  .company-name {
+    font-family: 'Proxima Nova', 'Montserrat', 'Arial', sans-serif;
+    font-weight: 700;
+  }
+
+  /* Mobile responsive font size for company name */
+  @media screen and (max-width: 600px) {
+    .company-name {
+      font-size: 16px;
     }
   }
 }

@@ -34,7 +34,7 @@ export const Footer = () => {
                 alt="Drops Chemicals Logo"
               />
               <div className="flex flex-col">
-                <span className="font-bold text-lg text-white">Drops Chemicals</span>
+                <span className="font-bold text-lg text-white company-name">Drops Chemicals</span>
                 <span className="text-sm text-blue-200 -mt-1">Reliable Partner Serving Excellence</span>
               </div>
             </div>

@@ -14,7 +14,7 @@ export const Chatbot = () => {
       services: "Our services include chemical consultation, custom formulations, quality testing, and technical support. What specific service are you interested in?",
       price: "Our pricing varies depending on the product and quantity. Can you specify which chemical product you're interested in?",
       pricing: "Our pricing varies depending on the product and quantity. Can you specify which chemical product you're interested in?",
-      contact: "You can contact us at info@dropschemicals.com or sales@dropschemicals.com, or call us at +91 96775 22201.",
+      contact: "Phone: +91 96775 22201\nEmail: info@dropschemicals.com",
       hours: "Our business hours are Monday to Saturday, 9:00 AM to 8:00 PM. Sunday: Closed.",
       location: "We are located at 3rd floor, No.76, East Power House Road, Gandhipuram, Coimbatore - 641012, Tamil Nadu, India.",
       address: "We are located at 3rd floor, No.76, East Power House Road, Gandhipuram, Coimbatore - 641012, Tamil Nadu, India.",
@@ -28,7 +28,7 @@ export const Chatbot = () => {
       industrial: "We supply basic industrial chemicals for various manufacturing processes. What industrial application do you need chemicals for?",
       pharmaceutical: "We offer high-purity pharmaceutical raw materials meeting strict quality standards. What pharmaceutical ingredient are you looking for?",
       hygiene: "We provide raw materials for hygiene and detergent manufacturing including surfactants and cleaning agents. What hygiene product are you developing?",
-      quote: "For product quotes, please visit our contact page or email us at sales@dropschemicals.com with your specific requirements.",
+      quote: "Please submit your requirements here: https://wa.me/919677522201",
       msds: "For Material Safety Data Sheets (MSDS), please contact us at info@dropschemicals.com with the specific product name.",
       quality: "We maintain strict quality standards with comprehensive testing and certifications. All our products meet international quality requirements.",
       delivery: "We offer fast local delivery within 24-48 hours across Tamil Nadu. For other locations, delivery time may vary.",
@@ -83,6 +83,67 @@ export const Chatbot = () => {
       chatMessages.scrollTop = chatMessages.scrollHeight;
     }
 
+    // Add quick reply buttons
+    function addQuickReplyButtons() {
+      if (!chatMessages) return;
+
+      const quickReplyDiv = document.createElement("div");
+      quickReplyDiv.classList.add("quick-reply-container");
+
+      const buttons = [
+        { text: "Contact", action: "contact" },
+        { text: "Product Categories", action: "categories" },
+        { text: "Request Quote", action: "quote" }
+      ];
+
+      buttons.forEach(button => {
+        const btn = document.createElement("button");
+        btn.classList.add("quick-reply-btn");
+        btn.textContent = button.text;
+        btn.onclick = () => handleQuickReply(button.action);
+        quickReplyDiv.appendChild(btn);
+      });
+
+      chatMessages.appendChild(quickReplyDiv);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    // Handle quick reply button clicks
+    function handleQuickReply(action: string) {
+      let response = "";
+      
+      switch (action) {
+        case "contact":
+          response = "Phone: +91 96775 22201\nEmail: info@dropschemicals.com";
+          break;
+        case "categories":
+          response = "We serve the following sectors:\n- Agro & Aquaculture\n- Poultry\n- Food Processing\n- Hygiene & Cleaning\n- Water Treatment\n- Metal Finishing\n- Textile Manufacturing\n- Petrochemicals\n- Solvent Recovery\n- Soap & Detergent Production\n- Boiler & ETP Chemicals\n- Cooling Tower Solutions";
+          break;
+        case "quote":
+          response = "Please submit your requirements here: https://wa.me/919677522201";
+          break;
+      }
+
+      // Remove quick reply buttons
+      const quickReplyContainer = document.querySelector(".quick-reply-container");
+      if (quickReplyContainer) {
+        quickReplyContainer.remove();
+      }
+
+      // Add user message (button text)
+      const buttonTexts = {
+        "contact": "Contact",
+        "categories": "Product Categories", 
+        "quote": "Request Quote"
+      };
+      addMessage(buttonTexts[action as keyof typeof buttonTexts], true);
+
+      // Add bot response
+      setTimeout(() => {
+        addMessage(response);
+      }, 500);
+    }
+
     // Get bot response based on user input
     function getBotResponse(userMessage: string) {
       userMessage = userMessage.toLowerCase();
@@ -122,9 +183,10 @@ export const Chatbot = () => {
     if (closeChat) closeChat.addEventListener("click", toggleChat);
     if (chatForm) chatForm.addEventListener("submit", handleUserMessage);
 
-    // Add welcome message when component mounts
+    // Add welcome message and quick reply buttons when component mounts
     setTimeout(() => {
       addMessage("Hello! I'm Drops Chemical's Bot. How can I help you today?");
+      addQuickReplyButtons();
     }, 1000);
 
     // Cleanup function
@@ -140,12 +202,11 @@ export const Chatbot = () => {
       {/* Chat Toggle Button */}
       <div id="chatToggle" className="chat-toggle">
         <div className="chat-icon">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M20 2H4C2.9 2 2 2.9 2 4V22L6 18H20C21.1 18 22 17.1 22 16V4C22 2.9 21.1 2 20 2ZM20 16H5.17L4 17.17V4H20V16Z" fill="currentColor"/>
-            <circle cx="7" cy="9" r="1" fill="currentColor"/>
-            <circle cx="12" cy="9" r="1" fill="currentColor"/>
-            <circle cx="17" cy="9" r="1" fill="currentColor"/>
-          </svg>
+          <img
+            src="https://ik.imagekit.io/dvuz4klnl/Screenshot_2025-06-03-15-28-07-28_c37d74246d9c81aa0bb824b57eaf7062.jpg?updatedAt=1748944738882"
+            alt="Drops Chemicals Logo"
+            className="w-8 h-8 rounded-full object-cover"
+          />
         </div>
         <div className="close-icon" style={{ display: 'none' }}>
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -159,9 +220,11 @@ export const Chatbot = () => {
         <div className="chat-header">
           <div className="chat-header-info">
             <div className="bot-avatar">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M12 2C13.1 2 14 2.9 14 4C14 5.1 13.1 6 12 6C10.9 6 10 5.1 10 4C10 2.9 10.9 2 12 2ZM21 9V7L15 1H5C3.9 1 3 1.9 3 3V19C3 20.1 3.9 21 5 21H11V19H5V3H13V9H21Z" fill="currentColor"/>
-              </svg>
+              <img
+                src="https://ik.imagekit.io/dvuz4klnl/Screenshot_2025-06-03-15-28-07-28_c37d74246d9c81aa0bb824b57eaf7062.jpg?updatedAt=1748944738882"
+                alt="Drops Chemicals Logo"
+                className="w-8 h-8 rounded-full object-cover"
+              />
             </div>
             <div>
               <h4>Drops Chemical's Bot</h4>

@@ -87,7 +87,7 @@ export const Header = () => {
               alt="Drops Chemicals Logo"
             />
             <div className="flex flex-col">
-              <span className="font-bold text-lg gradient-text" style={{ color: 'var(--brand-dark-blue)' }}>Drops Chemicals</span>
+              <span className="font-bold text-lg gradient-text company-name" style={{ color: 'var(--brand-dark-blue)' }}>Drops Chemicals</span>
               <span className="text-xs text-gray-600 -mt-1">Reliable Partner Serving Excellence</span>
             </div>
           </Link>
