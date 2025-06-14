@@ -83,12 +83,12 @@ export const Header = () => {
           <Link to="/" className="flex items-center space-x-3 hover:opacity-80 transition-all duration-300 hover:scale-105">
             <img
               src="https://ik.imagekit.io/dvuz4klnl/Screenshot_2025-06-03-15-28-07-28_c37d74246d9c81aa0bb824b57eaf7062.jpg?updatedAt=1748944738882"
-              className="w-10 h-10 rounded-full object-cover object-center shadow-lg hover:shadow-xl transition-all duration-300 bg-white"
+              className="w-12 h-12 rounded-full object-cover object-center shadow-lg hover:shadow-xl transition-all duration-300 bg-white"
               alt="Drops Chemicals Logo"
             />
-            <div className="flex flex-col">
-              <span className="font-bold text-lg gradient-text company-name" style={{ color: 'var(--brand-dark-blue)' }}>Drops Chemicals</span>
-              <span className="text-xs text-gray-600 -mt-1">Reliable Partner Serving Excellence</span>
+            <div className="flex flex-col justify-center h-12">
+              <span className="font-bold text-lg gradient-text company-name leading-tight" style={{ color: 'var(--brand-dark-blue)' }}>Drops Chemicals</span>
+              <span className="text-xs text-gray-600 leading-tight">Reliable Partner Serving Excellence</span>
             </div>
           </Link>
 
