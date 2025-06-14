@@ -6,48 +6,34 @@ import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { useEffect, useRef, useState } from "react";
+import { useBlogPosts } from "@/hooks/useBlogPosts";
+import { BlogPost } from "@/lib/supabase";
 
 const Blog = () => {
-  const blogPosts = [
-    {
-      id: 1,
-      title: "Understanding Water Treatment Chemicals: A Complete Guide",
-      excerpt: "Explore the essential role of water treatment chemicals in maintaining water quality across industrial and municipal applications. Learn about different types and their applications.",
-      image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&h=400&fit=crop",
-      category: "Water Treatment",
-      readTime: "8 min read",
-      date: "2024-01-15",
-      author: "Dr. Raj Kumar"
-    },
-    {
-      id: 2,
-      title: "Sustainable Agriculture: The Role of Modern Agro Chemicals",
-      excerpt: "Discover how modern agricultural chemicals are revolutionizing farming practices while maintaining environmental sustainability and crop yield optimization.",
-      image: "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=800&h=400&fit=crop",
-      category: "Agriculture",
-      readTime: "6 min read",
-      date: "2024-01-10",
-      author: "Priya Sharma"
-    },
-    {
-      id: 3,
-      title: "Industrial Hygiene: Best Practices for Chemical Safety",
-      excerpt: "Essential guidelines for handling industrial chemicals safely. Learn about proper storage, handling procedures, and safety protocols in chemical manufacturing.",
-      image: "https://images.unsplash.com/photo-1582719471384-894fbb16e074?w=800&h=400&fit=crop",
-      category: "Safety",
-      readTime: "10 min read",
-      date: "2024-01-05",
-      author: "Amit Patel"
-    }
-  ];
-
-  const categories = ["All", "Water Treatment", "Agriculture", "Safety", "Industry News"];
-  const recentPosts = blogPosts.slice(0, 3);
+  const { getPublishedPosts } = useBlogPosts();
+  const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("all");
+  const [loading, setLoading] = useState(true);
 
   // Animation state for each card
-  const [visibleCards, setVisibleCards] = useState<boolean[]>(Array(blogPosts.length).fill(false));
+  const [visibleCards, setVisibleCards] = useState<boolean[]>([]);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
 
+  // Fetch published posts
+  useEffect(() => {
+    const fetchPosts = async () => {
+      setLoading(true);
+      const posts = await getPublishedPosts();
+      setBlogPosts(posts);
+      setVisibleCards(Array(posts.length).fill(false));
+      setLoading(false);
+    };
+    
+    fetchPosts();
+  }, [getPublishedPosts]);
+
+  // Animation observer
   useEffect(() => {
     const handleScroll = () => {
       cardRefs.current.forEach((ref, idx) => {
@@ -69,7 +55,37 @@ const Blog = () => {
     window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [blogPosts]);
+
+  // Filter posts based on search and category
+  const filteredPosts = blogPosts.filter(post => {
+    const matchesSearch = post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                         post.excerpt?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                         post.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()));
+    
+    const matchesCategory = selectedCategory === "all" || post.category === selectedCategory;
+    
+    return matchesSearch && matchesCategory;
+  });
+
+  // Get unique categories
+  const categories = ["all", ...Array.from(new Set(blogPosts.map(post => post.category)))];
+  const recentPosts = blogPosts.slice(0, 3);
+
+  const formatDate = (dateString: string) => {
+    return new Date(dateString).toLocaleDateString('en-US', { 
+      year: 'numeric', 
+      month: 'long', 
+      day: 'numeric' 
+    });
+  };
+
+  const getReadTime = (content?: string) => {
+    if (!content) return "2 min read";
+    const words = content.split(' ').length;
+    const readTime = Math.ceil(words / 200); // Average reading speed
+    return `${readTime} min read`;
+  };
 
   return (
     <div className="min-h-screen">
@@ -94,12 +110,14 @@ const Blog = () => {
               Stay updated with the latest trends, safety guidelines, and innovations in chemical manufacturing
             </p>
             
-            {/* Search Bar - Fixed height matching */}
+            {/* Search Bar */}
             <div className="max-w-2xl mx-auto relative animate-fade-in animation-delay-400 flex items-stretch gap-2 mt-6">
               <div className="relative flex-1">
                 <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
                 <Input
                   placeholder="Search articles, topics, or products..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
                   className="pl-12 pr-4 py-4 text-lg bg-white/10 backdrop-blur-md border-white/20 text-white placeholder-gray-300 w-full h-14"
                 />
               </div>
@@ -120,8 +138,9 @@ const Blog = () => {
               {categories.map((category) => (
                 <Badge
                   key={category}
-                  variant="outline"
-                  className="px-4 py-2 cursor-pointer hover:bg-blue-50 hover:border-blue-300 transition-colors"
+                  variant={selectedCategory === category ? "default" : "outline"}
+                  className="px-4 py-2 cursor-pointer hover:bg-blue-50 hover:border-blue-300 transition-colors capitalize"
+                  onClick={() => setSelectedCategory(category)}
                 >
                   {category}
                 </Badge>
@@ -130,56 +149,81 @@ const Blog = () => {
 
             {/* Blog Posts Grid */}
             <div className="space-y-8">
-              {blogPosts.map((post, idx) => (
-                <div
-                  key={post.id}
-                  ref={el => cardRefs.current[idx] = el}
-                  className={`transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] will-change-transform ${visibleCards[idx] ? 'blog-fade-in' : 'blog-fade-init'}`}
-                  style={{ transitionDelay: visibleCards[idx] ? `${idx * 0.15 + 0.1}s` : '0ms' }}
-                >
-                  <Card className="overflow-hidden hover:shadow-lg transition-shadow duration-300 group">
-                    <div className="md:flex">
-                      <div className="md:w-1/3">
-                        <img
-                          src={post.image}
-                          alt={post.title}
-                          className="w-full h-48 md:h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                        />
-                      </div>
-                      <div className="md:w-2/3 p-6">
-                        <div className="flex items-center gap-4 mb-3">
-                          <Badge variant="secondary">{post.category}</Badge>
-                          {/* Improved mobile meta alignment */}
-                          <div className="flex flex-col sm:flex-row items-start sm:items-center text-sm text-gray-500 gap-1 sm:gap-4">
-                            <div className="flex items-center gap-1">
-                              <Calendar className="w-4 h-4" />
-                              <span>{post.date}</span>
-                            </div>
-                            <div className="flex items-center gap-1">
-                              <User className="w-4 h-4" />
-                              <span>{post.author}</span>
-                            </div>
-                            <div className="flex items-center gap-1">
-                              <Clock className="w-4 h-4" />
-                              <span>{post.readTime}</span>
+              {loading ? (
+                <div className="text-center py-12">
+                  <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
+                  <p className="mt-4 text-gray-600">Loading blog posts...</p>
+                </div>
+              ) : filteredPosts.length === 0 ? (
+                <div className="text-center py-12">
+                  <p className="text-gray-600 text-lg">No blog posts found matching your criteria.</p>
+                </div>
+              ) : (
+                filteredPosts.map((post, idx) => (
+                  <div
+                    key={post.id}
+                    ref={el => cardRefs.current[idx] = el}
+                    className={`transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] will-change-transform ${visibleCards[idx] ? 'blog-fade-in' : 'blog-fade-init'}`}
+                    style={{ transitionDelay: visibleCards[idx] ? `${idx * 0.15 + 0.1}s` : '0ms' }}
+                  >
+                    <Card className="overflow-hidden hover:shadow-lg transition-shadow duration-300 group">
+                      <div className="md:flex">
+                        {post.featured_image && (
+                          <div className="md:w-1/3">
+                            <img
+                              src={post.featured_image}
+                              alt={post.title}
+                              className="w-full h-48 md:h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                              onError={(e) => {
+                                const target = e.target as HTMLImageElement;
+                                target.style.display = 'none';
+                              }}
+                            />
+                          </div>
+                        )}
+                        <div className={`${post.featured_image ? 'md:w-2/3' : 'w-full'} p-6`}>
+                          <div className="flex items-center gap-4 mb-3">
+                            <Badge variant="secondary" className="capitalize">{post.category}</Badge>
+                            <div className="flex flex-col sm:flex-row items-start sm:items-center text-sm text-gray-500 gap-1 sm:gap-4">
+                              <div className="flex items-center gap-1">
+                                <Calendar className="w-4 h-4" />
+                                <span>{formatDate(post.published_at || post.created_at)}</span>
+                              </div>
+                              <div className="flex items-center gap-1">
+                                <User className="w-4 h-4" />
+                                <span>Drops Chemicals</span>
+                              </div>
+                              <div className="flex items-center gap-1">
+                                <Clock className="w-4 h-4" />
+                                <span>{getReadTime(post.content)}</span>
+                              </div>
                             </div>
                           </div>
+                          <h3 className="text-xl font-bold mb-3 group-hover:text-blue-600 transition-colors">
+                            {post.title}
+                          </h3>
+                          <p className="text-gray-600 mb-4 line-clamp-2">
+                            {post.excerpt}
+                          </p>
+                          {post.tags.length > 0 && (
+                            <div className="flex flex-wrap gap-2 mb-4">
+                              {post.tags.slice(0, 3).map((tag, tagIdx) => (
+                                <Badge key={tagIdx} variant="outline" className="text-xs">
+                                  {tag}
+                                </Badge>
+                              ))}
+                            </div>
+                          )}
+                          <Button variant="outline" className="group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                            Read More
+                            <ArrowRight className="w-4 h-4 ml-2" />
+                          </Button>
                         </div>
-                        <h3 className="text-xl font-bold mb-3 group-hover:text-blue-600 transition-colors">
-                          {post.title}
-                        </h3>
-                        <p className="text-gray-600 mb-4 line-clamp-2">
-                          {post.excerpt}
-                        </p>
-                        <Button variant="outline" className="group-hover:bg-blue-600 group-hover:text-white transition-colors">
-                          Read More
-                          <ArrowRight className="w-4 h-4 ml-2" />
-                        </Button>
                       </div>
-                    </div>
-                  </Card>
-                </div>
-              ))}
+                    </Card>
+                  </div>
+                ))
+              )}
             </div>
           </div>
 
@@ -193,16 +237,22 @@ const Blog = () => {
               <CardContent className="space-y-4">
                 {recentPosts.map((post) => (
                   <div key={post.id} className="flex gap-3 pb-4 border-b last:border-b-0">
-                    <img
-                      src={post.image}
-                      alt={post.title}
-                      className="w-16 h-16 object-cover rounded"
-                    />
-                    <div>
+                    {post.featured_image && (
+                      <img
+                        src={post.featured_image}
+                        alt={post.title}
+                        className="w-16 h-16 object-cover rounded"
+                        onError={(e) => {
+                          const target = e.target as HTMLImageElement;
+                          target.style.display = 'none';
+                        }}
+                      />
+                    )}
+                    <div className="flex-1">
                       <h4 className="font-medium text-sm line-clamp-2 mb-1">
                         {post.title}
                       </h4>
-                      <p className="text-xs text-gray-500">{post.date}</p>
+                      <p className="text-xs text-gray-500">{formatDate(post.published_at || post.created_at)}</p>
                     </div>
                   </div>
                 ))}
@@ -227,15 +277,20 @@ const Blog = () => {
               </CardContent>
             </Card>
 
-            {/* Tags */}
+            {/* Popular Tags */}
             <Card>
               <CardHeader>
                 <CardTitle>Popular Tags</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="flex flex-wrap gap-2">
-                  {["Water Treatment", "Agriculture", "Safety", "Chemicals", "Industry", "Innovation", "Sustainability"].map((tag) => (
-                    <Badge key={tag} variant="outline" className="text-xs">
+                  {Array.from(new Set(blogPosts.flatMap(post => post.tags))).slice(0, 10).map((tag) => (
+                    <Badge 
+                      key={tag} 
+                      variant="outline" 
+                      className="text-xs cursor-pointer hover:bg-blue-50"
+                      onClick={() => setSearchTerm(tag)}
+                    >
                       {tag}
                     </Badge>
                   ))}
