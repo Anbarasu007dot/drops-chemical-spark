@@ -1,6 +1,6 @@
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
-import { Search, Calendar, User, ArrowRight } from "lucide-react";
+import { Search, Calendar, User, ArrowRight, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -94,16 +94,16 @@ const Blog = () => {
               Stay updated with the latest trends, safety guidelines, and innovations in chemical manufacturing
             </p>
             
-            {/* Search Bar */}
-            <div className="max-w-2xl mx-auto relative animate-fade-in animation-delay-400 flex items-center gap-2 mt-6">
+            {/* Search Bar - Fixed height matching */}
+            <div className="max-w-2xl mx-auto relative animate-fade-in animation-delay-400 flex items-stretch gap-2 mt-6">
               <div className="relative flex-1">
                 <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
                 <Input
                   placeholder="Search articles, topics, or products..."
-                  className="pl-12 pr-4 py-4 text-lg bg-white/10 backdrop-blur-md border-white/20 text-white placeholder-gray-300 w-full"
+                  className="pl-12 pr-4 py-4 text-lg bg-white/10 backdrop-blur-md border-white/20 text-white placeholder-gray-300 w-full h-14"
                 />
               </div>
-              <Button className="bg-blue-600 hover:bg-blue-700 px-6 py-4 text-lg font-semibold h-auto">
+              <Button className="bg-blue-600 hover:bg-blue-700 px-6 text-lg font-semibold h-14">
                 Search
               </Button>
             </div>
@@ -149,16 +149,20 @@ const Blog = () => {
                       <div className="md:w-2/3 p-6">
                         <div className="flex items-center gap-4 mb-3">
                           <Badge variant="secondary">{post.category}</Badge>
-                          <div className="flex items-center text-sm text-gray-500 gap-4">
+                          {/* Improved mobile meta alignment */}
+                          <div className="flex flex-col sm:flex-row items-start sm:items-center text-sm text-gray-500 gap-1 sm:gap-4">
                             <div className="flex items-center gap-1">
                               <Calendar className="w-4 h-4" />
-                              {post.date}
+                              <span>{post.date}</span>
                             </div>
                             <div className="flex items-center gap-1">
                               <User className="w-4 h-4" />
-                              {post.author}
+                              <span>{post.author}</span>
                             </div>
-                            <span>{post.readTime}</span>
+                            <div className="flex items-center gap-1">
+                              <Clock className="w-4 h-4" />
+                              <span>{post.readTime}</span>
+                            </div>
                           </div>
                         </div>
                         <h3 className="text-xl font-bold mb-3 group-hover:text-blue-600 transition-colors">

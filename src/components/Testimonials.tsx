@@ -1,6 +1,6 @@
 import { Star } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 
 export const Testimonials = () => {
   const testimonials = [
@@ -57,6 +57,18 @@ export const Testimonials = () => {
   // Carousel logic
   const carouselRef = useRef<HTMLDivElement>(null);
   const [isPaused, setIsPaused] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Check if mobile
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   // Duplicate testimonials for seamless looping
   const carouselTestimonials = [...testimonials, ...testimonials];
@@ -71,6 +83,31 @@ export const Testimonials = () => {
   // Pause animation on hover
   const handleMouseEnter = () => setIsPaused(true);
   const handleMouseLeave = () => setIsPaused(false);
+
+  // Touch handling for mobile
+  const [touchStart, setTouchStart] = useState<number | null>(null);
+  const [touchEnd, setTouchEnd] = useState<number | null>(null);
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setTouchEnd(null);
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+    
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > 50;
+    const isRightSwipe = distance < -50;
+
+    if (isLeftSwipe || isRightSwipe) {
+      // Handle swipe logic here if needed
+    }
+  };
 
   return (
     <section
@@ -142,37 +179,52 @@ export const Testimonials = () => {
           </div>
         </div>
 
-        {/* Mobile: Horizontal swipeable carousel */}
-        <div className="md:hidden flex gap-6 overflow-x-auto snap-x snap-mandatory pb-4 -mx-4 px-4">
-          {testimonials.map((testimonial, index) => (
-            <Card
-              key={index}
-              className="professional-card bg-black/30 backdrop-blur-lg border-white/20 text-white testimonial-hover min-w-[85vw] max-w-[90vw] snap-center cursor-pointer"
-            >
-              <CardContent className="p-8">
-                <div className="flex items-center mb-4">
-                  {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
-                  ))}
-                </div>
-                <p className="text-blue-100 mb-6 line-height-loose">
-                  "{testimonial.content}"
-                </p>
-                <div className="flex items-center">
-                  <img
-                    src={testimonial.image}
-                    alt={testimonial.name}
-                    className="w-12 h-12 rounded-full mr-4 object-cover"
-                  />
-                  <div>
-                    <h4 className="font-semibold text-white">{testimonial.name}</h4>
-                    <p className="text-sm text-blue-200">{testimonial.role}</p>
-                    <p className="text-sm text-blue-300">{testimonial.company}</p>
+        {/* Mobile: Auto-scrolling carousel with touch support */}
+        <div 
+          className="md:hidden overflow-x-hidden w-full"
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
+        >
+          <div
+            className="flex gap-6 testimonial-carousel-track"
+            style={{
+              width: totalWidth,
+              animationDuration: `${duration}s`,
+              animationPlayState: "running",
+            }}
+          >
+            {carouselTestimonials.map((testimonial, index) => (
+              <Card
+                key={index}
+                className="professional-card bg-black/30 backdrop-blur-lg border-white/20 text-white testimonial-hover min-w-[85vw] max-w-[90vw] cursor-pointer"
+                style={{ flex: "0 0 85vw" }}
+              >
+                <CardContent className="p-8">
+                  <div className="flex items-center mb-4">
+                    {[...Array(testimonial.rating)].map((_, i) => (
+                      <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                    ))}
                   </div>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
+                  <p className="text-blue-100 mb-6 line-height-loose">
+                    "{testimonial.content}"
+                  </p>
+                  <div className="flex items-center">
+                    <img
+                      src={testimonial.image}
+                      alt={testimonial.name}
+                      className="w-12 h-12 rounded-full mr-4 object-cover"
+                    />
+                    <div>
+                      <h4 className="font-semibold text-white">{testimonial.name}</h4>
+                      <p className="text-sm text-blue-200">{testimonial.role}</p>
+                      <p className="text-sm text-blue-300">{testimonial.company}</p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
         </div>
       </div>
     </section>

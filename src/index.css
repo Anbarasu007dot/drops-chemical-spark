@@ -1296,6 +1296,54 @@
     opacity: 1;
     transform: translateY(0);
   }
+
+  /* Mobile-specific optimizations */
+  @media (max-width: 768px) {
+    /* Ensure animations work on mobile */
+    .animated-btn {
+      transition: transform 0.18s cubic-bezier(0.4,0,0.2,1), box-shadow 0.18s cubic-bezier(0.4,0,0.2,1);
+      will-change: transform, box-shadow;
+    }
+    
+    .animated-btn:active {
+      transform: scale(0.98);
+      box-shadow: 0 2px 8px 0 rgba(37,99,235,0.08), 0 1px 2px 0 rgba(0,0,0,0.04);
+    }
+
+    /* Disable hover effects on mobile, use touch instead */
+    .product-card:hover .overlay {
+      transform: translateY(100%);
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    /* Enable touch-based interactions */
+    .product-card:active .overlay {
+      transform: translateY(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* Optimize testimonial carousel for mobile */
+    .testimonial-carousel-track {
+      animation: testimonial-carousel-loop linear infinite;
+      animation-duration: 30s;
+      animation-play-state: running;
+    }
+
+    /* Ensure proper spacing on mobile */
+    .professional-card {
+      margin-bottom: 1rem;
+    }
+
+    /* Mobile-friendly button sizing */
+    .professional-button,
+    .secondary-button,
+    .accent-button {
+      min-height: 44px;
+      padding: 12px 24px;
+    }
+  }
 }
 
 /* Professional Scrollbar */

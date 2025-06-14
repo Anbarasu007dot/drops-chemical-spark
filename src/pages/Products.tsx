@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Search, MessageSquare } from "lucide-react";
 import { Header } from "@/components/Header";
@@ -247,21 +246,22 @@ const Products = () => {
                     style={{ animationDelay: `${index * 0.05}s` }}
                   >
                     <CardContent className="p-6 relative">
-                      <div className="flex items-center justify-between">
-                        <div className="flex-1">
+                      <div className="flex flex-col md:flex-row md:items-center md:justify-between">
+                        <div className="flex-1 mb-4 md:mb-0">
                           <h3 className="text-lg font-semibold text-gray-900 mb-2 hover:text-blue-600 transition-colors" style={{ color: 'var(--brand-dark-blue)' }}>
                             {product}
                           </h3>
-                          <p className="text-sm text-gray-600">
+                          {/* Hide description on mobile */}
+                          <p className="text-sm text-gray-600 hidden md:block">
                             High-quality chemical solution for industrial applications
                           </p>
                         </div>
                         
-                        <div className="flex gap-2 ml-4">
+                        <div className="flex flex-col sm:flex-row gap-2 md:ml-4">
                           <Link to="/contact" style={{ textDecoration: 'none' }}>
                             <Button
                               size="sm"
-                              className="professional-button animated-btn"
+                              className="professional-button animated-btn w-full sm:w-auto"
                             >
                               <MessageSquare className="w-4 h-4 mr-1" />
                               Quote
@@ -270,7 +270,7 @@ const Products = () => {
                           <Link to="/contact" style={{ textDecoration: 'none' }}>
                             <Button
                               size="sm"
-                              className="bg-blue-200 hover:bg-blue-300 text-blue-900 font-bold shadow-md border-0 px-4 py-2 rounded-lg flex items-center gap-1 animated-btn"
+                              className="bg-blue-200 hover:bg-blue-300 text-blue-900 font-bold shadow-md border-0 px-4 py-2 rounded-lg flex items-center gap-1 animated-btn w-full sm:w-auto"
                               style={{ fontFamily: 'Montserrat, Arial, sans-serif', letterSpacing: '0.05em' }}
                             >
                               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" className="w-4 h-4 mr-1" stroke="currentColor"><path d="M4 17V7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v10" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/><rect x="9" y="9" width="6" height="6" rx="1" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
@@ -310,20 +310,21 @@ const Products = () => {
                         style={{ animationDelay: `${index * 0.05}s` }}
                       >
                         <CardContent className="p-6 relative">
-                          <div className="flex items-center justify-between">
-                            <div className="flex-1">
+                          <div className="flex flex-col md:flex-row md:items-center md:justify-between">
+                            <div className="flex-1 mb-4 md:mb-0">
                               <h3 className="text-lg font-semibold text-gray-900 mb-2 hover:text-blue-600 transition-colors" style={{ color: 'var(--brand-dark-blue)' }}>
                                 {product}
                               </h3>
-                              <p className="text-sm text-gray-600">
+                              {/* Hide description on mobile */}
+                              <p className="text-sm text-gray-600 hidden md:block">
                                 High-quality chemical solution for industrial applications
                               </p>
                             </div>
-                            <div className="flex gap-2 ml-4">
+                            <div className="flex flex-col sm:flex-row gap-2 md:ml-4">
                               <Link to="/contact" style={{ textDecoration: 'none' }}>
                                 <Button
                                   size="sm"
-                                  className="professional-button animated-btn"
+                                  className="professional-button animated-btn w-full sm:w-auto"
                                 >
                                   <MessageSquare className="w-4 h-4 mr-1" />
                                   Quote
@@ -332,7 +333,7 @@ const Products = () => {
                               <Link to="/contact" style={{ textDecoration: 'none' }}>
                                 <Button
                                   size="sm"
-                                  className="bg-blue-200 hover:bg-blue-300 text-blue-900 font-bold shadow-md border-0 px-4 py-2 rounded-lg flex items-center gap-1 animated-btn"
+                                  className="bg-blue-200 hover:bg-blue-300 text-blue-900 font-bold shadow-md border-0 px-4 py-2 rounded-lg flex items-center gap-1 animated-btn w-full sm:w-auto"
                                   style={{ fontFamily: 'Montserrat, Arial, sans-serif', letterSpacing: '0.05em' }}
                                 >
                                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" className="w-4 h-4 mr-1" stroke="currentColor"><path d="M4 17V7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v10" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/><rect x="9" y="9" width="6" height="6" rx="1" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>

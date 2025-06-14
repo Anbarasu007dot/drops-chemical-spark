@@ -13,7 +13,7 @@
   align-items: center;
   justify-content: center;
   margin: 0;
-  padding: 0;
+  padding: 20px; /* Added padding to prevent clipping */
   box-sizing: border-box;
 }
 
@@ -24,7 +24,7 @@
 .atom-spinner {
   height: 200px; /* Increased size for prominence */
   width: 200px;
-  overflow: hidden;
+  overflow: visible; /* Changed from hidden to visible */
   position: relative;
   background: transparent;
   transition: opacity 0.6s ease;
@@ -35,6 +35,10 @@
   .atom-spinner {
     height: 120px;
     width: 120px;
+  }
+  
+  .preloader-container {
+    padding: 40px; /* Increased padding on mobile */
   }
 }
 
