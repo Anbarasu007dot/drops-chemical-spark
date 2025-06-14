@@ -82,6 +82,12 @@
   html {
     scroll-behavior: smooth;
     overflow-x: hidden;
+    /* Force scrollbar to always be visible */
+    overflow-y: scroll !important;
+    scrollbar-gutter: stable both-edges;
+    /* Ensure scrollbar is always rendered */
+    min-height: 100vh;
+    height: auto;
   }
 
   body {
@@ -92,6 +98,17 @@
     line-height: 1.6;
     overflow-x: hidden;
     color: #1e293b;
+    /* Force scrollbar visibility on body */
+    overflow-y: auto !important;
+    min-height: 100vh;
+    height: auto;
+  }
+
+  /* Force scrollbar on all major containers */
+  #root {
+    min-height: 100vh;
+    height: auto;
+    overflow-y: auto !important;
   }
 
   .line-clamp-2 {
@@ -573,7 +590,7 @@
   /* Logo Carousel - Increased Speed */
   .logo-carousel {
     @apply flex items-center space-x-8;
-    animation: scroll 15s linear infinite; /* Reduced from 30s to 15s for 2x speed */
+    animation: scroll 10s linear infinite; /* Increased speed from 15s to 10s */
   }
 
   .logo-carousel:hover {
@@ -581,7 +598,7 @@
   }
 
   .animate-logo-scroll {
-    animation: logo-scroll 16s linear infinite; /* Reduced from 32s to 16s for 2x speed */
+    animation: logo-scroll 12s linear infinite; /* Increased speed from 16s to 12s */
   }
 
   @keyframes logo-scroll {
@@ -1344,89 +1361,109 @@
   }
 }
 
-/* Enhanced Mobile Scrollbar with Smooth Animations - FIXED VERSION */
+/* ENHANCED MOBILE SCROLLBAR WITH MAXIMUM VISIBILITY - FIXED VERSION */
 ::-webkit-scrollbar {
-  width: 14px; /* Increased width for better visibility */
-  height: 14px;
+  width: 16px !important; /* Increased width for maximum visibility */
+  height: 16px !important;
+  display: block !important;
+  -webkit-appearance: none !important;
 }
 
 ::-webkit-scrollbar-track {
-  background: linear-gradient(180deg, #f1f5f9 0%, #e2e8f0 100%);
-  border-radius: 8px;
-  margin: 4px;
-  border: 1px solid rgba(66, 153, 225, 0.1);
+  background: linear-gradient(180deg, #e2e8f0 0%, #cbd5e1 100%) !important;
+  border-radius: 10px !important;
+  margin: 2px !important;
+  border: 2px solid rgba(66, 153, 225, 0.2) !important;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1) !important;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #4299e1 0%, #1a365d 100%);
-  border-radius: 8px;
-  border: 2px solid #f1f5f9;
-  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  box-shadow: 0 2px 8px rgba(66, 153, 225, 0.3);
-  min-height: 40px; /* Ensure minimum thumb size */
+  background: linear-gradient(180deg, #4299e1 0%, #1a365d 100%) !important;
+  border-radius: 10px !important;
+  border: 3px solid #f1f5f9 !important;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+  box-shadow: 0 4px 12px rgba(66, 153, 225, 0.4) !important;
+  min-height: 50px !important; /* Ensure minimum thumb size */
+  cursor: pointer !important;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, #1a365d 0%, #4299e1 100%);
-  transform: scale(1.05);
-  box-shadow: 0 4px 16px rgba(66, 153, 225, 0.5);
-  border-color: rgba(255, 255, 255, 0.8);
+  background: linear-gradient(180deg, #1a365d 0%, #4299e1 100%) !important;
+  transform: scale(1.1) !important;
+  box-shadow: 0 6px 20px rgba(66, 153, 225, 0.6) !important;
+  border-color: rgba(255, 255, 255, 0.9) !important;
 }
 
 ::-webkit-scrollbar-thumb:active {
-  background: linear-gradient(180deg, #1a365d 0%, #2b77e6 100%);
-  transform: scale(0.95);
-  box-shadow: 0 2px 8px rgba(66, 153, 225, 0.7);
+  background: linear-gradient(180deg, #1a365d 0%, #2b77e6 100%) !important;
+  transform: scale(1.05) !important;
+  box-shadow: 0 4px 16px rgba(66, 153, 225, 0.8) !important;
 }
 
 ::-webkit-scrollbar-corner {
-  background: #f1f5f9;
+  background: #f1f5f9 !important;
+  border-radius: 10px !important;
 }
 
-/* Mobile-specific scrollbar enhancements - FIXED VERSION */
+/* MOBILE-SPECIFIC SCROLLBAR ENHANCEMENTS - MAXIMUM VISIBILITY */
 @media (max-width: 768px) {
   ::-webkit-scrollbar {
-    width: 12px; /* Increased from 8px for better visibility */
-    height: 12px;
+    width: 14px !important; /* Increased from 12px for better visibility */
+    height: 14px !important;
+    display: block !important;
+    -webkit-appearance: none !important;
   }
   
   ::-webkit-scrollbar-track {
-    background: linear-gradient(180deg, #f8fafc 0%, #e2e8f0 100%);
-    border-radius: 6px;
-    margin: 2px;
-    border: 1px solid rgba(66, 153, 225, 0.15);
+    background: linear-gradient(180deg, #f8fafc 0%, #e2e8f0 100%) !important;
+    border-radius: 8px !important;
+    margin: 1px !important;
+    border: 2px solid rgba(66, 153, 225, 0.25) !important;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.15) !important;
   }
   
   ::-webkit-scrollbar-thumb {
-    background: linear-gradient(180deg, #4299e1 0%, #1a365d 100%);
-    border-radius: 6px;
-    border: 1px solid #f8fafc;
-    transition: all 0.2s ease-out;
-    box-shadow: 0 1px 4px rgba(66, 153, 225, 0.4);
-    min-height: 30px; /* Ensure minimum thumb size on mobile */
+    background: linear-gradient(180deg, #4299e1 0%, #1a365d 100%) !important;
+    border-radius: 8px !important;
+    border: 2px solid #f8fafc !important;
+    transition: all 0.2s ease-out !important;
+    box-shadow: 0 2px 8px rgba(66, 153, 225, 0.5) !important;
+    min-height: 40px !important; /* Ensure minimum thumb size on mobile */
+    cursor: pointer !important;
   }
   
   ::-webkit-scrollbar-thumb:active {
-    background: linear-gradient(180deg, #1a365d 0%, #2b77e6 100%);
-    transform: scale(1.1);
-    box-shadow: 0 2px 8px rgba(66, 153, 225, 0.6);
+    background: linear-gradient(180deg, #1a365d 0%, #2b77e6 100%) !important;
+    transform: scale(1.15) !important;
+    box-shadow: 0 4px 12px rgba(66, 153, 225, 0.7) !important;
   }
 
-  /* Force scrollbar to always be visible on mobile */
+  /* FORCE SCROLLBAR VISIBILITY ON ALL MOBILE ELEMENTS */
+  html {
+    overflow-y: scroll !important;
+    scrollbar-gutter: stable both-edges !important;
+    scrollbar-width: auto !important; /* For Firefox */
+  }
+  
   body {
-    overflow-y: scroll;
-    scrollbar-gutter: stable;
+    overflow-y: auto !important;
+    scrollbar-gutter: stable both-edges !important;
+  }
+  
+  #root {
+    overflow-y: auto !important;
+    scrollbar-gutter: stable both-edges !important;
   }
   
   /* Enhanced touch scrolling */
   * {
-    -webkit-overflow-scrolling: touch;
-    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch !important;
+    overscroll-behavior: contain !important;
   }
   
   /* Smooth transitions for mobile interactions */
   .mobile-smooth-transition {
-    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
   }
   
   /* Enhanced mobile scroll indicators */
@@ -1443,13 +1480,26 @@
   }
 }
 
+/* FIREFOX SCROLLBAR SUPPORT */
+html {
+  scrollbar-width: auto !important;
+  scrollbar-color: #4299e1 #e2e8f0 !important;
+}
+
+@media (max-width: 768px) {
+  html {
+    scrollbar-width: auto !important;
+    scrollbar-color: #4299e1 #f8fafc !important;
+  }
+}
+
 /* Smooth scroll behavior with enhanced animations */
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 80px;
   /* Force scrollbar to always be visible */
-  overflow-y: scroll;
-  scrollbar-gutter: stable;
+  overflow-y: scroll !important;
+  scrollbar-gutter: stable both-edges !important;
 }
 
 /* Enhanced scroll animations for mobile */
