@@ -570,10 +570,10 @@
     font-family: 'Montserrat', sans-serif;
   }
 
-  /* Logo Carousel */
+  /* Logo Carousel - Increased Speed */
   .logo-carousel {
     @apply flex items-center space-x-8;
-    animation: scroll 30s linear infinite;
+    animation: scroll 15s linear infinite; /* Reduced from 30s to 15s for 2x speed */
   }
 
   .logo-carousel:hover {
@@ -581,7 +581,7 @@
   }
 
   .animate-logo-scroll {
-    animation: logo-scroll 32s linear infinite;
+    animation: logo-scroll 16s linear infinite; /* Reduced from 32s to 16s for 2x speed */
   }
 
   @keyframes logo-scroll {
@@ -1344,81 +1344,78 @@
   }
 }
 
-/* Enhanced Mobile Scrollbar with Smooth Animations */
+/* Enhanced Mobile Scrollbar with Smooth Animations - FIXED VERSION */
 ::-webkit-scrollbar {
-  width: 12px;
+  width: 14px; /* Increased width for better visibility */
+  height: 14px;
 }
 
 ::-webkit-scrollbar-track {
   background: linear-gradient(180deg, #f1f5f9 0%, #e2e8f0 100%);
-  border-radius: 6px;
+  border-radius: 8px;
   margin: 4px;
+  border: 1px solid rgba(66, 153, 225, 0.1);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, var(--brand-light-blue) 0%, var(--brand-dark-blue) 100%);
-  border-radius: 6px;
+  background: linear-gradient(180deg, #4299e1 0%, #1a365d 100%);
+  border-radius: 8px;
   border: 2px solid #f1f5f9;
   transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  box-shadow: 0 2px 8px rgba(66, 153, 225, 0.2);
+  box-shadow: 0 2px 8px rgba(66, 153, 225, 0.3);
+  min-height: 40px; /* Ensure minimum thumb size */
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, var(--brand-dark-blue) 0%, var(--brand-light-blue) 100%);
+  background: linear-gradient(180deg, #1a365d 0%, #4299e1 100%);
   transform: scale(1.05);
-  box-shadow: 0 4px 16px rgba(66, 153, 225, 0.4);
+  box-shadow: 0 4px 16px rgba(66, 153, 225, 0.5);
+  border-color: rgba(255, 255, 255, 0.8);
 }
 
 ::-webkit-scrollbar-thumb:active {
   background: linear-gradient(180deg, #1a365d 0%, #2b77e6 100%);
   transform: scale(0.95);
-  box-shadow: 0 2px 8px rgba(66, 153, 225, 0.6);
+  box-shadow: 0 2px 8px rgba(66, 153, 225, 0.7);
 }
 
-/* Mobile-specific scrollbar enhancements */
+::-webkit-scrollbar-corner {
+  background: #f1f5f9;
+}
+
+/* Mobile-specific scrollbar enhancements - FIXED VERSION */
 @media (max-width: 768px) {
   ::-webkit-scrollbar {
-    width: 8px;
+    width: 12px; /* Increased from 8px for better visibility */
+    height: 12px;
   }
   
   ::-webkit-scrollbar-track {
     background: linear-gradient(180deg, #f8fafc 0%, #e2e8f0 100%);
-    border-radius: 4px;
+    border-radius: 6px;
     margin: 2px;
+    border: 1px solid rgba(66, 153, 225, 0.15);
   }
   
   ::-webkit-scrollbar-thumb {
-    background: linear-gradient(180deg, var(--brand-light-blue) 0%, var(--brand-dark-blue) 100%);
-    border-radius: 4px;
+    background: linear-gradient(180deg, #4299e1 0%, #1a365d 100%);
+    border-radius: 6px;
     border: 1px solid #f8fafc;
     transition: all 0.2s ease-out;
-    box-shadow: 0 1px 4px rgba(66, 153, 225, 0.3);
+    box-shadow: 0 1px 4px rgba(66, 153, 225, 0.4);
+    min-height: 30px; /* Ensure minimum thumb size on mobile */
   }
   
   ::-webkit-scrollbar-thumb:active {
     background: linear-gradient(180deg, #1a365d 0%, #2b77e6 100%);
     transform: scale(1.1);
-    box-shadow: 0 2px 8px rgba(66, 153, 225, 0.5);
+    box-shadow: 0 2px 8px rgba(66, 153, 225, 0.6);
   }
-}
 
-/* Smooth scroll behavior with enhanced animations */
-html {
-  scroll-behavior: smooth;
-  scroll-padding-top: 80px;
-}
-
-/* Enhanced scroll animations for mobile */
-@media (max-width: 768px) {
-  /* Smooth scroll snap for better mobile experience */
-  .scroll-snap-container {
-    scroll-snap-type: y mandatory;
-    scroll-behavior: smooth;
-  }
-  
-  .scroll-snap-item {
-    scroll-snap-align: start;
-    scroll-snap-stop: always;
+  /* Force scrollbar to always be visible on mobile */
+  body {
+    overflow-y: scroll;
+    scrollbar-gutter: stable;
   }
   
   /* Enhanced touch scrolling */
@@ -1443,6 +1440,29 @@ html {
     transform-origin: left;
     z-index: 9999;
     transition: transform 0.1s ease-out;
+  }
+}
+
+/* Smooth scroll behavior with enhanced animations */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+  /* Force scrollbar to always be visible */
+  overflow-y: scroll;
+  scrollbar-gutter: stable;
+}
+
+/* Enhanced scroll animations for mobile */
+@media (max-width: 768px) {
+  /* Smooth scroll snap for better mobile experience */
+  .scroll-snap-container {
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
+  }
+  
+  .scroll-snap-item {
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
   }
 }
 
