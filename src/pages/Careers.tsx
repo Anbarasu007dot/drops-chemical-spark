@@ -95,6 +95,14 @@ const Careers = () => {
     }
   ];
 
+  const handleCardClick = () => {
+    window.open('https://erp.dropschemicals.com/jobs', '_blank');
+  };
+
+  const handleViewOpeningsClick = () => {
+    window.open('https://erp.dropschemicals.com/jobs', '_blank');
+  };
+
   return (
     <div className="min-h-screen">
       <Header />
@@ -157,11 +165,19 @@ const Careers = () => {
             {benefits.map((benefit, index) => (
               <div
                 key={index}
-                className={`group relative transition-all duration-700 ease-out ${
+                className={`group relative transition-all duration-700 ease-out cursor-pointer ${
                   isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
                 }`}
                 style={{ 
                   transitionDelay: `${index * 150 + 200}ms`
+                }}
+                onClick={handleCardClick}
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    handleCardClick();
+                  }
                 }}
               >
                 {/* Glassmorphism Card */}
@@ -207,56 +223,12 @@ const Careers = () => {
                 <p className="text-lg font-semibold mb-1">Ready to join our team?</p>
                 <p className="text-sm text-slate-600">Explore opportunities and grow with us</p>
               </div>
-              <Button className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white px-8 py-3 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
+              <Button 
+                className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white px-8 py-3 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+                onClick={handleViewOpeningsClick}
+              >
                 View Openings
               </Button>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Hiring Plans Notice */}
-      <section className="py-24 bg-gradient-to-br from-gray-50 via-blue-50 to-blue-100 flex items-center justify-center min-h-[40vh] relative overflow-hidden">
-        {/* Animated background pattern */}
-        <div className="absolute inset-0 pointer-events-none opacity-30 z-0" aria-hidden="true">
-          <svg width="100%" height="100%" className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <pattern id="dots" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
-                <circle cx="2" cy="2" r="2" fill="#a5b4fc" />
-              </pattern>
-            </defs>
-            <rect width="100%" height="100%" fill="url(#dots)" />
-          </svg>
-        </div>
-        <div className="relative z-10 w-full max-w-7xl mx-auto px-4">
-          <div className="bg-white/90 rounded-2xl shadow-lg flex flex-col md:flex-row items-center justify-center gap-10 p-8 md:p-12 animate-fade-in">
-            {/* Illustration (left) */}
-            <div className="flex-shrink-0 w-full md:w-1/2 flex justify-center mb-8 md:mb-0 h-full">
-              <img
-                src="https://imgs.search.brave.com/o86eUJzEKOk-sodCYHSNPxFiElss8xD_s21f4RjwsYU/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvODgx/NTQyMTIyL3Bob3Rv/L2J1c2luZXNzLXBl/b3BsZS11c2luZy1w/ZW4tdGFibGV0LW5v/dGVib29rLWFyZS1w/bGFubmluZy1hLW1h/cmtldGluZy1wbGFu/LXRvLWltcHJvdmUt/dGhlLXF1YWxpdHku/anBnP3M9NjEyeDYx/MiZ3PTAmaz0yMCZj/PXpTbzZ6WDR6Z3NP/WUJRcHdfN1hjejNu/WF9zWHF3SHIwbVN6/RUdrVVJFVWc9"
-                alt="Planning illustration"
-                className="w-full h-full max-h-72 md:max-h-96 object-contain rounded-xl m-2"
-                loading="lazy"
-              />
-            </div>
-            {/* Message and CTA (right) */}
-            <div className="flex-1 flex flex-col items-center md:items-start text-center md:text-left justify-center">
-              <svg xmlns="http://www.w3.org/2000/svg" className="w-12 h-12 text-blue-400 mb-4 mx-auto md:mx-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6l4 2m6-4a10 10 0 11-20 0 10 10 0 0120 0z" />
-              </svg>
-              <h2 className="text-2xl md:text-3xl font-semibold text-gray-800 mb-2">Our hiring plans are still under consideration.</h2>
-              <p className="text-gray-600 text-lg font-normal mb-6">Please check back soon for updates on career opportunities at Drops Chemicals.</p>
-              <div className="flex progress-wrapper sm:flex-row flex-col sm:items-center gap-3 w-full">
-                <Button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg text-lg font-semibold shadow-md transition-all duration-300" onClick={() => alert('Job alerts coming soon!')}>
-                  Stay Updated
-                </Button>
-                {/* Animated Loading Bar */}
-                <div className="animated-loading-bar">
-                  <div className="loading-fill">
-                    <div className="shimmer"></div>
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         </div>
