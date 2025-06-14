@@ -1,12 +1,10 @@
 import { useState, useEffect } from "react";
-import { Menu, X, Search, ChevronDown } from "lucide-react";
+import { Menu, X, ChevronDown } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [openDropdownIndex, setOpenDropdownIndex] = useState<number | null>(null);
   const [scrolled, setScrolled] = useState(false);
   const navigate = useNavigate();
@@ -83,10 +81,10 @@ export const Header = () => {
           <Link to="/" className="flex items-center space-x-3 hover:opacity-80 transition-all duration-300 hover:scale-105">
             <img
               src="https://ik.imagekit.io/dvuz4klnl/Screenshot_2025-06-03-15-28-07-28_c37d74246d9c81aa0bb824b57eaf7062.jpg?updatedAt=1748944738882"
-              className="w-12 h-12 rounded-full object-cover object-center shadow-lg hover:shadow-xl transition-all duration-300 bg-white"
+              className="w-14 h-14 rounded-full object-cover object-center shadow-lg hover:shadow-xl transition-all duration-300 bg-white"
               alt="Drops Chemicals Logo"
             />
-            <div className="flex flex-col justify-center h-12">
+            <div className="flex flex-col justify-center h-14">
               <span className="font-bold text-lg gradient-text company-name leading-tight" style={{ color: 'var(--brand-dark-blue)' }}>Drops Chemicals</span>
               <span className="text-xs text-gray-600 leading-tight">Reliable Partner Serving Excellence</span>
             </div>
@@ -142,49 +140,16 @@ export const Header = () => {
             ))}
           </nav>
 
-          {/* Search & Mobile Menu */}
-          <div className="flex items-center space-x-4">
-            {/* Enhanced Search */}
-            <div className="hidden md:flex items-center">
-              {isSearchOpen ? (
-                <div className="flex items-center space-x-2 animate-fade-in">
-                  <Input
-                    placeholder="Search products..."
-                    className="w-64 border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 rounded-xl"
-                    autoFocus
-                  />
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    onClick={() => setIsSearchOpen(false)}
-                    className="hover:bg-gray-100 rounded-xl"
-                  >
-                    <X className="w-4 h-4" />
-                  </Button>
-                </div>
-              ) : (
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={() => setIsSearchOpen(true)}
-                  className="hover:bg-gray-100 rounded-xl hover:scale-105 transition-all duration-200"
-                >
-                  <Search className="w-5 h-5" />
-                </Button>
-              )}
-            </div>
-
-            {/* Mobile Menu Button */}
-            <div className="mobile-menu-container lg:hidden">
-              <Button
-                variant="ghost"
-                size="sm"
-                className="hover:bg-gray-100 rounded-xl"
-                onClick={() => setIsMenuOpen(!isMenuOpen)}
-              >
-                {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-              </Button>
-            </div>
+          {/* Mobile Menu Button */}
+          <div className="mobile-menu-container lg:hidden">
+            <Button
+              variant="ghost"
+              size="sm"
+              className="hover:bg-gray-100 rounded-xl"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+            >
+              {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </Button>
           </div>
         </div>
 

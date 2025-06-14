@@ -139,90 +139,119 @@ const AdminDashboard = () => {
       title: "Total Blog Posts", 
       value: posts.length, 
       icon: <FileText className="w-6 h-6" />,
-      color: "text-blue-600"
+      color: "text-blue-600",
+      bgColor: "bg-blue-50"
     },
     { 
       title: "Published Posts", 
       value: posts.filter(p => p.status === "published").length, 
       icon: <Eye className="w-6 h-6" />,
-      color: "text-green-600"
+      color: "text-green-600",
+      bgColor: "bg-green-50"
     },
     { 
       title: "Draft Posts", 
       value: posts.filter(p => p.status === "draft").length, 
       icon: <Edit className="w-6 h-6" />,
-      color: "text-orange-600"
+      color: "text-orange-600",
+      bgColor: "bg-orange-50"
     },
     { 
       title: "Total Views", 
       value: posts.reduce((sum, post) => sum + (post.view_count || 0), 0), 
       icon: <BarChart3 className="w-6 h-6" />,
-      color: "text-purple-600"
+      color: "text-purple-600",
+      bgColor: "bg-purple-50"
     }
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <header className="bg-white shadow-sm border-b">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50">
+      {/* Enhanced Header */}
+      <header className="bg-white/95 backdrop-blur-lg shadow-lg border-b border-gray-200/50">
         <div className="flex items-center justify-between px-6 py-4">
           <div className="flex items-center space-x-4">
-            <div className="w-8 h-8 bg-gradient-to-br from-blue-600 to-blue-800 rounded-lg flex items-center justify-center text-white font-bold">
-              D
+            <img
+              src="https://ik.imagekit.io/dvuz4klnl/Screenshot_2025-06-03-15-28-07-28_c37d74246d9c81aa0bb824b57eaf7062.jpg?updatedAt=1748944738882"
+              className="w-12 h-12 rounded-full object-cover shadow-lg"
+              alt="Drops Chemicals Logo"
+            />
+            <div>
+              <h1 className="text-2xl font-bold company-name" style={{ color: 'var(--brand-dark-blue)' }}>
+                Drops Chemicals Admin
+              </h1>
+              <p className="text-sm text-gray-600">Content Management System</p>
             </div>
-            <h1 className="text-2xl font-bold">Drops Chemicals Admin</h1>
           </div>
           
-          <Button variant="outline" onClick={handleLogout}>
+          <Button 
+            variant="outline" 
+            onClick={handleLogout}
+            className="hover:bg-red-50 hover:border-red-300 hover:text-red-600 transition-all duration-300"
+          >
             <LogOut className="w-4 h-4 mr-2" />
             Logout
           </Button>
         </div>
       </header>
 
-      <div className="flex">
-        {/* Sidebar */}
-        <aside className="w-64 bg-white shadow-sm h-screen sticky top-0">
-          <nav className="p-4 space-y-2">
+      <div className="flex min-h-screen">
+        {/* Enhanced Sidebar */}
+        <aside className="w-72 bg-white/90 backdrop-blur-md shadow-xl border-r border-gray-200/50">
+          <nav className="p-6 space-y-3">
             {[
-              { id: "overview", label: "Overview", icon: <BarChart3 className="w-5 h-5" /> },
-              { id: "blog", label: "Blog Posts", icon: <FileText className="w-5 h-5" /> },
-              { id: "inquiries", label: "Inquiries", icon: <Users className="w-5 h-5" /> },
-              { id: "products", label: "Products", icon: <ShoppingCart className="w-5 h-5" /> }
+              { id: "overview", label: "Dashboard Overview", icon: <BarChart3 className="w-5 h-5" />, color: "blue" },
+              { id: "blog", label: "Blog Management", icon: <FileText className="w-5 h-5" />, color: "green" },
+              { id: "inquiries", label: "Customer Inquiries", icon: <Users className="w-5 h-5" />, color: "purple" },
+              { id: "products", label: "Product Catalog", icon: <ShoppingCart className="w-5 h-5" />, color: "orange" }
             ].map((item) => (
               <button
                 key={item.id}
                 onClick={() => setActiveTab(item.id)}
-                className={`w-full flex items-center space-x-3 px-4 py-3 text-left rounded-lg transition-colors ${
+                className={`w-full flex items-center space-x-3 px-4 py-3 text-left rounded-xl transition-all duration-300 group ${
                   activeTab === item.id
-                    ? "bg-blue-50 text-blue-600 border-l-4 border-blue-600"
-                    : "text-gray-600 hover:bg-gray-50"
+                    ? `bg-gradient-to-r from-${item.color}-500 to-${item.color}-600 text-white shadow-lg transform scale-105`
+                    : "text-gray-600 hover:bg-gray-50 hover:text-gray-900 hover:scale-102"
                 }`}
               >
-                {item.icon}
-                <span>{item.label}</span>
+                <div className={`${activeTab === item.id ? 'text-white' : `text-${item.color}-500`} transition-colors duration-300`}>
+                  {item.icon}
+                </div>
+                <span className="font-medium">{item.label}</span>
               </button>
             ))}
           </nav>
         </aside>
 
-        {/* Main Content */}
-        <main className="flex-1 p-6">
+        {/* Enhanced Main Content */}
+        <main className="flex-1 p-8">
           {activeTab === "overview" && (
-            <div className="space-y-6">
-              <h2 className="text-3xl font-bold">Dashboard Overview</h2>
+            <div className="space-y-8">
+              <div className="flex items-center justify-between">
+                <div>
+                  <h2 className="text-4xl font-bold" style={{ color: 'var(--brand-dark-blue)' }}>
+                    Dashboard Overview
+                  </h2>
+                  <p className="text-gray-600 mt-2">Monitor your content performance and analytics</p>
+                </div>
+              </div>
               
-              {/* Stats Cards */}
+              {/* Enhanced Stats Cards */}
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 {stats.map((stat, index) => (
-                  <Card key={index} className="hover:shadow-lg transition-shadow">
+                  <Card 
+                    key={index} 
+                    className="hover:shadow-xl transition-all duration-500 hover:scale-105 border-0 bg-white/80 backdrop-blur-sm"
+                  >
                     <CardContent className="p-6">
                       <div className="flex items-center justify-between">
                         <div>
-                          <p className="text-sm text-gray-600">{stat.title}</p>
-                          <p className="text-2xl font-bold">{stat.value}</p>
+                          <p className="text-sm font-medium text-gray-600 mb-1">{stat.title}</p>
+                          <p className="text-3xl font-bold" style={{ color: 'var(--brand-dark-blue)' }}>
+                            {stat.value}
+                          </p>
                         </div>
-                        <div className={stat.color}>
+                        <div className={`${stat.bgColor} p-3 rounded-xl ${stat.color}`}>
                           {stat.icon}
                         </div>
                       </div>
@@ -231,19 +260,25 @@ const AdminDashboard = () => {
                 ))}
               </div>
 
-              {/* Recent Activity */}
-              <Card>
+              {/* Enhanced Recent Activity */}
+              <Card className="border-0 bg-white/80 backdrop-blur-sm shadow-xl">
                 <CardHeader>
-                  <CardTitle>Recent Blog Posts</CardTitle>
+                  <CardTitle className="flex items-center gap-2" style={{ color: 'var(--brand-dark-blue)' }}>
+                    <FileText className="w-6 h-6" />
+                    Recent Blog Posts
+                  </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-4">
                     {posts.slice(0, 5).map((post) => (
-                      <div key={post.id} className="flex items-center justify-between py-2 border-b">
+                      <div key={post.id} className="flex items-center justify-between py-3 px-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors duration-300">
                         <div>
-                          <span className="font-medium">{post.title}</span>
-                          <div className="flex items-center gap-2 mt-1">
-                            <Badge variant={post.status === "published" ? "default" : "secondary"}>
+                          <span className="font-semibold text-gray-900">{post.title}</span>
+                          <div className="flex items-center gap-3 mt-1">
+                            <Badge 
+                              variant={post.status === "published" ? "default" : "secondary"}
+                              className={post.status === "published" ? "bg-green-100 text-green-800" : "bg-gray-100 text-gray-800"}
+                            >
                               {post.status}
                             </Badge>
                             <span className="text-sm text-gray-500">
@@ -251,7 +286,10 @@ const AdminDashboard = () => {
                             </span>
                           </div>
                         </div>
-                        <span className="text-sm text-gray-500">{post.view_count} views</span>
+                        <div className="flex items-center gap-2">
+                          <Eye className="w-4 h-4 text-gray-400" />
+                          <span className="text-sm font-medium text-gray-600">{post.view_count}</span>
+                        </div>
                       </div>
                     ))}
                   </div>
@@ -261,35 +299,44 @@ const AdminDashboard = () => {
           )}
 
           {activeTab === "blog" && (
-            <div className="space-y-6">
+            <div className="space-y-8">
               <div className="flex items-center justify-between">
-                <h2 className="text-3xl font-bold">Blog Management</h2>
-                <Button onClick={() => setShowNewPostForm(true)} className="bg-blue-600 hover:bg-blue-700">
+                <div>
+                  <h2 className="text-4xl font-bold" style={{ color: 'var(--brand-dark-blue)' }}>
+                    Blog Management
+                  </h2>
+                  <p className="text-gray-600 mt-2">Create, edit, and manage your blog content</p>
+                </div>
+                <Button 
+                  onClick={() => setShowNewPostForm(true)} 
+                  className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+                >
                   <Plus className="w-4 h-4 mr-2" />
                   New Post
                 </Button>
               </div>
 
-              {/* Blog Post Form */}
+              {/* Enhanced Blog Post Form */}
               {showNewPostForm && (
-                <Card className="border-2 border-blue-200">
-                  <CardHeader>
+                <Card className="border-2 border-blue-200 bg-white/90 backdrop-blur-sm shadow-xl">
+                  <CardHeader className="bg-gradient-to-r from-blue-50 to-blue-100 border-b border-blue-200">
                     <div className="flex items-center justify-between">
-                      <CardTitle>
+                      <CardTitle className="flex items-center gap-2" style={{ color: 'var(--brand-dark-blue)' }}>
+                        <FileText className="w-6 h-6" />
                         {editingPost ? "Edit Blog Post" : "Create New Blog Post"}
                       </CardTitle>
-                      <Button variant="ghost" size="sm" onClick={resetForm}>
+                      <Button variant="ghost" size="sm" onClick={resetForm} className="hover:bg-red-100">
                         <X className="w-4 h-4" />
                       </Button>
                     </div>
                   </CardHeader>
-                  <CardContent>
-                    <form onSubmit={handleSubmit} className="space-y-6">
+                  <CardContent className="p-8">
+                    <form onSubmit={handleSubmit} className="space-y-8">
                       {/* Basic Information */}
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
-                          <label className="block text-sm font-medium mb-2">
-                            <FileText className="w-4 h-4 inline mr-1" />
+                          <label className="block text-sm font-semibold mb-3 text-gray-700">
+                            <FileText className="w-4 h-4 inline mr-2" />
                             Title *
                           </label>
                           <Input
@@ -297,25 +344,27 @@ const AdminDashboard = () => {
                             onChange={(e) => setFormData({ ...formData, title: e.target.value })}
                             placeholder="Enter blog post title"
                             required
+                            className="border-2 border-gray-200 focus:border-blue-500 rounded-xl"
                           />
                         </div>
                         
                         <div>
-                          <label className="block text-sm font-medium mb-2">
-                            <Globe className="w-4 h-4 inline mr-1" />
+                          <label className="block text-sm font-semibold mb-3 text-gray-700">
+                            <Globe className="w-4 h-4 inline mr-2" />
                             Slug
                           </label>
                           <Input
                             value={formData.slug}
                             onChange={(e) => setFormData({ ...formData, slug: e.target.value })}
                             placeholder="url-friendly-slug (auto-generated if empty)"
+                            className="border-2 border-gray-200 focus:border-blue-500 rounded-xl"
                           />
                         </div>
                       </div>
 
                       <div>
-                        <label className="block text-sm font-medium mb-2">
-                          <FileText className="w-4 h-4 inline mr-1" />
+                        <label className="block text-sm font-semibold mb-3 text-gray-700">
+                          <FileText className="w-4 h-4 inline mr-2" />
                           Excerpt *
                         </label>
                         <Textarea
@@ -324,77 +373,83 @@ const AdminDashboard = () => {
                           placeholder="Brief description of the blog post"
                           rows={3}
                           required
+                          className="border-2 border-gray-200 focus:border-blue-500 rounded-xl"
                         />
                       </div>
                       
                       <div>
-                        <label className="block text-sm font-medium mb-2">
-                          <Edit className="w-4 h-4 inline mr-1" />
+                        <label className="block text-sm font-semibold mb-3 text-gray-700">
+                          <Edit className="w-4 h-4 inline mr-2" />
                           Content
                         </label>
                         <Textarea
                           value={formData.content}
                           onChange={(e) => setFormData({ ...formData, content: e.target.value })}
                           placeholder="Full blog post content (Markdown supported)"
-                          rows={8}
+                          rows={10}
+                          className="border-2 border-gray-200 focus:border-blue-500 rounded-xl"
                         />
                       </div>
 
                       {/* SEO & Meta */}
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
-                          <label className="block text-sm font-medium mb-2">
-                            <Image className="w-4 h-4 inline mr-1" />
+                          <label className="block text-sm font-semibold mb-3 text-gray-700">
+                            <Image className="w-4 h-4 inline mr-2" />
                             Featured Image URL
                           </label>
                           <Input
                             value={formData.featured_image}
                             onChange={(e) => setFormData({ ...formData, featured_image: e.target.value })}
                             placeholder="https://example.com/image.jpg"
+                            className="border-2 border-gray-200 focus:border-blue-500 rounded-xl"
                           />
                         </div>
                         
                         <div>
-                          <label className="block text-sm font-medium mb-2">
-                            <Tag className="w-4 h-4 inline mr-1" />
+                          <label className="block text-sm font-semibold mb-3 text-gray-700">
+                            <Tag className="w-4 h-4 inline mr-2" />
                             Category
                           </label>
                           <Input
                             value={formData.category}
                             onChange={(e) => setFormData({ ...formData, category: e.target.value })}
                             placeholder="Category"
+                            className="border-2 border-gray-200 focus:border-blue-500 rounded-xl"
                           />
                         </div>
                       </div>
 
                       <div>
-                        <label className="block text-sm font-medium mb-2">
-                          <Tag className="w-4 h-4 inline mr-1" />
+                        <label className="block text-sm font-semibold mb-3 text-gray-700">
+                          <Tag className="w-4 h-4 inline mr-2" />
                           Tags (comma-separated)
                         </label>
                         <Input
                           value={formData.tags.join(', ')}
                           onChange={(e) => handleTagsChange(e.target.value)}
                           placeholder="water treatment, chemicals, industry"
+                          className="border-2 border-gray-200 focus:border-blue-500 rounded-xl"
                         />
                       </div>
 
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
-                          <label className="block text-sm font-medium mb-2">Meta Title</label>
+                          <label className="block text-sm font-semibold mb-3 text-gray-700">Meta Title</label>
                           <Input
                             value={formData.meta_title}
                             onChange={(e) => setFormData({ ...formData, meta_title: e.target.value })}
                             placeholder="SEO title (60 chars max)"
+                            className="border-2 border-gray-200 focus:border-blue-500 rounded-xl"
                           />
                         </div>
                         
                         <div>
-                          <label className="block text-sm font-medium mb-2">Status</label>
+                          <label className="block text-sm font-semibold mb-3 text-gray-700">Status</label>
                           <select
                             value={formData.status}
                             onChange={(e) => setFormData({ ...formData, status: e.target.value as 'draft' | 'published' })}
-                            className="w-full rounded-md border border-gray-300 px-3 py-2"
+                            className="w-full rounded-xl border-2 border-gray-200 px-4 py-3 focus:border-blue-500 focus:outline-none"
                           >
                             <option value="draft">Draft</option>
                             <option value="published">Published</option>
@@ -403,21 +458,30 @@ const AdminDashboard = () => {
                       </div>
 
                       <div>
-                        <label className="block text-sm font-medium mb-2">Meta Description</label>
+                        <label className="block text-sm font-semibold mb-3 text-gray-700">Meta Description</label>
                         <Textarea
                           value={formData.meta_description}
                           onChange={(e) => setFormData({ ...formData, meta_description: e.target.value })}
                           placeholder="SEO description (160 chars max)"
                           rows={2}
+                          className="border-2 border-gray-200 focus:border-blue-500 rounded-xl"
                         />
                       </div>
 
-                      <div className="flex space-x-3 pt-4">
-                        <Button type="submit" className="bg-blue-600 hover:bg-blue-700">
+                      <div className="flex space-x-4 pt-6">
+                        <Button 
+                          type="submit" 
+                          className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+                        >
                           <Save className="w-4 h-4 mr-2" />
                           {editingPost ? "Update Post" : "Create Post"}
                         </Button>
-                        <Button type="button" variant="outline" onClick={resetForm}>
+                        <Button 
+                          type="button" 
+                          variant="outline" 
+                          onClick={resetForm}
+                          className="hover:bg-gray-50 border-2"
+                        >
                           Cancel
                         </Button>
                       </div>
@@ -426,29 +490,32 @@ const AdminDashboard = () => {
                 </Card>
               )}
 
-              {/* Blog Posts List */}
-              <div className="space-y-4">
+              {/* Enhanced Blog Posts List */}
+              <div className="space-y-6">
                 {loading ? (
-                  <div className="text-center py-8">
-                    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto"></div>
-                    <p className="mt-2 text-gray-600">Loading posts...</p>
+                  <div className="text-center py-12">
+                    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
+                    <p className="mt-4 text-gray-600">Loading posts...</p>
                   </div>
                 ) : posts.length === 0 ? (
-                  <Card>
-                    <CardContent className="p-8 text-center">
-                      <FileText className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-                      <p className="text-gray-600">No blog posts yet. Create your first post!</p>
+                  <Card className="border-0 bg-white/80 backdrop-blur-sm shadow-xl">
+                    <CardContent className="p-12 text-center">
+                      <FileText className="w-16 h-16 text-gray-400 mx-auto mb-4" />
+                      <p className="text-gray-600 text-lg">No blog posts yet. Create your first post!</p>
                     </CardContent>
                   </Card>
                 ) : (
                   posts.map((post) => (
-                    <Card key={post.id} className="hover:shadow-lg transition-shadow">
+                    <Card key={post.id} className="hover:shadow-xl transition-all duration-500 hover:scale-102 border-0 bg-white/80 backdrop-blur-sm">
                       <CardContent className="p-6">
                         <div className="flex items-start justify-between">
                           <div className="flex-1">
-                            <div className="flex items-center gap-3 mb-2">
-                              <h3 className="text-lg font-bold">{post.title}</h3>
-                              <Badge variant={post.status === "published" ? "default" : "secondary"}>
+                            <div className="flex items-center gap-3 mb-3">
+                              <h3 className="text-xl font-bold text-gray-900">{post.title}</h3>
+                              <Badge 
+                                variant={post.status === "published" ? "default" : "secondary"}
+                                className={post.status === "published" ? "bg-green-100 text-green-800" : "bg-gray-100 text-gray-800"}
+                              >
                                 {post.status}
                               </Badge>
                               {post.tags.length > 0 && (
@@ -461,7 +528,7 @@ const AdminDashboard = () => {
                                 </div>
                               )}
                             </div>
-                            <p className="text-gray-600 mb-2 line-clamp-2">{post.excerpt}</p>
+                            <p className="text-gray-600 mb-3 line-clamp-2">{post.excerpt}</p>
                             <div className="flex items-center gap-4 text-sm text-gray-500">
                               <span className="flex items-center gap-1">
                                 <Calendar className="w-4 h-4" />
@@ -480,11 +547,12 @@ const AdminDashboard = () => {
                             </div>
                           </div>
                           
-                          <div className="flex space-x-2 ml-4">
+                          <div className="flex space-x-2 ml-6">
                             <Button 
                               variant="outline" 
                               size="sm"
                               onClick={() => handleEdit(post)}
+                              className="hover:bg-blue-50 hover:border-blue-300 hover:text-blue-600 transition-all duration-300"
                             >
                               <Edit className="w-4 h-4" />
                             </Button>
@@ -492,7 +560,7 @@ const AdminDashboard = () => {
                               variant="outline" 
                               size="sm" 
                               onClick={() => handleDelete(post.id)}
-                              className="text-red-600 hover:text-red-700"
+                              className="hover:bg-red-50 hover:border-red-300 hover:text-red-600 transition-all duration-300"
                             >
                               <Trash2 className="w-4 h-4" />
                             </Button>
@@ -507,22 +575,34 @@ const AdminDashboard = () => {
           )}
 
           {activeTab === "inquiries" && (
-            <div className="space-y-6">
-              <h2 className="text-3xl font-bold">Customer Inquiries</h2>
-              <Card>
-                <CardContent className="p-6">
-                  <p className="text-gray-600">No recent inquiries to display.</p>
+            <div className="space-y-8">
+              <div>
+                <h2 className="text-4xl font-bold" style={{ color: 'var(--brand-dark-blue)' }}>
+                  Customer Inquiries
+                </h2>
+                <p className="text-gray-600 mt-2">Manage customer inquiries and support requests</p>
+              </div>
+              <Card className="border-0 bg-white/80 backdrop-blur-sm shadow-xl">
+                <CardContent className="p-12 text-center">
+                  <Users className="w-16 h-16 text-gray-400 mx-auto mb-4" />
+                  <p className="text-gray-600 text-lg">No recent inquiries to display.</p>
                 </CardContent>
               </Card>
             </div>
           )}
 
           {activeTab === "products" && (
-            <div className="space-y-6">
-              <h2 className="text-3xl font-bold">Product Management</h2>
-              <Card>
-                <CardContent className="p-6">
-                  <p className="text-gray-600">Product management features coming soon.</p>
+            <div className="space-y-8">
+              <div>
+                <h2 className="text-4xl font-bold" style={{ color: 'var(--brand-dark-blue)' }}>
+                  Product Management
+                </h2>
+                <p className="text-gray-600 mt-2">Manage your product catalog and inventory</p>
+              </div>
+              <Card className="border-0 bg-white/80 backdrop-blur-sm shadow-xl">
+                <CardContent className="p-12 text-center">
+                  <ShoppingCart className="w-16 h-16 text-gray-400 mx-auto mb-4" />
+                  <p className="text-gray-600 text-lg">Product management features coming soon.</p>
                 </CardContent>
               </Card>
             </div>
