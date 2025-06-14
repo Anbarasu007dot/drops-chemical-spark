@@ -1,38 +1,7 @@
-/*
-  # Create blog posts table
+-- Drop the old users table if it's not needed
+DROP TABLE IF EXISTS users;
 
-  1. New Tables
-    - `blog_posts`
-      - `id` (uuid, primary key)
-      - `title` (text, required)
-      - `slug` (text, unique, required)
-      - `excerpt` (text)
-      - `content` (text)
-      - `featured_image` (text, URL)
-      - `meta_title` (text)
-      - `meta_description` (text)
-      - `tags` (text array)
-      - `category` (text)
-      - `status` (text, default 'draft')
-      - `author_id` (uuid, references auth.users)
-      - `published_at` (timestamp)
-      - `created_at` (timestamp)
-      - `updated_at` (timestamp)
-      - `view_count` (integer, default 0)
-
-  2. Security
-    - Enable RLS on `blog_posts` table
-    - Add policies for authenticated users to manage posts
-    - Add policy for public to read published posts
-*/
-
--- Create users table if it doesn't exist (for foreign key reference)
-CREATE TABLE IF NOT EXISTS users (
-  id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
-  email text UNIQUE,
-  created_at timestamptz DEFAULT now()
-);
-
+-- Create blog_posts table referencing Supabase auth.users
 CREATE TABLE IF NOT EXISTS blog_posts (
   id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
   title text NOT NULL,
@@ -45,32 +14,32 @@ CREATE TABLE IF NOT EXISTS blog_posts (
   tags text[] DEFAULT '{}',
   category text DEFAULT 'general',
   status text DEFAULT 'draft' CHECK (status IN ('draft', 'published', 'archived')),
-  author_id uuid REFERENCES users(id) DEFAULT uid(),
+  author_id uuid REFERENCES auth.users(id) DEFAULT auth.uid(),
   published_at timestamptz,
   created_at timestamptz DEFAULT now(),
   updated_at timestamptz DEFAULT now(),
   view_count integer DEFAULT 0
 );
 
--- Enable RLS
+-- Enable Row Level Security
 ALTER TABLE blog_posts ENABLE ROW LEVEL SECURITY;
 
--- Policy for authenticated users to manage their own posts
+-- Allow authenticated users to manage their own blog posts
 CREATE POLICY "Users can manage their own blog posts"
   ON blog_posts
   FOR ALL
   TO authenticated
-  USING (uid() = author_id)
-  WITH CHECK (uid() = author_id);
+  USING (auth.uid() = author_id)
+  WITH CHECK (auth.uid() = author_id);
 
--- Policy for public to read published posts
+-- Allow public (unauthenticated users) to read published blog posts
 CREATE POLICY "Public can read published posts"
   ON blog_posts
   FOR SELECT
   TO public
   USING (status = 'published');
 
--- Function to update updated_at timestamp
+-- Trigger function to update updated_at
 CREATE OR REPLACE FUNCTION update_updated_at_column()
 RETURNS TRIGGER AS $$
 BEGIN
@@ -79,13 +48,13 @@ BEGIN
 END;
 $$ language 'plpgsql';
 
--- Trigger to automatically update updated_at
+-- Trigger to auto-update updated_at
 CREATE TRIGGER update_blog_posts_updated_at
   BEFORE UPDATE ON blog_posts
   FOR EACH ROW
   EXECUTE FUNCTION update_updated_at_column();
 
--- Create index for better performance
+-- Indexes for performance
 CREATE INDEX IF NOT EXISTS idx_blog_posts_status ON blog_posts(status);
 CREATE INDEX IF NOT EXISTS idx_blog_posts_published_at ON blog_posts(published_at);
 CREATE INDEX IF NOT EXISTS idx_blog_posts_slug ON blog_posts(slug);
