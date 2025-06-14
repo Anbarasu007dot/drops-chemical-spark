@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Lock, User } from "lucide-react";
@@ -78,7 +77,7 @@ const AdminLogin = () => {
           </form>
           
           <div className="mt-6 text-center text-sm text-gray-500">
-            <p>Forgot your password? Contact  technical support </p>
+            <p>Forgot your password? Contact technical support</p>
           </div>
         </CardContent>
       </Card>
